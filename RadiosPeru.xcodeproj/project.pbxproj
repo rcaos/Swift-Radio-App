@@ -22,6 +22,8 @@
 		7755B52E235A144F004E642B /* PopularViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7755B52C235A144F004E642B /* PopularViewCell.xib */; };
 		7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B52F235A15D2004E642B /* PopularCellViewModel.swift */; };
 		77964891235A569900813C48 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77964890235A569900813C48 /* PlayerViewModel.swift */; };
+		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
+		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		7755B52C235A144F004E642B /* PopularViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularViewCell.xib; sourceTree = "<group>"; };
 		7755B52F235A15D2004E642B /* PopularCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCellViewModel.swift; sourceTree = "<group>"; };
 		77964890235A569900813C48 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
+		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 				77421B1B2358FEE700A23C79 /* Assets.xcassets */,
 				77421B202358FEE700A23C79 /* Info.plist */,
 				7755B525235A13E9004E642B /* Scenes */,
+				77B9469E235AD802006C3EEA /* Helpers */,
 				7755B529235A141A004E642B /* ViewComponents */,
 				77421B2A235901AE00A23C79 /* StoryBoards */,
 				7755B51F235A0F62004E642B /* Model.swift */,
@@ -140,6 +145,23 @@
 				77964890235A569900813C48 /* PlayerViewModel.swift */,
 			);
 			path = Player;
+			sourceTree = "<group>";
+		};
+		77B9469E235AD802006C3EEA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				77B9469F235AD80D006C3EEA /* Transitions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		77B9469F235AD80D006C3EEA /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				77B9469A235AD7D7006C3EEA /* Interactor.swift */,
+				77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */,
+			);
+			path = Transitions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +242,8 @@
 				77964891235A569900813C48 /* PlayerViewModel.swift in Sources */,
 				7755B524235A1350004E642B /* PopularViewModel.swift in Sources */,
 				7755B522235A1241004E642B /* PopularViewController.swift in Sources */,
+				77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */,
+				77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,
 				77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */,
 				7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */,

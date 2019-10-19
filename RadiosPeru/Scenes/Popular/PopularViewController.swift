@@ -16,6 +16,8 @@ class PopularViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let interactor = Interactor()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +39,8 @@ class PopularViewController: UIViewController {
             let index = sender as? Int {
             let _ = destination.view
             destination.viewModel = viewModel.buildModel(for: index)
-            
+            destination.transitioningDelegate = self
+            destination.interactor = interactor
         }
     }
 }
@@ -93,5 +96,15 @@ extension PopularViewController : UICollectionViewDelegateFlowLayout {
         let width = collectionView.frame.width / numberOfRows
         
         return CGSize(width: width, height: width)
+    }
+}
+
+extension PopularViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissAnimator()
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
     }
 }
