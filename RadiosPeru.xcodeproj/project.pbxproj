@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282D9235C08AC000098DB /* MiniPlayerViewController.swift */; };
+		770282DC235C08B9000098DB /* MiniPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */; };
+		770282DF235C27A7000098DB /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282DE235C27A7000098DB /* Bindable.swift */; };
 		77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77421B142358FEE500A23C79 /* AppDelegate.swift */; };
 		77421B1A2358FEE500A23C79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B182358FEE500A23C79 /* Main.storyboard */; };
 		77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1B2358FEE700A23C79 /* Assets.xcassets */; };
@@ -27,6 +30,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		770282D9235C08AC000098DB /* MiniPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerViewController.swift; sourceTree = "<group>"; };
+		770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerViewModel.swift; sourceTree = "<group>"; };
+		770282DE235C27A7000098DB /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		77421B112358FEE500A23C79 /* RadiosPeru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiosPeru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77421B142358FEE500A23C79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77421B192358FEE500A23C79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,6 +65,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		770282DD235C08BD000098DB /* MiniPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				770282D9235C08AC000098DB /* MiniPlayerViewController.swift */,
+				770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */,
+			);
+			path = MiniPlayer;
+			sourceTree = "<group>";
+		};
 		77421B082358FEE500A23C79 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +122,7 @@
 			children = (
 				7755B526235A13F0004E642B /* Popular */,
 				77964892235A569D00813C48 /* Player */,
+				770282DD235C08BD000098DB /* MiniPlayer */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -151,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				77B9469F235AD80D006C3EEA /* Transitions */,
+				770282DE235C27A7000098DB /* Bindable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -239,7 +256,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				770282DF235C27A7000098DB /* Bindable.swift in Sources */,
 				77964891235A569900813C48 /* PlayerViewModel.swift in Sources */,
+				770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */,
+				770282DC235C08B9000098DB /* MiniPlayerViewModel.swift in Sources */,
 				7755B524235A1350004E642B /* PopularViewModel.swift in Sources */,
 				7755B522235A1241004E642B /* PopularViewController.swift in Sources */,
 				77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */,

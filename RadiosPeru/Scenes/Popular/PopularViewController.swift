@@ -21,7 +21,12 @@ class PopularViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
         setupCollection()
+    }
+    
+    func setupView() {
+        collectionView.backgroundColor = UIColor(red: 51 / 255.0, green: 51 / 255.0, blue: 51 / 255.0, alpha: 1.0)
     }
     
     func setupCollection() {
@@ -36,17 +41,25 @@ class PopularViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "playerSegue",
             let destination = segue.destination as? PlayerViewController,
-            let index = sender as? Int {
+            let model = sender as? PlayerViewModel {
             let _ = destination.view
-            destination.viewModel = viewModel.buildModel(for: index)
+            destination.viewModel = model
             destination.transitioningDelegate = self
             destination.interactor = interactor
+        }
+        
+        if segue.identifier == "miniPlayerSegue",
+            let destination = segue.destination as? MiniPlayerViewController {
+            let _ = destination.view
+            destination.delegate = self
+            destination.viewModel = viewModel.miniPlayer
         }
     }
 }
 
+// MARK:- UICollectionViewDataSource
+
 extension PopularViewController : UICollectionViewDataSource {
-    // MARK: UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.stations.count
@@ -59,12 +72,16 @@ extension PopularViewController : UICollectionViewDataSource {
     }
 }
 
+// MARK:- UICollectionViewDelegate
+
 extension PopularViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        performSegue(withIdentifier: "playerSegue", sender: indexPath.row)
+        viewModel.selectStation(at: indexPath.row)
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension PopularViewController : UICollectionViewDelegateFlowLayout {
     
@@ -99,6 +116,8 @@ extension PopularViewController : UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UIViewControllerTransitioningDelegate
+
 extension PopularViewController: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissAnimator()
@@ -107,4 +126,22 @@ extension PopularViewController: UIViewControllerTransitioningDelegate {
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactor.hasStarted ? interactor : nil
     }
+}
+
+// MARK: - MiniPlayerControllerDelegate
+
+extension PopularViewController: MiniPlayerControllerDelegate  {
+    
+    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectRadio radio: PlayerViewModel) {
+        performSegue(withIdentifier: "playerSegue", sender: radio)
+    }
+    
+    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectPlay radio: String) {
+        print(radio)
+    }
+    
+    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectFavorite radio: String) {
+        print(radio)
+    }
+    
 }
