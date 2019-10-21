@@ -11,23 +11,23 @@ import UIKit
 
 final class PlayerViewModel {
     
-    var radioStation: RadioStation
+    private var radioStation: RadioStation
     
-    lazy var name: String = {
-        return self.radioStation.name
-    }()
-    
-    lazy var image: String = {
-        return self.radioStation.image
-    }()
-    
-    lazy var description: String = {
-        return self.radioStation.description
-    }()
+    var name: String?
+    var image: String?
+    var description: String?
     
     //Init
     init(station: RadioStation) {
         self.radioStation = station
+        setupRadio(for: station)
+    }
+    
+    //MARK: - Private
+    func setupRadio(for station: RadioStation) {
+        name = radioStation.name
+        image = radioStation.image
+        description = radioStation.description
     }
     
 }

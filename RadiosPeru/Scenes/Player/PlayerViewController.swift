@@ -81,7 +81,12 @@ class PlayerViewController: UIViewController {
     func setupViewModel() {
         guard let viewModel = viewModel else { return }
         
-        stationImageView?.image = UIImage(named: viewModel.image)
+        if let image = viewModel.image {
+            stationImageView?.image = UIImage(named: image)
+        } else {
+            //stationImageView?.image = UIImage(named: "PlaceHolder")
+        }
+        
         stationNameLabel?.text = viewModel.name
         stationDescriptionLabel?.text = viewModel.description
     }
