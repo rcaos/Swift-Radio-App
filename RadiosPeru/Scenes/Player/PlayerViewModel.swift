@@ -27,7 +27,8 @@ final class PlayerViewModel {
     func setupRadio(for station: RadioStation) {
         name = radioStation.name
         image = radioStation.image
-        description = radioStation.description
+        description = radioStation.city + " " +
+                        radioStation.frecuency
     }
     
 }

@@ -12,7 +12,9 @@ final class MiniPlayerViewModel {
     
     private var radioStation: RadioStation!
     
-    var fullName: String = "Pick a Radio Station"
+    var name: String = "Pick a Radio Station"
+    
+    var description: String?
     
     var isSelected: Bool {
         return (radioStation != nil)
@@ -38,7 +40,10 @@ final class MiniPlayerViewModel {
     
     private func setupRadio(_ station: RadioStation) {
         radioStation = station
-        fullName = station.name + station.description
+        name = radioStation.name
+        description = radioStation.city + " " +
+                        radioStation.frecuency + " " +
+                        radioStation.slogan
     }
  
     //MARK: - View Models Building

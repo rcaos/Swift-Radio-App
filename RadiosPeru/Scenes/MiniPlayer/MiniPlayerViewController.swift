@@ -19,21 +19,19 @@ protocol MiniPlayerControllerDelegate: class {
 class MiniPlayerViewController: UIViewController {
 
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var playingBarsView: UIImageView!
+    
+    @IBOutlet weak var stationStackView: UIStackView!
     @IBOutlet weak var stationNameLabel: UILabel!
-    @IBOutlet weak var playerButton: UIButton!
+    @IBOutlet weak var stationDescriptionLabel: UILabel!
     
-    var playState: Bool = false {
-        didSet {
-            if playState {
-                playerButton.setImage( UIImage(named: "btn-pause"), for: .normal)
-                playerButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            } else {
-                playerButton.setImage( UIImage(named: "but-play"), for: .normal)
-                playerButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            }
-        }
-    }
+    @IBOutlet weak var playerStackView: UIStackView!
     
+    private var playView: UIView!
+    private var loadingView: UIView!
+    private var pauseView: UIView!
+    
+    var count = 0
     var favorite: Bool = false {
         didSet {
             if favorite {
@@ -41,6 +39,7 @@ class MiniPlayerViewController: UIViewController {
             } else {
                 favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
             }
+            toogle()
         }
     }
     
@@ -58,6 +57,7 @@ class MiniPlayerViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        setupPlayerView()
         setupGestures()
     }
     
@@ -74,50 +74,103 @@ class MiniPlayerViewController: UIViewController {
     func setupViewBindables() {
         guard let viewModel = viewModel else { return }
         
-        stationNameLabel.text = viewModel.fullName
+        stationNameLabel.text = viewModel.name
+        stationDescriptionLabel.text = viewModel.description
+    }
+    
+    //FIX
+    func toogle() {
+        count += 1
+        
+        switch count {
+        case 1:
+            playView.isHidden = true
+            loadingView.isHidden = false
+            pauseView.isHidden = true
+        case 2:
+            playView.isHidden = true
+            loadingView.isHidden = true
+            pauseView.isHidden = false
+        
+        default:
+            playView.isHidden = false
+            loadingView.isHidden = true
+            pauseView.isHidden = true
+        }
+        
+        if count == 3 {
+            count = 0
+        }
     }
     
     func setupUI() {
-        
-        //view.backgroundColor = UIColor(red: 51 / 255.0, green: 51 / 255.0, blue: 51 / 255.0, alpha: 1.0)
-        
         view.backgroundColor = UIColor(red: 30 / 255.0, green: 30 / 255.0, blue: 36 / 255.0, alpha: 1.0)
-        
         
         favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
         
-        playerButton.setImage( UIImage(named: "but-play"), for: .normal)
-        playerButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        playerButton.layer.cornerRadius = playerButton.frame.size.height / 2
-        playerButton.layer.borderWidth = 2.0
-        playerButton.layer.borderColor = UIColor.white.cgColor
+        playingBarsView.image = UIImage(named: "NowPlayingBars-2")
+        playingBarsView.autoresizingMask = []
+        playingBarsView.contentMode = UIView.ContentMode.center
         
+        stationNameLabel.text = ""
         stationNameLabel.textColor = UIColor.white
         stationNameLabel.font = UIFont.preferredFont(forTextStyle: .title2)
         
-        //Only for Test
-        //stationNameLabel.text = "Pick a Radio Station"
+        stationDescriptionLabel.text = ""
+        stationDescriptionLabel.textColor = .lightGray
+        stationDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
+    }
+    
+    func setupPlayerView() {
+        setupControlViews()
+        setupStackView()
+    }
+    
+    func setupControlViews() {
+        let viewForPlay = UIImageView()
+        viewForPlay.image = UIImage(named: "but-play")
+        viewForPlay.contentMode = .scaleAspectFit
+        playView = viewForPlay
+        
+        let viewForPause = UIImageView(image: UIImage(named: "btn-pause"))
+        viewForPause.contentMode = .scaleAspectFit
+        pauseView = viewForPause
+        
+        let size = CGSize(width: playerStackView.frame.width, height: playerStackView.frame.height)
+        let frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+        let viewForLoading = LoadingPlayerView(frame: frame)
+        viewForLoading.setUpAnimation(size: size, color: .white, imageName: "pauseFill")
+        loadingView = viewForLoading
+    }
+    
+    func setupStackView() {
+        playerStackView.addArrangedSubview(playView)
+        playerStackView.addArrangedSubview(pauseView)
+        playerStackView.addArrangedSubview(loadingView)
+        playerStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        playView.isHidden = true
+        pauseView.isHidden = true
+        loadingView.isHidden = true
     }
     
     func setupGestures() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleGestureView(_:)))
         view.addGestureRecognizer(tapGesture)
+        
+        let tapForStack = UITapGestureRecognizer(target: self, action: #selector(handleGestureStack(_:)))
+        playerStackView.addGestureRecognizer(tapForStack)
     }
     
-    @objc func handleGesture(_ sender: UITapGestureRecognizer) {
+    @objc func handleGestureView(_ sender: UITapGestureRecognizer) {
         guard let viewModel = viewModel, viewModel.isSelected else { return }
         
         delegate?.miniPlayerController(self, didSelectRadio: viewModel.buildPlayerViewModel() )
     }
     
-    //MARK: - IBActions
-    @IBAction func tapButton(_ sender: Any) {
+    @objc func handleGestureStack(_ sender: UITapGestureRecognizer) {
         guard let viewModel = viewModel, viewModel.isSelected else { return }
-        
-        //Esta variable debería ser Bindable, Loading, Buffering, etc
-        playState = !playState
-        
-        delegate?.miniPlayerController(self, didSelectPlay: "selecciono Play Button")
+        delegate?.miniPlayerController(self, didSelectPlay: "Press Stack View (Toogle)")
     }
     
     @IBAction func tapFavorite(_ sender: Any) {

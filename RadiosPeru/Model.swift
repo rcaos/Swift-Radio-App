@@ -12,36 +12,29 @@ struct RadioStation {
     
     var name: String
     var image: String
-    var description : String
-    
-    
+    var city: String
+    var frecuency: String
+    var slogan: String
     
     static func createStations() -> [RadioStation] {
         var stations:[RadioStation] = []
         
         //Grupo RPP
-        stations.append( RadioStation(name: "RPP", image: "rpp", description: "") )
-        stations.append( RadioStation(name: "Capital", image: "capital", description: "") )
-        stations.append( RadioStation(name: "Studio 92", image: "studio92", description: "") )
-        stations.append( RadioStation(name: "Corazón", image: "corazon", description: "") )
-        stations.append( RadioStation(name: "Oxigeno", image: "oxigeno", description: "Lima 87.1 FM") )
-        stations.append( RadioStation(name: "La Zona", image: "lazona", description: "") )
-        stations.append( RadioStation(name: "Felicidad", image: "felicidad", description: "") )
+        stations.append( RadioStation(name: "RPP", image: "rpp", city: "Lima", frecuency: "89.7 FM", slogan: "Confianza por todos los medios"))
+        stations.append( RadioStation(name: "Capital", image: "capital", city: "Lima",  frecuency: "96.7 FM", slogan: "Tu Opinion Importa") )
+        stations.append( RadioStation(name: "Studio 92", image: "studio92", city: "Lima", frecuency: "92.5FM", slogan: "Primeros en tu Música") )
+        stations.append( RadioStation(name: "Corazón", image: "corazon", city: "Lima", frecuency: "94.3 FM", slogan: "Única como tú") )
+        stations.append( RadioStation(name: "Oxigeno", image: "oxigeno", city: "Lima", frecuency: "102.1 FM", slogan: "Clásicos del rock & pop") )
+        stations.append( RadioStation(name: "La Zona", image: "lazona", city: "Lima", frecuency: "90.5 FM", slogan: "¡Tu música urbana!") )
+        stations.append( RadioStation(name: "Felicidad", image: "felicidad", city: "Lima", frecuency: "88.9 FM", slogan: "La música de tu vida") )
         
         //Grupo CRP
-        stations.append( RadioStation(name: "Ritmo Romántica", image: "ritmoromantica", description: "") )
-        stations.append( RadioStation(name: "La Inolvidable", image: "inolvidable", description: "") )
-        stations.append( RadioStation(name: "Moda", image: "moda", description: "") )
-        stations.append( RadioStation(name: "Oasis", image: "oasis", description: "") )
-        stations.append( RadioStation(name: "Radiomar", image: "radiomar", description: "") )
-        stations.append( RadioStation(name: "Nueva Q", image: "nuevaq", description: "") )
-        stations.append( RadioStation(name: "Planeta", image: "planeta", description: "") )
-        
-        
-        
-        
-        
-        
+        stations.append( RadioStation(name: "Ritmo Romántica", image: "ritmoromantica", city: "Lima", frecuency: "93.1 FM", slogan: "Tu radio de baladas") )
+        stations.append( RadioStation(name: "Moda", image: "moda", city: "Lima", frecuency: "97.3 FM", slogan: "Te mueve! ... con la música que esta de moda") )
+        stations.append( RadioStation(name: "Oasis", image: "oasis", city: "Lima", frecuency: "100.1 FM", slogan: "Oasis, Rock & pop") )
+        stations.append( RadioStation(name: "Radiomar", image: "radiomar", city: "Lima", frecuency: "106.3 FM", slogan: "¡Vive gozando!") )
+        stations.append( RadioStation(name: "Nueva Q", image: "nuevaq", city: "Lima", frecuency: "107.1 FM", slogan: "¡QQQumbia!") )
+        stations.append( RadioStation(name: "Planeta", image: "planeta", city: "Lima", frecuency: "107.7 FM", slogan: "Tu música en inglés") )
         
         return stations
     }
