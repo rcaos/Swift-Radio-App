@@ -21,20 +21,14 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var stationDescriptionLabel: UILabel!
     
     @IBOutlet weak var volumeSlider: UISlider!
-    @IBOutlet weak var playButton: UIButton!
+    
+    @IBOutlet weak var playingBarsImage: UIImageView!
+    @IBOutlet weak var playerStackView: UIStackView!
     @IBOutlet weak var favoriteButton: UIButton!
     
-    var playState: Bool = false {
-        didSet {
-            if playState {
-                playButton.setImage( UIImage(named: "btn-pause"), for: .normal)
-                playButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            } else {
-                playButton.setImage( UIImage(named: "but-play"), for: .normal)
-                playButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-            }
-        }
-    }
+    private var playView: UIView!
+    private var loadingView: UIView!
+    private var pauseView: UIView!
     
     var favorite: Bool = false {
         didSet {
@@ -49,10 +43,12 @@ class PlayerViewController: UIViewController {
     var interactor:Interactor? = nil
     
     //MARK : - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
+        setupPlayerView()
         setupGestures()
     }
     
@@ -60,25 +56,26 @@ class PlayerViewController: UIViewController {
         print("Deinit Player View Controller.")
     }
     
-    func setupUI() {
-        playButton.setImage( UIImage(named: "but-play"), for: .normal)
-        playButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        playButton.layer.cornerRadius = playButton.frame.size.height / 2
-        playButton.layer.borderWidth = 2.0
-        playButton.layer.borderColor = UIColor.white.cgColor
-        
-        volumeSlider.minimumTrackTintColor = UIColor.white
-        volumeSlider.maximumTrackTintColor = UIColor.darkGray
-        
-        favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
+    override func viewDidAppear(_ animated: Bool) {
+        guard let viewModel = viewModel else { return }
+        viewModel.refreshStatus()
     }
     
-    func setupGestures() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        view.addGestureRecognizer( panGesture )
-    }
+    //MARK: - ViewModel
     
     func setupViewModel() {
+        setupViewBindables()
+        
+        viewModel?.viewState.bindAndFire({[weak self] state in
+            DispatchQueue.main.async {
+                self?.configView(with: state)
+            }
+        })
+        
+        //viewModel?.getInfoRadio()
+    }
+    
+    func setupViewBindables() {
         guard let viewModel = viewModel else { return }
         
         if let image = viewModel.image {
@@ -88,20 +85,128 @@ class PlayerViewController: UIViewController {
         }
         
         stationNameLabel?.text = viewModel.name
-        stationDescriptionLabel?.text = viewModel.description
+        stationDescriptionLabel?.text = viewModel.defaultDescription
+    }
+    
+    //Debería usar la Enum de Radio Player? o solo conocer la ENum de su Model?
+    func configView(with state: RadioPlayerState) {
+        switch state {
+        case .stopped :
+            playingBarsImage.stopAnimating()
+            stationDescriptionLabel.text = viewModel?.defaultDescription
+        case .loading :
+            playingBarsImage.stopAnimating()
+            stationDescriptionLabel.text = "Loading..."
+        case .playing :
+            playingBarsImage.startAnimating()
+            stationDescriptionLabel.text = viewModel?.onlineDescription
+        case .buffering :
+            playingBarsImage.stopAnimating()
+            stationDescriptionLabel.text = viewModel?.onlineDescription
+        }
+        
+        configPlayer(with: state)
+    }
+    
+    func configPlayer(with state: RadioPlayerState) {
+        switch state {
+        case .stopped :
+            playView.isHidden = false
+            loadingView.isHidden = true
+            pauseView.isHidden = true
+        case .loading :
+            playView.isHidden = true
+            loadingView.isHidden = false
+            pauseView.isHidden = true
+        case .playing :
+            playView.isHidden = true
+            loadingView.isHidden = true
+            pauseView.isHidden = false
+        case .buffering :
+            playView.isHidden = true
+            loadingView.isHidden = false
+            pauseView.isHidden = true
+        }
+    }
+    
+    //MARK: - Setup UI
+    
+    func setupUI() {
+        
+        //TODO: COnfig
+        //stationImageView
+        stationImageView.contentMode = .scaleAspectFit
+        
+        stationNameLabel.text = ""
+        stationNameLabel.textColor = UIColor.white
+        stationNameLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        
+        stationDescriptionLabel.text = ""
+        stationDescriptionLabel.textColor = .lightGray
+        stationDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        
+        volumeSlider.minimumTrackTintColor = UIColor.white
+        volumeSlider.maximumTrackTintColor = UIColor.darkGray
+        
+        playingBarsImage.image = UIImage(named: "NowPlayingBars-2")
+        playingBarsImage.autoresizingMask = []
+        playingBarsImage.contentMode = UIView.ContentMode.center
+        playingBarsImage.animationImages = PlayingBarsViews.createFrames()
+        playingBarsImage.animationDuration = 0.6
+        
+        //TODO
+        //Config Stack View Here ..
+        
+        favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
+    }
+    
+    func setupPlayerView() {
+        setupControlViews()
+        setupStackView()
+    }
+    
+    func setupControlViews() {
+        let viewForPlay = UIImageView()
+        viewForPlay.image = UIImage(named: "but-play")
+        viewForPlay.contentMode = .scaleAspectFit
+        playView = viewForPlay
+        
+        let viewForPause = UIImageView(image: UIImage(named: "btn-pause"))
+        viewForPause.contentMode = .scaleAspectFit
+        pauseView = viewForPause
+        
+        let size = CGSize(width: playerStackView.frame.width, height: playerStackView.frame.height)
+        let frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+        let viewForLoading = LoadingPlayerView(frame: frame)
+        viewForLoading.setUpAnimation(size: size, color: .white, imageName: "pauseFill")
+        loadingView = viewForLoading
+    }
+    
+    func setupStackView() {
+        playerStackView.addArrangedSubview(playView)
+        playerStackView.addArrangedSubview(pauseView)
+        playerStackView.addArrangedSubview(loadingView)
+        playerStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        playView.isHidden = true
+        pauseView.isHidden = true
+        loadingView.isHidden = true
     }
     
     
-    @IBAction func tapPlay(_ sender: Any) {
-        playState = !playState
+    func setupGestures() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        view.addGestureRecognizer( panGesture )
+        
+        let tapForStack = UITapGestureRecognizer(target: self, action: #selector(handleGestureStack(_:)))
+        playerStackView.addGestureRecognizer( tapForStack )
     }
+ 
+    //MARK: - Handle Gestures
     
-    @IBAction func tapFavorite(_ sender: Any) {
-        favorite = !favorite
-    }
-    
-    @IBAction func tapClose(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    @objc func handleGestureStack(_ sender: UITapGestureRecognizer) {
+        guard let viewModel = viewModel else { return }
+        viewModel.togglePlayPause()
     }
     
     @objc func handlePanGesture(_ sender: UIPanGestureRecognizer) {
@@ -134,5 +239,19 @@ class PlayerViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    //MARK: - IBActions
+    
+    @IBAction func tapFavorite(_ sender: Any) {
+        guard let  viewModel = viewModel else { return }
+        
+        //Esta varaible debería ser Bindable, podría demorar el Servicio
+        favorite = !favorite
+        viewModel.markAsFavorite()
+    }
+    
+    @IBAction func tapClose(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }

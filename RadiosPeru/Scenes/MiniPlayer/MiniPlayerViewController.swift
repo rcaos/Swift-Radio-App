@@ -60,6 +60,11 @@ class MiniPlayerViewController: UIViewController {
         setupGestures()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.refreshStatus()
+    }
+    
     //MARK: - Reactive
     
     private func setupViewModel() {
@@ -81,6 +86,7 @@ class MiniPlayerViewController: UIViewController {
         stationDescriptionLabel.text = viewModel.defaultDescription
     }
     
+    //Debería usar la Enum de Radio Player? o solo conocer la ENum de su Model?
     func configView(with state: RadioPlayerState) {
         switch state {
         case .stopped :
@@ -142,6 +148,11 @@ class MiniPlayerViewController: UIViewController {
         stationDescriptionLabel.text = ""
         stationDescriptionLabel.textColor = .lightGray
         stationDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        
+        //TODO COnfig StackView
+        //stackView. = .fill
+        //ALigment
+        //distribution
     }
     
     func setupPlayerView() {

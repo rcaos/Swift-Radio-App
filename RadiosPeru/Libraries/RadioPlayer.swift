@@ -28,9 +28,15 @@ class RadioPlayer {
     
     private let player = ApiPlayer.shared
     
-    weak var delegate: RadioPlayerDelegate?
-    
     private var station: RadioStation?
+    
+    weak var delegate: RadioPlayerDelegate? {
+        didSet {
+            print("Cambia delegate de RadioPlayer")
+        }
+    }
+    
+    var state: RadioPlayerState = .stopped
     
     //MARK: - Life Cycle
     init() {
@@ -94,6 +100,8 @@ extension RadioPlayer: ApiPlayerDelegate {
             radioState = .stopped
         }
         print("Cambio Player: \(state). Informo con: \(radioState)")
+        
+        self.state = radioState
         
         delegate?.radioPlayer(self, didChangeState: radioState)
     }

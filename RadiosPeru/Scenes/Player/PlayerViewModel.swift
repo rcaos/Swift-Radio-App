@@ -11,24 +11,69 @@ import UIKit
 
 final class PlayerViewModel {
     
+    private var servicePlayer: RadioPlayer?
+    
     private var radioStation: RadioStation
     
-    var name: String?
     var image: String?
-    var description: String?
     
-    //Init
-    init(station: RadioStation) {
+    var name: String?
+    
+    var defaultDescription: String?
+    
+    var onlineDescription: String?
+    
+    //Reactive
+    var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
+    
+    //MARK: - Initializers
+    
+    init(station: RadioStation, service: RadioPlayer?) {
         self.radioStation = station
+        self.servicePlayer = service
+        servicePlayer?.delegate = self
         setupRadio(for: station)
+        refreshStatus()
     }
     
     //MARK: - Private
-    func setupRadio(for station: RadioStation) {
+    
+    private func setupRadio(for station: RadioStation) {
         name = radioStation.name
         image = radioStation.image
-        description = radioStation.city + " " +
-                        radioStation.frecuency
+        defaultDescription = radioStation.city + " " +
+                        radioStation.frecuency + " " +
+                        radioStation.slogan
+        onlineDescription = "Currently Program..."
     }
     
+    //MARK: - Public
+    func togglePlayPause() {
+        guard let service = servicePlayer else { return }
+        service.togglePlayPause()
+    }
+    
+    func markAsFavorite() {
+        print("Mark as Favorite..")
+    }
+    
+    func refreshStatus() {
+        guard let service = servicePlayer else { return }
+        viewState.value = service.state
+    }
+}
+
+extension PlayerViewModel : RadioPlayerDelegate {
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
+        print("Soy Delegate PlayerViewModel, recibo state: \(state)")
+        viewState.value = state
+    }
+    
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String) {
+        
+    }
+    
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String) {
+        
+    }
 }
