@@ -136,12 +136,4 @@ extension PopularViewController: MiniPlayerControllerDelegate  {
         performSegue(withIdentifier: "playerSegue", sender: radio)
     }
     
-    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectPlay radio: String) {
-        print(radio)
-    }
-    
-    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectFavorite radio: String) {
-        print(radio)
-    }
-    
 }

@@ -15,10 +15,14 @@ final class PopularViewModel {
     
     var miniPlayer: MiniPlayerViewModel
     
+    var servicePlayer: RadioPlayer
+    
     init() {
         stations = RadioStation.createStations()
         models = stations.map({ return PopularCellViewModel(station: $0) })
-        miniPlayer = MiniPlayerViewModel(radio: nil)
+        
+        servicePlayer = RadioPlayer()
+        miniPlayer = MiniPlayerViewModel(radio: nil, service: servicePlayer)
     }
     
     func selectStation(at index: Int) {

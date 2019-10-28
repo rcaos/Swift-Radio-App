@@ -11,9 +11,9 @@ import UIKit
 protocol MiniPlayerControllerDelegate: class {
     func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectRadio radio: PlayerViewModel)
     
-    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectPlay radio: String)
+    //func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectPlay radio: String)
     
-    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectFavorite radio : String)
+    //func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectFavorite radio : String)
 }
 
 class MiniPlayerViewController: UIViewController {
@@ -39,7 +39,6 @@ class MiniPlayerViewController: UIViewController {
             } else {
                 favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
             }
-            toogle()
         }
     }
     
@@ -66,40 +65,62 @@ class MiniPlayerViewController: UIViewController {
     private func setupViewModel() {
         setupViewBindables()
         
-        viewModel?.updateRadioDetail = {[weak self] in
-            self?.setupViewBindables()
-        }
+        viewModel?.viewState.bind({ [weak self] state in
+            DispatchQueue.main.async {
+                self?.configView(with: state)
+            }
+            
+        })
+        
     }
     
     func setupViewBindables() {
         guard let viewModel = viewModel else { return }
         
         stationNameLabel.text = viewModel.name
-        stationDescriptionLabel.text = viewModel.description
+        stationDescriptionLabel.text = viewModel.defaultDescription
     }
     
-    //FIX
-    func toogle() {
-        count += 1
-        
-        switch count {
-        case 1:
-            playView.isHidden = true
-            loadingView.isHidden = false
-            pauseView.isHidden = true
-        case 2:
-            playView.isHidden = true
-            loadingView.isHidden = true
-            pauseView.isHidden = false
-        
-        default:
+    func configView(with state: RadioPlayerState) {
+        switch state {
+        case .stopped :
+            playingBarsView.stopAnimating()
+            stationNameLabel.text = viewModel?.name
+            stationDescriptionLabel.text = viewModel?.defaultDescription
+        case .loading :
+            playingBarsView.stopAnimating()
+            stationNameLabel.text = viewModel?.name
+            stationDescriptionLabel.text = "Loading..."
+        case .playing :
+            playingBarsView.startAnimating()
+            stationNameLabel.text = viewModel?.name
+            stationDescriptionLabel.text = viewModel?.onlineDescription
+        case .buffering :
+            playingBarsView.stopAnimating()
+            stationNameLabel.text = viewModel?.name
+            stationDescriptionLabel.text = viewModel?.onlineDescription
+        }
+        configPlayer(with: state)
+    }
+    
+    func configPlayer(with state: RadioPlayerState) {
+        switch state {
+        case .stopped :
             playView.isHidden = false
             loadingView.isHidden = true
             pauseView.isHidden = true
-        }
-        
-        if count == 3 {
-            count = 0
+        case .loading :
+            playView.isHidden = true
+            loadingView.isHidden = false
+            pauseView.isHidden = true
+        case .playing :
+            playView.isHidden = true
+            loadingView.isHidden = true
+            pauseView.isHidden = false
+        case .buffering :
+            playView.isHidden = true
+            loadingView.isHidden = false
+            pauseView.isHidden = true
         }
     }
     
@@ -111,6 +132,8 @@ class MiniPlayerViewController: UIViewController {
         playingBarsView.image = UIImage(named: "NowPlayingBars-2")
         playingBarsView.autoresizingMask = []
         playingBarsView.contentMode = UIView.ContentMode.center
+        playingBarsView.animationImages = PlayingBarsViews.createFrames()
+        playingBarsView.animationDuration = 0.6
         
         stationNameLabel.text = ""
         stationNameLabel.textColor = UIColor.white
@@ -170,7 +193,8 @@ class MiniPlayerViewController: UIViewController {
     
     @objc func handleGestureStack(_ sender: UITapGestureRecognizer) {
         guard let viewModel = viewModel, viewModel.isSelected else { return }
-        delegate?.miniPlayerController(self, didSelectPlay: "Press Stack View (Toogle)")
+        //delegate?.miniPlayerController(self, didSelectPlay: "Press Stack View (Toogle)")
+        viewModel.togglePlayPause()
     }
     
     @IBAction func tapFavorite(_ sender: Any) {
@@ -178,7 +202,6 @@ class MiniPlayerViewController: UIViewController {
         
         //Esta varaible debería ser Bindable, podría demorar el Servicio
         favorite = !favorite
-        
-        delegate?.miniPlayerController(self, didSelectFavorite: "selecciono Favorite Button")
+        viewModel.markAsFavorite()
     }
 }

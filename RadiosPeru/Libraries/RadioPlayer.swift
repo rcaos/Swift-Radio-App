@@ -30,23 +30,30 @@ class RadioPlayer {
     
     weak var delegate: RadioPlayerDelegate?
     
-    var station: RadioStation? {
-        didSet {
-            setupRadio(with: station)
-        }
-    }
+    private var station: RadioStation?
     
     //MARK: - Life Cycle
     init() {
-        //player.delegate = self
+        player.delegate = self
     }
     
-    func setupRadio(with station: RadioStation?) {
+    //MARK: - Publics
+    func setupRadio(with station: RadioStation?, playWhenReady: Bool = false) {
         guard let station = station else { return }
-        //TODO 
+        
+        resetRadio()
+        self.station = station
+        
+        if let url = URL(string: station.urlStream) {
+            player.prepare(with: url, playWhenReady: playWhenReady)
+        }
     }
     
-    func resetRadioPlayer() {
+    func togglePlayPause() {
+        player.togglePlayPause()
+    }
+    
+    func resetRadio() {
         station = nil
         player.stop()
     }

@@ -25,13 +25,11 @@ class LoadingPlayerView: UIView {
         
         // Rotate animation
         let rotateAnimation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
-        //rotateAnimation.keyTimes = scaleAnimation.keyTimes
         rotateAnimation.values = [0, Double.pi, 2 * Double.pi]
         
         // Animation
         let animation = CAAnimationGroup()
         
-        //animation.animations = [scaleAnimation, rotateAnimation]
         animation.animations = [rotateAnimation]
         animation.timingFunction = CAMediaTimingFunction(name: .linear)
         
@@ -39,7 +37,7 @@ class LoadingPlayerView: UIView {
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
         
-        //Draw Play
+        //Add Play Image
         let newScaleSize = CGSize(width: size.width * 0.5 ,
                              height: size.height * 0.5)
         let image = getImage(with : newScaleSize, image: imageName)
@@ -64,7 +62,6 @@ class LoadingPlayerView: UIView {
         
         circle.frame = frame
         circle.add(animation, forKey: "animation")
-        //circle.backgroundColor = UIColor.green.cgColor
         
         layer.addSublayer(circle)
     }
@@ -83,18 +80,13 @@ class LoadingPlayerView: UIView {
         playImageView.contentMode = .scaleAspectFit
         playImageView.frame = frame
         
-        
         let layer: CAShapeLayer = CAShapeLayer()
-        //layer.backgroundColor = UIColor.red.cgColor
         layer.addSublayer( playImageView.layer )
         
         return layer
     }
     
     private func getRingThirdFour(size: CGSize, color: UIColor) -> CAShapeLayer {
-        
-        
-        
         let layer: CAShapeLayer = CAShapeLayer()
         let path: UIBezierPath = UIBezierPath()
         
