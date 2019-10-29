@@ -10,6 +10,8 @@ import Foundation
 
 final class MiniPlayerViewModel {
     
+    private let showService = ApiClient<RadioShowProvider>()
+    
     private var servicePlayer: RadioPlayer?
     
     private var radioStation: RadioStation!
@@ -26,6 +28,8 @@ final class MiniPlayerViewModel {
     
     //Reactive
     var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
+    
+    var updateUI:(()-> Void)?
     
     //MARK: - Initializers
     
@@ -62,6 +66,20 @@ final class MiniPlayerViewModel {
         viewState.value = player.state
     }
     
+    func getDescription() -> String? {
+        switch viewState.value {
+        case .playing, .buffering:
+            if let onlineDescription = onlineDescription,
+                !onlineDescription.isEmpty {
+                return onlineDescription
+            } else {
+                return defaultDescription
+            }
+        default:
+            return defaultDescription
+        }
+    }
+    
     //MARK: - Private
     
     private func setupRadio(_ station: RadioStation) {
@@ -70,7 +88,28 @@ final class MiniPlayerViewModel {
         defaultDescription = radioStation.city + " " +
                         radioStation.frecuency + " " +
                         radioStation.slogan
-        onlineDescription = "Currently Program.."
+        //onlineDescription = "Currently Program.."
+    }
+    
+    private func getShowDetail() {
+        guard let radioStation = radioStation ,
+            let idStation =  Int(radioStation.companyId) else { return }
+        
+        showService.load(service: .getNowShowDetail(idStation), decodeType: GrupoRPPResult.self , completion: { result in
+            switch result {
+            case .success(let response) :
+                self.processFetched(for: response)
+            case .failure(let error) :
+                print(error)
+            }
+        })
+    }
+    
+    private func processFetched(for response: GrupoRPPResult) {
+        let radioDetail = response.results.radioDetail
+        
+        self.onlineDescription = radioDetail.name
+        updateUI?()
     }
  
     //MARK: - View Models Building
@@ -85,6 +124,10 @@ extension MiniPlayerViewModel : RadioPlayerDelegate {
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
         print("Soy Delegate MiniPlayerViewModel, recibo state: \(state)")
         viewState.value = state
+        
+        if viewState.value == .playing {
+            getShowDetail()
+        }
     }
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String) {

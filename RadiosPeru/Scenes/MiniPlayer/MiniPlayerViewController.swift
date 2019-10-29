@@ -77,34 +77,30 @@ class MiniPlayerViewController: UIViewController {
             
         })
         
+        viewModel?.updateUI = { [weak self] in
+            DispatchQueue.main.async {
+                self?.setupViewBindables()
+            }
+        }
     }
     
     func setupViewBindables() {
         guard let viewModel = viewModel else { return }
         
         stationNameLabel.text = viewModel.name
-        stationDescriptionLabel.text = viewModel.defaultDescription
+        stationDescriptionLabel.text = viewModel.getDescription()
     }
     
     //Debería usar la Enum de Radio Player? o solo conocer la ENum de su Model?
     func configView(with state: RadioPlayerState) {
+        stationNameLabel.text = viewModel?.name
+        stationDescriptionLabel.text = viewModel?.getDescription()
+        
         switch state {
-        case .stopped :
+        case .stopped, .loading, .buffering:
             playingBarsView.stopAnimating()
-            stationNameLabel.text = viewModel?.name
-            stationDescriptionLabel.text = viewModel?.defaultDescription
-        case .loading :
-            playingBarsView.stopAnimating()
-            stationNameLabel.text = viewModel?.name
-            stationDescriptionLabel.text = "Loading..."
         case .playing :
             playingBarsView.startAnimating()
-            stationNameLabel.text = viewModel?.name
-            stationDescriptionLabel.text = viewModel?.onlineDescription
-        case .buffering :
-            playingBarsView.stopAnimating()
-            stationNameLabel.text = viewModel?.name
-            stationDescriptionLabel.text = viewModel?.onlineDescription
         }
         configPlayer(with: state)
     }
