@@ -39,7 +39,7 @@
 		779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DF55F23634D8C001F034F /* LoadingPlayerView.swift */; };
 		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
 		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
-		77CA145B23689CB9001BF04E /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA145A23689CB9001BF04E /* APIError.swift */; };
+		77CA145B23689CB9001BF04E /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA145A23689CB9001BF04E /* ApiError.swift */; };
 		77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7CA6D23686FB800E1D64A /* ShowCRP.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +78,7 @@
 		779DF55F23634D8C001F034F /* LoadingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlayerView.swift; sourceTree = "<group>"; };
 		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
-		77CA145A23689CB9001BF04E /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		77CA145A23689CB9001BF04E /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +108,7 @@
 				77236FAA23677FBC009C80D0 /* Feed Results */,
 				77236FA123677C3F009C80D0 /* ApiClient.swift */,
 				77236FA323677C56009C80D0 /* EndPoint.swift */,
-				77CA145A23689CB9001BF04E /* APIError.swift */,
+				77CA145A23689CB9001BF04E /* ApiError.swift */,
 				77236FB0236787B6009C80D0 /* Services */,
 			);
 			path = Networking;
@@ -367,7 +367,7 @@
 				774714612363A39100198D9E /* PlayingBarsView.swift in Sources */,
 				77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */,
 				779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */,
-				77CA145B23689CB9001BF04E /* APIError.swift in Sources */,
+				77CA145B23689CB9001BF04E /* ApiError.swift in Sources */,
 				77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */,
 				77236FA423677C56009C80D0 /* EndPoint.swift in Sources */,
 				77236FA223677C3F009C80D0 /* ApiClient.swift in Sources */,
