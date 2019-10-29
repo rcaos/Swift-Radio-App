@@ -56,9 +56,9 @@ class PlayerViewController: UIViewController {
         print("Deinit Player View Controller.")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        guard let viewModel = viewModel else { return }
-        viewModel.refreshStatus()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.refreshStatus()
     }
     
     //MARK: - ViewModel
@@ -66,13 +66,17 @@ class PlayerViewController: UIViewController {
     func setupViewModel() {
         setupViewBindables()
         
-        viewModel?.viewState.bindAndFire({[weak self] state in
+        viewModel?.viewState.bind({[weak self] state in
             DispatchQueue.main.async {
                 self?.configView(with: state)
             }
         })
         
-        //viewModel?.getInfoRadio()
+        viewModel?.updateUI = { [weak self] in
+            DispatchQueue.main.async {
+                self?.setupViewBindables()
+            }
+        }
     }
     
     func setupViewBindables() {
@@ -85,24 +89,19 @@ class PlayerViewController: UIViewController {
         }
         
         stationNameLabel?.text = viewModel.name
-        stationDescriptionLabel?.text = viewModel.defaultDescription
+        stationDescriptionLabel?.text = viewModel.getDescription()
     }
     
     //Debería usar la Enum de Radio Player? o solo conocer la ENum de su Model?
     func configView(with state: RadioPlayerState) {
+        stationNameLabel.text = viewModel?.name
+        stationDescriptionLabel.text = viewModel?.getDescription()
+        
         switch state {
-        case .stopped :
+        case .stopped, .loading, .buffering :
             playingBarsImage.stopAnimating()
-            stationDescriptionLabel.text = viewModel?.defaultDescription
-        case .loading :
-            playingBarsImage.stopAnimating()
-            stationDescriptionLabel.text = "Loading..."
         case .playing :
             playingBarsImage.startAnimating()
-            stationDescriptionLabel.text = viewModel?.onlineDescription
-        case .buffering :
-            playingBarsImage.stopAnimating()
-            stationDescriptionLabel.text = viewModel?.onlineDescription
         }
         
         configPlayer(with: state)

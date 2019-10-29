@@ -51,6 +51,7 @@ extension ApiClient {
     func fetch<T: Decodable>(with request: URLRequest,
                              decode: @escaping (Decodable) -> T?,
                              completion: @escaping (Result<T, APIError>) -> Void) {
+        print("request: [\(request)]")
         let task = decodingTask(with: request, decodingType: T.self) { (json, error) in
             DispatchQueue.main.async {
                 guard let json = json else {
