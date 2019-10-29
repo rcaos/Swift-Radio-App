@@ -10,7 +10,7 @@ import Foundation
 
 final class MiniPlayerViewModel {
     
-    private let showService = ApiClient<RadioShowProvider>()
+    private let radioClient = RadioClient()
     
     private var servicePlayer: RadioPlayer?
     
@@ -92,23 +92,21 @@ final class MiniPlayerViewModel {
     }
     
     private func getShowDetail() {
-        guard let radioStation = radioStation ,
-            let idStation =  Int(radioStation.companyId) else { return }
+        guard let radioStation = radioStation else { return }
         
-        showService.load(service: .getNowShowDetail(idStation), decodeType: GrupoRPPResult.self , completion: { result in
+        radioClient.getShowOnlineDetail(group: radioStation.group , completion: { result in
             switch result {
             case .success(let response) :
-                self.processFetched(for: response)
+                guard let showResult = response else { return }
+                self.processFetched(for: showResult)
             case .failure(let error) :
                 print(error)
             }
         })
     }
     
-    private func processFetched(for response: GrupoRPPResult) {
-        let radioDetail = response.results.radioDetail
-        
-        self.onlineDescription = radioDetail.name
+    private func processFetched(for radioResponse: Show) {
+        self.onlineDescription = radioResponse.name
         updateUI?()
     }
  

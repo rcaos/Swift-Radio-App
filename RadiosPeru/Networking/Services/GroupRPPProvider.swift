@@ -8,11 +8,13 @@
 
 import Foundation
 
-enum RadioShowProvider {
-    case getNowShowDetail(Int)
+enum GroupRPPProvider {
+    case getNowShowDetail(String)
 }
 
-extension RadioShowProvider: EndPoint {
+//MARK: - EndPoint
+
+extension GroupRPPProvider: EndPoint {
     var baseURL: String {
         return "https://radio.rpp.pe"
     }

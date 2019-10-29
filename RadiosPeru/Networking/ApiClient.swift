@@ -8,61 +8,63 @@
 
 import Foundation
 
-class ApiClient<T: EndPoint> {
-    var urlSession = URLSession.shared
+protocol ApiClient {
+    var session: URLSession { get }
     
-    init() { }
-    
-    func load(service: T, completion: @escaping (Result<Data, APIError>) -> Void) {
-        call(service.urlRequest, completion: completion)
-    }
-    
-    func load<U>(service: T, decodeType: U.Type, completion: @escaping (Result<U, APIError>) -> Void) where U: Decodable {
-        call(service.urlRequest) { result in
-            switch result {
-            case .success(let data):
-                let decoder = JSONDecoder()
-                do {
-                    let resp = try decoder.decode(decodeType, from: data)
-                    completion(.success(resp))
-                }
-                catch {
-                    print("error to Decode: [\(error)]")
-                    completion(.failure( .requestFailed ))
-                }
-            case .failure(let error):
-                print("error server: [\(error)]")
-                completion(.failure(error))
-            }
-        }
-    }
+    func fetch<T: Decodable>(with request:  URLRequest,
+                             decode:        @escaping (Decodable) -> T?,
+                             completion:    @escaping (Result<T, APIError>) -> Void)
 }
 
 extension ApiClient {
-    private func call(_ request: URLRequest, deliverQueue: DispatchQueue = DispatchQueue.main, completion: @escaping (Result<Data, APIError>) -> Void) {
-        print( "url request: [\(request)]" )
-        let task = urlSession.dataTask(with: request) { (data, response, _) in
-            
+    
+    typealias JSONTaskCompletionHandler = (Decodable?, APIError?) -> Void
+    
+    private func decodingTask<T: Decodable>(with request: URLRequest,
+                                            decodingType: T.Type,
+                                            completionHandler completion: JSONTaskCompletionHandler?) -> URLSessionDataTask {
+        let task = session.dataTask(with: request) { data, response, _ in
             guard let httpResponse = response as? HTTPURLResponse else {
-                deliverQueue.async {
-                    completion( .failure(.requestFailed) )
-                }
+                completion?(nil, .requestFailed)
                 return
             }
-            
             if httpResponse.statusCode == 200 || httpResponse.statusCode == 201 {
                 if let data = data {
-                    deliverQueue.async {
-                        completion( .success( data ))
+                    do {
+                        let decoder = JSONDecoder()
+                        let genericModel = try decoder.decode(decodingType, from: data)
+                        completion?(genericModel, nil)
+                    } catch {
+                        print(error.localizedDescription)
+                        completion?(nil, .requestFailed)
                     }
                 } else {
-                    deliverQueue.async {
-                        completion( .failure(  .invalidData ))
-                    }
+                    completion?(nil, .invalidData)
                 }
             } else {
-                deliverQueue.async {
-                    completion( .failure( APIError(response: httpResponse) ))
+                completion?(nil, APIError(response: httpResponse))
+            }
+        }
+        return task
+    }
+    
+    func fetch<T: Decodable>(with request: URLRequest,
+                             decode: @escaping (Decodable) -> T?,
+                             completion: @escaping (Result<T, APIError>) -> Void) {
+        let task = decodingTask(with: request, decodingType: T.self) { (json, error) in
+            DispatchQueue.main.async {
+                guard let json = json else {
+                    if let error = error {
+                        completion(Result.failure(error))
+                    } else {
+                        completion(Result.failure(.requestFailed))
+                    }
+                    return
+                }
+                if let value = decode(json) {
+                    completion(.success(value))
+                } else {
+                    completion(.failure(.requestFailed))
                 }
             }
         }

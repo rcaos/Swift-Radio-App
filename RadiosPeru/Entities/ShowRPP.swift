@@ -8,21 +8,27 @@
 
 import Foundation
 
-struct RadioShow: Codable{
+struct ShowRPP: Show, Codable {
     
-    let radioName: String
-    let name: String
-    let description: String
-    let imageURL: String
-    let startTime: String
-    let endTime: String
+    var id: String
+    var name: String
+    var imageURL: String
+    
+    var startTime: String
+    var endTime: String
     
     enum CodingKeys: String, CodingKey {
-        case radioName = "serviceName"
+        case id = "rpId"
         case name
-        case description
         case imageURL = "imageWeb"
+        
         case startTime
         case endTime = "stopTime"
+    }
+}
+
+extension ShowRPP {
+    var horario: String {
+        return startTime + " - " + endTime
     }
 }

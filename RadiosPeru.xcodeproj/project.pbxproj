@@ -10,12 +10,14 @@
 		770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282D9235C08AC000098DB /* MiniPlayerViewController.swift */; };
 		770282DC235C08B9000098DB /* MiniPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */; };
 		770282DF235C27A7000098DB /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282DE235C27A7000098DB /* Bindable.swift */; };
+		770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770A6BFA23687AF400FDE4F6 /* GroupCRPProvider.swift */; };
+		770A6BFD2368895100FDE4F6 /* RadioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770A6BFC2368895100FDE4F6 /* RadioClient.swift */; };
+		770A6BFF2368978500FDE4F6 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770A6BFE2368978500FDE4F6 /* Show.swift */; };
 		77236FA223677C3F009C80D0 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FA123677C3F009C80D0 /* ApiClient.swift */; };
 		77236FA423677C56009C80D0 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FA323677C56009C80D0 /* EndPoint.swift */; };
-		77236FA623677C62009C80D0 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FA523677C62009C80D0 /* ApiError.swift */; };
 		77236FA923677F9B009C80D0 /* GrupoRPPResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FA823677F9B009C80D0 /* GrupoRPPResult.swift */; };
-		77236FAC236786F8009C80D0 /* RadioShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FAB236786F8009C80D0 /* RadioShow.swift */; };
-		77236FAF236787B3009C80D0 /* RadioShowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FAE236787B2009C80D0 /* RadioShowProvider.swift */; };
+		77236FAC236786F8009C80D0 /* ShowRPP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FAB236786F8009C80D0 /* ShowRPP.swift */; };
+		77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */; };
 		7739E809235E4A610071882A /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739E808235E4A610071882A /* RadioPlayer.swift */; };
 		7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739E80B235E4B980071882A /* ApiPlayer.swift */; };
 		77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77421B142358FEE500A23C79 /* AppDelegate.swift */; };
@@ -37,18 +39,22 @@
 		779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DF55F23634D8C001F034F /* LoadingPlayerView.swift */; };
 		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
 		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
+		77CA145B23689CB9001BF04E /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA145A23689CB9001BF04E /* APIError.swift */; };
+		77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7CA6D23686FB800E1D64A /* ShowCRP.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		770282D9235C08AC000098DB /* MiniPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerViewController.swift; sourceTree = "<group>"; };
 		770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerViewModel.swift; sourceTree = "<group>"; };
 		770282DE235C27A7000098DB /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		770A6BFA23687AF400FDE4F6 /* GroupCRPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCRPProvider.swift; sourceTree = "<group>"; };
+		770A6BFC2368895100FDE4F6 /* RadioClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioClient.swift; sourceTree = "<group>"; };
+		770A6BFE2368978500FDE4F6 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		77236FA123677C3F009C80D0 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		77236FA323677C56009C80D0 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
-		77236FA523677C62009C80D0 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		77236FA823677F9B009C80D0 /* GrupoRPPResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrupoRPPResult.swift; sourceTree = "<group>"; };
-		77236FAB236786F8009C80D0 /* RadioShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioShow.swift; sourceTree = "<group>"; };
-		77236FAE236787B2009C80D0 /* RadioShowProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioShowProvider.swift; sourceTree = "<group>"; };
+		77236FAB236786F8009C80D0 /* ShowRPP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRPP.swift; sourceTree = "<group>"; };
+		77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRPPProvider.swift; sourceTree = "<group>"; };
 		7739E808235E4A610071882A /* RadioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
 		7739E80B235E4B980071882A /* ApiPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPlayer.swift; sourceTree = "<group>"; };
 		77421B112358FEE500A23C79 /* RadiosPeru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiosPeru.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +78,8 @@
 		779DF55F23634D8C001F034F /* LoadingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlayerView.swift; sourceTree = "<group>"; };
 		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
+		77CA145A23689CB9001BF04E /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +108,7 @@
 				77236FAA23677FBC009C80D0 /* Feed Results */,
 				77236FA123677C3F009C80D0 /* ApiClient.swift */,
 				77236FA323677C56009C80D0 /* EndPoint.swift */,
-				77236FA523677C62009C80D0 /* ApiError.swift */,
+				77CA145A23689CB9001BF04E /* APIError.swift */,
 				77236FB0236787B6009C80D0 /* Services */,
 			);
 			path = Networking;
@@ -117,7 +125,9 @@
 		77236FAD236786FE009C80D0 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				77236FAB236786F8009C80D0 /* RadioShow.swift */,
+				770A6BFE2368978500FDE4F6 /* Show.swift */,
+				77236FAB236786F8009C80D0 /* ShowRPP.swift */,
+				77F7CA6D23686FB800E1D64A /* ShowCRP.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -125,7 +135,9 @@
 		77236FB0236787B6009C80D0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				77236FAE236787B2009C80D0 /* RadioShowProvider.swift */,
+				77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */,
+				770A6BFA23687AF400FDE4F6 /* GroupCRPProvider.swift */,
+				770A6BFC2368895100FDE4F6 /* RadioClient.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -346,23 +358,27 @@
 				7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */,
 				77964891235A569900813C48 /* PlayerViewModel.swift in Sources */,
 				770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */,
+				770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */,
 				77236FA923677F9B009C80D0 /* GrupoRPPResult.swift in Sources */,
 				770282DC235C08B9000098DB /* MiniPlayerViewModel.swift in Sources */,
 				7755B524235A1350004E642B /* PopularViewModel.swift in Sources */,
 				7755B522235A1241004E642B /* PopularViewController.swift in Sources */,
-				77236FAC236786F8009C80D0 /* RadioShow.swift in Sources */,
+				77236FAC236786F8009C80D0 /* ShowRPP.swift in Sources */,
 				774714612363A39100198D9E /* PlayingBarsView.swift in Sources */,
 				77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */,
 				779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */,
+				77CA145B23689CB9001BF04E /* APIError.swift in Sources */,
 				77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */,
 				77236FA423677C56009C80D0 /* EndPoint.swift in Sources */,
 				77236FA223677C3F009C80D0 /* ApiClient.swift in Sources */,
-				77236FA623677C62009C80D0 /* ApiError.swift in Sources */,
 				7739E809235E4A610071882A /* RadioPlayer.swift in Sources */,
-				77236FAF236787B3009C80D0 /* RadioShowProvider.swift in Sources */,
+				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,
+				77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */,
 				77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */,
+				770A6BFD2368895100FDE4F6 /* RadioClient.swift in Sources */,
 				7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */,
+				770A6BFF2368978500FDE4F6 /* Show.swift in Sources */,
 				7755B520235A0F62004E642B /* Model.swift in Sources */,
 				7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */,
 			);

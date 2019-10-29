@@ -13,7 +13,7 @@ struct GrupoRPPResult: Decodable{
 }
 
 struct ShowWrapper: Codable{
-    let radioDetail: RadioShow
+    let radioDetail: ShowRPP
     
     enum CodingKeys: String, CodingKey {
         case radioDetail = "PI"
