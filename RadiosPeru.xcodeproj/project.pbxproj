@@ -20,6 +20,8 @@
 		77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */; };
 		7739E809235E4A610071882A /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739E808235E4A610071882A /* RadioPlayer.swift */; };
 		7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739E80B235E4B980071882A /* ApiPlayer.swift */; };
+		773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773D455A2368EE58007B755D /* FavoritesViewController.swift */; };
+		773D455D2368EE6E007B755D /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773D455C2368EE6E007B755D /* FavoritesViewModel.swift */; };
 		77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77421B142358FEE500A23C79 /* AppDelegate.swift */; };
 		77421B1A2358FEE500A23C79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B182358FEE500A23C79 /* Main.storyboard */; };
 		77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1B2358FEE700A23C79 /* Assets.xcassets */; };
@@ -29,7 +31,7 @@
 		77421B2C2359116600A23C79 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B2B2359116600A23C79 /* Player.storyboard */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B51D2359F1E2004E642B /* PlayerViewController.swift */; };
-		7755B520235A0F62004E642B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B51F235A0F62004E642B /* Model.swift */; };
+		7755B520235A0F62004E642B /* StationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B51F235A0F62004E642B /* StationsManager.swift */; };
 		7755B522235A1241004E642B /* PopularViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B521235A1241004E642B /* PopularViewController.swift */; };
 		7755B524235A1350004E642B /* PopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B523235A1350004E642B /* PopularViewModel.swift */; };
 		7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B52B235A144F004E642B /* PopularViewCell.swift */; };
@@ -40,6 +42,7 @@
 		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
 		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
 		77CA145B23689CB9001BF04E /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA145A23689CB9001BF04E /* ApiError.swift */; };
+		77F65DFC2371E1CA00677DB8 /* MiniPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */; };
 		77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7CA6D23686FB800E1D64A /* ShowCRP.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +60,8 @@
 		77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRPPProvider.swift; sourceTree = "<group>"; };
 		7739E808235E4A610071882A /* RadioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
 		7739E80B235E4B980071882A /* ApiPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPlayer.swift; sourceTree = "<group>"; };
+		773D455A2368EE58007B755D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		773D455C2368EE6E007B755D /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		77421B112358FEE500A23C79 /* RadiosPeru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiosPeru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77421B142358FEE500A23C79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77421B192358FEE500A23C79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,7 +73,7 @@
 		77421B2B2359116600A23C79 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
 		774714602363A39100198D9E /* PlayingBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingBarsView.swift; sourceTree = "<group>"; };
 		7755B51D2359F1E2004E642B /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
-		7755B51F235A0F62004E642B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		7755B51F235A0F62004E642B /* StationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsManager.swift; sourceTree = "<group>"; };
 		7755B521235A1241004E642B /* PopularViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewController.swift; sourceTree = "<group>"; };
 		7755B523235A1350004E642B /* PopularViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewModel.swift; sourceTree = "<group>"; };
 		7755B52B235A144F004E642B /* PopularViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewCell.swift; sourceTree = "<group>"; };
@@ -79,6 +84,7 @@
 		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 		77CA145A23689CB9001BF04E /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MiniPlayer.storyboard; sourceTree = "<group>"; };
 		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +157,15 @@
 			path = Libraries;
 			sourceTree = "<group>";
 		};
+		773D455E2368EE72007B755D /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				773D455A2368EE58007B755D /* FavoritesViewController.swift */,
+				773D455C2368EE6E007B755D /* FavoritesViewModel.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 		77421B082358FEE500A23C79 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +185,7 @@
 		77421B132358FEE500A23C79 /* RadiosPeru */ = {
 			isa = PBXGroup;
 			children = (
+				77F65DFA2371B8AE00677DB8 /* Managers */,
 				77236FA723677C67009C80D0 /* Networking */,
 				77236FAD236786FE009C80D0 /* Entities */,
 				7755B525235A13E9004E642B /* Scenes */,
@@ -177,7 +193,6 @@
 				77B9469E235AD802006C3EEA /* Helpers */,
 				7755B529235A141A004E642B /* ViewComponents */,
 				77421B2A235901AE00A23C79 /* StoryBoards */,
-				7755B51F235A0F62004E642B /* Model.swift */,
 				77421B142358FEE500A23C79 /* AppDelegate.swift */,
 				77421B1B2358FEE700A23C79 /* Assets.xcassets */,
 				77421B202358FEE700A23C79 /* Info.plist */,
@@ -193,6 +208,7 @@
 				77421B262359015C00A23C79 /* Popular.storyboard */,
 				77421B282359016700A23C79 /* Favorites.storyboard */,
 				77421B2B2359116600A23C79 /* Player.storyboard */,
+				77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */,
 			);
 			path = StoryBoards;
 			sourceTree = "<group>";
@@ -210,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				7755B526235A13F0004E642B /* Popular */,
+				773D455E2368EE72007B755D /* Favorites */,
 				77964892235A569D00813C48 /* Player */,
 				770282DD235C08BD000098DB /* MiniPlayer */,
 			);
@@ -277,6 +294,14 @@
 				77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */,
 			);
 			path = Transitions;
+			sourceTree = "<group>";
+		};
+		77F65DFA2371B8AE00677DB8 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7755B51F235A0F62004E642B /* StationsManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,6 +373,7 @@
 				77421B1A2358FEE500A23C79 /* Main.storyboard in Resources */,
 				7755B52E235A144F004E642B /* PopularViewCell.xib in Resources */,
 				77421B292359016700A23C79 /* Favorites.storyboard in Resources */,
+				77F65DFC2371E1CA00677DB8 /* MiniPlayer.storyboard in Resources */,
 				77421B2C2359116600A23C79 /* Player.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,8 +385,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				773D455D2368EE6E007B755D /* FavoritesViewModel.swift in Sources */,
 				770282DF235C27A7000098DB /* Bindable.swift in Sources */,
 				7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */,
+				773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */,
 				77964891235A569900813C48 /* PlayerViewModel.swift in Sources */,
 				770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */,
 				770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */,
@@ -384,7 +412,7 @@
 				770A6BFD2368895100FDE4F6 /* RadioClient.swift in Sources */,
 				7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */,
 				770A6BFF2368978500FDE4F6 /* Show.swift in Sources */,
-				7755B520235A0F62004E642B /* Model.swift in Sources */,
+				7755B520235A0F62004E642B /* StationsManager.swift in Sources */,
 				7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

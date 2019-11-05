@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yxd-fs-tGp">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Mini Player View Controller-->
+        <scene sceneID="gqa-cM-rX6">
+            <objects>
+                <viewController id="yxd-fs-tGp" customClass="MiniPlayerViewController" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="twk-5z-v9l">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ynh-iq-l5f">
+                                <rect key="frame" x="8" y="16" width="168" height="168"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ynh-iq-l5f" secondAttribute="height" multiplier="1:1" id="HU1-JM-oAt"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="tapFavorite:" destination="yxd-fs-tGp" eventType="touchUpInside" id="0hf-Tb-TkH"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ce9-yx-aXT">
+                                <rect key="frame" x="184" y="0.0" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ce9-yx-aXT" secondAttribute="height" multiplier="1:1" id="9Jv-AA-52i"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="3le-8F-YdW" userLabel="Station Stack View">
+                                <rect key="frame" x="392" y="77.5" width="48" height="45.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Enw-Ss-WaU">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="24"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6k-Sr-aGT">
+                                        <rect key="frame" x="0.0" y="25" width="48" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ODa-e6-Rmg">
+                                <rect key="frame" x="732" y="12" width="60" height="176"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="z00-3c-st2"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ODa-e6-Rmg" secondAttribute="trailing" constant="8" id="1xO-GX-nbd"/>
+                            <constraint firstItem="Ynh-iq-l5f" firstAttribute="top" secondItem="twk-5z-v9l" secondAttribute="top" constant="16" id="FVo-I0-dOS"/>
+                            <constraint firstAttribute="bottom" secondItem="Ce9-yx-aXT" secondAttribute="bottom" id="URd-fW-q87"/>
+                            <constraint firstAttribute="bottom" secondItem="ODa-e6-Rmg" secondAttribute="bottom" constant="12" id="X8v-C5-wvE"/>
+                            <constraint firstItem="Ce9-yx-aXT" firstAttribute="leading" secondItem="Ynh-iq-l5f" secondAttribute="trailing" constant="8" id="db7-R3-uph"/>
+                            <constraint firstItem="Ce9-yx-aXT" firstAttribute="top" secondItem="twk-5z-v9l" secondAttribute="top" id="fbH-X1-gI0"/>
+                            <constraint firstItem="Ynh-iq-l5f" firstAttribute="leading" secondItem="twk-5z-v9l" secondAttribute="leading" constant="8" id="j2L-BW-XWu"/>
+                            <constraint firstItem="ODa-e6-Rmg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3le-8F-YdW" secondAttribute="trailing" constant="8" id="lI1-8s-Axy"/>
+                            <constraint firstAttribute="bottom" secondItem="Ynh-iq-l5f" secondAttribute="bottom" constant="16" id="mdC-1V-gG5"/>
+                            <constraint firstItem="3le-8F-YdW" firstAttribute="leading" secondItem="Ce9-yx-aXT" secondAttribute="trailing" constant="8" id="mvd-Yf-DDA"/>
+                            <constraint firstItem="ODa-e6-Rmg" firstAttribute="top" secondItem="twk-5z-v9l" secondAttribute="top" constant="12" id="wRZ-9j-x4E"/>
+                            <constraint firstItem="3le-8F-YdW" firstAttribute="centerY" secondItem="twk-5z-v9l" secondAttribute="centerY" id="wkr-Rq-TjR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="abl-jk-KcT"/>
+                    </view>
+                    <size key="freeformSize" width="800" height="200"/>
+                    <connections>
+                        <outlet property="favoriteButton" destination="Ynh-iq-l5f" id="2Go-aZ-mhV"/>
+                        <outlet property="playerStackView" destination="ODa-e6-Rmg" id="dKf-PP-FIW"/>
+                        <outlet property="playingBarsView" destination="Ce9-yx-aXT" id="cBJ-oC-E6z"/>
+                        <outlet property="stationDescriptionLabel" destination="X6k-Sr-aGT" id="48q-I7-uOd"/>
+                        <outlet property="stationNameLabel" destination="Enw-Ss-WaU" id="Qkl-so-8S7"/>
+                        <outlet property="stationStackView" destination="3le-8F-YdW" id="e57-nM-cMd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vce-fV-d3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1050.7246376811595" y="434.59821428571428"/>
+        </scene>
+    </scenes>
+</document>

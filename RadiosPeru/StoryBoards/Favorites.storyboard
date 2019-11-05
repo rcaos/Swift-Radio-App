@@ -10,33 +10,81 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Favorites View Controller-->
         <scene sceneID="pHo-HP-hcE">
             <objects>
-                <viewController id="9kJ-6N-zaO" sceneMemberID="viewController">
+                <viewController id="9kJ-6N-zaO" customClass="FavoritesViewController" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NPI-eD-Z8d">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorites Here!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSS-Om-bkB">
-                                <rect key="frame" x="110.5" y="430" width="193" height="36"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pS9-cb-eug">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="an9-fT-Zc2">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="DAo-15-nA2">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qbZ-jQ-JfA">
+                                <rect key="frame" x="0.0" y="749" width="414" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="WcZ-Fy-EY7"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Tj7-0l-LhN" kind="embed" identifier="miniPlayerSegue" id="WbJ-he-JLm"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="LSS-Om-bkB" firstAttribute="centerX" secondItem="NPI-eD-Z8d" secondAttribute="centerX" id="ZLD-0F-nE2"/>
-                            <constraint firstItem="LSS-Om-bkB" firstAttribute="centerY" secondItem="NPI-eD-Z8d" secondAttribute="centerY" id="osp-oo-n5O"/>
+                            <constraint firstItem="fsT-Lh-Ji8" firstAttribute="bottom" secondItem="qbZ-jQ-JfA" secondAttribute="bottom" id="9Hh-R1-CIc"/>
+                            <constraint firstItem="fsT-Lh-Ji8" firstAttribute="bottom" secondItem="pS9-cb-eug" secondAttribute="bottom" id="Rsm-hH-daJ"/>
+                            <constraint firstItem="fsT-Lh-Ji8" firstAttribute="trailing" secondItem="pS9-cb-eug" secondAttribute="trailing" id="XYJ-gD-jff"/>
+                            <constraint firstItem="fsT-Lh-Ji8" firstAttribute="trailing" secondItem="qbZ-jQ-JfA" secondAttribute="trailing" id="bFN-Oq-HtB"/>
+                            <constraint firstItem="pS9-cb-eug" firstAttribute="leading" secondItem="fsT-Lh-Ji8" secondAttribute="leading" id="c1D-Dd-zTp"/>
+                            <constraint firstItem="qbZ-jQ-JfA" firstAttribute="leading" secondItem="fsT-Lh-Ji8" secondAttribute="leading" id="hJt-lp-Uy8"/>
+                            <constraint firstItem="pS9-cb-eug" firstAttribute="top" secondItem="fsT-Lh-Ji8" secondAttribute="top" id="n7P-h1-fOa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fsT-Lh-Ji8"/>
                     </view>
                     <navigationItem key="navigationItem" id="Uki-a7-0Hu"/>
+                    <connections>
+                        <outlet property="collectionView" destination="pS9-cb-eug" id="bFa-LL-tGX"/>
+                        <segue destination="uly-yo-cuk" kind="show" identifier="playerSegue" id="HLb-9m-d2a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pgW-2O-kVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="818.84057971014499" y="-51.5625"/>
+        </scene>
+        <!--MiniPlayer-->
+        <scene sceneID="x4p-Dg-K6p">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MiniPlayer" id="Tj7-0l-LhN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jQk-Az-3C2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="820" y="366"/>
+        </scene>
+        <!--PlayerViewController-->
+        <scene sceneID="LGE-86-ihp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Player" referencedIdentifier="PlayerViewController" id="uly-yo-cuk" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fQQ-mU-6vO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1462" y="-52"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="A0K-Ms-NbZ">

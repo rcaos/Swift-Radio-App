@@ -1,14 +1,14 @@
 //
-//  PopularViewModel.swift
+//  FavoritesViewModel.swift
 //  RadiosPeru
 //
-//  Created by Jeans on 10/18/19.
+//  Created by Jeans on 10/29/19.
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
 import Foundation
 
-final class PopularViewModel {
+final class FavoritesViewModel {
     
     var stations:[RadioStation] = []
     var models:[PopularCellViewModel] = []
@@ -22,7 +22,7 @@ final class PopularViewModel {
     init(manager: StationsManager = StationsManager.shared ) {
         
         stationsManager = manager
-        stations = stationsManager.allStations
+        stations = stationsManager.findFavorites()
         
         models = stations.map({ return PopularCellViewModel(station: $0) })
         

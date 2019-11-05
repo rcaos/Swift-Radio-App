@@ -200,7 +200,6 @@ class MiniPlayerViewController: UIViewController {
     
     @objc func handleGestureStack(_ sender: UITapGestureRecognizer) {
         guard let viewModel = viewModel, viewModel.isSelected else { return }
-        //delegate?.miniPlayerController(self, didSelectPlay: "Press Stack View (Toogle)")
         viewModel.togglePlayPause()
     }
     
