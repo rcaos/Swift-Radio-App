@@ -20,6 +20,7 @@ final class FavoritesViewModel {
     
     init(manager: StationsManager) {
         stationsManager = manager
+        manager.addObserver(self)
         
         getFavorites()
     }
@@ -39,4 +40,11 @@ final class FavoritesViewModel {
         models = stations.map({ return PopularCellViewModel(station: $0) })
     }
     
+}
+
+extension FavoritesViewModel: StationsManagerObserver {
+    
+    func stationsManagerDidChangeFavorites(_ manager: StationsManager) {
+        refreshStations()
+    }
 }

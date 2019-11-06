@@ -31,6 +31,10 @@ struct RadioStation : Equatable{
     }
 }
 
+protocol StationsManagerObserver: class {
+    func stationsManagerDidChangeFavorites(_ manager: StationsManager)
+}
+
 class StationsManager {
     
     static let shared = StationsManager()
@@ -40,6 +44,8 @@ class StationsManager {
     lazy var allStations: [RadioStation] = {
         return stations
     }()
+    
+    private var observations = [ObjectIdentifier : Observation]()
     
     //MARK: - Initializers
     
@@ -59,6 +65,9 @@ class StationsManager {
             let favorite = !stations[index].isFavorite
             stations[index].isFavorite = favorite
             completion( Result.success( favorite ) )
+            
+            //Informar a todos los Observers
+            favoritesDidChange()
         }
     }
     
@@ -156,5 +165,38 @@ class StationsManager {
         
         
         return stations
+    }
+}
+
+private extension StationsManager {
+    
+    struct Observation {
+        weak var observer: StationsManagerObserver?
+    }
+}
+
+private extension StationsManager {
+    
+    func favoritesDidChange() {
+        for (id, observation) in observations {
+            guard let observer = observation.observer else {
+                observations.removeValue(forKey: id)
+                continue
+            }
+            observer.stationsManagerDidChangeFavorites(self)
+        }
+    }
+}
+
+extension StationsManager {
+    
+    func addObserver(_ observer: StationsManagerObserver) {
+        let id = ObjectIdentifier(observer)
+        observations[id] = Observation(observer: observer)
+    }
+    
+    func removeObserver(_ observer: StationsManagerObserver) {
+        let id = ObjectIdentifier(observer)
+        observations.removeValue(forKey: id)
     }
 }
