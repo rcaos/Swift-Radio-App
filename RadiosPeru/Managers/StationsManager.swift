@@ -8,12 +8,13 @@
 
 import Foundation
 
-enum GroupStation {
+enum GroupStation : Equatable{
     case RPP(String)
     case CRP(String)
 }
 
-struct RadioStation {
+struct RadioStation : Equatable{
+    
     var name: String
     var image: String
     var city: String
@@ -23,6 +24,11 @@ struct RadioStation {
     var group: GroupStation
     
     var isFavorite: Bool
+    
+    static func == (lhs: RadioStation, rhs: RadioStation) -> Bool {
+        return ( lhs.name == rhs.name ) &&
+            ( lhs.group == rhs.group)
+    }
 }
 
 class StationsManager {
@@ -47,10 +53,20 @@ class StationsManager {
         return stations.filter({ $0.isFavorite })
     }
     
-    func toggleFavorite(for name: String) {
-        if let index = stations.firstIndex(where: { $0.name == name }) {
-            let favorite = stations[index].isFavorite
-            stations[index].isFavorite = !favorite
+    func toggleFavorite(for station: RadioStation,
+                        completion: @escaping (Result<Bool, Error>) -> Void){
+        if let index = stations.firstIndex(where: { $0 == station} ) {
+            let favorite = !stations[index].isFavorite
+            stations[index].isFavorite = favorite
+            completion( Result.success( favorite ) )
+        }
+    }
+    
+    func findStation(for station: RadioStation) -> RadioStation? {
+        if let index = stations.firstIndex(where: { $0 == station} ) {
+            return stations[index]
+        } else {
+            return nil
         }
     }
     

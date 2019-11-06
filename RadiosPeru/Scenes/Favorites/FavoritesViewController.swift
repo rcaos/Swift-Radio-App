@@ -12,7 +12,11 @@ private let reuseIdentifier = "FavoriteViewCell"
 
 class FavoritesViewController: UIViewController {
     
-    var viewModel: FavoritesViewModel!
+    var viewModel: FavoritesViewModel! {
+        didSet {
+            setupViewModel()
+        }
+    }
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -20,11 +24,27 @@ class FavoritesViewController: UIViewController {
     
     var delegate: MainControllerDelegate?
     
+    //MARK: - Initializers
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         setupCollection()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.refreshStations()
+    }
+    
+    //MARK: - Reactive
+    private func setupViewModel() {
+        viewModel.updateUI = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
     func setupView() {

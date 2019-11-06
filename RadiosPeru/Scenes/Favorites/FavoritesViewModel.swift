@@ -15,16 +15,28 @@ final class FavoritesViewModel {
     
     var stationsManager: StationsManager
     
+    //Reactive
+    var updateUI: (() -> Void)?
+    
     init(manager: StationsManager) {
-        
         stationsManager = manager
-        stations = stationsManager.findFavorites()
         
-        models = stations.map({ return PopularCellViewModel(station: $0) })
+        getFavorites()
     }
     
     func selectStation(at index: Int) -> RadioStation {
         return stations[index]
+    }
+    
+    func refreshStations() {
+        getFavorites()
+        updateUI?()
+    }
+    
+    //MARK: - Private
+    private func getFavorites() {
+        stations = stationsManager.findFavorites()
+        models = stations.map({ return PopularCellViewModel(station: $0) })
     }
     
 }

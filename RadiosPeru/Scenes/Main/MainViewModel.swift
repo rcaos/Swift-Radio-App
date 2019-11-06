@@ -22,7 +22,7 @@ final class MainViewModel {
         
         servicePlayer = RadioPlayer()
         
-        miniPlayer = MiniPlayerViewModel(radio: nil, service: servicePlayer)
+        miniPlayer = MiniPlayerViewModel(radio: nil, service: servicePlayer, manager: stationsManager)
     }
     
     func selectStation(at station: RadioStation) {

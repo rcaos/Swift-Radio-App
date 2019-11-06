@@ -13,9 +13,11 @@ final class PlayerViewModel {
     
     private let radioClient = RadioClient()
     
-    private var servicePlayer: RadioPlayer?
+    private var radioPlayer: RadioPlayer?
     
     private var radioStation: RadioStation
+    
+    private var stationsManager: StationsManager
     
     var image: String?
     
@@ -30,24 +32,36 @@ final class PlayerViewModel {
     
     var updateUI:(() -> Void)?
     
+    var isFavorite: Bindable<Bool> = Bindable(false)
+    
     //MARK: - Initializers
     
-    init(station: RadioStation, service: RadioPlayer?) {
+    init(station: RadioStation, service: RadioPlayer?, manager: StationsManager) {
         self.radioStation = station
-        self.servicePlayer = service
-        servicePlayer?.delegate = self
+        self.radioPlayer = service
+        self.stationsManager = manager
+        radioPlayer?.delegate = self
         setupRadio(for: station)
     }
     
     //MARK: - Private
     
     private func setupRadio(for station: RadioStation) {
+        if let selected = stationsManager.findStation(for: station) {
+            radioStation = selected
+        } else {
+            return
+        }
+        
         name = radioStation.name
         image = radioStation.image
         defaultDescription = radioStation.city + " " +
                         radioStation.frecuency + " " +
                         radioStation.slogan
+        isFavorite.value = radioStation.isFavorite
     }
+    
+    //MARK: - Networking
     
     private func getShowDetail() {
         radioClient.getShowOnlineDetail(group: radioStation.group, completion: { result in
@@ -69,17 +83,24 @@ final class PlayerViewModel {
     //MARK: - Public
     
     func togglePlayPause() {
-        guard let service = servicePlayer else { return }
-        service.togglePlayPause()
+        guard let player = radioPlayer else { return }
+        player.togglePlayPause()
     }
     
     func markAsFavorite() {
-        print("Mark as Favorite..")
+        stationsManager.toggleFavorite(for: radioStation, completion: { result in
+            switch result {
+            case .success(let data) :
+                self.isFavorite.value = data
+            case .failure(_) :
+                print("Error")
+            }
+        })
     }
     
     func refreshStatus() {
-        guard let service = servicePlayer else { return }
-        viewState.value = service.state
+        guard let player = radioPlayer else { return }
+        viewState.value = player.state
         
         if viewState.value == .playing {
             getShowDetail()

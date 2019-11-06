@@ -12,9 +12,11 @@ final class MiniPlayerViewModel {
     
     private let radioClient = RadioClient()
     
-    private var servicePlayer: RadioPlayer?
+    private var radioPlayer: RadioPlayer?
     
     private var radioStation: RadioStation!
+    
+    private var stationsManager: StationsManager
     
     var name: String = "Pick a Radio Station"
     
@@ -31,14 +33,17 @@ final class MiniPlayerViewModel {
     
     var updateUI:(()-> Void)?
     
+    var isFavorite: Bindable<Bool> = Bindable(false)
+    
     //MARK: - Initializers
     
-    init(radio: RadioStation?, service: RadioPlayer?) {
-        if let station = radio {
-            setupRadio(station)
-        }
-        servicePlayer = service
-        servicePlayer?.delegate = self
+    init(radio: RadioStation?, service: RadioPlayer?, manager: StationsManager) {
+        stationsManager = manager
+        
+        setupRadio(radio)
+        
+        radioPlayer = service
+        radioPlayer?.delegate = self
     }
     
     deinit {
@@ -48,22 +53,31 @@ final class MiniPlayerViewModel {
     func configStation(radio: RadioStation, playAutomatically: Bool = true) {
         setupRadio(radio)
         viewState.value = .stopped
-        servicePlayer?.setupRadio(with: radioStation, playWhenReady: playAutomatically)
+        radioPlayer?.setupRadio(with: radioStation, playWhenReady: playAutomatically)
     }
     
     func togglePlayPause() {
-        guard let service = servicePlayer else { return }
-        service.togglePlayPause()
+        guard let player = radioPlayer else { return }
+        player.togglePlayPause()
     }
     
     func markAsFavorite() {
-        print("Mark as Favorite..")
+        stationsManager.toggleFavorite(for: radioStation, completion: { result in
+            switch result {
+            case .success(let data) :
+                self.isFavorite.value = data
+            case .failure(_) :
+                print("Error")
+            }
+        })
     }
     
     func refreshStatus() {
-        guard let player = servicePlayer else { return }
+        guard let player = radioPlayer else { return }
         player.delegate = self
         viewState.value = player.state
+        
+        setupRadio(radioStation)
     }
     
     func getDescription() -> String? {
@@ -82,13 +96,19 @@ final class MiniPlayerViewModel {
     
     //MARK: - Private
     
-    private func setupRadio(_ station: RadioStation) {
-        radioStation = station
+    private func setupRadio(_ station: RadioStation?) {
+        if let station = station,
+            let selected = stationsManager.findStation(for: station) {
+            radioStation = selected
+        } else {
+            return
+        }
+        
         name = radioStation.name
         defaultDescription = radioStation.city + " " +
                         radioStation.frecuency + " " +
                         radioStation.slogan
-        //onlineDescription = "Currently Program.."
+        isFavorite.value = radioStation.isFavorite
     }
     
     private func getShowDetail() {
@@ -113,7 +133,7 @@ final class MiniPlayerViewModel {
     //MARK: - View Models Building
     
     func buildPlayerViewModel() -> PlayerViewModel {
-        return PlayerViewModel(station: radioStation, service: servicePlayer)
+        return PlayerViewModel(station: radioStation, service: radioPlayer, manager: stationsManager)
     }
 }
 

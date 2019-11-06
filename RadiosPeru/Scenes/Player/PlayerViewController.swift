@@ -30,16 +30,6 @@ class PlayerViewController: UIViewController {
     private var loadingView: UIView!
     private var pauseView: UIView!
     
-    var favorite: Bool = false {
-        didSet {
-            if favorite {
-                favoriteButton.setImage( UIImage(named: "btn-favoriteFill") , for: .normal)
-            } else {
-                favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
-            }
-        }
-    }
-    
     var interactor:Interactor? = nil
     
     //MARK : - Life Cycle
@@ -77,6 +67,16 @@ class PlayerViewController: UIViewController {
                 self?.setupViewBindables()
             }
         }
+        
+        viewModel?.isFavorite.bindAndFire({ [weak self] favorite in
+            DispatchQueue.main.async {
+                if favorite {
+                    self?.favoriteButton.setImage( UIImage(named: "btn-favoriteFill") , for: .normal)
+                } else {
+                    self?.favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
+                }
+            }
+        })
     }
     
     func setupViewBindables() {
@@ -244,9 +244,6 @@ class PlayerViewController: UIViewController {
     
     @IBAction func tapFavorite(_ sender: Any) {
         guard let  viewModel = viewModel else { return }
-        
-        //Esta varaible debería ser Bindable, podría demorar el Servicio
-        favorite = !favorite
         viewModel.markAsFavorite()
     }
     

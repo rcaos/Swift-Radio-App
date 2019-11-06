@@ -31,17 +31,6 @@ class MiniPlayerViewController: UIViewController {
     private var loadingView: UIView!
     private var pauseView: UIView!
     
-    var count = 0
-    var favorite: Bool = false {
-        didSet {
-            if favorite {
-                favoriteButton.setImage( UIImage(named: "btn-favoriteFill") , for: .normal)
-            } else {
-                favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
-            }
-        }
-    }
-    
     weak var delegate: MiniPlayerControllerDelegate?
     
     var viewModel: MiniPlayerViewModel? {
@@ -82,6 +71,16 @@ class MiniPlayerViewController: UIViewController {
                 self?.setupViewBindables()
             }
         }
+        
+        viewModel?.isFavorite.bindAndFire({ [weak self] favorite in
+            DispatchQueue.main.async {
+                if favorite {
+                    self?.favoriteButton.setImage( UIImage(named: "btn-favoriteFill") , for: .normal)
+                } else {
+                    self?.favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
+                }
+            }
+        })
     }
     
     func setupViewBindables() {
@@ -207,8 +206,6 @@ class MiniPlayerViewController: UIViewController {
     @IBAction func tapFavorite(_ sender: Any) {
         guard let  viewModel = viewModel, viewModel.isSelected else { return }
         
-        //Esta varaible debería ser Bindable, podría demorar el Servicio
-        favorite = !favorite
         viewModel.markAsFavorite()
     }
 }
