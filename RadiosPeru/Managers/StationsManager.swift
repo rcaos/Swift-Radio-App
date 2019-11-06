@@ -107,6 +107,23 @@ class StationsManager {
                                       urlStream: "https://18723.live.streamtheworld.com/CRP_PLA.mp3",
                                       group: .CRP("https://planeta.pe"), isFavorite: false ))
         
+        //Test for Scrolling
+        stations.append( RadioStation(name: "Capital", image: "capital", city: "Lima",  frecuency: "96.7 FM", slogan: "Tu Opinion Importa",
+                                      urlStream: "https://16693.live.streamtheworld.com/RADIO_CAPITAL.mp3",
+                                      group: .RPP("44"), isFavorite: false ) )
+        stations.append( RadioStation(name: "Corazón", image: "corazon", city: "Lima", frecuency: "94.3 FM", slogan: "Única como tú",
+                                      urlStream: "https://17523.live.streamtheworld.com/RADIO_CORAZON.mp3",
+                                      group: .RPP("45"), isFavorite: false ) )
+        stations.append( RadioStation(name: "Oxigeno", image: "oxigeno", city: "Lima", frecuency: "102.1 FM", slogan: "Clásicos del rock & pop",
+                                      urlStream: "https://20813.live.streamtheworld.com/RADIO_OXIGENO.mp3",
+                                      group: .RPP("48"), isFavorite: false ) )
+        stations.append( RadioStation(name: "La Zona", image: "lazona", city: "Lima", frecuency: "90.5 FM", slogan: "¡Tu música urbana!",
+                                      urlStream: "https://15383.live.streamtheworld.com/RADIO_LAZONA.mp3",
+                                      group: .RPP("46"), isFavorite: false ) )
+        stations.append( RadioStation(name: "Felicidad", image: "felicidad", city: "Lima", frecuency: "88.9 FM", slogan: "La música de tu vida",
+                                      urlStream: "https://18313.live.streamtheworld.com/RADIO_FELICIDAD.mp3",
+                                      group: .RPP("49"), isFavorite: false ) )
+        
         //Mark a few Favorites
         
         if let index = stations.firstIndex(where: { $0.name == "RPP" }) {

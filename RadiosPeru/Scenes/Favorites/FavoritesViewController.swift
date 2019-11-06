@@ -12,11 +12,13 @@ private let reuseIdentifier = "FavoriteViewCell"
 
 class FavoritesViewController: UIViewController {
     
-    var viewModel = FavoritesViewModel()
+    var viewModel: FavoritesViewModel!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     let interactor = Interactor()
+    
+    var delegate: MainControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,26 +39,6 @@ class FavoritesViewController: UIViewController {
         collectionView.delegate = self
     }
     
-    //MARK : - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "playerSegue",
-            let destination = segue.destination as? PlayerViewController,
-            let model = sender as? PlayerViewModel {
-            let _ = destination.view
-            destination.viewModel = model
-            destination.transitioningDelegate = self
-            destination.interactor = interactor
-        }
-        
-        if segue.identifier == "miniPlayerSegue",
-            let destination = segue.destination as? MiniPlayerViewController {
-            let _ = destination.view
-            destination.delegate = self
-            destination.viewModel = viewModel.miniPlayer
-        }
-    }
 }
 
 // MARK:- UICollectionViewDataSource
@@ -64,6 +46,7 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let viewModel = viewModel else { return 0}
         return viewModel.stations.count
     }
     
@@ -80,7 +63,8 @@ extension FavoritesViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        viewModel.selectStation(at: indexPath.row)
+        let selected = viewModel.selectStation(at: indexPath.row)
+        delegate?.mainControllerDelegate(self, didConfigRadio: selected)
     }
 }
 
@@ -118,27 +102,3 @@ extension FavoritesViewController : UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: width)
     }
 }
-
-// MARK: - UIViewControllerTransitioningDelegate
-
-extension FavoritesViewController: UIViewControllerTransitioningDelegate {
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissAnimator()
-    }
-    
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-}
-
-// MARK: - MiniPlayerControllerDelegate
-
-extension FavoritesViewController: MiniPlayerControllerDelegate  {
-    
-    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectRadio radio: PlayerViewModel) {
-        performSegue(withIdentifier: "playerSegue", sender: radio)
-    }
-    
-}
-

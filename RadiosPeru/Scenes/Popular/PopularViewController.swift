@@ -12,11 +12,13 @@ private let reuseIdentifier = "PopularViewCell"
 
 class PopularViewController: UIViewController {
     
-    var viewModel = PopularViewModel()
+    var viewModel: PopularViewModel!
 
     @IBOutlet weak var collectionView: UICollectionView!
     
     let interactor = Interactor()
+    
+    var delegate: MainControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,24 +39,6 @@ class PopularViewController: UIViewController {
         collectionView.delegate = self
     }
     
-    //MARK : - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "playerSegue",
-            let destination = segue.destination as? PlayerViewController,
-            let model = sender as? PlayerViewModel {
-            let _ = destination.view
-            destination.viewModel = model
-            destination.transitioningDelegate = self
-            destination.interactor = interactor
-        }
-        
-        if segue.identifier == "miniPlayerSegue",
-            let destination = segue.destination as? MiniPlayerViewController {
-            let _ = destination.view
-            destination.delegate = self
-            destination.viewModel = viewModel.miniPlayer
-        }
-    }
 }
 
 // MARK:- UICollectionViewDataSource
@@ -62,6 +46,7 @@ class PopularViewController: UIViewController {
 extension PopularViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let viewModel = viewModel else { return 0}
         return viewModel.stations.count
     }
     
@@ -77,7 +62,8 @@ extension PopularViewController : UICollectionViewDataSource {
 extension PopularViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        viewModel.selectStation(at: indexPath.row)
+        let selectedRadio = viewModel.selectStation(at: indexPath.row)
+        delegate?.mainControllerDelegate(self, didConfigRadio: selectedRadio)
     }
 }
 
@@ -114,26 +100,4 @@ extension PopularViewController : UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: width, height: width)
     }
-}
-
-// MARK: - UIViewControllerTransitioningDelegate
-
-extension PopularViewController: UIViewControllerTransitioningDelegate {
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissAnimator()
-    }
-    
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-}
-
-// MARK: - MiniPlayerControllerDelegate
-
-extension PopularViewController: MiniPlayerControllerDelegate  {
-    
-    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectRadio radio: PlayerViewModel) {
-        performSegue(withIdentifier: "playerSegue", sender: radio)
-    }
-    
 }

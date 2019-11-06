@@ -38,24 +38,12 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qbZ-jQ-JfA">
-                                <rect key="frame" x="0.0" y="749" width="414" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="WcZ-Fy-EY7"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="Tj7-0l-LhN" kind="embed" identifier="miniPlayerSegue" id="WbJ-he-JLm"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fsT-Lh-Ji8" firstAttribute="bottom" secondItem="qbZ-jQ-JfA" secondAttribute="bottom" id="9Hh-R1-CIc"/>
                             <constraint firstItem="fsT-Lh-Ji8" firstAttribute="bottom" secondItem="pS9-cb-eug" secondAttribute="bottom" id="Rsm-hH-daJ"/>
                             <constraint firstItem="fsT-Lh-Ji8" firstAttribute="trailing" secondItem="pS9-cb-eug" secondAttribute="trailing" id="XYJ-gD-jff"/>
-                            <constraint firstItem="fsT-Lh-Ji8" firstAttribute="trailing" secondItem="qbZ-jQ-JfA" secondAttribute="trailing" id="bFN-Oq-HtB"/>
                             <constraint firstItem="pS9-cb-eug" firstAttribute="leading" secondItem="fsT-Lh-Ji8" secondAttribute="leading" id="c1D-Dd-zTp"/>
-                            <constraint firstItem="qbZ-jQ-JfA" firstAttribute="leading" secondItem="fsT-Lh-Ji8" secondAttribute="leading" id="hJt-lp-Uy8"/>
                             <constraint firstItem="pS9-cb-eug" firstAttribute="top" secondItem="fsT-Lh-Ji8" secondAttribute="top" id="n7P-h1-fOa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fsT-Lh-Ji8"/>
@@ -63,28 +51,11 @@
                     <navigationItem key="navigationItem" id="Uki-a7-0Hu"/>
                     <connections>
                         <outlet property="collectionView" destination="pS9-cb-eug" id="bFa-LL-tGX"/>
-                        <segue destination="uly-yo-cuk" kind="show" identifier="playerSegue" id="HLb-9m-d2a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pgW-2O-kVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="818.84057971014499" y="-51.5625"/>
-        </scene>
-        <!--MiniPlayer-->
-        <scene sceneID="x4p-Dg-K6p">
-            <objects>
-                <viewControllerPlaceholder storyboardName="MiniPlayer" id="Tj7-0l-LhN" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jQk-Az-3C2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="820" y="366"/>
-        </scene>
-        <!--PlayerViewController-->
-        <scene sceneID="LGE-86-ihp">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Player" referencedIdentifier="PlayerViewController" id="uly-yo-cuk" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fQQ-mU-6vO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1462" y="-52"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="A0K-Ms-NbZ">

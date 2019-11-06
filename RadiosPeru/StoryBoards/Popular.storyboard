@@ -37,23 +37,11 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LmB-sS-MHw">
-                                <rect key="frame" x="0.0" y="749" width="414" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="ZPj-6p-V8d"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="LtX-65-HZ7" kind="embed" identifier="miniPlayerSegue" id="tqB-W3-Uff"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hzh-i2-b6Q" firstAttribute="trailing" secondItem="Hu8-J7-VPZ" secondAttribute="trailing" id="B5h-Mb-1ky"/>
                             <constraint firstItem="Hu8-J7-VPZ" firstAttribute="leading" secondItem="hzh-i2-b6Q" secondAttribute="leading" id="BDI-hz-shP"/>
-                            <constraint firstItem="hzh-i2-b6Q" firstAttribute="bottom" secondItem="LmB-sS-MHw" secondAttribute="bottom" id="NFI-pg-l9C"/>
-                            <constraint firstItem="hzh-i2-b6Q" firstAttribute="trailing" secondItem="LmB-sS-MHw" secondAttribute="trailing" id="Tz6-7K-9yS"/>
-                            <constraint firstItem="LmB-sS-MHw" firstAttribute="leading" secondItem="hzh-i2-b6Q" secondAttribute="leading" id="kCq-V4-JhN"/>
                             <constraint firstItem="hzh-i2-b6Q" firstAttribute="bottom" secondItem="Hu8-J7-VPZ" secondAttribute="bottom" id="p1c-6y-cCO"/>
                             <constraint firstItem="Hu8-J7-VPZ" firstAttribute="top" secondItem="hzh-i2-b6Q" secondAttribute="top" id="rvw-Ha-sdB"/>
                         </constraints>
@@ -64,20 +52,11 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="Hu8-J7-VPZ" id="hds-8R-QSe"/>
-                        <segue destination="c2J-jR-avW" kind="presentation" identifier="playerSegue" id="wLe-KQ-XBb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jTI-et-v4y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="-3.3482142857142856"/>
-        </scene>
-        <!--PlayerViewController-->
-        <scene sceneID="aLk-eq-jAd">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Player" referencedIdentifier="PlayerViewController" id="c2J-jR-avW" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tcj-sf-YPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1647" y="-3"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1s0-fG-VRd">
@@ -98,14 +77,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bs3-Gc-pPU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="-3.3482142857142856"/>
-        </scene>
-        <!--MiniPlayer-->
-        <scene sceneID="4De-8G-Rbj">
-            <objects>
-                <viewControllerPlaceholder storyboardName="MiniPlayer" id="LtX-65-HZ7" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MeC-ZR-bfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1050.7246376811595" y="434.59821428571428"/>
         </scene>
     </scenes>
 </document>

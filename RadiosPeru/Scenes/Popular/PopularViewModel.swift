@@ -13,25 +13,18 @@ final class PopularViewModel {
     var stations:[RadioStation] = []
     var models:[PopularCellViewModel] = []
     
-    var miniPlayer: MiniPlayerViewModel
-    
-    var servicePlayer: RadioPlayer
-    
     var stationsManager: StationsManager
     
-    init(manager: StationsManager = StationsManager.shared ) {
+    init(manager: StationsManager) {
         
         stationsManager = manager
         stations = stationsManager.allStations
         
         models = stations.map({ return PopularCellViewModel(station: $0) })
-        
-        servicePlayer = RadioPlayer()
-        miniPlayer = MiniPlayerViewModel(radio: nil, service: servicePlayer)
     }
     
-    func selectStation(at index: Int) {
-        miniPlayer.configStation(radio: stations[index])
+    func selectStation(at index: Int) -> RadioStation {
+        return stations[index]
     }
     
 }

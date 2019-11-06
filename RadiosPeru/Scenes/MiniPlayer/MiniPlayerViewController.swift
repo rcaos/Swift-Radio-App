@@ -166,7 +166,8 @@ class MiniPlayerViewController: UIViewController {
         viewForPause.contentMode = .scaleAspectFit
         pauseView = viewForPause
         
-        let size = CGSize(width: playerStackView.frame.width, height: playerStackView.frame.height)
+        //Fixed Frame
+        let size = CGSize(width: 60, height: 36)
         let frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
         let viewForLoading = LoadingPlayerView(frame: frame)
         viewForLoading.setUpAnimation(size: size, color: .white, imageName: "pauseFill")
