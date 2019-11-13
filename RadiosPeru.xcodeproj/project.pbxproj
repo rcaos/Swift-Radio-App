@@ -45,6 +45,17 @@
 		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
 		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
 		77CA145B23689CB9001BF04E /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA145A23689CB9001BF04E /* ApiError.swift */; };
+		77D51745237C988B00B7DCC9 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51744237C988B00B7DCC9 /* Station.swift */; };
+		77D51747237C989200B7DCC9 /* StationFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51746237C989200B7DCC9 /* StationFavorite.swift */; };
+		77D5174A237C98B300B7DCC9 /* PersistenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51749237C98B300B7DCC9 /* PersistenceStore.swift */; };
+		77D5174C237C98C300B7DCC9 /* PersistenceStore+Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5174B237C98C300B7DCC9 /* PersistenceStore+Station.swift */; };
+		77D5174E237C98CE00B7DCC9 /* PersistenceStore+StationFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5174D237C98CE00B7DCC9 /* PersistenceStore+StationFavorite.swift */; };
+		77D51751237C98E800B7DCC9 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51750237C98E800B7DCC9 /* Managed.swift */; };
+		77D51753237C98FB00B7DCC9 /* NSManagedObjectContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51752237C98FB00B7DCC9 /* NSManagedObjectContext+Extension.swift */; };
+		77D51755237C990800B7DCC9 /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51754237C990800B7DCC9 /* CodingUserInfoKey.swift */; };
+		77D51758237C992300B7DCC9 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51757237C992300B7DCC9 /* PersistenceManager.swift */; };
+		77D5175B237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */; };
+		77D5175D237C9BAE00B7DCC9 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5175C237C9BAE00B7DCC9 /* Group.swift */; };
 		77F65DFC2371E1CA00677DB8 /* MiniPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */; };
 		77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7CA6D23686FB800E1D64A /* ShowCRP.swift */; };
 /* End PBXBuildFile section */
@@ -90,6 +101,17 @@
 		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 		77CA145A23689CB9001BF04E /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		77D51744237C988B00B7DCC9 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		77D51746237C989200B7DCC9 /* StationFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFavorite.swift; sourceTree = "<group>"; };
+		77D51749237C98B300B7DCC9 /* PersistenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStore.swift; sourceTree = "<group>"; };
+		77D5174B237C98C300B7DCC9 /* PersistenceStore+Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceStore+Station.swift"; sourceTree = "<group>"; };
+		77D5174D237C98CE00B7DCC9 /* PersistenceStore+StationFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceStore+StationFavorite.swift"; sourceTree = "<group>"; };
+		77D51750237C98E800B7DCC9 /* Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
+		77D51752237C98FB00B7DCC9 /* NSManagedObjectContext+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extension.swift"; sourceTree = "<group>"; };
+		77D51754237C990800B7DCC9 /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
+		77D51757237C992300B7DCC9 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		77D5175A237C9A8300B7DCC9 /* RadiosPeru.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RadiosPeru.xcdatamodel; sourceTree = "<group>"; };
+		77D5175C237C9BAE00B7DCC9 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MiniPlayer.storyboard; sourceTree = "<group>"; };
 		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +162,7 @@
 				770A6BFE2368978500FDE4F6 /* Show.swift */,
 				77236FAB236786F8009C80D0 /* ShowRPP.swift */,
 				77F7CA6D23686FB800E1D64A /* ShowCRP.swift */,
+				77D5175C237C9BAE00B7DCC9 /* Group.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -191,7 +214,7 @@
 		77421B132358FEE500A23C79 /* RadiosPeru */ = {
 			isa = PBXGroup;
 			children = (
-				77F65DFA2371B8AE00677DB8 /* Managers */,
+				77D51743237C985100B7DCC9 /* Core Data */,
 				77236FA723677C67009C80D0 /* Networking */,
 				77236FAD236786FE009C80D0 /* Entities */,
 				7755B525235A13E9004E642B /* Scenes */,
@@ -202,6 +225,7 @@
 				77421B142358FEE500A23C79 /* AppDelegate.swift */,
 				77421B1B2358FEE700A23C79 /* Assets.xcassets */,
 				77421B202358FEE700A23C79 /* Info.plist */,
+				77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */,
 			);
 			path = RadiosPeru;
 			sourceTree = "<group>";
@@ -321,9 +345,50 @@
 			path = Transitions;
 			sourceTree = "<group>";
 		};
+		77D51743237C985100B7DCC9 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				77F65DFA2371B8AE00677DB8 /* Managers */,
+				77D51748237C989700B7DCC9 /* Entities */,
+				77D5174F237C98D400B7DCC9 /* Stores */,
+				77D51756237C990C00B7DCC9 /* Extensions */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		77D51748237C989700B7DCC9 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				77D51744237C988B00B7DCC9 /* Station.swift */,
+				77D51746237C989200B7DCC9 /* StationFavorite.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		77D5174F237C98D400B7DCC9 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				77D51749237C98B300B7DCC9 /* PersistenceStore.swift */,
+				77D5174B237C98C300B7DCC9 /* PersistenceStore+Station.swift */,
+				77D5174D237C98CE00B7DCC9 /* PersistenceStore+StationFavorite.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		77D51756237C990C00B7DCC9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				77D51750237C98E800B7DCC9 /* Managed.swift */,
+				77D51752237C98FB00B7DCC9 /* NSManagedObjectContext+Extension.swift */,
+				77D51754237C990800B7DCC9 /* CodingUserInfoKey.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		77F65DFA2371B8AE00677DB8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				77D51757237C992300B7DCC9 /* PersistenceManager.swift */,
 				7755B51F235A0F62004E642B /* StationsManager.swift */,
 			);
 			path = Managers;
@@ -412,10 +477,16 @@
 			files = (
 				774F0CA52372199D002852C3 /* TabBarViewController.swift in Sources */,
 				773D455D2368EE6E007B755D /* FavoritesViewModel.swift in Sources */,
+				77D51758237C992300B7DCC9 /* PersistenceManager.swift in Sources */,
 				770282DF235C27A7000098DB /* Bindable.swift in Sources */,
+				77D5175D237C9BAE00B7DCC9 /* Group.swift in Sources */,
 				7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */,
 				773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */,
+				77D51751237C98E800B7DCC9 /* Managed.swift in Sources */,
+				77D5175B237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld in Sources */,
 				77964891235A569900813C48 /* PlayerViewModel.swift in Sources */,
+				77D51753237C98FB00B7DCC9 /* NSManagedObjectContext+Extension.swift in Sources */,
+				77D51747237C989200B7DCC9 /* StationFavorite.swift in Sources */,
 				770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */,
 				770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */,
 				77236FA923677F9B009C80D0 /* GrupoRPPResult.swift in Sources */,
@@ -425,12 +496,17 @@
 				7755B522235A1241004E642B /* PopularViewController.swift in Sources */,
 				77236FAC236786F8009C80D0 /* ShowRPP.swift in Sources */,
 				774714612363A39100198D9E /* PlayingBarsView.swift in Sources */,
+				77D51755237C990800B7DCC9 /* CodingUserInfoKey.swift in Sources */,
 				77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */,
+				77D5174A237C98B300B7DCC9 /* PersistenceStore.swift in Sources */,
 				779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */,
 				77CA145B23689CB9001BF04E /* ApiError.swift in Sources */,
 				77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */,
+				77D5174E237C98CE00B7DCC9 /* PersistenceStore+StationFavorite.swift in Sources */,
+				77D51745237C988B00B7DCC9 /* Station.swift in Sources */,
 				77236FA423677C56009C80D0 /* EndPoint.swift in Sources */,
 				77236FA223677C3F009C80D0 /* ApiClient.swift in Sources */,
+				77D5174C237C98C300B7DCC9 /* PersistenceStore+Station.swift in Sources */,
 				7739E809235E4A610071882A /* RadioPlayer.swift in Sources */,
 				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,
@@ -641,6 +717,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				77D5175A237C9A8300B7DCC9 /* RadiosPeru.xcdatamodel */,
+			);
+			currentVersion = 77D5175A237C9A8300B7DCC9 /* RadiosPeru.xcdatamodel */;
+			path = RadiosPeru.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 77421B092358FEE500A23C79 /* Project object */;
 }
