@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VNK-wz-oE4">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-1607" y="-443"/>
         </scene>
-        <!--View Controller-->
+        <!--Initial View Controller-->
         <scene sceneID="P1N-3G-wKH">
             <objects>
-                <viewController id="iAb-sK-SuU" sceneMemberID="viewController">
+                <viewController id="iAb-sK-SuU" customClass="InitialViewController" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Apb-eZ-Ps8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,11 +43,11 @@
             </objects>
             <point key="canvasLocation" x="149" y="-443"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="HgE-0m-GFY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MAh-my-xyU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Jch-d4-3Kp"/>
+                    <tabBarItem key="tabBarItem" title="" id="Jch-d4-3Kp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Z3q-mW-JvR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

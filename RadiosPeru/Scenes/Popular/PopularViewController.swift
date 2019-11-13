@@ -12,7 +12,11 @@ private let reuseIdentifier = "PopularViewCell"
 
 class PopularViewController: UIViewController {
     
-    var viewModel: PopularViewModel!
+    var viewModel: PopularViewModel! {
+        didSet {
+            setupBindables()
+        }
+    }
 
     @IBOutlet weak var collectionView: UICollectionView!
     
