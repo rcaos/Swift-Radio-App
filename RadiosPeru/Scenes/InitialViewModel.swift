@@ -11,7 +11,7 @@ import CoreData
 
 final class InitialViewModel {
     
-    private let stationClient = StationsClient()
+    private let stationClient = StationClient()
     
     var stationsFetched: (() -> Void)?
     

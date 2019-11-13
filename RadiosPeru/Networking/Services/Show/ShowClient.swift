@@ -18,12 +18,14 @@ class ShowClient: ApiClient {
     
     //MARK: - Radio Show Detail
     
-    func getShowOnlineDetail(group: GroupStation, completion: @escaping (Result<Show?, APIError >) -> Void ) {
+    func getShowOnlineDetail(group: Group, completion: @escaping (Result<Show?, APIError >) -> Void ) {
         switch group {
-        case .RPP(let id) :
-            fetchForRPP( id, completion: completion )
-        case .CRP(let base) :
-            fetchForCRP( base, completion: completion )
+        case .rpp(let rpp) :
+            fetchForRPP( rpp.id , completion: completion )
+        case .crp(let crp) :
+            fetchForCRP( crp.base, completion: completion )
+        case .unknown:
+            print("Not implemented")
         }
     }
     

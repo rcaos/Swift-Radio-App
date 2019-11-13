@@ -7,23 +7,26 @@
 //
 
 import Foundation
-import UIKit
+import CoreData
 
 final class PlayerViewModel {
     
-    private let radioClient = ShowClient()
+    private var managedObjectContext: NSManagedObjectContext
+    private var favoritesStore: PersistenceStore<StationFavorite>!
     
+    private let showClient = ShowClient()
     private var radioPlayer: RadioPlayer?
     
-    private var radioStation: RadioStation
-    
-    private var stationsManager: StationsManager
+    private var nameSelected: String!
+    private var groupSelected: String!
     
     var image: String?
     
     var name: String?
     
     var defaultDescription: String?
+    
+    private var leftDefaultDescription: String?
     
     var onlineDescription: String?
     
@@ -36,35 +39,54 @@ final class PlayerViewModel {
     
     //MARK: - Initializers
     
-    init(station: RadioStation, service: RadioPlayer?, manager: StationsManager) {
-        self.radioStation = station
+    init(name: String, group: String, service: RadioPlayer?, managedObjectContext: NSManagedObjectContext) {
+        
+        self.managedObjectContext = managedObjectContext
+        setupStores(self.managedObjectContext)
+        
+        self.nameSelected = name
+        self.groupSelected = group
+        
         self.radioPlayer = service
-        self.stationsManager = manager
+        
         radioPlayer?.delegate = self
-        setupRadio(for: station)
+        setupRadio()
     }
     
     //MARK: - Private
     
-    private func setupRadio(for station: RadioStation) {
-        if let selected = stationsManager.findStation(for: station) {
-            radioStation = selected
-        } else {
-            return
-        }
+    private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
+        favoritesStore = PersistenceStore(managedObjectContext)
+    }
+    
+    private func setupRadio() {
+        guard let radioStation = getSelectedStation() else { return }
         
         name = radioStation.name
         image = radioStation.image
-        defaultDescription = radioStation.city + " " +
-                        radioStation.frecuency + " " +
-                        radioStation.slogan
-        isFavorite.value = radioStation.isFavorite
+        
+        leftDefaultDescription = radioStation.city + " " +
+            radioStation.frecuency + " "
+        
+        defaultDescription = (leftDefaultDescription ?? "")
+            + " " + radioStation.slogan
+        
+        isFavorite.value = favoritesStore.isFavorite(with: radioStation.name, group: radioStation.group)
+    }
+    
+    private func getSelectedStation() -> Station?{
+        guard let name  = nameSelected, let _ = groupSelected,
+            let selected = PersistenceManager.shared.findStation(with: name) else { return nil }
+        return selected
     }
     
     //MARK: - Networking
     
     private func getShowDetail() {
-        radioClient.getShowOnlineDetail(group: radioStation.group, completion: { result in
+        guard let radioStation = getSelectedStation() else { return }
+        
+        //MARK: - TODO
+        showClient.getShowOnlineDetail(group: radioStation.type, completion: { result in
             switch result {
             case .success(let response) :
                 guard let showResult = response else { return  }
@@ -88,14 +110,7 @@ final class PlayerViewModel {
     }
     
     func markAsFavorite() {
-        stationsManager.toggleFavorite(for: radioStation, completion: { result in
-            switch result {
-            case .success(let data) :
-                self.isFavorite.value = data
-            case .failure(_) :
-                print("Error")
-            }
-        })
+        isFavorite.value = favoritesStore.toggleFavorite(with: nameSelected, group: groupSelected)
     }
     
     func refreshStatus() {
@@ -112,9 +127,8 @@ final class PlayerViewModel {
         case .playing, .buffering:
             if let onlineDescription = onlineDescription,
                 !onlineDescription.isEmpty {
-                return radioStation.city + " " +
-                    radioStation.frecuency + " - " +
-                    onlineDescription
+                return (leftDefaultDescription ?? "") + " - " +
+                onlineDescription
             } else {
                 return defaultDescription
             }

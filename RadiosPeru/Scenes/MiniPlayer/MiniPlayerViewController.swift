@@ -195,7 +195,9 @@ class MiniPlayerViewController: UIViewController {
     @objc func handleGestureView(_ sender: UITapGestureRecognizer) {
         guard let viewModel = viewModel, viewModel.isSelected else { return }
         
-        delegate?.miniPlayerController(self, didSelectRadio: viewModel.buildPlayerViewModel() )
+        if let modelForPlayer = viewModel.buildPlayerViewModel() {
+            delegate?.miniPlayerController(self, didSelectRadio: modelForPlayer )
+        }
     }
     
     @objc func handleGestureStack(_ sender: UITapGestureRecognizer) {
