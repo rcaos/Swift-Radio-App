@@ -87,13 +87,13 @@ class StationsManager {
         //RPP Group
         
         stations.append( RadioStation(name: "RPP", image: "rpp", city: "Lima", frecuency: "89.7 FM", slogan: "Confianza por todos los medios",
-                                      urlStream: "https://18593.live.streamtheworld.com/RADIO_RPP.mp3",
+                                      urlStream: "https://17003.live.streamtheworld.com/RADIO_RPP.mp3",
                                       group: .RPP("43"), isFavorite: false ))
         stations.append( RadioStation(name: "Capital", image: "capital", city: "Lima",  frecuency: "96.7 FM", slogan: "Tu Opinion Importa",
                                       urlStream: "https://16693.live.streamtheworld.com/RADIO_CAPITAL.mp3",
                                       group: .RPP("44"), isFavorite: false ) )
         stations.append( RadioStation(name: "Studio 92", image: "studio92", city: "Lima", frecuency: "92.5FM", slogan: "Primeros en tu Música",
-                                      urlStream: "https://18623.live.streamtheworld.com/RADIO_STUDIO92.mp3",
+                                      urlStream: "https://16083.live.streamtheworld.com/RADIO_STUDIO92.mp3",
                                       group: .RPP("47"), isFavorite: false ) )
         stations.append( RadioStation(name: "Corazón", image: "corazon", city: "Lima", frecuency: "94.3 FM", slogan: "Única como tú",
                                       urlStream: "https://17523.live.streamtheworld.com/RADIO_CORAZON.mp3",

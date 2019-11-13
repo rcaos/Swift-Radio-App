@@ -42,7 +42,7 @@ class FavoritesViewController: UIViewController {
     private func setupViewModel() {
         viewModel.updateUI = { [weak self] in
             DispatchQueue.main.async {
-                self?.collectionView.reloadData()
+                self?.collectionView?.reloadData()
             }
         }
     }
