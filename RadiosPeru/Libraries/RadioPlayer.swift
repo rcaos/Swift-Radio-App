@@ -28,7 +28,7 @@ class RadioPlayer {
     
     private let player = ApiPlayer.shared
     
-    private var station: RadioStation?
+    private var urlStation: String?
     
     weak var delegate: RadioPlayerDelegate? {
         didSet {
@@ -44,14 +44,14 @@ class RadioPlayer {
     }
     
     //MARK: - Publics
-    func setupRadio(with station: RadioStation?, playWhenReady: Bool = false) {
-        guard let station = station else { return }
+    func setupRadio(with station: String?, playWhenReady: Bool = false) {
+        guard let url = station else { return }
         
         resetRadio()
-        self.station = station
+        self.urlStation = url
         
-        if let url = URL(string: station.urlStream) {
-            player.prepare(with: url, playWhenReady: playWhenReady)
+        if let urlStream = URL(string: url) {
+            player.prepare(with: urlStream, playWhenReady: playWhenReady)
         }
     }
     
@@ -60,7 +60,7 @@ class RadioPlayer {
     }
     
     func resetRadio() {
-        station = nil
+        urlStation = nil
         player.stop()
     }
     
