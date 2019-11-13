@@ -10,13 +10,13 @@ import Foundation
 
 final class PopularCellViewModel {
     
-    var radioStation: RadioStation
+    var radioStation: Station
     
     lazy var image: String = {
         return radioStation.image
     }()
     
-    init(station: RadioStation) {
+    init(station: Station) {
         self.radioStation = station
     }
     

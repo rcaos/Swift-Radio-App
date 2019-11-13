@@ -39,6 +39,16 @@ class PopularViewController: UIViewController {
         collectionView.delegate = self
     }
     
+    //MARK: - Reactive
+    
+    func setupBindables() {
+        viewModel?.selectedRadioStation = { [weak self] name, group in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.delegate?.mainControllerDelegate(strongSelf, didConfigRadio: name, group: group)
+        }
+    }
+    
 }
 
 // MARK:- UICollectionViewDataSource
@@ -47,12 +57,12 @@ extension PopularViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0}
-        return viewModel.stations.count
+        return viewModel.popularCells.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PopularViewCell
-        cell.viewModel = viewModel.models[indexPath.row]
+        cell.viewModel = viewModel.popularCells[indexPath.row]
         return cell
     }
 }
@@ -62,8 +72,7 @@ extension PopularViewController : UICollectionViewDataSource {
 extension PopularViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let selectedRadio = viewModel.selectStation(at: indexPath.row)
-        delegate?.mainControllerDelegate(self, didConfigRadio: selectedRadio)
+        viewModel.getStationSelection(by: indexPath.row)
     }
 }
 

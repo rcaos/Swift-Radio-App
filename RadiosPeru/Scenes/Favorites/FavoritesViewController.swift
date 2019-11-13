@@ -33,17 +33,18 @@ class FavoritesViewController: UIViewController {
         setupCollection()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.refreshStations()
-    }
-    
     //MARK: - Reactive
     private func setupViewModel() {
         viewModel.updateUI = { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView?.reloadData()
             }
+        }
+        
+        viewModel.selectedRadioStation = {[weak self] name, group in
+            guard let strongSelf = self else { return }
+            self?.delegate?.mainControllerDelegate(strongSelf, didConfigRadio: name, group: group)
+            
         }
     }
     
@@ -72,7 +73,7 @@ extension FavoritesViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PopularViewCell
-        cell.viewModel = viewModel.models[indexPath.row]
+        cell.viewModel = viewModel.stations[indexPath.row]
         return cell
     }
 }
@@ -83,8 +84,7 @@ extension FavoritesViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let selected = viewModel.selectStation(at: indexPath.row)
-        delegate?.mainControllerDelegate(self, didConfigRadio: selected)
+        viewModel.getStationSelection(by: indexPath.row)
     }
 }
 

@@ -7,44 +7,50 @@
 //
 
 import Foundation
+import CoreData
 
 final class FavoritesViewModel {
     
-    var stations:[RadioStation] = []
-    var models:[PopularCellViewModel] = []
+    private var favoriteStore: PersistenceStore<StationFavorite>!
     
-    var stationsManager: StationsManager
+    var stations: [PopularCellViewModel] {
+        let favoriteStations = PersistenceManager.shared.favorites
+        return favoriteStations.map({ PopularCellViewModel(station: $0) })
+    }
+    
+    var selectedRadioStation: ((String, String) -> Void)?
     
     //Reactive
     var updateUI: (() -> Void)?
     
-    init(manager: StationsManager) {
-        stationsManager = manager
-        manager.addObserver(self)
-        
-        getFavorites()
+    init(managedObjectContext: NSManagedObjectContext) {
+        setupStores(managedObjectContext)
     }
     
-    func selectStation(at index: Int) -> RadioStation {
-        return stations[index]
+    private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
+        favoriteStore = PersistenceStore(managedObjectContext)
+        favoriteStore.configureResultsController(sortDescriptors: StationFavorite.defaultSortDescriptors)
+        favoriteStore.delegate = self
     }
     
-    func refreshStations() {
-        getFavorites()
+    private func refreshStations() {
         updateUI?()
     }
     
-    //MARK: - Private
-    private func getFavorites() {
-        stations = stationsManager.findFavorites()
-        models = stations.map({ return PopularCellViewModel(station: $0) })
-    }
+    //MARK: - Public Methods
     
+    func getStationSelection(by index: Int) {
+        let favorites = PersistenceManager.shared.favorites
+        let selectedStation = favorites[index]
+        selectedRadioStation?( selectedStation.name, selectedStation.group)
+    }
 }
 
-extension FavoritesViewModel: StationsManagerObserver {
+//MARK: - PersistenceStoreDelegate
+
+extension FavoritesViewModel: PersistenceStoreDelegate {
     
-    func stationsManagerDidChangeFavorites(_ manager: StationsManager) {
+    func persistenceStore(didUpdateEntity update: Bool) {
         refreshStations()
     }
 }

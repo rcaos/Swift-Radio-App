@@ -10,21 +10,21 @@ import Foundation
 
 final class PopularViewModel {
     
-    var stations:[RadioStation] = []
-    var models:[PopularCellViewModel] = []
-    
-    var stationsManager: StationsManager
-    
-    init(manager: StationsManager) {
-        
-        stationsManager = manager
-        stations = stationsManager.allStations
-        
-        models = stations.map({ return PopularCellViewModel(station: $0) })
+    var popularCells: [PopularCellViewModel] {
+        let popularStations = PersistenceManager.shared.stations
+        return popularStations.map{ PopularCellViewModel(station: $0) }
     }
     
-    func selectStation(at index: Int) -> RadioStation {
-        return stations[index]
+    var selectedRadioStation: ((String, String) -> Void)?
+    
+    init() {
+        
+    }
+    
+    func getStationSelection(by index: Int) {
+        let stations = PersistenceManager.shared.stations
+        let selectedStation = stations[index]
+        selectedRadioStation?( selectedStation.name, selectedStation.group )
     }
     
 }
