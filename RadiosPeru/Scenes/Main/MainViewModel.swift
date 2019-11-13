@@ -7,35 +7,35 @@
 //
 
 import Foundation
+import CoreData
 
 final class MainViewModel {
     
-    var miniPlayer: MiniPlayerViewModel
+    private var managedObjectContext: NSManagedObjectContext
     
-    var stationsManager: StationsManager
+    var miniPlayer: MiniPlayerViewModel
     
     var servicePlayer: RadioPlayer
     
-    init(manager: StationsManager = StationsManager.shared) {
-        
-        stationsManager = manager
+    init(managedObjectContext: NSManagedObjectContext = PersistenceManager.shared.mainContext) {
+        self.managedObjectContext = managedObjectContext
         
         servicePlayer = RadioPlayer()
         
-        miniPlayer = MiniPlayerViewModel(radio: nil, service: servicePlayer, manager: stationsManager)
+        miniPlayer = MiniPlayerViewModel(name: nil, group: nil, service: servicePlayer, managedObjectContext: self.managedObjectContext)
     }
     
-    func selectStation(at station: RadioStation) {
-        miniPlayer.configStation(radio: station)
+    func selectStation(by name: String, group: String) {
+        miniPlayer.configStation(by: name, group: group)
     }
     
     //MARK: - Builds Model
     
     func buildPopularViewModel() -> PopularViewModel {
-        return PopularViewModel(manager: stationsManager)
+        return PopularViewModel()
     }
     
     func buildFavoriteViewModel() -> FavoritesViewModel {
-        return FavoritesViewModel(manager: stationsManager)
+        return FavoritesViewModel(managedObjectContext: managedObjectContext)
     }
 }

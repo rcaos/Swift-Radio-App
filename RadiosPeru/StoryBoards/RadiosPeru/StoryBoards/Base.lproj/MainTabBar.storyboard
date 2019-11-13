@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controler-->
+        <scene sceneID="cMs-fm-N6V">
+            <objects>
+                <viewController storyboardIdentifier="MainTabBarController" id="rcO-Ej-yHS" customClass="MainViewControler" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5gC-0j-I8C">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tzS-g3-ALr">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <connections>
+                                    <segue destination="5A5-DQ-qDr" kind="embed" identifier="tabBarSegue" id="mr8-N5-l8k"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71m-qd-IfN">
+                                <rect key="frame" x="0.0" y="753" width="414" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1Io-i7-sky"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Foe-Yc-zPa" kind="embed" identifier="miniPlayerSegue" id="M19-mC-VsT"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0jR-cv-aHg" firstAttribute="trailing" secondItem="71m-qd-IfN" secondAttribute="trailing" id="7R7-HS-km1"/>
+                            <constraint firstItem="71m-qd-IfN" firstAttribute="leading" secondItem="0jR-cv-aHg" secondAttribute="leading" id="9QO-jQ-9HH"/>
+                            <constraint firstItem="0jR-cv-aHg" firstAttribute="bottom" secondItem="71m-qd-IfN" secondAttribute="bottom" constant="49" id="SeB-Sf-WFl"/>
+                            <constraint firstItem="0jR-cv-aHg" firstAttribute="bottom" secondItem="tzS-g3-ALr" secondAttribute="bottom" id="acr-Xi-Xgf"/>
+                            <constraint firstItem="tzS-g3-ALr" firstAttribute="leading" secondItem="0jR-cv-aHg" secondAttribute="leading" id="hQO-Eb-8rG"/>
+                            <constraint firstItem="0jR-cv-aHg" firstAttribute="trailing" secondItem="tzS-g3-ALr" secondAttribute="trailing" id="k1H-VE-DQ5"/>
+                            <constraint firstItem="tzS-g3-ALr" firstAttribute="top" secondItem="0jR-cv-aHg" secondAttribute="top" id="pQr-YV-YWv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0jR-cv-aHg"/>
+                    </view>
+                    <connections>
+                        <segue destination="6z0-kf-dmd" kind="show" identifier="playerSegue" id="979-y4-cwG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zqx-PE-mno" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-964" y="-494"/>
+        </scene>
+        <!--MiniPlayer-->
+        <scene sceneID="gEB-Z2-lZZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MiniPlayer" id="Foe-Yc-zPa" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0dX-GN-3UV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1075" y="-38"/>
+        </scene>
+        <!--PlayerViewController-->
+        <scene sceneID="lFP-0Q-vLn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Player" referencedIdentifier="PlayerViewController" id="6z0-kf-dmd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aUQ-Zn-UrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-780" y="-38"/>
+        </scene>
+        <!--Tab Bar View Controller-->
+        <scene sceneID="Y8r-Ay-lug">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="5A5-DQ-qDr" customClass="TabBarViewController" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MsL-d9-gWi">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="5c6-Wq-WGZ" kind="relationship" relationship="viewControllers" id="zEV-Zi-5me"/>
+                        <segue destination="5eQ-Us-qea" kind="relationship" relationship="viewControllers" id="vx9-kA-9oy"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w3I-NL-33D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="-494"/>
+        </scene>
+        <!--PopularStoryBoard-->
+        <scene sceneID="0r8-JI-aF2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Popular" referencedIdentifier="PopularStoryBoard" id="5c6-Wq-WGZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Fourth VC" id="Rcq-d9-FPC"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U8U-kc-fES" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="565" y="-666"/>
+        </scene>
+        <!--FavoritesStoryBoard-->
+        <scene sceneID="aEo-Vo-5tZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Favorites" referencedIdentifier="FavoritesStoryBoard" id="5eQ-Us-qea" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Third VC" id="Q1v-DQ-VfH"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4r9-Zn-PnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="572" y="-323"/>
+        </scene>
+    </scenes>
+</document>

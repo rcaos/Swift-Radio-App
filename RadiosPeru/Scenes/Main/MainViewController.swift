@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 protocol MainControllerDelegate: class {
-    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio radio: RadioStation)
+    
+    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio name: String, group: String)
+    
 }
 
 class MainViewControler: UIViewController {
@@ -62,8 +64,8 @@ extension MainViewControler : MiniPlayerControllerDelegate  {
 
 extension MainViewControler: MainControllerDelegate {
     
-    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio radio: RadioStation) {
-        viewModel.selectStation(at: radio)
+    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio name: String, group: String) {
+        viewModel.selectStation(by: name, group: group)
     }
 }
 

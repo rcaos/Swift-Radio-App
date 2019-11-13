@@ -56,6 +56,9 @@
 		77D51758237C992300B7DCC9 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51757237C992300B7DCC9 /* PersistenceManager.swift */; };
 		77D5175B237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */; };
 		77D5175D237C9BAE00B7DCC9 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5175C237C9BAE00B7DCC9 /* Group.swift */; };
+		77D51760237C9CD500B7DCC9 /* MainTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D5175E237C9CD500B7DCC9 /* MainTabBar.storyboard */; };
+		77D51762237C9DA500B7DCC9 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51761237C9DA500B7DCC9 /* InitialViewController.swift */; };
+		77D51764237C9DB200B7DCC9 /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51763237C9DB200B7DCC9 /* InitialViewModel.swift */; };
 		77F65DFC2371E1CA00677DB8 /* MiniPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */; };
 		77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7CA6D23686FB800E1D64A /* ShowCRP.swift */; };
 /* End PBXBuildFile section */
@@ -112,6 +115,9 @@
 		77D51757237C992300B7DCC9 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		77D5175A237C9A8300B7DCC9 /* RadiosPeru.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RadiosPeru.xcdatamodel; sourceTree = "<group>"; };
 		77D5175C237C9BAE00B7DCC9 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		77D5175F237C9CD500B7DCC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = RadiosPeru/StoryBoards/Base.lproj/MainTabBar.storyboard; sourceTree = "<group>"; };
+		77D51761237C9DA500B7DCC9 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		77D51763237C9DB200B7DCC9 /* InitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewModel.swift; sourceTree = "<group>"; };
 		77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MiniPlayer.storyboard; sourceTree = "<group>"; };
 		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -235,6 +241,7 @@
 			children = (
 				77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */,
 				77421B182358FEE500A23C79 /* Main.storyboard */,
+				77D5175E237C9CD500B7DCC9 /* MainTabBar.storyboard */,
 				77421B262359015C00A23C79 /* Popular.storyboard */,
 				77421B282359016700A23C79 /* Favorites.storyboard */,
 				77421B2B2359116600A23C79 /* Player.storyboard */,
@@ -272,6 +279,8 @@
 		7755B525235A13E9004E642B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				77D51761237C9DA500B7DCC9 /* InitialViewController.swift */,
+				77D51763237C9DB200B7DCC9 /* InitialViewModel.swift */,
 				774F0CA3237218BB002852C3 /* Main */,
 				774F0CA6237219A3002852C3 /* TabBar */,
 				7755B526235A13F0004E642B /* Popular */,
@@ -457,6 +466,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77D51760237C9CD500B7DCC9 /* MainTabBar.storyboard in Resources */,
 				77421B272359015C00A23C79 /* Popular.storyboard in Resources */,
 				77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */,
 				77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */,
@@ -510,11 +520,13 @@
 				7739E809235E4A610071882A /* RadioPlayer.swift in Sources */,
 				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,
+				77D51762237C9DA500B7DCC9 /* InitialViewController.swift in Sources */,
 				77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */,
 				77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */,
 				770A6BFD2368895100FDE4F6 /* RadioClient.swift in Sources */,
 				7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */,
 				770A6BFF2368978500FDE4F6 /* Show.swift in Sources */,
+				77D51764237C9DB200B7DCC9 /* InitialViewModel.swift in Sources */,
 				7755B520235A0F62004E642B /* StationsManager.swift in Sources */,
 				7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */,
 				774F0CA22372163E002852C3 /* MainViewModel.swift in Sources */,
@@ -538,6 +550,14 @@
 				77421B1E2358FEE700A23C79 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		77D5175E237C9CD500B7DCC9 /* MainTabBar.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77D5175F237C9CD500B7DCC9 /* Base */,
+			);
+			name = MainTabBar.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

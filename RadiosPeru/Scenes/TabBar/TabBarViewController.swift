@@ -30,14 +30,12 @@ class TabBarViewController: UITabBarController {
                 
                 if let navigation = controller as? UINavigationController ,
                     let destination = navigation.topViewController as? PopularViewController{
-                    print("Se inyecta Popular")
                     destination.viewModel = popularViewModel
                     destination.delegate = radioDelegate
                 }
                 
                 if let navigation = controller as? UINavigationController,
                     let destination =  navigation.topViewController as? FavoritesViewController {
-                    print("Se inyecta Favorites")
                     destination.viewModel = favoriteViewModel
                     destination.delegate = radioDelegate
                 }
