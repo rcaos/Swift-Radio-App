@@ -9,12 +9,15 @@
 import Foundation
 
 enum GroupRPPProvider {
+    
     case getNowShowDetail(String)
+    
 }
 
 //MARK: - EndPoint
 
 extension GroupRPPProvider: EndPoint {
+    
     var baseURL: String {
         return "https://radio.rpp.pe"
     }

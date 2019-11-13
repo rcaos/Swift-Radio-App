@@ -10,7 +10,7 @@ import Foundation
 
 final class MiniPlayerViewModel {
     
-    private let radioClient = RadioClient()
+    private let radioClient = ShowClient()
     
     private var radioPlayer: RadioPlayer?
     

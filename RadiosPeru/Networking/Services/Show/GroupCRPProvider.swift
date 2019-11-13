@@ -9,12 +9,15 @@
 import Foundation
 
 enum GroupCRPProvider {
+    
     case getNowShowDetail(String)
+    
 }
 
 //MARK: - EndPoint
 
 extension GroupCRPProvider: EndPoint {
+    
     var baseURL: String {
         switch self {
         case .getNowShowDetail(let base) :

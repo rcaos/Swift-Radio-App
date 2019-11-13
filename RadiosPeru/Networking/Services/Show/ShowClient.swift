@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RadioClient: ApiClient {
+class ShowClient: ApiClient {
     
     let session: URLSession
     

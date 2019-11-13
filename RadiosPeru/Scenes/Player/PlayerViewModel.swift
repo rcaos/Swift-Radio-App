@@ -11,7 +11,7 @@ import UIKit
 
 final class PlayerViewModel {
     
-    private let radioClient = RadioClient()
+    private let radioClient = ShowClient()
     
     private var radioPlayer: RadioPlayer?
     
