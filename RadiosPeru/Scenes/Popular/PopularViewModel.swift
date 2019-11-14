@@ -17,8 +17,19 @@ final class PopularViewModel {
     
     var selectedRadioStation: ((String, String) -> Void)?
     
+    //Reactive
+    var viewState: Bindable<ViewState>!
+    
     init() {
-        
+        setupViewState()
+    }
+    
+    private func setupViewState() {
+        if popularCells.count == 0 {
+            viewState = Bindable(.empty)
+        } else {
+            viewState = Bindable(.populated)
+        }
     }
     
     func getStationSelection(by index: Int) {
@@ -27,4 +38,14 @@ final class PopularViewModel {
         selectedRadioStation?( selectedStation.name, selectedStation.group )
     }
     
+}
+
+extension PopularViewModel {
+    
+    enum ViewState {
+        
+        case populated
+        case empty
+        
+    }
 }

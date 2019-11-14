@@ -12,11 +12,7 @@ private let reuseIdentifier = "PopularViewCell"
 
 class PopularViewController: UIViewController {
     
-    var viewModel: PopularViewModel! {
-        didSet {
-            setupBindables()
-        }
-    }
+    var viewModel: PopularViewModel!
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -29,6 +25,7 @@ class PopularViewController: UIViewController {
         
         setupView()
         setupCollection()
+        setupBindables()
     }
     
     func setupView() {
@@ -51,6 +48,39 @@ class PopularViewController: UIViewController {
             
             strongSelf.delegate?.mainControllerDelegate(strongSelf, didConfigRadio: name, group: group)
         }
+        
+        viewModel?.viewState.bindAndFire({ [weak self] state in
+            guard let strongSelf = self else { return }
+            
+            DispatchQueue.main.async {
+                strongSelf.configView(with: state)
+            }
+            
+        })
+    }
+    
+    func configView(with state: PopularViewModel.ViewState) {
+        switch state {
+        case .populated :
+            restoreBackground()
+        case .empty :
+            setBackground("There are no Stations to Show")
+        }
+    }
+    
+    func setBackground(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: self.collectionView.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .white
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = .center;
+        messageLabel.sizeToFit()
+        
+        self.collectionView?.backgroundView = messageLabel;
+    }
+    
+    func restoreBackground() {
+        self.collectionView?.backgroundView = nil
     }
     
 }
