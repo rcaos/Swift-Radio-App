@@ -12,11 +12,7 @@ private let reuseIdentifier = "FavoriteViewCell"
 
 class FavoritesViewController: UIViewController {
     
-    var viewModel: FavoritesViewModel! {
-        didSet {
-            setupViewModel()
-        }
-    }
+    var viewModel: FavoritesViewModel!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -31,22 +27,52 @@ class FavoritesViewController: UIViewController {
         
         setupView()
         setupCollection()
+        setupViewModel()
     }
     
     //MARK: - Reactive
     private func setupViewModel() {
-        viewModel.updateUI = { [weak self] in
-            DispatchQueue.main.async {
-                self?.collectionView?.reloadData()
-            }
-        }
         
         viewModel.selectedRadioStation = {[weak self] name, group in
             guard let strongSelf = self else { return }
             self?.delegate?.mainControllerDelegate(strongSelf, didConfigRadio: name, group: group)
             
         }
+        
+        viewModel.viewState.bindAndFire({[weak self] state in
+            guard let strongSelf = self ,
+                let _ = strongSelf.collectionView else { return }
+            DispatchQueue.main.async {
+                strongSelf.configView(with: state)
+                strongSelf.collectionView?.reloadData()
+            }
+        })
     }
+    
+    func configView(with state: FavoritesViewModel.ViewState) {
+        switch state {
+        case .populated :
+            restoreBackground()
+        case .empty :
+            setBackground("There are no Stations added to your Favorites")
+        }
+    }
+    
+    func setBackground(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: self.collectionView.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .white
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = .center;
+        messageLabel.sizeToFit()
+        
+        self.collectionView?.backgroundView = messageLabel;
+    }
+    
+    func restoreBackground() {
+        self.collectionView?.backgroundView = nil
+    }
+    
     
     func setupView() {
         collectionView.backgroundColor = UIColor(red: 51 / 255.0, green: 51 / 255.0, blue: 51 / 255.0, alpha: 1.0)
@@ -67,7 +93,7 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let viewModel = viewModel else { return 0}
+        guard let viewModel = viewModel else { return 0 }
         return viewModel.stations.count
     }
     

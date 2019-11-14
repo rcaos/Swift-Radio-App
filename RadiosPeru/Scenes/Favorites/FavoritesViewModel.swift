@@ -21,10 +21,11 @@ final class FavoritesViewModel {
     var selectedRadioStation: ((String, String) -> Void)?
     
     //Reactive
-    var updateUI: (() -> Void)?
+    var viewState: Bindable<ViewState> = Bindable(.empty)
     
     init(managedObjectContext: NSManagedObjectContext) {
         setupStores(managedObjectContext)
+        refreshStations()
     }
     
     private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
@@ -34,7 +35,11 @@ final class FavoritesViewModel {
     }
     
     private func refreshStations() {
-        updateUI?()
+        if stations.count == 0 {
+            viewState.value = .empty
+        } else {
+            viewState.value = .populated
+        }
     }
     
     //MARK: - Public Methods
@@ -52,5 +57,15 @@ extension FavoritesViewModel: PersistenceStoreDelegate {
     
     func persistenceStore(didUpdateEntity update: Bool) {
         refreshStations()
+    }
+}
+
+extension FavoritesViewModel {
+    
+    enum ViewState {
+        
+        case populated
+        case empty
+        
     }
 }
