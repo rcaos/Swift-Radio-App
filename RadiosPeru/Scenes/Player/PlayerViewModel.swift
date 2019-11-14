@@ -117,14 +117,14 @@ final class PlayerViewModel {
         guard let player = radioPlayer else { return }
         viewState.value = player.state
         
-        if viewState.value == .playing {
+        if case .playing = viewState.value {
             getShowDetail()
         }
     }
     
     func getDescription() -> String? {
         switch viewState.value {
-        case .playing, .buffering:
+        case .playing, .buffering :
             if let onlineDescription = onlineDescription,
                 !onlineDescription.isEmpty {
                 return (leftDefaultDescription ?? "") + " - " +
@@ -132,6 +132,8 @@ final class PlayerViewModel {
             } else {
                 return defaultDescription
             }
+        case .error(let message) :
+            return message
         default:
             return defaultDescription
         }
@@ -144,7 +146,7 @@ extension PlayerViewModel : RadioPlayerDelegate {
         print("Soy Delegate PlayerViewModel, recibo state: \(state)")
         viewState.value = state
         
-        if viewState.value == .playing {
+        if case .playing = viewState.value {
             getShowDetail()
         }
     }

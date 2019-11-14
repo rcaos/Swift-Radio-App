@@ -124,7 +124,7 @@ class ApiPlayer : NSObject{
     public func togglePlayPause() {
         print("Toogle for status: [\(status)]")
         switch status {
-        case .paused, .stopped:
+        case .paused, .stopped, .error:
             play()
         default :
             stop()

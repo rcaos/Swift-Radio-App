@@ -15,14 +15,14 @@ final class MainViewModel {
     
     var miniPlayer: MiniPlayerViewModel
     
-    var servicePlayer: RadioPlayer
+    var radioPlayer: RadioPlayer
     
     init(managedObjectContext: NSManagedObjectContext = PersistenceManager.shared.mainContext) {
         self.managedObjectContext = managedObjectContext
         
-        servicePlayer = RadioPlayer()
+        radioPlayer = RadioPlayer()
         
-        miniPlayer = MiniPlayerViewModel(name: nil, group: nil, service: servicePlayer, managedObjectContext: self.managedObjectContext)
+        miniPlayer = MiniPlayerViewModel(name: nil, group: nil, service: radioPlayer, managedObjectContext: self.managedObjectContext)
     }
     
     func selectStation(by name: String, group: String) {

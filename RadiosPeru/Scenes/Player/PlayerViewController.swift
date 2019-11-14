@@ -98,7 +98,7 @@ class PlayerViewController: UIViewController {
         stationDescriptionLabel.text = viewModel?.getDescription()
         
         switch state {
-        case .stopped, .loading, .buffering :
+        case .stopped, .loading, .buffering, .error(_) :
             playingBarsImage.stopAnimating()
         case .playing :
             playingBarsImage.startAnimating()
@@ -109,7 +109,7 @@ class PlayerViewController: UIViewController {
     
     func configPlayer(with state: RadioPlayerState) {
         switch state {
-        case .stopped :
+        case .stopped, .error(_):
             playView.isHidden = false
             loadingView.isHidden = true
             pauseView.isHidden = true

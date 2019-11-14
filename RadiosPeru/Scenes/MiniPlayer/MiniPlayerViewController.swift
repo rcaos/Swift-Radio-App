@@ -96,7 +96,7 @@ class MiniPlayerViewController: UIViewController {
         stationDescriptionLabel.text = viewModel?.getDescription()
         
         switch state {
-        case .stopped, .loading, .buffering:
+        case .stopped, .loading, .buffering, .error:
             playingBarsView.stopAnimating()
         case .playing :
             playingBarsView.startAnimating()
@@ -106,7 +106,7 @@ class MiniPlayerViewController: UIViewController {
     
     func configPlayer(with state: RadioPlayerState) {
         switch state {
-        case .stopped :
+        case .stopped, .error :
             playView.isHidden = false
             loadingView.isHidden = true
             pauseView.isHidden = true

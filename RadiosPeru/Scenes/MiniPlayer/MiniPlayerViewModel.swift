@@ -101,6 +101,8 @@ final class MiniPlayerViewModel {
             } else {
                 return defaultDescription
             }
+        case .error(let message):
+            return message
         default:
             return defaultDescription
         }
@@ -157,7 +159,7 @@ extension MiniPlayerViewModel : RadioPlayerDelegate {
         print("Soy Delegate MiniPlayerViewModel, recibo state: \(state)")
         viewState.value = state
         
-        if viewState.value == .playing {
+        if case .playing = viewState.value {
             getShowDetail()
         }
     }

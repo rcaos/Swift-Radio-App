@@ -14,6 +14,7 @@ enum RadioPlayerState {
     case loading
     case playing
     case buffering
+    case error(String)
 }
 
 protocol RadioPlayerDelegate: class {
@@ -85,8 +86,6 @@ class RadioPlayer {
 extension RadioPlayer: ApiPlayerDelegate {
     
     func apiPlayerDelegate(didChangeState state: ApiPlayerState) {
-        print("Cambio Player: \(state)")
-        
         let radioState: RadioPlayerState
         
         switch state {
@@ -96,10 +95,12 @@ extension RadioPlayer: ApiPlayerDelegate {
             radioState = .buffering
         case .preparing(_) :
             radioState = .loading
+        case .error :
+            radioState = .error("Error: Try another Radio")
         default :
             radioState = .stopped
         }
-        print("Cambio Player: \(state). Informo con: \(radioState)")
+        print("Change ApiPlayer State: \(state). Informo con: \(radioState)")
         
         self.state = radioState
         
