@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import MediaPlayer
 
 enum ApiPlayerState {
     case initial
@@ -63,13 +64,15 @@ class ApiPlayer : NSObject{
         let audioSession = AVAudioSession.sharedInstance()
         try? audioSession.setCategory(AVAudioSession.Category.playback, options: [.defaultToSpeaker])
         try? audioSession.setMode(AVAudioSession.Mode.default)
-        
+        try? audioSession.setActive(true)
         
         player = AVPlayer()
         super.init()
         player.addObserver(self, forKeyPath: "timeControlStatus", options: .new, context: nil)
         
         NotificationCenter.default.addObserver( forName: AVAudioSession.interruptionNotification, object: nil, queue: .main, using: handleAudioSessionInterruptionNotification)
+        
+        setupRemoteCommandCenter()
     }
     
     //MARK: - Public Control Methods
@@ -162,10 +165,10 @@ class ApiPlayer : NSObject{
     }
 }
 
+//MARK: - KVO Apple
+
 extension ApiPlayer {
-    
-    //MARK: - KVO Apple
-    
+
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         guard let keyPath = keyPath else { return }
@@ -284,6 +287,35 @@ extension ApiPlayer {
             print("No Implementation")
         }
         
+    }
+}
+
+//MARK: - Remote Commands
+
+extension ApiPlayer {
+    
+    func setupRemoteCommandCenter() {
+        //Singleton
+        let commandCenter = MPRemoteCommandCenter.shared()
+        
+        commandCenter.nextTrackCommand.isEnabled = false
+        commandCenter.previousTrackCommand.isEnabled = false
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.pauseCommand.isEnabled = true
+        
+        // Handle Commands
+        
+        commandCenter.playCommand.addTarget { [unowned self] event in
+            print("Play from  Remote")
+            self.togglePlayPause()
+            return .success
+        }
+        
+        commandCenter.pauseCommand.addTarget { [unowned self] event in
+            print("Pause from Remote")
+            self.togglePlayPause()
+            return .success
+        }
     }
 }
 
