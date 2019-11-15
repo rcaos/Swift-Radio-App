@@ -57,9 +57,19 @@ class ApiPlayer : NSObject{
     //MARK: - Initialization
     
     override private init() {
+        
+        //Enable Speaker
+        //TODO: Check other optiones, bluetooth? airPlay?, .mixWithOthers
+        let audioSession = AVAudioSession.sharedInstance()
+        try? audioSession.setCategory(AVAudioSession.Category.playback, options: [.defaultToSpeaker])
+        try? audioSession.setMode(AVAudioSession.Mode.default)
+        
+        
         player = AVPlayer()
         super.init()
         player.addObserver(self, forKeyPath: "timeControlStatus", options: .new, context: nil)
+        
+        NotificationCenter.default.addObserver( forName: AVAudioSession.interruptionNotification, object: nil, queue: .main, using: handleAudioSessionInterruptionNotification)
     }
     
     //MARK: - Public Control Methods
@@ -70,7 +80,6 @@ class ApiPlayer : NSObject{
             //It's the same URL
             if let currentURL = (currentItem.asset as? AVURLAsset)?.url ,
                 currentURL == url {
-                //print("Es la misma URl radio. No hacer nada")
                 return
             }
             
@@ -94,7 +103,7 @@ class ApiPlayer : NSObject{
     }
     
     public func play() {
-        print("--Api.play()")
+        print("--Api.play(). Current Status:[\(status)]")
         switch status {
         case .paused, .preparing:
             player.play()
@@ -103,20 +112,6 @@ class ApiPlayer : NSObject{
                 prepare(with: lastURL, playWhenReady: true)
             }
         case .initial, .playing, .buffering, .error:
-            break
-        }
-    }
-    
-    public func pause(manually: Bool) {
-        switch status {
-        case .preparing(let playWhenReady):
-            if playWhenReady {
-                status = .preparing(playWhenReady: false)
-            }
-        case .playing, .buffering:
-            status = .paused(manually: manually)
-            player.pause()
-        case .initial, .paused, .stopped, .error:
             break
         }
     }
@@ -249,3 +244,46 @@ extension ApiPlayer {
         }
     }
 }
+
+//MARK: - Handle Interruptions
+
+extension ApiPlayer {
+    
+    fileprivate func handleAudioSessionInterruptionNotification(note: Notification) {
+        
+        guard let typeNumber = note.userInfo?[AVAudioSessionInterruptionTypeKey] as? NSNumber else {return}
+        guard let type = AVAudioSession.InterruptionType(rawValue: typeNumber.uintValue) else { return }
+        
+        switch type {
+            
+        case .began:
+            print("Interrupted began")
+            
+            stop()
+            
+        case .ended:
+            print("Interrupted ended")
+            //isInterrupted = false
+            
+            let optionNumber = note.userInfo?[AVAudioSessionInterruptionOptionKey] as? NSNumber
+            if let number = optionNumber {
+                let options = AVAudioSession.InterruptionOptions(rawValue: number.uintValue)
+                let shouldResume = options.contains(.shouldResume)
+                
+                print("Should Resume: \(shouldResume) ")
+                
+                //Se pierde la conexión cuando Pauso el Player !!!
+                //Stop or Play
+                
+                if shouldResume {
+                    play()
+                }
+                
+            }
+        @unknown default:
+            print("No Implementation")
+        }
+        
+    }
+}
+
