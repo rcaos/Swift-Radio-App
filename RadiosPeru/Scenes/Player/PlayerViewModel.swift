@@ -48,9 +48,13 @@ final class PlayerViewModel {
         self.groupSelected = group
         
         self.radioPlayer = service
+        radioPlayer?.addObserver(self)
         
-        radioPlayer?.delegate = self
         setupRadio()
+    }
+    
+    deinit {
+        radioPlayer?.removeObserver(self)
     }
     
     //MARK: - Private
@@ -85,7 +89,6 @@ final class PlayerViewModel {
     private func getShowDetail() {
         guard let radioStation = getSelectedStation() else { return }
         
-        //MARK: - TODO
         showClient.getShowOnlineDetail(group: radioStation.type, completion: { result in
             switch result {
             case .success(let response) :
@@ -140,10 +143,10 @@ final class PlayerViewModel {
     }
 }
 
-extension PlayerViewModel : RadioPlayerDelegate {
+extension PlayerViewModel : RadioPlayerObserver {
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
-        print("Soy Delegate PlayerViewModel, recibo state: \(state)")
+        print("Estoy suscrito PlayerViewModel, recibo state: \(state)")
         viewState.value = state
         
         if case .playing = viewState.value {
@@ -151,11 +154,4 @@ extension PlayerViewModel : RadioPlayerDelegate {
         }
     }
     
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String) {
-        
-    }
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String) {
-        
-    }
 }

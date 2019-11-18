@@ -42,10 +42,6 @@ class PlayerViewController: UIViewController {
         setupGestures()
     }
     
-    deinit {
-        print("Deinit Player View Controller.")
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel?.refreshStatus()

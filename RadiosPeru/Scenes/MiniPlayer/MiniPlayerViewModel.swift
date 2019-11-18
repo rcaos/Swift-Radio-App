@@ -49,11 +49,11 @@ final class MiniPlayerViewModel {
         self.groupSelected = group
         
         radioPlayer = service
-        radioPlayer?.delegate = self
+        radioPlayer?.addObserver(self)
     }
     
     deinit {
-        print("Finalizo Player ViewModel")
+        radioPlayer?.removeObserver(self)
     }
     
     private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
@@ -85,7 +85,6 @@ final class MiniPlayerViewModel {
     
     func refreshStatus() {
         guard let player = radioPlayer else { return }
-        player.delegate = self
         viewState.value = player.state
         
         guard let selected = getSelectedStation() else { return }
@@ -153,10 +152,10 @@ final class MiniPlayerViewModel {
     }
 }
 
-extension MiniPlayerViewModel : RadioPlayerDelegate {
+extension MiniPlayerViewModel: RadioPlayerObserver {
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
-        print("Soy Delegate MiniPlayerViewModel, recibo state: \(state)")
+        print("Estoy suscrito MiniPlayerViewModel, recibo state: \(state)")
         viewState.value = state
         
         if case .playing = viewState.value {
@@ -164,11 +163,4 @@ extension MiniPlayerViewModel : RadioPlayerDelegate {
         }
     }
     
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String) {
-        
-    }
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String) {
-        
-    }
 }

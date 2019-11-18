@@ -9,6 +9,7 @@
 import Foundation
 
 //Visual States
+
 enum RadioPlayerState {
     case stopped
     case loading
@@ -17,12 +18,22 @@ enum RadioPlayerState {
     case error(String)
 }
 
-protocol RadioPlayerDelegate: class {
+protocol RadioPlayerObserver: class {
+    
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState)
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String)
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String)
+}
+
+extension RadioPlayerObserver {
+    
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) { }
+    
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String) { }
+    
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String) { }
 }
 
 class RadioPlayer {
@@ -31,15 +42,12 @@ class RadioPlayer {
     
     private var urlStation: String?
     
-    weak var delegate: RadioPlayerDelegate? {
-        didSet {
-            print("Cambia delegate de RadioPlayer")
-        }
-    }
-    
     var state: RadioPlayerState = .stopped
     
+    private var observations = [ObjectIdentifier: Observation]()
+    
     //MARK: - Life Cycle
+    
     init() {
         player.delegate = self
     }
@@ -104,6 +112,45 @@ extension RadioPlayer: ApiPlayerDelegate {
         
         self.state = radioState
         
-        delegate?.radioPlayer(self, didChangeState: radioState)
+        stateDidChange(with: radioState)
+    }
+}
+
+private extension RadioPlayer {
+    
+    struct Observation {
+        weak var observer: RadioPlayerObserver?
+    }
+}
+
+//MARK: - Notify to all Observers
+
+private extension RadioPlayer {
+    
+    func stateDidChange(with state: RadioPlayerState) {
+        for(id, observation) in observations {
+            guard let observer = observation.observer else {
+                observations.removeValue(forKey: id)
+                continue
+            }
+            observer.radioPlayer(self, didChangeState: state)
+        }
+    }
+}
+
+//MARK: - Suscribe/ Unsuscribe
+
+extension RadioPlayer {
+    
+    func addObserver(_ observer: RadioPlayerObserver) {
+        let id = ObjectIdentifier(observer)
+        observations[id] = Observation(observer: observer)
+        print("Nuevo suscriptor: \(id)")
+    }
+    
+    func removeObserver(_ observer: RadioPlayerObserver) {
+        let id = ObjectIdentifier(observer)
+        observations.removeValue(forKey: id)
+        print("Se dió de baja a suscriptor: \(id)")
     }
 }

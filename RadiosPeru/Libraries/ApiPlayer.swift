@@ -34,6 +34,7 @@ class ApiPlayer : NSObject{
     var status: ApiPlayerState = .initial {
         didSet {
             delegate?.apiPlayerDelegate(didChangeState: status)
+            updateNowPlayingInfo()
         }
     }
     
@@ -319,3 +320,26 @@ extension ApiPlayer {
     }
 }
 
+//MARK: - Now Playing Info
+
+extension ApiPlayer {
+    
+    fileprivate func updateNowPlayingInfo() {
+        var info: [String: Any]? = [:]
+        
+        switch status {
+        case .playing :
+            //info [MPMediaItemPropertyMediaType] = NSNum
+            info?[MPMediaItemPropertyTitle] = "Radio RPP"
+            info?[MPMediaItemPropertyArtist] = "Lima 89.7 FM"
+            info?[MPMediaItemPropertyAlbumTitle] = "Confianza por todos los medios"
+
+        default :
+            print("Limpiar updateNow()")
+            info = nil
+        }
+        
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+    }
+    
+}
