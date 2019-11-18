@@ -14,9 +14,10 @@ protocol RadioPlayerObserver: class {
     
     func radioPlayerDidChangeOnlineInfo(_ radioPlayer: RadioPlayer)
     
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String)
+    //MARK: - TODO
+    //func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String)
     
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String)
+    //func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String)
 }
 
 extension RadioPlayerObserver {
@@ -25,7 +26,7 @@ extension RadioPlayerObserver {
     
     func radioPlayerDidChangeOnlineInfo(_ radioPlayer: RadioPlayer) { }
     
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String) { }
+    //func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String) { }
     
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String) { }
+    //func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String) { }
 }

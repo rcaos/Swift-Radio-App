@@ -51,6 +51,12 @@ class ApiPlayer : NSObject{
         }
     }
     
+    var dataSource: PlayerDataSource? {
+        didSet {
+            updateNowPlayingInfo()
+        }
+    }
+    
     //TO DO
     private var isHeadPhonesConnected = false
     private var isInterrupted = false
@@ -107,7 +113,7 @@ class ApiPlayer : NSObject{
     }
     
     public func play() {
-        print("--Api.play(). Current Status:[\(status)]")
+        //print("--Api.play(). Current Status:[\(status)]")
         switch status {
         case .paused, .preparing:
             player.play()
@@ -121,7 +127,7 @@ class ApiPlayer : NSObject{
     }
     
     public func togglePlayPause() {
-        print("Toogle for status: [\(status)]")
+        //print("Toogle for status: [\(status)]")
         switch status {
         case .paused, .stopped, .error:
             play()
@@ -139,13 +145,13 @@ class ApiPlayer : NSObject{
     
     private func removeObservers(for item: AVPlayerItem?) {
         guard let item = item else { return }
-        print("--Remove Observers for: \((item.asset as? AVURLAsset)?.url)")
+        //print("--Remove Observers for: \((item.asset as? AVURLAsset)?.url)")
         item.removeObserver(self, forKeyPath: "status")
     }
     
     private func addObservers(for item: AVPlayerItem?) {
         guard let item = item else { return }
-        print("--Add Observers for:\((item.asset as? AVURLAsset)?.url)")
+        //print("--Add Observers for:\((item.asset as? AVURLAsset)?.url)")
         item.addObserver(self, forKeyPath: "status", options: .new, context: nil)
         
         if let observer = currentPlayerItemObserver {
@@ -208,13 +214,13 @@ extension ApiPlayer {
             }
             
         case .failed:
-            print("\n(Item status failed: \(item.error))")
+            //print("\n(Item status failed: \(item.error))")
             status = .error
         case .unknown:
-            print("(\nItem status unknown)")
+            //print("(\nItem status unknown)")
             status = .error
         @unknown default:
-            print("\n(Unknow statue)")
+            //print("\n(Unknow statue)")
             status = .error
         }
     }
@@ -261,12 +267,12 @@ extension ApiPlayer {
         switch type {
             
         case .began:
-            print("Interrupted began")
+            //print("Interrupted began")
             
             stop()
             
         case .ended:
-            print("Interrupted ended")
+            //print("Interrupted ended")
             //isInterrupted = false
             
             let optionNumber = note.userInfo?[AVAudioSessionInterruptionOptionKey] as? NSNumber
@@ -274,7 +280,7 @@ extension ApiPlayer {
                 let options = AVAudioSession.InterruptionOptions(rawValue: number.uintValue)
                 let shouldResume = options.contains(.shouldResume)
                 
-                print("Should Resume: \(shouldResume) ")
+                //print("Should Resume: \(shouldResume) ")
                 
                 //Se pierde la conexión cuando Pauso el Player !!!
                 //Stop or Play
@@ -307,13 +313,13 @@ extension ApiPlayer {
         // Handle Commands
         
         commandCenter.playCommand.addTarget { [unowned self] event in
-            print("Play from  Remote")
+            //print("Play from  Remote")
             self.togglePlayPause()
             return .success
         }
         
         commandCenter.pauseCommand.addTarget { [unowned self] event in
-            print("Pause from Remote")
+            //print("Pause from Remote")
             self.togglePlayPause()
             return .success
         }
@@ -325,19 +331,18 @@ extension ApiPlayer {
 extension ApiPlayer {
     
     fileprivate func updateNowPlayingInfo() {
+        guard let dataSource = dataSource else { return }
+        
         var info: [String: Any]? = [:]
         
         switch status {
         case .playing :
-            //info [MPMediaItemPropertyMediaType] = NSNum
-            info?[MPMediaItemPropertyTitle] = "Radio RPP"
-            info?[MPMediaItemPropertyArtist] = "Lima 89.7 FM"
-            info?[MPMediaItemPropertyAlbumTitle] = "Confianza por todos los medios"
-
+            info = dataSource.nowPlayInfo()
         default :
-            print("Limpiar updateNow()")
-            info = nil
+            info = dataSource.nowDefaultInfo()
         }
+        
+        //print("Se envia a UpdateNow: \(info)")
         
         MPNowPlayingInfoCenter.default().nowPlayingInfo = info
     }

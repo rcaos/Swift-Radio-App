@@ -32,6 +32,12 @@ class RadioPlayer {
     
     private var onlineInfo: String?
     
+    private var dataSource: PlayerDataSource? {
+        didSet {
+            player.dataSource = dataSource
+        }
+    }
+    
     //MARK: - Life Cycle
     
     init() {
@@ -48,6 +54,8 @@ class RadioPlayer {
         if let url = URL(string: stationSelected.urlStream) {
             player.prepare(with: url, playWhenReady: playWhenReady)
         }
+        
+        setupSource(with: stationSelected)
     }
     
     func refreshOnlineInfo() {
@@ -61,6 +69,7 @@ class RadioPlayer {
     func resetRadio() {
         player.stop()
         onlineInfo = nil
+        //Clean DataSource
     }
     
     func getRadioDescription() -> String {
@@ -117,20 +126,30 @@ class RadioPlayer {
                 self.onlineInfo = showResult.name
                 
                 self.changeOnlineInfo()
+                self.setupSource(with: stationSelected)
                 
             case .failure(let error) :
                 print("Error to get online Description: \(error)")
                 self.onlineInfo = ""
+                self.setupSource(with: stationSelected)
             }
         })
     }
     
-    private func getSelectedStation(with name: String?) -> Station?{
+    private func getSelectedStation(with name: String?) -> Station? {
         //MARK: - TODO
         //, let _ = groupSelected,
         guard let stationName = name,
             let station = PersistenceManager.shared.findStation(with: stationName) else { return nil }
         return station
+    }
+    
+    private func setupSource(with selected: Station) {
+        let defaultInfo = selected.city + " - " +
+            selected.frecuency + " - " +
+            selected.slogan
+        
+        dataSource = PlayerDataSource(title: selected.name, defaultInfo: defaultInfo, onlineNowInfo: self.onlineInfo, artWork: selected.image)
     }
 }
 

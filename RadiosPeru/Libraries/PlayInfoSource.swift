@@ -12,30 +12,63 @@ import MediaPlayer
 
 public protocol PlayInfoSource {
     
-    var url: String { get }
-    
     var title: String { get }
     
     var defaultInfo: String { get }
     
-    var onlineInfo: String? { get }
+    var onlineNowInfo: String? { get }
     
-    var artWork: UIImage? { get }
+    var artWork: String? { get }
     
 }
 
 extension PlayInfoSource {
     
-    func nowPlayInfo(image: UIImage? = nil) -> [String: Any] {
+    func nowPlayInfo() -> [String: Any] {
+        var info:[String: Any] = [:]
+        
+        info[MPMediaItemPropertyTitle] = title
+        
+        if let online = onlineNowInfo {
+            info[MPMediaItemPropertyArtist] = online
+        }
+        
+        info[MPMediaItemPropertyAlbumTitle] = defaultInfo
+        
+        if let named = artWork, let image = UIImage(named: named) {
+            let imageArtWork = MPMediaItemArtwork(boundsSize: image.size) { (inputSize) -> UIImage in
+                return image 
+            }
+            info[MPMediaItemPropertyArtwork] = imageArtWork
+        }
+        
+        return info
+    }
+    
+    func nowDefaultInfo() -> [String: Any] {
         var info:[String: Any] = [:]
         
         info[MPMediaItemPropertyTitle] = title
         info[MPMediaItemPropertyArtist] = defaultInfo
         
-        if let online = onlineInfo {
-            info[MPMediaItemPropertyAlbumTitle] = online
+        if let named = artWork, let image = UIImage(named: named) {
+            let imageArtWork = MPMediaItemArtwork(boundsSize: image.size) { (inputSize) -> UIImage in
+                return image
+            }
+             info[MPMediaItemPropertyArtwork] = imageArtWork
         }
         
         return info
     }
+}
+
+struct PlayerDataSource: PlayInfoSource {
+    
+    var title: String
+    
+    var defaultInfo: String
+    
+    var onlineNowInfo: String?
+    
+    var artWork: String?
 }
