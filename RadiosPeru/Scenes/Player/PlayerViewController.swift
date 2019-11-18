@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class PlayerViewController: UIViewController {
     
@@ -20,7 +21,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var stationNameLabel: UILabel!
     @IBOutlet weak var stationDescriptionLabel: UILabel!
     
-    @IBOutlet weak var volumeSlider: UISlider!
+    @IBOutlet weak var volumeStackView: UIStackView!
     
     @IBOutlet weak var playingBarsImage: UIImageView!
     @IBOutlet weak var playerStackView: UIStackView!
@@ -140,8 +141,19 @@ class PlayerViewController: UIViewController {
         stationDescriptionLabel.textColor = .lightGray
         stationDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         
-        volumeSlider.minimumTrackTintColor = UIColor.white
-        volumeSlider.maximumTrackTintColor = UIColor.darkGray
+        
+        //MARK: - TODO Fix autolayout
+        let mpVolumenView = MPVolumeView(frame: volumeStackView.bounds)
+        for currentView in mpVolumenView.subviews {
+            if currentView.isKind(of: UISlider.self) {
+                let tempSlider = currentView as! UISlider
+                tempSlider.minimumTrackTintColor = UIColor.white
+                tempSlider.maximumTrackTintColor = UIColor.darkGray
+            }
+        }
+        mpVolumenView.showsRouteButton = false
+        mpVolumenView.showsVolumeSlider = true
+        volumeStackView.addArrangedSubview(mpVolumenView)
         
         playingBarsImage.image = UIImage(named: "NowPlayingBars-2")
         playingBarsImage.autoresizingMask = []
