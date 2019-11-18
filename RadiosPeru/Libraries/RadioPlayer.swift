@@ -18,28 +18,6 @@ enum RadioPlayerState {
     case error(String)
 }
 
-protocol RadioPlayerObserver: class {
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState)
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeOnlineInfo result: Show)
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String)
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String)
-}
-
-extension RadioPlayerObserver {
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) { }
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeOnlineInfo result: Show) { }
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String) { }
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String) { }
-}
-
 class RadioPlayer {
     
     var state: RadioPlayerState = .stopped
@@ -51,6 +29,8 @@ class RadioPlayer {
     private let showClient = ShowClient()
     
     private var nameSelected: String?
+    
+    private var onlineInfo: String?
     
     //MARK: - Life Cycle
     
@@ -80,6 +60,31 @@ class RadioPlayer {
     
     func resetRadio() {
         player.stop()
+        onlineInfo = nil
+    }
+    
+    func getRadioDescription() -> String {
+        
+        guard let stationSelected = getSelectedStation(with: nameSelected) else { return "" }
+        
+        let defaultDescription = stationSelected.city + " - " +
+            stationSelected.frecuency + " - " +
+            stationSelected.slogan
+        
+        switch state {
+        case .playing, .buffering:
+            if let onlineDescription = onlineInfo, !onlineDescription.isEmpty {
+                return stationSelected.city + " - " +
+                        stationSelected.frecuency + " - " +
+                        onlineDescription
+            } else {
+                return defaultDescription
+            }
+        case .error(let message):
+            return message
+        default:
+            return defaultDescription
+        }
     }
     
     func updateCurrentTrack() {
@@ -109,10 +114,13 @@ class RadioPlayer {
             switch result {
             case .success(let response) :
                 guard let showResult = response else { return }
-                self.changeOnlineInfo(result: showResult)
+                self.onlineInfo = showResult.name
+                
+                self.changeOnlineInfo()
                 
             case .failure(let error) :
                 print("Error to get online Description: \(error)")
+                self.onlineInfo = ""
             }
         })
     }
@@ -177,14 +185,14 @@ private extension RadioPlayer {
         }
     }
     
-    func changeOnlineInfo(result: Show) {
+    func changeOnlineInfo( ) {
         print("Informar a \(observations.count) suscriptores. didChangeOnlineInfo")
         for(id, observation) in observations {
             guard let observer = observation.observer else {
                 observations.removeValue(forKey: id)
                 continue
             }
-            observer.radioPlayer(self, didChangeOnlineInfo: result)
+            observer.radioPlayerDidChangeOnlineInfo(self)
         }
     }
 }

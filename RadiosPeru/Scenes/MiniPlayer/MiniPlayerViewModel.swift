@@ -20,10 +20,6 @@ final class MiniPlayerViewModel {
     
     var name: String = "Pick a Radio Station"
     
-    var defaultDescription: String?
-    
-    var onlineDescription: String?
-    
     var isSelected: Bool {
         guard let name  = nameSelected, let _ = groupSelected,
             let _ = PersistenceManager.shared.findStation(with: name) else { return false }
@@ -59,6 +55,8 @@ final class MiniPlayerViewModel {
         favoritesStore = PersistenceStore(managedObjectContext)
     }
     
+    //MARK: - Public
+    
     func configStation(by name: String, group: String, playAutomatically: Bool = true) {
         self.nameSelected = name
         self.groupSelected = group
@@ -90,29 +88,16 @@ final class MiniPlayerViewModel {
         setupRadio( selected )
     }
     
-    func getDescription() -> String? {
-        switch viewState.value {
-        case .playing, .buffering:
-            if let onlineDescription = onlineDescription,
-                !onlineDescription.isEmpty {
-                return onlineDescription
-            } else {
-                return defaultDescription
-            }
-        case .error(let message):
-            return message
-        default:
-            return defaultDescription
-        }
+    func getDescription() -> String {
+        guard let radioPlayer = radioPlayer else { return "" }
+        
+        return radioPlayer.getRadioDescription()
     }
     
     //MARK: - Private
     
     private func setupRadio(_ radio: Station) {
         self.name = radio.name
-        self.defaultDescription = radio.city + " " +
-            radio.frecuency + " " +
-            radio.slogan
         
         isFavorite.value = favoritesStore.isFavorite(with: radio.name, group: radio.group)
     }
@@ -132,14 +117,16 @@ final class MiniPlayerViewModel {
     }
 }
 
+
+//MARK: - RadioPlayerObserver
+
 extension MiniPlayerViewModel: RadioPlayerObserver {
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
         viewState.value = state
     }
     
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeOnlineInfo result: Show) {
-        self.onlineDescription = result.name
+    func radioPlayerDidChangeOnlineInfo(_ radioPlayer: RadioPlayer) {
         updateUI?()
     }
     

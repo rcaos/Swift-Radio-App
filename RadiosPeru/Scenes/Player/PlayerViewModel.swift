@@ -23,12 +23,6 @@ final class PlayerViewModel {
     
     var name: String?
     
-    var defaultDescription: String?
-    
-    private var leftDefaultDescription: String?
-    
-    var onlineDescription: String?
-    
     //Reactive
     var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
     
@@ -68,12 +62,6 @@ final class PlayerViewModel {
         name = radioStation.name
         image = radioStation.image
         
-        leftDefaultDescription = radioStation.city + " " +
-            radioStation.frecuency + " "
-        
-        defaultDescription = (leftDefaultDescription ?? "")
-            + " " + radioStation.slogan
-        
         isFavorite.value = favoritesStore.isFavorite(with: radioStation.name, group: radioStation.group)
     }
     
@@ -103,23 +91,14 @@ final class PlayerViewModel {
         }
     }
     
-    func getDescription() -> String? {
-        switch viewState.value {
-        case .playing, .buffering :
-            if let onlineDescription = onlineDescription,
-                !onlineDescription.isEmpty {
-                return (leftDefaultDescription ?? "") + " - " +
-                onlineDescription
-            } else {
-                return defaultDescription
-            }
-        case .error(let message) :
-            return message
-        default:
-            return defaultDescription
-        }
+    func getDescription() -> String {
+        guard let radioPlayer = radioPlayer else { return "" }
+        
+        return radioPlayer.getRadioDescription()
     }
 }
+
+//MARK: - RadioPlayerObserver
 
 extension PlayerViewModel : RadioPlayerObserver {
     
@@ -127,8 +106,7 @@ extension PlayerViewModel : RadioPlayerObserver {
         viewState.value = state
     }
     
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeOnlineInfo result: Show) {
-        self.onlineDescription = result.name
+    func radioPlayerDidChangeOnlineInfo(_ radioPlayer: RadioPlayer) {
         updateUI?()
     }
     
