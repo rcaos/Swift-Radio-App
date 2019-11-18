@@ -34,6 +34,6 @@ final class StationFavorite: NSManagedObject {
 extension StationFavorite: Managed {
     
     static var defaultSortDescriptors: [NSSortDescriptor] {
-        return [NSSortDescriptor(key: #keyPath(createAt), ascending: false) ]
+        return [NSSortDescriptor(key: #keyPath(createAt), ascending: true) ]
     }
 }
