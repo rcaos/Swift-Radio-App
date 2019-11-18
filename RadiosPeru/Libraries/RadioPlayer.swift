@@ -22,6 +22,8 @@ protocol RadioPlayerObserver: class {
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState)
     
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeOnlineInfo result: Show)
+    
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String)
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String)
@@ -31,6 +33,8 @@ extension RadioPlayerObserver {
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) { }
     
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeOnlineInfo result: Show) { }
+    
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeTrack track: String) { }
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeImage image: String) { }
@@ -38,13 +42,15 @@ extension RadioPlayerObserver {
 
 class RadioPlayer {
     
-    private let player = ApiPlayer.shared
-    
-    private var urlStation: String?
-    
     var state: RadioPlayerState = .stopped
     
+    private let player = ApiPlayer.shared
+    
     private var observations = [ObjectIdentifier: Observation]()
+    
+    private let showClient = ShowClient()
+    
+    private var nameSelected: String?
     
     //MARK: - Life Cycle
     
@@ -54,14 +60,18 @@ class RadioPlayer {
     
     //MARK: - Publics
     func setupRadio(with station: String?, playWhenReady: Bool = false) {
-        guard let url = station else { return }
+        guard let stationSelected = getSelectedStation(with: station) else { return }
+        nameSelected = station
         
         resetRadio()
-        self.urlStation = url
         
-        if let urlStream = URL(string: url) {
-            player.prepare(with: urlStream, playWhenReady: playWhenReady)
+        if let url = URL(string: stationSelected.urlStream) {
+            player.prepare(with: url, playWhenReady: playWhenReady)
         }
+    }
+    
+    func refreshOnlineInfo() {
+        getAiringNowDetails()
     }
     
     func togglePlayPause() {
@@ -69,7 +79,6 @@ class RadioPlayer {
     }
     
     func resetRadio() {
-        urlStation = nil
         player.stop()
     }
     
@@ -86,8 +95,34 @@ class RadioPlayer {
     }
     
     //MARK: - Private
+    
     func getImage(for station: RadioStation) {
         //Consulta imagen
+    }
+    
+    //MARK : - Networking
+    
+    private func getAiringNowDetails() {
+        guard let stationSelected = getSelectedStation(with: nameSelected) else { return }
+        
+        showClient.getShowOnlineDetail(group: stationSelected.type, completion: { result in
+            switch result {
+            case .success(let response) :
+                guard let showResult = response else { return }
+                self.changeOnlineInfo(result: showResult)
+                
+            case .failure(let error) :
+                print("Error to get online Description: \(error)")
+            }
+        })
+    }
+    
+    private func getSelectedStation(with name: String?) -> Station?{
+        //MARK: - TODO
+        //, let _ = groupSelected,
+        guard let stationName = name,
+            let station = PersistenceManager.shared.findStation(with: stationName) else { return nil }
+        return station
     }
 }
 
@@ -113,6 +148,10 @@ extension RadioPlayer: ApiPlayerDelegate {
         self.state = radioState
         
         stateDidChange(with: radioState)
+        
+        if case .playing = radioState {
+            getAiringNowDetails()
+        }
     }
 }
 
@@ -128,12 +167,24 @@ private extension RadioPlayer {
 private extension RadioPlayer {
     
     func stateDidChange(with state: RadioPlayerState) {
+        print("Informar a \(observations.count) suscriptores. didChangeState")
         for(id, observation) in observations {
             guard let observer = observation.observer else {
                 observations.removeValue(forKey: id)
                 continue
             }
             observer.radioPlayer(self, didChangeState: state)
+        }
+    }
+    
+    func changeOnlineInfo(result: Show) {
+        print("Informar a \(observations.count) suscriptores. didChangeOnlineInfo")
+        for(id, observation) in observations {
+            guard let observer = observation.observer else {
+                observations.removeValue(forKey: id)
+                continue
+            }
+            observer.radioPlayer(self, didChangeOnlineInfo: result)
         }
     }
 }

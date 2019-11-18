@@ -14,7 +14,6 @@ final class PlayerViewModel {
     private var managedObjectContext: NSManagedObjectContext
     private var favoritesStore: PersistenceStore<StationFavorite>!
     
-    private let showClient = ShowClient()
     private var radioPlayer: RadioPlayer?
     
     private var nameSelected: String!
@@ -39,7 +38,7 @@ final class PlayerViewModel {
     
     //MARK: - Initializers
     
-    init(name: String, group: String, service: RadioPlayer?, managedObjectContext: NSManagedObjectContext) {
+    init(name: String, group: String, player: RadioPlayer?, managedObjectContext: NSManagedObjectContext) {
         
         self.managedObjectContext = managedObjectContext
         setupStores(self.managedObjectContext)
@@ -47,7 +46,7 @@ final class PlayerViewModel {
         self.nameSelected = name
         self.groupSelected = group
         
-        self.radioPlayer = service
+        self.radioPlayer = player
         radioPlayer?.addObserver(self)
         
         setupRadio()
@@ -84,27 +83,6 @@ final class PlayerViewModel {
         return selected
     }
     
-    //MARK: - Networking
-    
-    private func getShowDetail() {
-        guard let radioStation = getSelectedStation() else { return }
-        
-        showClient.getShowOnlineDetail(group: radioStation.type, completion: { result in
-            switch result {
-            case .success(let response) :
-                guard let showResult = response else { return  }
-                self.processFetched(for: showResult)
-            case .failure(let error) :
-                print(error)
-            }
-        })
-    }
-    
-    private func processFetched(for radioResponse: Show) {
-        self.onlineDescription = radioResponse.name
-        updateUI?()
-    }
-    
     //MARK: - Public
     
     func togglePlayPause() {
@@ -121,7 +99,7 @@ final class PlayerViewModel {
         viewState.value = player.state
         
         if case .playing = viewState.value {
-            getShowDetail()
+            player.refreshOnlineInfo()
         }
     }
     
@@ -146,12 +124,12 @@ final class PlayerViewModel {
 extension PlayerViewModel : RadioPlayerObserver {
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
-        print("Estoy suscrito PlayerViewModel, recibo state: \(state)")
         viewState.value = state
-        
-        if case .playing = viewState.value {
-            getShowDetail()
-        }
+    }
+    
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeOnlineInfo result: Show) {
+        self.onlineDescription = result.name
+        updateUI?()
     }
     
 }

@@ -13,7 +13,6 @@ final class MiniPlayerViewModel {
     private var managedObjectContext: NSManagedObjectContext
     private var favoritesStore: PersistenceStore<StationFavorite>!
     
-    private let showClient = ShowClient()
     private var radioPlayer: RadioPlayer?
     
     private var nameSelected: String?
@@ -70,7 +69,7 @@ final class MiniPlayerViewModel {
         setupRadio(station)
         
         viewState.value = .stopped
-        radioPlayer?.setupRadio(with: station.urlStream, playWhenReady: playAutomatically)
+        radioPlayer?.setupRadio(with: name, playWhenReady: playAutomatically)
     }
     
     func togglePlayPause() {
@@ -118,25 +117,6 @@ final class MiniPlayerViewModel {
         isFavorite.value = favoritesStore.isFavorite(with: radio.name, group: radio.group)
     }
     
-    private func getShowDetail() {
-        guard let selected = getSelectedStation() else { return }
-        
-        showClient.getShowOnlineDetail(group: selected.type , completion: { result in
-            switch result {
-            case .success(let response) :
-                guard let showResult = response else { return }
-                self.processFetched(for: showResult)
-            case .failure(let error) :
-                print(error)
-            }
-        })
-    }
-    
-    private func processFetched(for radioResponse: Show) {
-        self.onlineDescription = radioResponse.name
-        updateUI?()
-    }
-    
     private func getSelectedStation() -> Station?{
         guard let name  = nameSelected, let _ = groupSelected,
             let selected = PersistenceManager.shared.findStation(with: name) else { return nil }
@@ -148,19 +128,19 @@ final class MiniPlayerViewModel {
     func buildPlayerViewModel() -> PlayerViewModel? {
         guard let name = self.nameSelected, let group = self.groupSelected else { return nil }
         
-        return PlayerViewModel(name: name, group: group, service: radioPlayer, managedObjectContext: managedObjectContext)
+        return PlayerViewModel(name: name, group: group, player: radioPlayer, managedObjectContext: managedObjectContext)
     }
 }
 
 extension MiniPlayerViewModel: RadioPlayerObserver {
     
     func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
-        print("Estoy suscrito MiniPlayerViewModel, recibo state: \(state)")
         viewState.value = state
-        
-        if case .playing = viewState.value {
-            getShowDetail()
-        }
+    }
+    
+    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeOnlineInfo result: Show) {
+        self.onlineDescription = result.name
+        updateUI?()
     }
     
 }
