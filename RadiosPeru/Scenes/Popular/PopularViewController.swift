@@ -29,7 +29,7 @@ class PopularViewController: UIViewController {
     }
     
     func setupView() {
-        collectionView.backgroundColor = UIColor(red: 51 / 255.0, green: 51 / 255.0, blue: 51 / 255.0, alpha: 1.0)
+        collectionView.backgroundColor = UIColor(red:55/255, green:55/255, blue:55/255, alpha:1.0)
     }
     
     func setupCollection() {

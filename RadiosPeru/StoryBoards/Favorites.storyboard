@@ -13,13 +13,13 @@
         <!--Favorites View Controller-->
         <scene sceneID="pHo-HP-hcE">
             <objects>
-                <viewController id="9kJ-6N-zaO" customClass="FavoritesViewController" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoritesStoryBoard" id="9kJ-6N-zaO" customClass="FavoritesViewController" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NPI-eD-Z8d">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pS9-cb-eug">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="an9-fT-Zc2">
                                     <size key="itemSize" width="50" height="50"/>
@@ -48,7 +48,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fsT-Lh-Ji8"/>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="1YS-yO-tiL"/>
                     <navigationItem key="navigationItem" id="Uki-a7-0Hu"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="pS9-cb-eug" id="bFa-LL-tGX"/>
                     </connections>
@@ -56,26 +58,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pgW-2O-kVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="818.84057971014499" y="-51.5625"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="A0K-Ms-NbZ">
-            <objects>
-                <navigationController storyboardIdentifier="FavoritesStoryBoard" automaticallyAdjustsScrollViewInsets="NO" id="a5Y-29-9ul" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="eAV-xK-jFH"/>
-                    <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SLp-98-7Ya">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="9kJ-6N-zaO" kind="relationship" relationship="rootViewController" id="Q8v-34-weY"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qcL-H6-C8A" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-91.304347826086968" y="-51.5625"/>
         </scene>
     </scenes>
 </document>

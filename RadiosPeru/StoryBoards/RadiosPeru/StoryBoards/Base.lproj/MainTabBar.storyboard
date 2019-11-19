@@ -13,13 +13,13 @@
         <!--Main View Controler-->
         <scene sceneID="cMs-fm-N6V">
             <objects>
-                <viewController storyboardIdentifier="MainTabBarController" id="rcO-Ej-yHS" customClass="MainViewControler" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rcO-Ej-yHS" customClass="MainViewControler" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5gC-0j-I8C">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tzS-g3-ALr">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <connections>
                                     <segue destination="5A5-DQ-qDr" kind="embed" identifier="tabBarSegue" id="mr8-N5-l8k"/>
                                 </connections>
@@ -39,20 +39,21 @@
                             <constraint firstItem="0jR-cv-aHg" firstAttribute="trailing" secondItem="71m-qd-IfN" secondAttribute="trailing" id="7R7-HS-km1"/>
                             <constraint firstItem="71m-qd-IfN" firstAttribute="leading" secondItem="0jR-cv-aHg" secondAttribute="leading" id="9QO-jQ-9HH"/>
                             <constraint firstItem="0jR-cv-aHg" firstAttribute="bottom" secondItem="71m-qd-IfN" secondAttribute="bottom" constant="49" id="SeB-Sf-WFl"/>
-                            <constraint firstItem="0jR-cv-aHg" firstAttribute="bottom" secondItem="tzS-g3-ALr" secondAttribute="bottom" id="acr-Xi-Xgf"/>
+                            <constraint firstAttribute="bottom" secondItem="tzS-g3-ALr" secondAttribute="bottom" id="acr-Xi-Xgf"/>
                             <constraint firstItem="tzS-g3-ALr" firstAttribute="leading" secondItem="0jR-cv-aHg" secondAttribute="leading" id="hQO-Eb-8rG"/>
                             <constraint firstItem="0jR-cv-aHg" firstAttribute="trailing" secondItem="tzS-g3-ALr" secondAttribute="trailing" id="k1H-VE-DQ5"/>
                             <constraint firstItem="tzS-g3-ALr" firstAttribute="top" secondItem="0jR-cv-aHg" secondAttribute="top" id="pQr-YV-YWv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0jR-cv-aHg"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Ouu-z2-OnK"/>
                     <connections>
-                        <segue destination="6z0-kf-dmd" kind="show" identifier="playerSegue" id="979-y4-cwG"/>
+                        <segue destination="6z0-kf-dmd" kind="presentation" identifier="playerSegue" id="979-y4-cwG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zqx-PE-mno" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-964" y="-494"/>
+            <point key="canvasLocation" x="-55.072463768115945" y="-494.19642857142856"/>
         </scene>
         <!--MiniPlayer-->
         <scene sceneID="gEB-Z2-lZZ">
@@ -60,7 +61,7 @@
                 <viewControllerPlaceholder storyboardName="MiniPlayer" id="Foe-Yc-zPa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dX-GN-3UV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1075" y="-38"/>
+            <point key="canvasLocation" x="-241" y="-47"/>
         </scene>
         <!--PlayerViewController-->
         <scene sceneID="lFP-0Q-vLn">
@@ -68,7 +69,7 @@
                 <viewControllerPlaceholder storyboardName="Player" referencedIdentifier="PlayerViewController" id="6z0-kf-dmd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUQ-Zn-UrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-780" y="-38"/>
+            <point key="canvasLocation" x="296" y="-47"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="Y8r-Ay-lug">
@@ -87,7 +88,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3I-NL-33D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="-494"/>
+            <point key="canvasLocation" x="860.86956521739137" y="-494.19642857142856"/>
         </scene>
         <!--PopularStoryBoard-->
         <scene sceneID="0r8-JI-aF2">
@@ -97,7 +98,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8U-kc-fES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="565" y="-666"/>
+            <point key="canvasLocation" x="1473.913043478261" y="-666.29464285714278"/>
         </scene>
         <!--FavoritesStoryBoard-->
         <scene sceneID="aEo-Vo-5tZ">
@@ -107,7 +108,25 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4r9-Zn-PnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="-323"/>
+            <point key="canvasLocation" x="1481.8840579710145" y="-323.4375"/>
+        </scene>
+        <!--Initial Navigation Controller-->
+        <scene sceneID="lRP-LA-Gb7">
+            <objects>
+                <navigationController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="XnI-cq-Eg2" customClass="InitialNavigationController" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MBw-8d-JNO">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rcO-Ej-yHS" kind="relationship" relationship="rootViewController" id="cXx-93-Cag"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zZ4-cN-2pu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-965.21739130434787" y="-494.19642857142856"/>
         </scene>
     </scenes>
 </document>

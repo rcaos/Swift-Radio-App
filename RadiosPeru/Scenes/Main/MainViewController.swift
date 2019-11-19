@@ -24,7 +24,8 @@ class MainViewControler: UIViewController {
     //MARK: - Initializers
     
     override func viewDidLoad() {
-        
+        view.backgroundColor = .red
+        navigationItem.title = "Radios Perú"
     }
     
     //MARK: - Navigation

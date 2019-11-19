@@ -126,7 +126,7 @@ class MiniPlayerViewController: UIViewController {
     }
     
     func setupUI() {
-        view.backgroundColor = UIColor(red: 30 / 255.0, green: 30 / 255.0, blue: 36 / 255.0, alpha: 1.0)
+        view.backgroundColor = UIColor(red:38/255, green:38/255, blue:38/255, alpha:1.0)
         
         favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
         

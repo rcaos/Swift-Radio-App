@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Initial Navigation
     
     func initialTransition() {
-        guard let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainViewControler else {
+        guard let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController") as? InitialNavigationController else {
             fatalError()
         }
         self.window?.rootViewController = mainTabBarController

@@ -13,13 +13,13 @@
         <!--Popular View Controller-->
         <scene sceneID="1rk-jX-giV">
             <objects>
-                <viewController id="97V-JI-SOQ" customClass="PopularViewController" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PopularStoryBoard" id="97V-JI-SOQ" customClass="PopularViewController" customModule="RadiosPeru" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nLt-Hb-Gui">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hu8-J7-VPZ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DHC-tI-aVy">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -47,6 +47,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hzh-i2-b6Q"/>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="topRated" id="KWq-Jm-Bcu"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="5JS-YE-KDJ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -57,26 +58,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jTI-et-v4y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="-3.3482142857142856"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="1s0-fG-VRd">
-            <objects>
-                <navigationController storyboardIdentifier="PopularStoryBoard" automaticallyAdjustsScrollViewInsets="NO" id="eqZ-IN-PVb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="topRated" id="EXs-wd-ZD7"/>
-                    <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bOH-Nk-99j">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="97V-JI-SOQ" kind="relationship" relationship="rootViewController" id="dLX-5r-HKe"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bs3-Gc-pPU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="140.57971014492756" y="-3.3482142857142856"/>
         </scene>
     </scenes>
 </document>

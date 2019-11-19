@@ -22,24 +22,23 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         configureViewControllers()
+        
+        tabBar.barTintColor = UIColor(red:55/255, green:55/255, blue:55/255, alpha:1.0)
+        tabBar.tintColor = UIColor.white
     }
     
     private func configureViewControllers() {
         if let viewControllers = viewControllers {
             for controller in viewControllers {
-                
-                if let navigation = controller as? UINavigationController ,
-                    let destination = navigation.topViewController as? PopularViewController{
+                if let destination = controller as? PopularViewController {
                     destination.viewModel = popularViewModel
                     destination.delegate = radioDelegate
                 }
                 
-                if let navigation = controller as? UINavigationController,
-                    let destination =  navigation.topViewController as? FavoritesViewController {
+                if let destination = controller as? FavoritesViewController {
                     destination.viewModel = favoriteViewModel
                     destination.delegate = radioDelegate
                 }
-                
             }
         }
     }

@@ -45,6 +45,7 @@
 		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
 		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
 		77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */; };
+		77C6B0A523848E8C0085C0D0 /* InitialNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C6B0A423848E8C0085C0D0 /* InitialNavigationController.swift */; };
 		77CA145B23689CB9001BF04E /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA145A23689CB9001BF04E /* ApiError.swift */; };
 		77D51745237C988B00B7DCC9 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51744237C988B00B7DCC9 /* Station.swift */; };
 		77D51747237C989200B7DCC9 /* StationFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51746237C989200B7DCC9 /* StationFavorite.swift */; };
@@ -109,6 +110,7 @@
 		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 		77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerObserver.swift; sourceTree = "<group>"; };
+		77C6B0A423848E8C0085C0D0 /* InitialNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialNavigationController.swift; sourceTree = "<group>"; };
 		77CA145A23689CB9001BF04E /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		77D51744237C988B00B7DCC9 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		77D51746237C989200B7DCC9 /* StationFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFavorite.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			children = (
 				77D51761237C9DA500B7DCC9 /* InitialViewController.swift */,
 				77D51763237C9DB200B7DCC9 /* InitialViewModel.swift */,
+				77C6B0A623849FCC0085C0D0 /* NavigationController */,
 				774F0CA3237218BB002852C3 /* Main */,
 				774F0CA6237219A3002852C3 /* TabBar */,
 				7755B526235A13F0004E642B /* Popular */,
@@ -364,6 +367,14 @@
 				77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */,
 			);
 			path = Transitions;
+			sourceTree = "<group>";
+		};
+		77C6B0A623849FCC0085C0D0 /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				77C6B0A423848E8C0085C0D0 /* InitialNavigationController.swift */,
+			);
+			path = NavigationController;
 			sourceTree = "<group>";
 		};
 		77D51743237C985100B7DCC9 /* Core Data */ = {
@@ -545,6 +556,7 @@
 				779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */,
 				77D51768237CA04400B7DCC9 /* StationProvider.swift in Sources */,
 				77CA145B23689CB9001BF04E /* ApiError.swift in Sources */,
+				77C6B0A523848E8C0085C0D0 /* InitialNavigationController.swift in Sources */,
 				77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */,
 				77D5174E237C98CE00B7DCC9 /* PersistenceStore+StationFavorite.swift in Sources */,
 				77D51745237C988B00B7DCC9 /* Station.swift in Sources */,
