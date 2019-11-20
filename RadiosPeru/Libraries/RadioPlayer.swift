@@ -110,9 +110,9 @@ class RadioPlayer {
     
     //MARK: - Private
     
-    func getImage(for station: RadioStation) {
+    //func getImage(for station: RadioStation) {
         //Consulta imagen
-    }
+    //}
     
     //MARK : - Networking
     
