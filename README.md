@@ -12,6 +12,11 @@ Proyecto personal que muestra las principales estaciones de radio Peruanas.
 - Presentar información del Show que se está reproduciéndose.
 - Remote Command Center
 
+### Características que Solo funcionan en un dispositivo real
+- Remote controls
+- Volume View en Player View Controller
+
+
 ### Screenshots
 <p>
 <img src="https://github.com/rcaos/RadiosPeru/blob/master/Screenshots/IMG_1525.PNG" width="210" height="374">
