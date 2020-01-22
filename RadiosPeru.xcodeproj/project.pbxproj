@@ -39,6 +39,9 @@
 		7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B52B235A144F004E642B /* PopularViewCell.swift */; };
 		7755B52E235A144F004E642B /* PopularViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7755B52C235A144F004E642B /* PopularViewCell.xib */; };
 		7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B52F235A15D2004E642B /* PopularCellViewModel.swift */; };
+		777CEDC923D90C5300FCD04B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777CEDC823D90C5300FCD04B /* Observable.swift */; };
+		777CEDCB23D90C6500FCD04B /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777CEDCA23D90C6500FCD04B /* StoryboardInstantiable.swift */; };
+		777CEDCD23D90C6F00FCD04B /* SimpleViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */; };
 		77964891235A569900813C48 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77964890235A569900813C48 /* PlayerViewModel.swift */; };
 		779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DF55F23634D8C001F034F /* LoadingPlayerView.swift */; };
 		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
@@ -103,6 +106,9 @@
 		7755B52B235A144F004E642B /* PopularViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewCell.swift; sourceTree = "<group>"; };
 		7755B52C235A144F004E642B /* PopularViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularViewCell.xib; sourceTree = "<group>"; };
 		7755B52F235A15D2004E642B /* PopularCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCellViewModel.swift; sourceTree = "<group>"; };
+		777CEDC823D90C5300FCD04B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		777CEDCA23D90C6500FCD04B /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
+		777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleViewState.swift; sourceTree = "<group>"; };
 		77964890235A569900813C48 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		779DF55F23634D8C001F034F /* LoadingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlayerView.swift; sourceTree = "<group>"; };
 		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
@@ -232,6 +238,8 @@
 		77421B132358FEE500A23C79 /* RadiosPeru */ = {
 			isa = PBXGroup;
 			children = (
+				777CEDD123D90CB000FCD04B /* Application */,
+				777CEDCF23D90C8200FCD04B /* Presentation */,
 				77D51743237C985100B7DCC9 /* Core Data */,
 				77236FA723677C67009C80D0 /* Networking */,
 				77236FAD236786FE009C80D0 /* Entities */,
@@ -240,9 +248,7 @@
 				77B9469E235AD802006C3EEA /* Helpers */,
 				7755B529235A141A004E642B /* ViewComponents */,
 				77421B2A235901AE00A23C79 /* StoryBoards */,
-				77421B142358FEE500A23C79 /* AppDelegate.swift */,
-				77421B1B2358FEE700A23C79 /* Assets.xcassets */,
-				77421B202358FEE700A23C79 /* Info.plist */,
+				777CEDD023D90CA100FCD04B /* Resources */,
 				77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */,
 			);
 			path = RadiosPeru;
@@ -251,7 +257,6 @@
 		77421B2A235901AE00A23C79 /* StoryBoards */ = {
 			isa = PBXGroup;
 			children = (
-				77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */,
 				77421B182358FEE500A23C79 /* Main.storyboard */,
 				77D5175E237C9CD500B7DCC9 /* MainTabBar.storyboard */,
 				77421B262359015C00A23C79 /* Popular.storyboard */,
@@ -330,6 +335,42 @@
 				7755B52C235A144F004E642B /* PopularViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		777CEDCE23D90C7A00FCD04B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				777CEDC823D90C5300FCD04B /* Observable.swift */,
+				777CEDCA23D90C6500FCD04B /* StoryboardInstantiable.swift */,
+				777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		777CEDCF23D90C8200FCD04B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				777CEDCE23D90C7A00FCD04B /* Utils */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		777CEDD023D90CA100FCD04B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */,
+				77421B1B2358FEE700A23C79 /* Assets.xcassets */,
+				77421B202358FEE700A23C79 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		777CEDD123D90CB000FCD04B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				77421B142358FEE500A23C79 /* AppDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		77964892235A569D00813C48 /* Player */ = {
@@ -559,9 +600,11 @@
 				77D51745237C988B00B7DCC9 /* Station.swift in Sources */,
 				77236FA423677C56009C80D0 /* EndPoint.swift in Sources */,
 				77236FA223677C3F009C80D0 /* ApiClient.swift in Sources */,
+				777CEDCD23D90C6F00FCD04B /* SimpleViewState.swift in Sources */,
 				77D5174C237C98C300B7DCC9 /* PersistenceStore+Station.swift in Sources */,
 				77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */,
 				7739E809235E4A610071882A /* RadioPlayer.swift in Sources */,
+				777CEDCB23D90C6500FCD04B /* StoryboardInstantiable.swift in Sources */,
 				77D51766237C9FD200B7DCC9 /* StationResult.swift in Sources */,
 				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,
@@ -570,6 +613,7 @@
 				77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */,
 				770A6BFD2368895100FDE4F6 /* ShowClient.swift in Sources */,
 				7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */,
+				777CEDC923D90C5300FCD04B /* Observable.swift in Sources */,
 				770A6BFF2368978500FDE4F6 /* Show.swift in Sources */,
 				77D51764237C9DB200B7DCC9 /* InitialViewModel.swift in Sources */,
 				7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */,
@@ -730,7 +774,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DV4PUUR55B;
-				INFOPLIST_FILE = RadiosPeru/Info.plist;
+				INFOPLIST_FILE = RadiosPeru/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -750,7 +794,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DV4PUUR55B;
-				INFOPLIST_FILE = RadiosPeru/Info.plist;
+				INFOPLIST_FILE = RadiosPeru/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
