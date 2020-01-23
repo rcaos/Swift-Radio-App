@@ -66,6 +66,19 @@
 		77D51766237C9FD200B7DCC9 /* StationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51765237C9FD200B7DCC9 /* StationResult.swift */; };
 		77D51768237CA04400B7DCC9 /* StationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51767237CA04400B7DCC9 /* StationProvider.swift */; };
 		77D5176A237CA04B00B7DCC9 /* StationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51769237CA04B00B7DCC9 /* StationClient.swift */; };
+		77D9A0D823DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0D723DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift */; };
+		77D9A0DA23DA373600DDCE06 /* FetchStationsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0D923DA373600DDCE06 /* FetchStationsUseCase.swift */; };
+		77D9A0DC23DA387F00DDCE06 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0DB23DA387F00DDCE06 /* Cancellable.swift */; };
+		77D9A0E023DA38EF00DDCE06 /* StationsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0DF23DA38EF00DDCE06 /* StationsRepository.swift */; };
+		77D9A0E223DA38F900DDCE06 /* FavoritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0E123DA38F900DDCE06 /* FavoritesRepository.swift */; };
+		77D9A0E623DA3D0300DDCE06 /* StationsLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0E523DA3D0300DDCE06 /* StationsLocalRepository.swift */; };
+		77D9A0E823DA3F3B00DDCE06 /* ShowDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0E723DA3F3B00DDCE06 /* ShowDetailsRepository.swift */; };
+		77D9A0EA23DA424B00DDCE06 /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0E923DA424B00DDCE06 /* RepositoryTask.swift */; };
+		77D9A0EC23DA427C00DDCE06 /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0EB23DA427C00DDCE06 /* DataTransferService.swift */; };
+		77D9A0EE23DA451500DDCE06 /* DefaultStationsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0ED23DA451500DDCE06 /* DefaultStationsRepository.swift */; };
+		77D9A0F123DA454B00DDCE06 /* DefaultStationsLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F023DA454B00DDCE06 /* DefaultStationsLocalRepository.swift */; };
+		77D9A0F323DA457A00DDCE06 /* DefaultFavoritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F223DA457A00DDCE06 /* DefaultFavoritesRepository.swift */; };
+		77D9A0F523DA459C00DDCE06 /* DefaultShowDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F423DA459C00DDCE06 /* DefaultShowDetailsRepository.swift */; };
 		77E5AF6323D9F39800509BC2 /* ShowRPP+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6223D9F39800509BC2 /* ShowRPP+Decodable.swift */; };
 		77E5AF6623D9F45200509BC2 /* ShowCRP+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6523D9F45200509BC2 /* ShowCRP+Decodable.swift */; };
 		77E5AF6823D9F52D00509BC2 /* Group+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */; };
@@ -137,6 +150,19 @@
 		77D51765237C9FD200B7DCC9 /* StationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResult.swift; sourceTree = "<group>"; };
 		77D51767237CA04400B7DCC9 /* StationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationProvider.swift; sourceTree = "<group>"; };
 		77D51769237CA04B00B7DCC9 /* StationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationClient.swift; sourceTree = "<group>"; };
+		77D9A0D723DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchShowOnlineInfoUseCase.swift; sourceTree = "<group>"; };
+		77D9A0D923DA373600DDCE06 /* FetchStationsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStationsUseCase.swift; sourceTree = "<group>"; };
+		77D9A0DB23DA387F00DDCE06 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		77D9A0DF23DA38EF00DDCE06 /* StationsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsRepository.swift; sourceTree = "<group>"; };
+		77D9A0E123DA38F900DDCE06 /* FavoritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRepository.swift; sourceTree = "<group>"; };
+		77D9A0E523DA3D0300DDCE06 /* StationsLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsLocalRepository.swift; sourceTree = "<group>"; };
+		77D9A0E723DA3F3B00DDCE06 /* ShowDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsRepository.swift; sourceTree = "<group>"; };
+		77D9A0E923DA424B00DDCE06 /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
+		77D9A0EB23DA427C00DDCE06 /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
+		77D9A0ED23DA451500DDCE06 /* DefaultStationsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStationsRepository.swift; sourceTree = "<group>"; };
+		77D9A0F023DA454B00DDCE06 /* DefaultStationsLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStationsLocalRepository.swift; sourceTree = "<group>"; };
+		77D9A0F223DA457A00DDCE06 /* DefaultFavoritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFavoritesRepository.swift; sourceTree = "<group>"; };
+		77D9A0F423DA459C00DDCE06 /* DefaultShowDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultShowDetailsRepository.swift; sourceTree = "<group>"; };
 		77E5AF6223D9F39800509BC2 /* ShowRPP+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowRPP+Decodable.swift"; sourceTree = "<group>"; };
 		77E5AF6523D9F45200509BC2 /* ShowCRP+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowCRP+Decodable.swift"; sourceTree = "<group>"; };
 		77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+Decodable.swift"; sourceTree = "<group>"; };
@@ -242,6 +268,7 @@
 				77421B2A235901AE00A23C79 /* StoryBoards */,
 				777CEDD023D90CA100FCD04B /* Resources */,
 				77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */,
+				77D9A0DD23DA388C00DDCE06 /* Common */,
 			);
 			path = RadiosPeru;
 			sourceTree = "<group>";
@@ -448,10 +475,59 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		77D9A0DD23DA388C00DDCE06 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				77D9A0DB23DA387F00DDCE06 /* Cancellable.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		77D9A0DE23DA38DB00DDCE06 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				77D9A0D923DA373600DDCE06 /* FetchStationsUseCase.swift */,
+				77D9A0D723DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		77D9A0E323DA38FD00DDCE06 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				77D9A0DF23DA38EF00DDCE06 /* StationsRepository.swift */,
+				77D9A0E523DA3D0300DDCE06 /* StationsLocalRepository.swift */,
+				77D9A0E123DA38F900DDCE06 /* FavoritesRepository.swift */,
+				77D9A0E723DA3F3B00DDCE06 /* ShowDetailsRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		77D9A0E423DA390600DDCE06 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				77D9A0E323DA38FD00DDCE06 /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		77D9A0EF23DA451D00DDCE06 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				77D9A0ED23DA451500DDCE06 /* DefaultStationsRepository.swift */,
+				77D9A0F023DA454B00DDCE06 /* DefaultStationsLocalRepository.swift */,
+				77D9A0F223DA457A00DDCE06 /* DefaultFavoritesRepository.swift */,
+				77D9A0F423DA459C00DDCE06 /* DefaultShowDetailsRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		77E5AF5D23D9F0C200509BC2 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
 				77236FAD236786FE009C80D0 /* Entities */,
+				77D9A0DE23DA38DB00DDCE06 /* UseCases */,
+				77D9A0E423DA390600DDCE06 /* Interfaces */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -478,7 +554,9 @@
 		77E5AF6023D9F31800509BC2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				77D9A0EF23DA451D00DDCE06 /* Repositories */,
 				77E5AF5F23D9F31100509BC2 /* Network */,
+				77D9A0E923DA424B00DDCE06 /* RepositoryTask.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -486,6 +564,7 @@
 		77E5AF6123D9F35B00509BC2 /* Infraestructure */ = {
 			isa = PBXGroup;
 			children = (
+				77D9A0EB23DA427C00DDCE06 /* DataTransferService.swift */,
 				77236FA723677C67009C80D0 /* Network */,
 			);
 			path = Infraestructure;
@@ -618,26 +697,36 @@
 				7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */,
 				773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */,
 				77E5AF6623D9F45200509BC2 /* ShowCRP+Decodable.swift in Sources */,
+				77D9A0E023DA38EF00DDCE06 /* StationsRepository.swift in Sources */,
 				77D51751237C98E800B7DCC9 /* Managed.swift in Sources */,
 				77D5175B237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld in Sources */,
 				77964891235A569900813C48 /* PlayerViewModel.swift in Sources */,
 				77D51753237C98FB00B7DCC9 /* NSManagedObjectContext+Extension.swift in Sources */,
 				77D51747237C989200B7DCC9 /* StationFavorite.swift in Sources */,
 				770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */,
+				77D9A0F323DA457A00DDCE06 /* DefaultFavoritesRepository.swift in Sources */,
+				77D9A0DA23DA373600DDCE06 /* FetchStationsUseCase.swift in Sources */,
 				770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */,
+				77D9A0EC23DA427C00DDCE06 /* DataTransferService.swift in Sources */,
 				77236FA923677F9B009C80D0 /* GrupoRPPResult.swift in Sources */,
 				77E5AF6A23D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift in Sources */,
 				77D5176A237CA04B00B7DCC9 /* StationClient.swift in Sources */,
+				77D9A0EA23DA424B00DDCE06 /* RepositoryTask.swift in Sources */,
 				770282DC235C08B9000098DB /* MiniPlayerViewModel.swift in Sources */,
 				774F0CA023721555002852C3 /* MainViewController.swift in Sources */,
 				7755B524235A1350004E642B /* PopularViewModel.swift in Sources */,
 				7755B522235A1241004E642B /* PopularViewController.swift in Sources */,
 				77236FAC236786F8009C80D0 /* ShowRPP.swift in Sources */,
 				774714612363A39100198D9E /* PlayingBarsView.swift in Sources */,
+				77D9A0E223DA38F900DDCE06 /* FavoritesRepository.swift in Sources */,
 				77D51755237C990800B7DCC9 /* CodingUserInfoKey.swift in Sources */,
+				77D9A0EE23DA451500DDCE06 /* DefaultStationsRepository.swift in Sources */,
+				77D9A0E823DA3F3B00DDCE06 /* ShowDetailsRepository.swift in Sources */,
 				77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */,
+				77D9A0F523DA459C00DDCE06 /* DefaultShowDetailsRepository.swift in Sources */,
 				77D5174A237C98B300B7DCC9 /* PersistenceStore.swift in Sources */,
 				779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */,
+				77D9A0DC23DA387F00DDCE06 /* Cancellable.swift in Sources */,
 				77D51768237CA04400B7DCC9 /* StationProvider.swift in Sources */,
 				77CA145B23689CB9001BF04E /* ApiError.swift in Sources */,
 				77C6B0A523848E8C0085C0D0 /* InitialNavigationController.swift in Sources */,
@@ -645,6 +734,7 @@
 				77D5174E237C98CE00B7DCC9 /* PersistenceStore+StationFavorite.swift in Sources */,
 				77D51745237C988B00B7DCC9 /* Station.swift in Sources */,
 				77236FA423677C56009C80D0 /* EndPoint.swift in Sources */,
+				77D9A0D823DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift in Sources */,
 				77E5AF6823D9F52D00509BC2 /* Group+Decodable.swift in Sources */,
 				77236FA223677C3F009C80D0 /* ApiClient.swift in Sources */,
 				777CEDCD23D90C6F00FCD04B /* SimpleViewState.swift in Sources */,
@@ -656,7 +746,9 @@
 				77D51766237C9FD200B7DCC9 /* StationResult.swift in Sources */,
 				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,
+				77D9A0F123DA454B00DDCE06 /* DefaultStationsLocalRepository.swift in Sources */,
 				77D51762237C9DA500B7DCC9 /* InitialViewController.swift in Sources */,
+				77D9A0E623DA3D0300DDCE06 /* StationsLocalRepository.swift in Sources */,
 				77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */,
 				77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */,
 				770A6BFD2368895100FDE4F6 /* ShowClient.swift in Sources */,

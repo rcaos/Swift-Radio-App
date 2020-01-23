@@ -11,7 +11,7 @@
 
 import Foundation
 
-protocol EndPoint {
+public protocol EndPoint {
     
     var baseURL: String { get }
     var path: String { get }
@@ -47,7 +47,7 @@ extension EndPoint {
     }
 }
 
-enum ServiceMethod: String {
+public enum ServiceMethod: String {
     case get = "GET"
     // implement more when needed: post, put, delete, patch, etc.
 }
