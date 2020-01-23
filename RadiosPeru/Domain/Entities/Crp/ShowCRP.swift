@@ -8,18 +8,11 @@
 
 import Foundation
 
-struct ShowCRP: Show, Codable {
+struct ShowCRP: Show {
     
     let id: String
     let name: String
     let imageURL: String
     
     let horario: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "programa_id"
-        case name = "programa"
-        case imageURL = "img_200"
-        case horario
-    }
 }

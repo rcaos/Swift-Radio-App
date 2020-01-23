@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Show : Codable{
+protocol Show {
     
     var id: String { get }
     

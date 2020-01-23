@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ShowRPP: Show, Codable {
+struct ShowRPP: Show {
     
     var id: String
     var name: String
@@ -16,18 +16,10 @@ struct ShowRPP: Show, Codable {
     
     var startTime: String
     var endTime: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "rpId"
-        case name
-        case imageURL = "imageWeb"
-        
-        case startTime
-        case endTime = "stopTime"
-    }
 }
 
 extension ShowRPP {
+    
     var horario: String {
         return startTime + " - " + endTime
     }

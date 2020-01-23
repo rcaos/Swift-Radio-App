@@ -68,6 +68,8 @@ extension ApiClient {
                     }
                     return
                 }
+                
+                // Only if is Decodable
                 if let value = decode(json) {
                     completion(.success(value))
                 } else {

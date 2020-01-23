@@ -8,14 +8,12 @@
 
 import Foundation
 
-struct GrupoRPPResult: Decodable{
+struct GrupoRPPResult {
+    
     let results: ShowWrapper
 }
 
-struct ShowWrapper: Codable{
-    let radioDetail: ShowRPP
+struct ShowWrapper {
     
-    enum CodingKeys: String, CodingKey {
-        case radioDetail = "PI"
-    }
+    let radioDetail: ShowRPP
 }
