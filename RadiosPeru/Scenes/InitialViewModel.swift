@@ -11,28 +11,44 @@ import CoreData
 
 final class InitialViewModel {
     
-    private let stationClient = StationClient()
+    private let fetchStationsUseCase: FetchStationsUseCase
     
     var stationsFetched: (() -> Void)?
     
-    private var managedObjectContext: NSManagedObjectContext!
+    var loadTask: Cancellable? {
+        willSet {
+            loadTask?.cancel()
+        }
+    }
     
-    init(managedObjectContext: NSManagedObjectContext = PersistenceManager.shared.mainContext) {
-        self.managedObjectContext = managedObjectContext
+    init(fetchStationsUseCase: FetchStationsUseCase) {
+        self.fetchStationsUseCase = fetchStationsUseCase
     }
     
     //MARK: - Public
     
     public func getStations() {
-        stationClient.getAllStations( context: managedObjectContext, completion: { result in
+        let request = FetchStationsUseCaseRequestValue()
+        
+        loadTask = fetchStationsUseCase.execute(requestValue: request) { [weak self] result in
+            guard let strongSelf = self else { return }
+            
             switch result {
-            case .success(let stationsResult):
-                print("Se recibieron: \(stationsResult?.stations.count) stations del Backend")
-            case .failure(_):
-                print("error to Fetch Stations del Backend")
+            case .success(let response):
+                strongSelf.processFetched(for: response)
+            case .failure:
+                print("error to Fetch Stations")
             }
             
-            self.stationsFetched?()
-        })
+            strongSelf.stationsFetched?()
+        }
+    }
+    
+    private func processFetched(for response: StationResult) {
+        print("retornaron: \(response.stations.count) stations")
+        for station in response.stations {
+            print("\(station.name)")
+        }
+        print("--")
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class InitialViewController: UIViewController {
     
-    private var viewModel = InitialViewModel()
+    var viewModel: InitialViewModel!
     
     private var appDelegate: AppDelegate? {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -19,8 +19,17 @@ class InitialViewController: UIViewController {
         return delegate
     }
     
+    static func create(with viewModel: InitialViewModel) -> InitialViewController {
+        let controller = InitialViewController()
+        controller.viewModel = viewModel
+        return controller
+    }
+    
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupBindables()
         viewModel.getStations()
     }
@@ -31,5 +40,7 @@ class InitialViewController: UIViewController {
         viewModel.stationsFetched = { [weak self] in
             self?.appDelegate?.initialTransition()
         }
+        
+        viewModel.getStations()
     }
 }

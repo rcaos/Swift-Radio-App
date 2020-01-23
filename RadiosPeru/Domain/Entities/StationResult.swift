@@ -10,6 +10,8 @@ import Foundation
 
 struct StationResult: Decodable {
     
-    let stations: [Station]
+    //let stations: [Station]
+    
+    let stations: [StationRemote]
     
 }

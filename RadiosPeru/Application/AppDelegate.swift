@@ -11,11 +11,17 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let appDIContainer = AppDIContainer()
     var window: UIWindow?
+    
     var storyBoard: UIStoryboard!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        storyBoard = UIStoryboard(name: "MainTabBar", bundle: nil)
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = InitialTabBarController(appDIContainer: appDIContainer)
+        window?.makeKeyAndVisible()
+        
         self.enableDebugMode(true)
         return true
     }
@@ -23,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Initial Navigation
     
     func initialTransition() {
+        storyBoard = UIStoryboard(name: "MainTabBar", bundle: nil)
         guard let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController") as? InitialNavigationController else {
             fatalError()
         }

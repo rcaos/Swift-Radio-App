@@ -16,3 +16,14 @@ final class DefaultStationsRepository {
         self.dataTransferService = dataTransferService
     }
 }
+
+extension DefaultStationsRepository: StationsRepository {
+    
+    func stationsList(completion: @escaping (Result<StationResult, Error>) -> Void) -> Cancellable? {
+        let endPoint = StationProvider.getAll
+        
+        let networkTask = dataTransferService.request(service: endPoint,
+                                                      decodeType: StationResult.self, completion: completion)
+        return RepositoryTask(networkTask: networkTask)
+    }
+}

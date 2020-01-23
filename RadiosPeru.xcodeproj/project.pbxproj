@@ -79,6 +79,11 @@
 		77D9A0F123DA454B00DDCE06 /* DefaultStationsLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F023DA454B00DDCE06 /* DefaultStationsLocalRepository.swift */; };
 		77D9A0F323DA457A00DDCE06 /* DefaultFavoritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F223DA457A00DDCE06 /* DefaultFavoritesRepository.swift */; };
 		77D9A0F523DA459C00DDCE06 /* DefaultShowDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F423DA459C00DDCE06 /* DefaultShowDetailsRepository.swift */; };
+		77D9A0F723DA526100DDCE06 /* ApiClientNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F623DA526100DDCE06 /* ApiClientNew.swift */; };
+		77D9A0F923DA556600DDCE06 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F823DA556600DDCE06 /* AppDIContainer.swift */; };
+		77D9A0FB23DA55C500DDCE06 /* InitialSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0FA23DA55C500DDCE06 /* InitialSceneDIContainer.swift */; };
+		77D9A0FD23DA5F8F00DDCE06 /* StationRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0FC23DA5F8F00DDCE06 /* StationRemote.swift */; };
+		77D9A0FF23DA628300DDCE06 /* InitialTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0FE23DA628300DDCE06 /* InitialTabBarController.swift */; };
 		77E5AF6323D9F39800509BC2 /* ShowRPP+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6223D9F39800509BC2 /* ShowRPP+Decodable.swift */; };
 		77E5AF6623D9F45200509BC2 /* ShowCRP+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6523D9F45200509BC2 /* ShowCRP+Decodable.swift */; };
 		77E5AF6823D9F52D00509BC2 /* Group+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */; };
@@ -163,6 +168,11 @@
 		77D9A0F023DA454B00DDCE06 /* DefaultStationsLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStationsLocalRepository.swift; sourceTree = "<group>"; };
 		77D9A0F223DA457A00DDCE06 /* DefaultFavoritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFavoritesRepository.swift; sourceTree = "<group>"; };
 		77D9A0F423DA459C00DDCE06 /* DefaultShowDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultShowDetailsRepository.swift; sourceTree = "<group>"; };
+		77D9A0F623DA526100DDCE06 /* ApiClientNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientNew.swift; sourceTree = "<group>"; };
+		77D9A0F823DA556600DDCE06 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		77D9A0FA23DA55C500DDCE06 /* InitialSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneDIContainer.swift; sourceTree = "<group>"; };
+		77D9A0FC23DA5F8F00DDCE06 /* StationRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRemote.swift; sourceTree = "<group>"; };
+		77D9A0FE23DA628300DDCE06 /* InitialTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTabBarController.swift; sourceTree = "<group>"; };
 		77E5AF6223D9F39800509BC2 /* ShowRPP+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowRPP+Decodable.swift"; sourceTree = "<group>"; };
 		77E5AF6523D9F45200509BC2 /* ShowCRP+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowCRP+Decodable.swift"; sourceTree = "<group>"; };
 		77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+Decodable.swift"; sourceTree = "<group>"; };
@@ -195,6 +205,7 @@
 		77236FA723677C67009C80D0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				77D9A0F623DA526100DDCE06 /* ApiClientNew.swift */,
 				77236FA123677C3F009C80D0 /* ApiClient.swift */,
 				77236FA323677C56009C80D0 /* EndPoint.swift */,
 				77CA145A23689CB9001BF04E /* ApiError.swift */,
@@ -212,6 +223,7 @@
 				77E5AF6C23D9F88900509BC2 /* Crp */,
 				77D5175C237C9BAE00B7DCC9 /* Group.swift */,
 				77D51765237C9FD200B7DCC9 /* StationResult.swift */,
+				77D9A0FC23DA5F8F00DDCE06 /* StationRemote.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -315,6 +327,7 @@
 		7755B525235A13E9004E642B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				77D9A0FE23DA628300DDCE06 /* InitialTabBarController.swift */,
 				77D51761237C9DA500B7DCC9 /* InitialViewController.swift */,
 				77D51763237C9DB200B7DCC9 /* InitialViewModel.swift */,
 				77C6B0A623849FCC0085C0D0 /* NavigationController */,
@@ -388,6 +401,8 @@
 			isa = PBXGroup;
 			children = (
 				77421B142358FEE500A23C79 /* AppDelegate.swift */,
+				77D9A0F823DA556600DDCE06 /* AppDIContainer.swift */,
+				77D9A0FA23DA55C500DDCE06 /* InitialSceneDIContainer.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -696,6 +711,7 @@
 				77D5175D237C9BAE00B7DCC9 /* Group.swift in Sources */,
 				7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */,
 				773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */,
+				77D9A0F923DA556600DDCE06 /* AppDIContainer.swift in Sources */,
 				77E5AF6623D9F45200509BC2 /* ShowCRP+Decodable.swift in Sources */,
 				77D9A0E023DA38EF00DDCE06 /* StationsRepository.swift in Sources */,
 				77D51751237C98E800B7DCC9 /* Managed.swift in Sources */,
@@ -720,6 +736,7 @@
 				774714612363A39100198D9E /* PlayingBarsView.swift in Sources */,
 				77D9A0E223DA38F900DDCE06 /* FavoritesRepository.swift in Sources */,
 				77D51755237C990800B7DCC9 /* CodingUserInfoKey.swift in Sources */,
+				77D9A0F723DA526100DDCE06 /* ApiClientNew.swift in Sources */,
 				77D9A0EE23DA451500DDCE06 /* DefaultStationsRepository.swift in Sources */,
 				77D9A0E823DA3F3B00DDCE06 /* ShowDetailsRepository.swift in Sources */,
 				77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */,
@@ -738,6 +755,7 @@
 				77E5AF6823D9F52D00509BC2 /* Group+Decodable.swift in Sources */,
 				77236FA223677C3F009C80D0 /* ApiClient.swift in Sources */,
 				777CEDCD23D90C6F00FCD04B /* SimpleViewState.swift in Sources */,
+				77D9A0FF23DA628300DDCE06 /* InitialTabBarController.swift in Sources */,
 				77D5174C237C98C300B7DCC9 /* PersistenceStore+Station.swift in Sources */,
 				77E5AF6323D9F39800509BC2 /* ShowRPP+Decodable.swift in Sources */,
 				77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */,
@@ -754,7 +772,9 @@
 				770A6BFD2368895100FDE4F6 /* ShowClient.swift in Sources */,
 				7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */,
 				777CEDC923D90C5300FCD04B /* Observable.swift in Sources */,
+				77D9A0FB23DA55C500DDCE06 /* InitialSceneDIContainer.swift in Sources */,
 				770A6BFF2368978500FDE4F6 /* Show.swift in Sources */,
+				77D9A0FD23DA5F8F00DDCE06 /* StationRemote.swift in Sources */,
 				77D51764237C9DB200B7DCC9 /* InitialViewModel.swift in Sources */,
 				7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */,
 				774F0CA22372163E002852C3 /* MainViewModel.swift in Sources */,

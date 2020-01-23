@@ -21,9 +21,9 @@ struct FetchStationsUseCaseRequestValue {
 final class DefaultFetchStationsUseCase: FetchStationsUseCase {
     
     private let stationsRepository: StationsRepository
-    private let stationsLocalRepository: StationsLocalRepository
+    private let stationsLocalRepository: StationsLocalRepository?
     
-    init(stationsRepository: StationsRepository, stationsLocalRepository: StationsLocalRepository) {
+    init(stationsRepository: StationsRepository, stationsLocalRepository: StationsLocalRepository?) {
         self.stationsRepository = stationsRepository
         self.stationsLocalRepository = stationsLocalRepository
     }
@@ -36,7 +36,7 @@ final class DefaultFetchStationsUseCase: FetchStationsUseCase {
             switch result {
             case .success(let stationsResult):
                 // Persistir Fetched Stations
-                strongSelf.stationsLocalRepository.saveStations(stations: stationsResult) { _ in }
+                strongSelf.stationsLocalRepository?.saveStations(stations: stationsResult) { _ in }
                 
                 completion(result)
             case .failure:
