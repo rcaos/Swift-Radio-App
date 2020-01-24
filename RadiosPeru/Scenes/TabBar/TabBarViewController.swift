@@ -21,25 +21,20 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureViewControllers()
-        
-        tabBar.barTintColor = UIColor(red:55/255, green:55/255, blue:55/255, alpha:1.0)
-        tabBar.tintColor = UIColor.white
+        viewControllers = createViewControllers()
     }
     
-    private func configureViewControllers() {
-        if let viewControllers = viewControllers {
-            for controller in viewControllers {
-                if let destination = controller as? PopularViewController {
-                    destination.viewModel = popularViewModel
-                    destination.delegate = radioDelegate
-                }
-                
-                if let destination = controller as? FavoritesViewController {
-                    destination.viewModel = favoriteViewModel
-                    destination.delegate = radioDelegate
-                }
-            }
-        }
+    private func createViewControllers() -> [UIViewController] {
+        let popularVC = PopularViewController()
+        popularVC.viewModel = popularViewModel
+        popularVC.delegate = radioDelegate
+        popularVC.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 0)
+        
+        let favoritesVC = FavoritesViewController()
+        favoritesVC.viewModel = favoriteViewModel
+        favoritesVC.delegate = radioDelegate
+        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        
+        return [popularVC, favoritesVC]
     }
 }

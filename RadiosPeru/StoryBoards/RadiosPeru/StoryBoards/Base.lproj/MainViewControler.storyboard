@@ -79,34 +79,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="5c6-Wq-WGZ" kind="relationship" relationship="viewControllers" id="zEV-Zi-5me"/>
-                        <segue destination="5eQ-Us-qea" kind="relationship" relationship="viewControllers" id="vx9-kA-9oy"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3I-NL-33D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="860.86956521739137" y="-494.19642857142856"/>
-        </scene>
-        <!--PopularStoryBoard-->
-        <scene sceneID="0r8-JI-aF2">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Popular" referencedIdentifier="PopularStoryBoard" id="5c6-Wq-WGZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Fourth VC" id="Rcq-d9-FPC"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="U8U-kc-fES" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1473.913043478261" y="-666.29464285714278"/>
-        </scene>
-        <!--FavoritesStoryBoard-->
-        <scene sceneID="aEo-Vo-5tZ">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Favorites" referencedIdentifier="FavoritesStoryBoard" id="5eQ-Us-qea" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Third VC" id="Q1v-DQ-VfH"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4r9-Zn-PnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1481.8840579710145" y="-323.4375"/>
         </scene>
     </scenes>
 </document>

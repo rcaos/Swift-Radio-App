@@ -23,8 +23,6 @@
 		77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77421B142358FEE500A23C79 /* AppDelegate.swift */; };
 		77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1B2358FEE700A23C79 /* Assets.xcassets */; };
 		77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */; };
-		77421B272359015C00A23C79 /* Popular.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B262359015C00A23C79 /* Popular.storyboard */; };
-		77421B292359016700A23C79 /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B282359016700A23C79 /* Favorites.storyboard */; };
 		77421B2C2359116600A23C79 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B2B2359116600A23C79 /* Player.storyboard */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		774F0CA023721555002852C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0C9F23721555002852C3 /* MainViewController.swift */; };
@@ -44,6 +42,7 @@
 		77A3D7FA23DB2ADC003FF385 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3D7F923DB2ADC003FF385 /* AppAppearance.swift */; };
 		77A3D7FD23DB2DF9003FF385 /* MainSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3D7FC23DB2DF9003FF385 /* MainSceneDIContainer.swift */; };
 		77A3D7FF23DB307B003FF385 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3D7FE23DB307B003FF385 /* MainNavigationController.swift */; };
+		77A3D80323DB46C0003FF385 /* GenericCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3D80223DB46C0003FF385 /* GenericCollectionView.swift */; };
 		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
 		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
 		77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */; };
@@ -110,8 +109,6 @@
 		77421B1B2358FEE700A23C79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77421B1E2358FEE700A23C79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77421B202358FEE700A23C79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		77421B262359015C00A23C79 /* Popular.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Popular.storyboard; sourceTree = "<group>"; };
-		77421B282359016700A23C79 /* Favorites.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		77421B2B2359116600A23C79 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
 		774714602363A39100198D9E /* PlayingBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingBarsView.swift; sourceTree = "<group>"; };
 		774F0C9F23721555002852C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +128,7 @@
 		77A3D7F923DB2ADC003FF385 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 		77A3D7FC23DB2DF9003FF385 /* MainSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneDIContainer.swift; sourceTree = "<group>"; };
 		77A3D7FE23DB307B003FF385 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		77A3D80223DB46C0003FF385 /* GenericCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCollectionView.swift; sourceTree = "<group>"; };
 		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 		77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerObserver.swift; sourceTree = "<group>"; };
@@ -282,8 +280,6 @@
 			isa = PBXGroup;
 			children = (
 				77D5175E237C9CD500B7DCC9 /* MainViewControler.storyboard */,
-				77421B262359015C00A23C79 /* Popular.storyboard */,
-				77421B282359016700A23C79 /* Favorites.storyboard */,
 				77421B2B2359116600A23C79 /* Player.storyboard */,
 				77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */,
 			);
@@ -317,6 +313,7 @@
 				773D455E2368EE72007B755D /* Favorites */,
 				77964892235A569D00813C48 /* Player */,
 				770282DD235C08BD000098DB /* MiniPlayer */,
+				77A3D80223DB46C0003FF385 /* GenericCollectionView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -687,11 +684,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				77D51760237C9CD500B7DCC9 /* MainViewControler.storyboard in Resources */,
-				77421B272359015C00A23C79 /* Popular.storyboard in Resources */,
 				77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */,
 				77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */,
 				7755B52E235A144F004E642B /* PopularViewCell.xib in Resources */,
-				77421B292359016700A23C79 /* Favorites.storyboard in Resources */,
 				77F65DFC2371E1CA00677DB8 /* MiniPlayer.storyboard in Resources */,
 				77421B2C2359116600A23C79 /* Player.storyboard in Resources */,
 			);
@@ -722,6 +717,7 @@
 				77D51747237C989200B7DCC9 /* StationFavorite.swift in Sources */,
 				770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */,
 				77D9A0F323DA457A00DDCE06 /* DefaultFavoritesRepository.swift in Sources */,
+				77A3D80323DB46C0003FF385 /* GenericCollectionView.swift in Sources */,
 				77D9A0DA23DA373600DDCE06 /* FetchStationsUseCase.swift in Sources */,
 				770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */,
 				77D9A0EC23DA427C00DDCE06 /* DataTransferService.swift in Sources */,

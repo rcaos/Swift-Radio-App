@@ -14,30 +14,38 @@ class PopularViewController: UIViewController {
     
     var viewModel: PopularViewModel!
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    var customView: GenericCollectionView!
     
     let interactor = Interactor()
     
     var delegate: MainControllerDelegate?
     
+    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        setupCollectionView()
         setupView()
         setupCollection()
         setupBindables()
     }
     
+    func setupCollectionView() {
+        customView = GenericCollectionView(frame: view.frame, layout: UICollectionViewFlowLayout() )
+        view = customView
+    }
+    
     func setupView() {
-        collectionView.backgroundColor = UIColor(red:55/255, green:55/255, blue:55/255, alpha:1.0)
+        customView.collectionView.backgroundColor = UIColor(red:55/255, green:55/255, blue:55/255, alpha:1.0)
     }
     
     func setupCollection() {
         let nibName = UINib(nibName: "PopularViewCell", bundle: nil)
-        collectionView.register(nibName, forCellWithReuseIdentifier: reuseIdentifier)
+        customView.collectionView.register(nibName, forCellWithReuseIdentifier: reuseIdentifier)
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        customView.collectionView.dataSource = self
+        customView.collectionView.delegate = self
     }
     
     //MARK: - Reactive
@@ -69,18 +77,21 @@ class PopularViewController: UIViewController {
     }
     
     func setBackground(_ message: String) {
-        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: self.collectionView.bounds.size.height))
+        guard let collectionView = customView.collectionView else { return }
+        
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+        
         messageLabel.text = message
         messageLabel.textColor = .white
         messageLabel.numberOfLines = 0;
         messageLabel.textAlignment = .center;
         messageLabel.sizeToFit()
         
-        self.collectionView?.backgroundView = messageLabel;
+        collectionView.backgroundView = messageLabel;
     }
     
     func restoreBackground() {
-        self.collectionView?.backgroundView = nil
+        customView.collectionView.backgroundView = nil
     }
     
 }
@@ -104,6 +115,7 @@ extension PopularViewController : UICollectionViewDataSource {
 // MARK:- UICollectionViewDelegate
 
 extension PopularViewController : UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         viewModel.getStationSelection(by: indexPath.row)

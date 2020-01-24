@@ -14,7 +14,7 @@ class FavoritesViewController: UIViewController {
     
     var viewModel: FavoritesViewModel!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    var customView: GenericCollectionView!
     
     let interactor = Interactor()
     
@@ -25,9 +25,27 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupCollectionView()
         setupView()
         setupCollection()
         setupViewModel()
+    }
+    
+    func setupCollectionView() {
+        customView = GenericCollectionView(frame: view.frame, layout: UICollectionViewFlowLayout() )
+        view = customView
+    }
+    
+    func setupView() {
+        customView.collectionView.backgroundColor = UIColor(red:55/255, green:55/255, blue:55/255, alpha:1.0)
+    }
+    
+    func setupCollection() {
+        let nibName = UINib(nibName: "PopularViewCell", bundle: nil)
+        customView.collectionView.register(nibName, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        customView.collectionView.dataSource = self
+        customView.collectionView.delegate = self
     }
     
     //MARK: - Reactive
@@ -41,10 +59,10 @@ class FavoritesViewController: UIViewController {
         
         viewModel.viewState.bindAndFire({[weak self] state in
             guard let strongSelf = self ,
-                let _ = strongSelf.collectionView else { return }
+                let _ = strongSelf.customView.collectionView else { return }
             DispatchQueue.main.async {
                 strongSelf.configView(with: state)
-                strongSelf.collectionView?.reloadData()
+                strongSelf.customView.collectionView?.reloadData()
             }
         })
     }
@@ -59,31 +77,21 @@ class FavoritesViewController: UIViewController {
     }
     
     func setBackground(_ message: String) {
-        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: self.collectionView.bounds.size.height))
+        let frame = CGRect(x: 0, y: 0,
+                           width: customView.collectionView.bounds.size.width,
+                           height: customView.collectionView.bounds.size.height)
+        let messageLabel = UILabel(frame: frame)
         messageLabel.text = message
         messageLabel.textColor = .white
         messageLabel.numberOfLines = 0;
         messageLabel.textAlignment = .center;
         messageLabel.sizeToFit()
         
-        self.collectionView?.backgroundView = messageLabel;
+        customView.collectionView?.backgroundView = messageLabel;
     }
     
     func restoreBackground() {
-        self.collectionView?.backgroundView = nil
-    }
-    
-    
-    func setupView() {
-        collectionView.backgroundColor = UIColor(red:55/255, green:55/255, blue:55/255, alpha:1.0)
-    }
-    
-    func setupCollection() {
-        let nibName = UINib(nibName: "PopularViewCell", bundle: nil)
-        collectionView.register(nibName, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        customView.collectionView?.backgroundView = nil
     }
     
 }
