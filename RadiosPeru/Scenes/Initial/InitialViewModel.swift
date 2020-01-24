@@ -36,8 +36,8 @@ final class InitialViewModel {
             switch result {
             case .success(let response):
                 strongSelf.processFetched(for: response)
-            case .failure:
-                print("error to Fetch Stations")
+            case .failure(let error):
+                print("error to Fetch Stations: [\(error)]")
             }
             
             strongSelf.stationsFetched?()

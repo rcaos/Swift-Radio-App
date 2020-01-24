@@ -12,11 +12,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let appDIContainer = AppDIContainer()
+    
     var window: UIWindow?
     
-    var storyBoard: UIStoryboard!
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        AppAppearance.setupAppearance()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = InitialTabBarController(appDIContainer: appDIContainer)
@@ -29,11 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Initial Navigation
     
     func initialTransition() {
-        storyBoard = UIStoryboard(name: "MainTabBar", bundle: nil)
-        guard let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController") as? InitialNavigationController else {
-            fatalError()
-        }
-        self.window?.rootViewController = mainTabBarController
+        self.window?.rootViewController = MainNavigationController(appDIContainer: appDIContainer)
     }
 
     //MARK: - Debug
@@ -43,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //Debug - location of sqlite db file
             //.documentDirectory
             //.libraryDirectory
-            var paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+            let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
             print("Debug - SQL File: [\(paths[0])]")
             print("Debug - SHIFT + CMD + G in finder")
         }

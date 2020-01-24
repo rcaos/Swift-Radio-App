@@ -15,11 +15,21 @@ protocol MainControllerDelegate: class {
     
 }
 
-class MainViewControler: UIViewController {
+class MainViewControler: UIViewController, StoryboardInstantiable {
     
-    var viewModel = MainViewModel()
+    var viewModel: MainViewModel!
     
     let interactor = Interactor()
+    
+    static func create(with viewModel: MainViewModel) -> MainViewControler {
+        let controller = MainViewControler.instantiateViewController()
+        controller.viewModel = viewModel
+    
+        // MARK: - Agregar Factory tmb
+        //controller.mainViewControllersFactory = mainFactory
+        
+        return controller
+    }
     
     //MARK: - Initializers
     

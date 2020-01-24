@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension GrupoRPPResult: Decodable {
+extension GroupRPPResult: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case results

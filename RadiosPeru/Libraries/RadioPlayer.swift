@@ -8,9 +8,10 @@
 
 import Foundation
 
-//Visual States
+// MARK: - Visual States
 
 enum RadioPlayerState {
+    
     case stopped
     case loading
     case playing
@@ -20,13 +21,13 @@ enum RadioPlayerState {
 
 class RadioPlayer {
     
+    private let showDetailsUseCase: FetchShowOnlineInfoUseCase
+    
     var state: RadioPlayerState = .stopped
     
     private let player = ApiPlayer.shared
     
     private var observations = [ObjectIdentifier: Observation]()
-    
-    private let showClient = ShowClient()
     
     private var nameSelected: String?
     
@@ -38,13 +39,21 @@ class RadioPlayer {
         }
     }
     
+    var loadTask: Cancellable? {
+        willSet {
+            loadTask?.cancel()
+        }
+    }
+    
     //MARK: - Life Cycle
     
-    init() {
+    init(showDetailsUseCase: FetchShowOnlineInfoUseCase) {
+        self.showDetailsUseCase = showDetailsUseCase
         player.delegate = self
     }
     
     //MARK: - Publics
+    
     func setupRadio(with station: String?, playWhenReady: Bool = false) {
         guard let stationSelected = getSelectedStation(with: station) else { return }
         nameSelected = station
@@ -119,21 +128,30 @@ class RadioPlayer {
     private func getAiringNowDetails() {
         guard let stationSelected = getSelectedStation(with: nameSelected) else { return }
         
-        showClient.getShowOnlineDetail(group: stationSelected.type, completion: { result in
+        let request = FetchShowOnlineInfoUseCaseRequestValue(group: stationSelected.type)
+
+        loadTask = showDetailsUseCase.execute(requestValue: request) { [weak self] result in
+            guard let strongSelf = self else { return }
+            
             switch result {
-            case .success(let response) :
-                guard let showResult = response else { return }
-                self.onlineInfo = showResult.name
+            case .success(let response):
+                strongSelf.processResponse(for: response)
                 
-                self.changeOnlineInfo()
-                self.setupSource(with: stationSelected)
-                
-            case .failure(let error) :
+            case .failure(let error):
                 print("Error to get online Description: \(error)")
-                self.onlineInfo = ""
-                self.setupSource(with: stationSelected)
+                strongSelf.onlineInfo = ""
+                strongSelf.setupSource(with: stationSelected)
             }
-        })
+        }
+    }
+    
+    private func processResponse(for show: Show) {
+        onlineInfo = show.name
+        changeOnlineInfo()
+        
+        // MARK: - TODO, call to CoreData
+        guard let stationSelected = getSelectedStation(with: nameSelected) else { return }
+        setupSource(with: stationSelected)
     }
     
     private func getSelectedStation(with name: String?) -> Station? {
@@ -152,6 +170,8 @@ class RadioPlayer {
         dataSource = PlayerDataSource(title: selected.name, defaultInfo: defaultInfo, onlineNowInfo: self.onlineInfo, artWork: selected.image)
     }
 }
+
+// MARK: - ApiPlayerDelegate
 
 extension RadioPlayer: ApiPlayerDelegate {
     

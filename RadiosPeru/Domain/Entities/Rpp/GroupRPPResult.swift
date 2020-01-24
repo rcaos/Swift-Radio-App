@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GrupoRPPResult {
+struct GroupRPPResult {
     
     let results: ShowWrapper
 }

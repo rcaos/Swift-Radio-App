@@ -17,10 +17,10 @@ final class MainViewModel {
     
     var radioPlayer: RadioPlayer
     
-    init(managedObjectContext: NSManagedObjectContext = PersistenceManager.shared.mainContext) {
+    init(radioPlayer: RadioPlayer, managedObjectContext: NSManagedObjectContext = PersistenceManager.shared.mainContext) {
         self.managedObjectContext = managedObjectContext
         
-        radioPlayer = RadioPlayer()
+        self.radioPlayer = radioPlayer
         
         miniPlayer = MiniPlayerViewModel(name: nil, group: nil, service: radioPlayer, managedObjectContext: self.managedObjectContext)
     }

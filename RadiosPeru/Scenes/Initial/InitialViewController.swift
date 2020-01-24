@@ -40,7 +40,5 @@ class InitialViewController: UIViewController {
         viewModel.stationsFetched = { [weak self] in
             self?.appDelegate?.initialTransition()
         }
-        
-        viewModel.getStations()
     }
 }

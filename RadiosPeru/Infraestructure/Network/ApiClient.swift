@@ -1,82 +1,101 @@
 //
-//  ApiClient.swift
+//  ApiClientNew.swift
 //  RadiosPeru
 //
-//  Created by Jeans on 10/28/19.
-//  Copyright © 2019 Jeans. All rights reserved.
+//  Created by Jeans Ruiz on 1/23/20.
+//  Copyright © 2020 Jeans. All rights reserved.
 //
 
 import Foundation
-import CoreData
 
-protocol ApiClient {
-    var session: URLSession { get }
+class ApiClient {
     
-    func fetch<T: Decodable>(with request:  URLRequest,
-                             context:       NSManagedObjectContext?,
-                             decode:        @escaping (Decodable) -> T?,
-                             completion:    @escaping (Result<T, APIError>) -> Void)
+    //private let configuration: NetworkConfigurable
+    
+//    init(with configuration: NetworkConfigurable) {
+//        self.configuration = configuration
+//    }
 }
 
-extension ApiClient {
+// MARK: - DataTransferService
+
+extension ApiClient: DataTransferService {
     
-    typealias JSONTaskCompletionHandler = (Decodable?, APIError?) -> Void
-    
-    private func decodingTask<T: Decodable>(with request: URLRequest,
-                                            decodingType: T.Type,
-                                            context: NSManagedObjectContext?,
-                                            completionHandler completion: JSONTaskCompletionHandler?) -> URLSessionDataTask {
-        let task = session.dataTask(with: request) { data, response, _ in
-            guard let httpResponse = response as? HTTPURLResponse else {
-                completion?(nil, .requestFailed)
-                return
-            }
-            if httpResponse.statusCode == 200 || httpResponse.statusCode == 201 {
-                if let data = data {
-                    do {
-                        let decoder = JSONDecoder()
-                        decoder.userInfo[.context] = context
-                        let genericModel = try decoder.decode(decodingType, from: data)
-                        try context?.save()
-                        completion?(genericModel, nil)
-                    } catch {
-                        print(error.localizedDescription)
-                        completion?(nil, .requestFailed)
-                    }
-                } else {
-                    completion?(nil, .invalidData)
-                }
-            } else {
-                completion?(nil, APIError(response: httpResponse))
+    func request<T>(service: T,
+                    completion: @escaping CompletionHandler<Data>) -> NetworkCancellable?
+        where T: EndPoint {
+            
+        let task = request(service.urlRequest) { result in
+            switch result {
+            case .success(let data):
+                completion( .success(data) )
+            case .failure(let error):
+                completion( .failure(error) )
             }
         }
         return task
     }
     
-    func fetch<T: Decodable>(with request: URLRequest,
-                             context: NSManagedObjectContext? = nil,
-                             decode: @escaping (Decodable) -> T?,
-                             completion: @escaping (Result<T, APIError>) -> Void) {
-        print("request: [\(request)]")
-        let task = decodingTask(with: request, decodingType: T.self, context: context) { (json, error) in
-            DispatchQueue.main.async {
-                guard let json = json else {
-                    if let error = error {
-                        completion(Result.failure(error))
-                    } else {
-                        completion(Result.failure(.requestFailed))
-                    }
-                    return
+    func request<T,U>(service: T,
+                      decodeType: U.Type,
+                      completion: @escaping CompletionHandler<U>) -> NetworkCancellable?
+        where T: EndPoint, U: Decodable {
+            
+        let task = request(service.urlRequest) { result in
+            switch result {
+            case .success(let data):
+                let decoder = JSONDecoder()
+                do {
+                    let resp = try decoder.decode(decodeType, from: data)
+                    completion(.success(resp))
                 }
-                
-                // Only if is Decodable
-                if let value = decode(json) {
-                    completion(.success(value))
+                catch {
+                    print("error to Decode: [\(error)]")
+                    completion(.failure( error ))
+                }
+            case .failure(let error):
+                print("error server: [\(error)]")
+                completion(.failure(error))
+            }
+        }
+        return task
+    }
+}
+
+// MARK: - Private
+
+extension ApiClient {
+    
+    private func request(_ request: URLRequest,
+                         deliverQueue: DispatchQueue = DispatchQueue.main,
+                         completion: @escaping (Result<Data, APIError>) -> Void) -> NetworkCancellable {
+        print( "url request new : [\(request)]" )
+        let task = URLSession.shared.dataTask(with: request) { (data, response, _) in
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                deliverQueue.async {
+                    completion( .failure(.requestFailed) )
+                }
+                return
+            }
+            
+            if httpResponse.statusCode == 200 || httpResponse.statusCode == 201 {
+                if let data = data {
+                    deliverQueue.async {
+                        completion( .success( data ))
+                    }
                 } else {
-                    completion(.failure(.requestFailed))
+                    deliverQueue.async {
+                        completion( .failure(  .invalidData ))
+                    }
+                }
+            } else {
+                deliverQueue.async {
+                    completion( .failure( APIError(response: httpResponse) ))
                 }
             }
         }
         task.resume()
+        return task
     }
 }

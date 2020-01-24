@@ -17,6 +17,8 @@ final class DefaultStationsRepository {
     }
 }
 
+// MARK: - StationsRepository
+
 extension DefaultStationsRepository: StationsRepository {
     
     func stationsList(completion: @escaping (Result<StationResult, Error>) -> Void) -> Cancellable? {
