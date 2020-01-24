@@ -9,13 +9,9 @@
 import UIKit
 import MediaPlayer
 
-class PlayerViewController: UIViewController {
-    
-    var viewModel: PlayerViewModel? {
-        didSet {
-            setupViewModel()
-        }
-    }
+class PlayerViewController: UIViewController, StoryboardInstantiable {
+        
+    var viewModel: PlayerViewModel!
     
     @IBOutlet weak var stationImageView: UIImageView!
     @IBOutlet weak var stationNameLabel: UILabel!
@@ -33,6 +29,12 @@ class PlayerViewController: UIViewController {
     
     var interactor:Interactor? = nil
     
+    static func create(with viewModel: PlayerViewModel) -> PlayerViewController {
+        let controller = PlayerViewController.instantiateViewController()
+        controller.viewModel = viewModel
+        return controller
+    }
+    
     //MARK : - Life Cycle
     
     override func viewDidLoad() {
@@ -41,6 +43,7 @@ class PlayerViewController: UIViewController {
         setupUI()
         setupPlayerView()
         setupGestures()
+        setupViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,7 +145,9 @@ class PlayerViewController: UIViewController {
         stationDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         
         
-        //MARK: - TODO Fix autolayout
+        // MARK: - TODO Fix autolayout
+        // MARK: - Aislarlo en una View Generica
+        // Para no importar "MediaPlayer"
         let mpVolumenView = MPVolumeView(frame: volumeStackView.bounds)
         for currentView in mpVolumenView.subviews {
             if currentView.isKind(of: UISlider.self) {

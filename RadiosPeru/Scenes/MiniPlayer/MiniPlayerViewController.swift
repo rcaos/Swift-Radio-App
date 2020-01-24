@@ -16,7 +16,7 @@ protocol MiniPlayerControllerDelegate: class {
     //func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectFavorite radio : String)
 }
 
-class MiniPlayerViewController: UIViewController {
+class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
 
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var playingBarsView: UIImageView!
@@ -33,10 +33,12 @@ class MiniPlayerViewController: UIViewController {
     
     weak var delegate: MiniPlayerControllerDelegate?
     
-    var viewModel: MiniPlayerViewModel? {
-        didSet {
-            setupViewModel()
-        }
+    var viewModel: MiniPlayerViewModel!
+    
+    static func create(with viewModel: MiniPlayerViewModel) -> MiniPlayerViewController {
+        let controller = MiniPlayerViewController.instantiateViewController()
+        controller.viewModel = viewModel
+        return controller
     }
     
     //MARK: - Life Cycle
@@ -47,11 +49,12 @@ class MiniPlayerViewController: UIViewController {
         setupUI()
         setupPlayerView()
         setupGestures()
+        setupViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.refreshStatus()
+        viewModel.refreshStatus()
     }
     
     //MARK: - Reactive
@@ -59,20 +62,19 @@ class MiniPlayerViewController: UIViewController {
     private func setupViewModel() {
         setupViewBindables()
         
-        viewModel?.viewState.bind({ [weak self] state in
+        viewModel.viewState.bind({ [weak self] state in
             DispatchQueue.main.async {
                 self?.configView(with: state)
             }
-            
         })
         
-        viewModel?.updateUI = { [weak self] in
+        viewModel.updateUI = { [weak self] in
             DispatchQueue.main.async {
                 self?.setupViewBindables()
             }
         }
         
-        viewModel?.isFavorite.bindAndFire({ [weak self] favorite in
+        viewModel.isFavorite.bindAndFire({ [weak self] favorite in
             DispatchQueue.main.async {
                 if favorite {
                     self?.favoriteButton.setImage( UIImage(named: "btn-favoriteFill") , for: .normal)
@@ -84,7 +86,7 @@ class MiniPlayerViewController: UIViewController {
     }
     
     func setupViewBindables() {
-        guard let viewModel = viewModel else { return }
+        //guard let viewModel = viewModel else { return }
         
         stationNameLabel.text = viewModel.name
         stationDescriptionLabel.text = viewModel.getDescription()
@@ -193,7 +195,7 @@ class MiniPlayerViewController: UIViewController {
     }
     
     @objc func handleGestureView(_ sender: UITapGestureRecognizer) {
-        guard let viewModel = viewModel, viewModel.isSelected else { return }
+        guard viewModel.isSelected else { return }
         
         if let modelForPlayer = viewModel.buildPlayerViewModel() {
             delegate?.miniPlayerController(self, didSelectRadio: modelForPlayer )
@@ -201,12 +203,12 @@ class MiniPlayerViewController: UIViewController {
     }
     
     @objc func handleGestureStack(_ sender: UITapGestureRecognizer) {
-        guard let viewModel = viewModel, viewModel.isSelected else { return }
+        guard viewModel.isSelected else { return }
         viewModel.togglePlayPause()
     }
     
     @IBAction func tapFavorite(_ sender: Any) {
-        guard let  viewModel = viewModel, viewModel.isSelected else { return }
+        guard viewModel.isSelected else { return }
         
         viewModel.markAsFavorite()
     }

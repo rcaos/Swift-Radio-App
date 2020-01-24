@@ -23,11 +23,10 @@
 		77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77421B142358FEE500A23C79 /* AppDelegate.swift */; };
 		77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1B2358FEE700A23C79 /* Assets.xcassets */; };
 		77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */; };
-		77421B2C2359116600A23C79 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B2B2359116600A23C79 /* Player.storyboard */; };
+		77421B2C2359116600A23C79 /* PlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B2B2359116600A23C79 /* PlayerViewController.storyboard */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		774F0CA023721555002852C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0C9F23721555002852C3 /* MainViewController.swift */; };
 		774F0CA22372163E002852C3 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0CA12372163E002852C3 /* MainViewModel.swift */; };
-		774F0CA52372199D002852C3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0CA42372199D002852C3 /* TabBarViewController.swift */; };
 		7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B51D2359F1E2004E642B /* PlayerViewController.swift */; };
 		7755B522235A1241004E642B /* PopularViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B521235A1241004E642B /* PopularViewController.swift */; };
 		7755B524235A1350004E642B /* PopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B523235A1350004E642B /* PopularViewModel.swift */; };
@@ -86,7 +85,7 @@
 		77E5AF6823D9F52D00509BC2 /* Group+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */; };
 		77E5AF6A23D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6923D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift */; };
 		77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */; };
-		77F65DFC2371E1CA00677DB8 /* MiniPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */; };
+		77F65DFC2371E1CA00677DB8 /* MiniPlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */; };
 		77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7CA6D23686FB800E1D64A /* ShowCRP.swift */; };
 /* End PBXBuildFile section */
 
@@ -109,11 +108,10 @@
 		77421B1B2358FEE700A23C79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77421B1E2358FEE700A23C79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77421B202358FEE700A23C79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		77421B2B2359116600A23C79 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
+		77421B2B2359116600A23C79 /* PlayerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayerViewController.storyboard; sourceTree = "<group>"; };
 		774714602363A39100198D9E /* PlayingBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingBarsView.swift; sourceTree = "<group>"; };
 		774F0C9F23721555002852C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		774F0CA12372163E002852C3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		774F0CA42372199D002852C3 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		7755B51D2359F1E2004E642B /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		7755B521235A1241004E642B /* PopularViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewController.swift; sourceTree = "<group>"; };
 		7755B523235A1350004E642B /* PopularViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewModel.swift; sourceTree = "<group>"; };
@@ -172,7 +170,7 @@
 		77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+Decodable.swift"; sourceTree = "<group>"; };
 		77E5AF6923D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GrupoRPPResult+Decodable.swift"; sourceTree = "<group>"; };
 		77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoSource.swift; sourceTree = "<group>"; };
-		77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MiniPlayer.storyboard; sourceTree = "<group>"; };
+		77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MiniPlayerViewController.storyboard; sourceTree = "<group>"; };
 		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -280,8 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				77D5175E237C9CD500B7DCC9 /* MainViewControler.storyboard */,
-				77421B2B2359116600A23C79 /* Player.storyboard */,
-				77F65DFB2371E1CA00677DB8 /* MiniPlayer.storyboard */,
+				77421B2B2359116600A23C79 /* PlayerViewController.storyboard */,
+				77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */,
 			);
 			path = StoryBoards;
 			sourceTree = "<group>";
@@ -295,20 +293,11 @@
 			path = MiniPlayer;
 			sourceTree = "<group>";
 		};
-		774F0CA6237219A3002852C3 /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				774F0CA42372199D002852C3 /* TabBarViewController.swift */,
-			);
-			path = TabBar;
-			sourceTree = "<group>";
-		};
 		7755B525235A13E9004E642B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				77A3D80023DB3442003FF385 /* Initial */,
 				77A3D80123DB344E003FF385 /* Main */,
-				774F0CA6237219A3002852C3 /* TabBar */,
 				7755B526235A13F0004E642B /* Popular */,
 				773D455E2368EE72007B755D /* Favorites */,
 				77964892235A569D00813C48 /* Player */,
@@ -687,8 +676,8 @@
 				77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */,
 				77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */,
 				7755B52E235A144F004E642B /* PopularViewCell.xib in Resources */,
-				77F65DFC2371E1CA00677DB8 /* MiniPlayer.storyboard in Resources */,
-				77421B2C2359116600A23C79 /* Player.storyboard in Resources */,
+				77F65DFC2371E1CA00677DB8 /* MiniPlayerViewController.storyboard in Resources */,
+				77421B2C2359116600A23C79 /* PlayerViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,7 +688,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				774F0CA52372199D002852C3 /* TabBarViewController.swift in Sources */,
 				773D455D2368EE6E007B755D /* FavoritesViewModel.swift in Sources */,
 				77D51758237C992300B7DCC9 /* PersistenceManager.swift in Sources */,
 				770282DF235C27A7000098DB /* Bindable.swift in Sources */,

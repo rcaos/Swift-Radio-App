@@ -46,9 +46,5 @@ final class InitialViewModel {
     
     private func processFetched(for response: StationResult) {
         print("retornaron: \(response.stations.count) stations")
-        for station in response.stations {
-            print("\(station.name)")
-        }
-        print("--")
     }
 }

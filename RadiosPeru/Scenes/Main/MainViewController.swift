@@ -21,10 +21,16 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
     
     let interactor = Interactor()
     
+    @IBOutlet weak var tabBarView: UIView!
+    @IBOutlet weak var miniPlayerView: UIView!
+    
+    var tabBarVC: UITabBarController!
+    var miniPlayerVC: MiniPlayerViewController!
+    
     static func create(with viewModel: MainViewModel) -> MainViewControler {
         let controller = MainViewControler.instantiateViewController()
         controller.viewModel = viewModel
-    
+        
         // MARK: - Agregar Factory tmb
         //controller.mainViewControllersFactory = mainFactory
         
@@ -36,40 +42,64 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
     override func viewDidLoad() {
         view.backgroundColor = .red
         navigationItem.title = "Radios Perú"
+        
+        setupTabBarView()
+        setupMiniPlayerView()
     }
     
-    //MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    private func setupMiniPlayerView() {
+        miniPlayerVC = MiniPlayerViewController.create(with: viewModel.miniPlayer)
+        miniPlayerVC.delegate = self
+        miniPlayerVC.view.translatesAutoresizingMaskIntoConstraints = false
         
-        if segue.identifier == "playerSegue",
-            let destination = segue.destination as? PlayerViewController,
-            let model = sender as? PlayerViewModel {
-            let _ = destination.view
-            destination.viewModel = model
-            destination.transitioningDelegate = self
-            destination.interactor = interactor
-        }
+        miniPlayerView.addSubview( miniPlayerVC.view )
         
-        if segue.identifier == "tabBarSegue",
-            let destination = segue.destination as? TabBarViewController {
-            destination.popularViewModel = viewModel.buildPopularViewModel()
-            destination.favoriteViewModel = viewModel.buildFavoriteViewModel()
-            destination.radioDelegate = self
-        }
+        NSLayoutConstraint.activate([miniPlayerVC.view.topAnchor.constraint(equalTo: miniPlayerView.topAnchor),
+                                     miniPlayerVC.view.leadingAnchor.constraint(equalTo: miniPlayerView.leadingAnchor),
+                                     miniPlayerVC.view.trailingAnchor.constraint(equalTo: miniPlayerView.trailingAnchor),
+                                     miniPlayerVC.view.bottomAnchor.constraint(equalTo: miniPlayerView.bottomAnchor)])
+    }
+    
+    private func setupTabBarView() {
+        tabBarVC = UITabBarController()
+        tabBarVC.viewControllers = buildViewControllers()
         
-        if segue.identifier == "miniPlayerSegue",
-            let destination = segue.destination as? MiniPlayerViewController {
-            let _ = destination.view
-            destination.delegate = self
-            destination.viewModel = viewModel.miniPlayer
-        }
+        tabBarVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        tabBarView.addSubview( tabBarVC.view )
+        NSLayoutConstraint.activate([tabBarVC.view.topAnchor.constraint(equalTo: tabBarView.topAnchor),
+                                     tabBarVC.view.leadingAnchor.constraint(equalTo: tabBarView.leadingAnchor),
+                                     tabBarVC.view.trailingAnchor.constraint(equalTo: tabBarView.trailingAnchor),
+                                     tabBarVC.view.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor)])
+    }
+    
+    private func buildViewControllers() -> [UIViewController] {
+        let popularVC = PopularViewController()
+        popularVC.viewModel = viewModel.buildPopularViewModel()
+        popularVC.delegate = self
+        popularVC.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 0)
+        
+        let favoritesVC = FavoritesViewController()
+        favoritesVC.viewModel = viewModel.buildFavoriteViewModel()
+        favoritesVC.delegate = self
+        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        
+        return [popularVC, favoritesVC]
     }
 }
 
 extension MainViewControler : MiniPlayerControllerDelegate  {
     
     func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectRadio radio: PlayerViewModel) {
-        performSegue(withIdentifier: "playerSegue", sender: radio)
+        
+        // MARK: - TODO, esto debe ir en una extension, controlado.
+        // Handle navigation
+        let playerVC = PlayerViewController.create(with: radio)
+        playerVC.transitioningDelegate = self
+        playerVC.interactor = interactor
+        
+        present(playerVC, animated: true, completion: nil)
+        
     }
 }
 
