@@ -157,9 +157,10 @@ class RadioPlayer {
     private func getSelectedStation(with name: String?) -> Station? {
         //MARK: - TODO
         //, let _ = groupSelected,
-        guard let stationName = name,
-            let station = PersistenceManager.shared.findStation(with: stationName) else { return nil }
-        return station
+//        guard let stationName = name,
+//            let station = PersistenceManager.shared.findStation(with: stationName) else { return nil }
+//        return station
+        return nil
     }
     
     private func setupSource(with selected: Station) {

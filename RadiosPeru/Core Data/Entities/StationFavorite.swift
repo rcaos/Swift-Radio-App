@@ -20,20 +20,20 @@ final class StationFavorite: NSManagedObject {
     @NSManaged fileprivate(set) var name: String
     @NSManaged fileprivate(set) var group: String
     
-    static func insert(into context: NSManagedObjectContext, name: String, group: String) -> StationFavorite{
-        let favorite: StationFavorite = context.insertObject()
-        
-        favorite.name = name
-        favorite.group = group
-        favorite.createAt = Date()
-        
-        return favorite
-    }
+//    static func insert(into context: NSManagedObjectContext, name: String, group: String) -> StationFavorite{
+//        let favorite: StationFavorite = context.insertObject()
+//
+//        favorite.name = name
+//        favorite.group = group
+//        favorite.createAt = Date()
+//
+//        return favorite
+//    }
 }
 
-extension StationFavorite: Managed {
-    
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        return [NSSortDescriptor(key: #keyPath(createAt), ascending: true) ]
-    }
-}
+//extension StationFavorite: Managed {
+//    
+//    static var defaultSortDescriptors: [NSSortDescriptor] {
+//        return [NSSortDescriptor(key: #keyPath(createAt), ascending: true) ]
+//    }
+//}

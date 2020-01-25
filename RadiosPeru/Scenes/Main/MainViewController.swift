@@ -84,7 +84,8 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
         favoritesVC.delegate = self
         favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
-        return [popularVC, favoritesVC]
+        return [popularVC]
+        //return [popularVC, favoritesVC]
     }
 }
 

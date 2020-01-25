@@ -11,28 +11,30 @@ import CoreData
 
 final class FavoritesViewModel {
     
-    private var favoriteStore: PersistenceStore<StationFavorite>!
+//    private var favoriteStore: PersistenceStore<StationFavorite>!
     
-    var stations: [PopularCellViewModel] {
-        let favoriteStations = PersistenceManager.shared.favorites
-        return favoriteStations.map({ PopularCellViewModel(station: $0) })
-    }
+//    var stations: [PopularCellViewModel] {
+//        let favoriteStations = PersistenceManager.shared.favorites
+//        return favoriteStations.map({ PopularCellViewModel(station: $0) })
+//    }
+    
+    var stations: [PopularCellViewModel] = []
     
     var selectedRadioStation: ((String, String) -> Void)?
     
     //Reactive
     var viewState: Bindable<ViewState> = Bindable(.empty)
     
-    init(managedObjectContext: NSManagedObjectContext) {
-        setupStores(managedObjectContext)
+    init( ) {
+//        setupStores(managedObjectContext)
         refreshStations()
     }
     
-    private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
-        favoriteStore = PersistenceStore(managedObjectContext)
-        favoriteStore.configureResultsController(sortDescriptors: StationFavorite.defaultSortDescriptors)
-        favoriteStore.delegate = self
-    }
+//    private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
+//        favoriteStore = PersistenceStore(managedObjectContext)
+//        favoriteStore.configureResultsController(sortDescriptors: StationFavorite.defaultSortDescriptors)
+//        favoriteStore.delegate = self
+//    }
     
     private func refreshStations() {
         if stations.count == 0 {
@@ -45,20 +47,20 @@ final class FavoritesViewModel {
     //MARK: - Public Methods
     
     func getStationSelection(by index: Int) {
-        let favorites = PersistenceManager.shared.favorites
-        let selectedStation = favorites[index]
-        selectedRadioStation?( selectedStation.name, selectedStation.group)
+//        let favorites = PersistenceManager.shared.favorites
+//        let selectedStation = favorites[index]
+//        selectedRadioStation?( selectedStation.name, selectedStation.group)
     }
 }
 
 //MARK: - PersistenceStoreDelegate
 
-extension FavoritesViewModel: PersistenceStoreDelegate {
-    
-    func persistenceStore(didUpdateEntity update: Bool) {
-        refreshStations()
-    }
-}
+//extension FavoritesViewModel: PersistenceStoreDelegate {
+//    
+//    func persistenceStore(didUpdateEntity update: Bool) {
+//        refreshStations()
+//    }
+//}
 
 extension FavoritesViewModel {
     

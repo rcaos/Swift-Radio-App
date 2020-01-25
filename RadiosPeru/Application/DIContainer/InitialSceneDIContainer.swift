@@ -17,7 +17,7 @@ final class InitialSceneDIContainer {
     private let dependencies: Dependencies
     
     // MARK: - TODO Persistence
-    //lazy var moviesQueriesStorage: MoviesQueriesStorage = CoreDataStorage(maxStorageLimit: 10)
+    lazy var stationsLocalStorage: StationsLocalStorage = CoreDataStorage(maxStorageLimit: 10)
     
     // MARK: - Initializers
     
@@ -45,12 +45,16 @@ extension InitialSceneDIContainer {
     private func makeFetchStationsUseCase() -> FetchStationsUseCase {
         return DefaultFetchStationsUseCase(
             stationsRepository: makeStationsRepository(),
-            stationsLocalRepository: nil)
+            stationsLocalRepository: makeStationsLocalRepository())
     }
     
     // MARK: - Repositories
     
     private func makeStationsRepository() -> StationsRepository {
         return DefaultStationsRepository(dataTransferService: dependencies.datTransferService)
+    }
+    
+    private func makeStationsLocalRepository() -> StationsLocalRepository {
+        return DefaultStationsLocalRepository(stationsPersistentStorage: stationsLocalStorage)
     }
 }

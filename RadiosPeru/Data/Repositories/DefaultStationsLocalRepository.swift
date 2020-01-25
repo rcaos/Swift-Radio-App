@@ -7,3 +7,23 @@
 //
 
 import Foundation
+
+final class DefaultStationsLocalRepository {
+    
+    private var stationsPersistentStorage: StationsLocalStorage
+    
+    init(stationsPersistentStorage: StationsLocalStorage) {
+        self.stationsPersistentStorage = stationsPersistentStorage
+    }
+}
+
+extension DefaultStationsLocalRepository: StationsLocalRepository {
+    
+    func saveStations(stations: [StationRemote], completion: @escaping (Result<Void, Error>) -> Void) {
+        stationsPersistentStorage.saveStations(stations: stations, completion: completion)
+    }
+    
+    func stationsList(completion: @escaping (Result<[StationRemote], Error>) -> Void) {
+        stationsPersistentStorage.stationsList(completion: completion)
+    }
+}

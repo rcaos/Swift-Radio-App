@@ -10,7 +10,7 @@ import Foundation
 
 protocol StationsLocalRepository {
     
-    func saveStations(stations: StationResult, completion: @escaping (Result<StationResult, Error>) -> Void)
+    func saveStations(stations: [StationRemote], completion: @escaping (Result<Void, Error>) -> Void)
     
-    func stationsList(completion: @escaping (Result<StationResult, Error>) -> Void)
+    func stationsList(completion: @escaping (Result<[StationRemote], Error>) -> Void)
 }

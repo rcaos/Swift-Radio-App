@@ -45,6 +45,11 @@
 		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
 		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
 		77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */; };
+		77C9D3ED23DB990400C6FD55 /* StationsLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */; };
+		77C9D3F023DB992700C6FD55 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3EF23DB992700C6FD55 /* CoreDataStorage.swift */; };
+		77C9D3F323DBA4F700C6FD55 /* Station+Mappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3F223DBA4F700C6FD55 /* Station+Mappings.swift */; };
+		77C9D3F523DBC1F900C6FD55 /* Station+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3F423DBC1F900C6FD55 /* Station+CoreDataProperties.swift */; };
+		77C9D3F723DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3F623DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift */; };
 		77CA145B23689CB9001BF04E /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA145A23689CB9001BF04E /* ApiError.swift */; };
 		77D51745237C988B00B7DCC9 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51744237C988B00B7DCC9 /* Station.swift */; };
 		77D51747237C989200B7DCC9 /* StationFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51746237C989200B7DCC9 /* StationFavorite.swift */; };
@@ -130,6 +135,11 @@
 		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 		77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerObserver.swift; sourceTree = "<group>"; };
+		77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsLocalStorage.swift; sourceTree = "<group>"; };
+		77C9D3EF23DB992700C6FD55 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		77C9D3F223DBA4F700C6FD55 /* Station+Mappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+Mappings.swift"; sourceTree = "<group>"; };
+		77C9D3F423DBC1F900C6FD55 /* Station+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		77C9D3F623DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStationsLocalUseCase.swift; sourceTree = "<group>"; };
 		77CA145A23689CB9001BF04E /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		77D51744237C988B00B7DCC9 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		77D51746237C989200B7DCC9 /* StationFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFavorite.swift; sourceTree = "<group>"; };
@@ -268,7 +278,6 @@
 				7755B529235A141A004E642B /* ViewComponents */,
 				77421B2A235901AE00A23C79 /* StoryBoards */,
 				777CEDD023D90CA100FCD04B /* Resources */,
-				77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */,
 				77D9A0DD23DA388C00DDCE06 /* Common */,
 			);
 			path = RadiosPeru;
@@ -438,6 +447,26 @@
 			path = Transitions;
 			sourceTree = "<group>";
 		};
+		77C9D3EE23DB990700C6FD55 /* PersistentStorages */ = {
+			isa = PBXGroup;
+			children = (
+				77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */,
+				77C9D3F123DB993A00C6FD55 /* CoreDataStorage */,
+			);
+			path = PersistentStorages;
+			sourceTree = "<group>";
+		};
+		77C9D3F123DB993A00C6FD55 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */,
+				77C9D3EF23DB992700C6FD55 /* CoreDataStorage.swift */,
+				77C9D3F223DBA4F700C6FD55 /* Station+Mappings.swift */,
+				77C9D3F423DBC1F900C6FD55 /* Station+CoreDataProperties.swift */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
 		77D51743237C985100B7DCC9 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +520,7 @@
 			children = (
 				77D9A0D923DA373600DDCE06 /* FetchStationsUseCase.swift */,
 				77D9A0D723DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift */,
+				77C9D3F623DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -560,6 +590,7 @@
 				77D9A0EF23DA451D00DDCE06 /* Repositories */,
 				77E5AF5F23D9F31100509BC2 /* Network */,
 				77D9A0E923DA424B00DDCE06 /* RepositoryTask.swift */,
+				77C9D3EE23DB990700C6FD55 /* PersistentStorages */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -689,6 +720,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				773D455D2368EE6E007B755D /* FavoritesViewModel.swift in Sources */,
+				77C9D3F323DBA4F700C6FD55 /* Station+Mappings.swift in Sources */,
 				77D51758237C992300B7DCC9 /* PersistenceManager.swift in Sources */,
 				770282DF235C27A7000098DB /* Bindable.swift in Sources */,
 				77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */,
@@ -708,6 +740,7 @@
 				77A3D80323DB46C0003FF385 /* GenericCollectionView.swift in Sources */,
 				77D9A0DA23DA373600DDCE06 /* FetchStationsUseCase.swift in Sources */,
 				770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */,
+				77C9D3F023DB992700C6FD55 /* CoreDataStorage.swift in Sources */,
 				77D9A0EC23DA427C00DDCE06 /* DataTransferService.swift in Sources */,
 				77236FA923677F9B009C80D0 /* GroupRPPResult.swift in Sources */,
 				77E5AF6A23D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift in Sources */,
@@ -735,6 +768,7 @@
 				77CA145B23689CB9001BF04E /* ApiError.swift in Sources */,
 				77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */,
 				77D5174E237C98CE00B7DCC9 /* PersistenceStore+StationFavorite.swift in Sources */,
+				77C9D3F723DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift in Sources */,
 				77D51745237C988B00B7DCC9 /* Station.swift in Sources */,
 				77236FA423677C56009C80D0 /* EndPoint.swift in Sources */,
 				77D9A0D823DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift in Sources */,
@@ -748,8 +782,10 @@
 				777CEDCB23D90C6500FCD04B /* StoryboardInstantiable.swift in Sources */,
 				77D51766237C9FD200B7DCC9 /* StationResult.swift in Sources */,
 				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,
+				77C9D3F523DBC1F900C6FD55 /* Station+CoreDataProperties.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,
 				77D9A0F123DA454B00DDCE06 /* DefaultStationsLocalRepository.swift in Sources */,
+				77C9D3ED23DB990400C6FD55 /* StationsLocalStorage.swift in Sources */,
 				77D51762237C9DA500B7DCC9 /* InitialViewController.swift in Sources */,
 				77D9A0E623DA3D0300DDCE06 /* StationsLocalRepository.swift in Sources */,
 				77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */,

@@ -11,18 +11,18 @@ import CoreData
 
 final class MainViewModel {
     
-    private var managedObjectContext: NSManagedObjectContext
+//    private var managedObjectContext: NSManagedObjectContext
     
     var miniPlayer: MiniPlayerViewModel
     
     var radioPlayer: RadioPlayer
     
-    init(radioPlayer: RadioPlayer, managedObjectContext: NSManagedObjectContext = PersistenceManager.shared.mainContext) {
-        self.managedObjectContext = managedObjectContext
+    init(radioPlayer: RadioPlayer) {
+//        self.managedObjectContext = managedObjectContext
         
         self.radioPlayer = radioPlayer
         
-        miniPlayer = MiniPlayerViewModel(name: nil, group: nil, service: radioPlayer, managedObjectContext: self.managedObjectContext)
+        miniPlayer = MiniPlayerViewModel(name: nil, group: nil, service: radioPlayer)
     }
     
     func selectStation(by name: String, group: String) {
@@ -36,6 +36,6 @@ final class MainViewModel {
     }
     
     func buildFavoriteViewModel() -> FavoritesViewModel {
-        return FavoritesViewModel(managedObjectContext: managedObjectContext)
+        return FavoritesViewModel()
     }
 }

@@ -11,8 +11,8 @@ import CoreData
 
 final class PlayerViewModel {
     
-    private var managedObjectContext: NSManagedObjectContext
-    private var favoritesStore: PersistenceStore<StationFavorite>!
+//    private var managedObjectContext: NSManagedObjectContext
+//    private var favoritesStore: PersistenceStore<StationFavorite>!
     
     private var radioPlayer: RadioPlayer?
     
@@ -32,10 +32,10 @@ final class PlayerViewModel {
     
     //MARK: - Initializers
     
-    init(name: String, group: String, player: RadioPlayer?, managedObjectContext: NSManagedObjectContext) {
+    init(name: String, group: String, player: RadioPlayer?) {
         
-        self.managedObjectContext = managedObjectContext
-        setupStores(self.managedObjectContext)
+        //self.managedObjectContext = managedObjectContext
+        //setupStores(self.managedObjectContext)
         
         self.nameSelected = name
         self.groupSelected = group
@@ -52,9 +52,9 @@ final class PlayerViewModel {
     
     //MARK: - Private
     
-    private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
-        favoritesStore = PersistenceStore(managedObjectContext)
-    }
+//    private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
+//        favoritesStore = PersistenceStore(managedObjectContext)
+//    }
     
     private func setupRadio() {
         guard let radioStation = getSelectedStation() else { return }
@@ -62,13 +62,14 @@ final class PlayerViewModel {
         name = radioStation.name
         image = radioStation.image
         
-        isFavorite.value = favoritesStore.isFavorite(with: radioStation.name, group: radioStation.group)
+//        isFavorite.value = favoritesStore.isFavorite(with: radioStation.name, group: radioStation.group)
     }
     
-    private func getSelectedStation() -> Station?{
-        guard let name  = nameSelected, let _ = groupSelected,
-            let selected = PersistenceManager.shared.findStation(with: name) else { return nil }
-        return selected
+    private func getSelectedStation() -> Station? {
+//        guard let name  = nameSelected, let _ = groupSelected,
+//            let selected = PersistenceManager.shared.findStation(with: name) else { return nil }
+//        return selected
+        return nil
     }
     
     //MARK: - Public
@@ -79,7 +80,7 @@ final class PlayerViewModel {
     }
     
     func markAsFavorite() {
-        isFavorite.value = favoritesStore.toggleFavorite(with: nameSelected, group: groupSelected)
+//        isFavorite.value = favoritesStore.toggleFavorite(with: nameSelected, group: groupSelected)
     }
     
     func refreshStatus() {

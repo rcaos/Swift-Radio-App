@@ -10,10 +10,12 @@ import Foundation
 
 final class PopularViewModel {
     
-    var popularCells: [PopularCellViewModel] {
-        let popularStations = PersistenceManager.shared.stations
-        return popularStations.map{ PopularCellViewModel(station: $0) }
-    }
+//    var popularCells: [PopularCellViewModel] {
+//        let popularStations = PersistenceManager.shared.stations
+//        return popularStations.map{ PopularCellViewModel(station: $0) }
+//    }
+    
+    var popularCells: [PopularCellViewModel] = []
     
     var selectedRadioStation: ((String, String) -> Void)?
     
@@ -33,9 +35,9 @@ final class PopularViewModel {
     }
     
     func getStationSelection(by index: Int) {
-        let stations = PersistenceManager.shared.stations
-        let selectedStation = stations[index]
-        selectedRadioStation?( selectedStation.name, selectedStation.group )
+//        let stations = PersistenceManager.shared.stations
+//        let selectedStation = stations[index]
+//        selectedRadioStation?( selectedStation.name, selectedStation.group )
     }
     
 }
