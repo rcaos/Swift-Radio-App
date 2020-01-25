@@ -17,6 +17,8 @@ final class AppDIContainer {
     lazy var dataTransferService: DataTransferService = {
         return ApiClient()
     }()
+    
+    lazy var stationsLocalStorage: StationsLocalStorage = CoreDataStorage(maxStorageLimit: 10)
 }
 
 extension AppDIContainer {
@@ -24,14 +26,19 @@ extension AppDIContainer {
     // MARK : - DIContainers Initial
     
     func makeInitialSceneDIContainer() -> InitialSceneDIContainer {
-        let dependencies =  InitialSceneDIContainer.Dependencies(datTransferService: dataTransferService)
+        let dependencies =  InitialSceneDIContainer.Dependencies(
+            dataTransferService: dataTransferService,
+            stationsLocalStorage: stationsLocalStorage)
         return InitialSceneDIContainer(dependencies: dependencies)
     }
     
     // MARK : - DIContainers Main
     
-     func makeMainSceneDIContainer() -> MainSceneDIContainer {
-         let dependencies =  MainSceneDIContainer.Dependencies(datTransferService: dataTransferService)
-         return MainSceneDIContainer(dependencies: dependencies)
-     }
+    func makeMainSceneDIContainer() -> MainSceneDIContainer {
+        let dependencies =  MainSceneDIContainer.Dependencies(
+            dataTransferService: dataTransferService,
+            stationsLocalStorage: stationsLocalStorage)
+        
+        return MainSceneDIContainer(dependencies: dependencies)
+    }
 }

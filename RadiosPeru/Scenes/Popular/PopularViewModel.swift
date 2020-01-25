@@ -10,27 +10,40 @@ import Foundation
 
 final class PopularViewModel {
     
-//    var popularCells: [PopularCellViewModel] {
-//        let popularStations = PersistenceManager.shared.stations
-//        return popularStations.map{ PopularCellViewModel(station: $0) }
-//    }
+    private let fetchStationsUseCase: FetchStationsLocalUseCase
     
     var popularCells: [PopularCellViewModel] = []
     
     var selectedRadioStation: ((String, String) -> Void)?
     
-    //Reactive
-    var viewState: Bindable<ViewState>!
+    var viewState: Bindable<ViewState> = Bindable(.empty)
     
-    init() {
-        setupViewState()
+    init(fetchStationsUseCase: FetchStationsLocalUseCase) {
+        self.fetchStationsUseCase = fetchStationsUseCase
     }
     
-    private func setupViewState() {
-        if popularCells.count == 0 {
-            viewState = Bindable(.empty)
+    func getStations() {
+        let request = FetchStationsLocalUseCaseRequestValue()
+        
+        _ = fetchStationsUseCase.execute(requestValue: request) { [weak self] result in
+            switch result {
+            case .success(let items):
+                self?.processFetched(for: items)
+            case .failure:
+                break
+            }
+        }
+    }
+    
+    private func processFetched(for items: [StationRemote]) {
+        popularCells = items.map({
+            PopularCellViewModel(station: $0)
+        })
+        
+        if popularCells.isEmpty {
+            viewState.value = .empty
         } else {
-            viewState = Bindable(.populated)
+            viewState.value = .populated
         }
     }
     

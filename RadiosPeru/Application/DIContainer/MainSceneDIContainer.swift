@@ -11,7 +11,8 @@ import UIKit
 final class MainSceneDIContainer {
     
     struct Dependencies {
-        let datTransferService: DataTransferService
+        let dataTransferService: DataTransferService
+        let stationsLocalStorage: StationsLocalStorage
     }
     
     private let dependencies: Dependencies
@@ -23,7 +24,16 @@ final class MainSceneDIContainer {
     }
     
     public func makeMainViewController() -> UIViewController {
-        return MainViewControler.create(with: makeMainViewModel())
+        return MainViewControler.create(with: makeMainViewModel(),
+                                        controllersFactory: self)
+    }
+    
+    public func makePopularViewController() -> UIViewController {
+        let popularDependencies = PopularSceneDIContainer.Dependencies(
+            dataTransferService: dependencies.dataTransferService,
+            stationsLocalStorage: dependencies.stationsLocalStorage)
+        
+        return PopularSceneDIContainer(dependencies: popularDependencies).makePopularViewController()
     }
 }
 
@@ -44,6 +54,10 @@ extension MainSceneDIContainer {
     }
     
     private func makeShowDetailsRepository() -> ShowDetailsRepository {
-        return DefaultShowDetailsRepository(dataTransferService: dependencies.datTransferService)
+        return DefaultShowDetailsRepository(dataTransferService: dependencies.dataTransferService)
     }
+}
+
+extension MainSceneDIContainer: MainViewControllersFactory {
+    
 }

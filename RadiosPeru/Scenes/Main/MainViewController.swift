@@ -17,7 +17,8 @@ protocol MainControllerDelegate: class {
 
 class MainViewControler: UIViewController, StoryboardInstantiable {
     
-    var viewModel: MainViewModel!
+    private var viewModel: MainViewModel!
+    private var controllersFactory: MainViewControllersFactory!
     
     let interactor = Interactor()
     
@@ -27,12 +28,10 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
     var tabBarVC: UITabBarController!
     var miniPlayerVC: MiniPlayerViewController!
     
-    static func create(with viewModel: MainViewModel) -> MainViewControler {
+    static func create(with viewModel: MainViewModel, controllersFactory: MainViewControllersFactory) -> MainViewControler {
         let controller = MainViewControler.instantiateViewController()
         controller.viewModel = viewModel
-        
-        // MARK: - Agregar Factory tmb
-        //controller.mainViewControllersFactory = mainFactory
+        controller.controllersFactory = controllersFactory
         
         return controller
     }
@@ -74,15 +73,15 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
     }
     
     private func buildViewControllers() -> [UIViewController] {
-        let popularVC = PopularViewController()
-        popularVC.viewModel = viewModel.buildPopularViewModel()
+        
+        guard let popularVC = controllersFactory.makePopularViewController() as? PopularViewController else { return [] }
         popularVC.delegate = self
         popularVC.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 0)
         
-        let favoritesVC = FavoritesViewController()
-        favoritesVC.viewModel = viewModel.buildFavoriteViewModel()
-        favoritesVC.delegate = self
-        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+//        let favoritesVC = FavoritesViewController()
+//        favoritesVC.viewModel = viewModel.buildFavoriteViewModel()
+//        favoritesVC.delegate = self
+//        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
         return [popularVC]
         //return [popularVC, favoritesVC]
@@ -123,3 +122,10 @@ extension MainViewControler: UIViewControllerTransitioningDelegate {
     }
 }
 
+// MARK: - MainViewControllersFactory
+
+protocol MainViewControllersFactory {
+    
+    func makePopularViewController() -> UIViewController
+    
+}

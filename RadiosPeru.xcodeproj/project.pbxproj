@@ -44,6 +44,7 @@
 		77A3D80323DB46C0003FF385 /* GenericCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3D80223DB46C0003FF385 /* GenericCollectionView.swift */; };
 		77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469A235AD7D7006C3EEA /* Interactor.swift */; };
 		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
+		77B957B123DC0D1800220426 /* PopularSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B023DC0D1800220426 /* PopularSceneDIContainer.swift */; };
 		77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */; };
 		77C9D3ED23DB990400C6FD55 /* StationsLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */; };
 		77C9D3F023DB992700C6FD55 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3EF23DB992700C6FD55 /* CoreDataStorage.swift */; };
@@ -134,6 +135,7 @@
 		77A3D80223DB46C0003FF385 /* GenericCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCollectionView.swift; sourceTree = "<group>"; };
 		77B9469A235AD7D7006C3EEA /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
+		77B957B023DC0D1800220426 /* PopularSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularSceneDIContainer.swift; sourceTree = "<group>"; };
 		77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerObserver.swift; sourceTree = "<group>"; };
 		77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsLocalStorage.swift; sourceTree = "<group>"; };
 		77C9D3EF23DB992700C6FD55 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				77D9A0F823DA556600DDCE06 /* AppDIContainer.swift */,
 				77D9A0FA23DA55C500DDCE06 /* InitialSceneDIContainer.swift */,
 				77A3D7FC23DB2DF9003FF385 /* MainSceneDIContainer.swift */,
+				77B957B023DC0D1800220426 /* PopularSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				777CEDCD23D90C6F00FCD04B /* SimpleViewState.swift in Sources */,
 				77D9A0FF23DA628300DDCE06 /* InitialTabBarController.swift in Sources */,
 				77D5174C237C98C300B7DCC9 /* PersistenceStore+Station.swift in Sources */,
+				77B957B123DC0D1800220426 /* PopularSceneDIContainer.swift in Sources */,
 				77E5AF6323D9F39800509BC2 /* ShowRPP+Decodable.swift in Sources */,
 				77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */,
 				7739E809235E4A610071882A /* RadioPlayer.swift in Sources */,

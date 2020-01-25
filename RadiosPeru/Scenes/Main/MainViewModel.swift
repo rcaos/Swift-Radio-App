@@ -31,10 +31,6 @@ final class MainViewModel {
     
     //MARK: - Builds Model
     
-    func buildPopularViewModel() -> PopularViewModel {
-        return PopularViewModel()
-    }
-    
     func buildFavoriteViewModel() -> FavoritesViewModel {
         return FavoritesViewModel()
     }

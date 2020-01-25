@@ -96,7 +96,7 @@ extension CoreDataStorage: StationsLocalStorage {
         // Los SortDescriptors los puedo tener en una clase aparte.
         
         persistentContainer.performBackgroundTask { [weak self] _ in
-        guard let strongSelf = self else { return }
+            guard let strongSelf = self else { return }
             
             do {
                 let request: NSFetchRequest<Station> = Station.fetchRequest()
@@ -104,7 +104,6 @@ extension CoreDataStorage: StationsLocalStorage {
                                                             ascending: false)]
                 //request.fetchLimit = number
                 
-                // LLama al otro constructor
                 let resut = try strongSelf.mainContext.fetch(request).map ( StationRemote.init )
                 DispatchQueue.global(qos: .background).async {
                     completion(.success(resut))

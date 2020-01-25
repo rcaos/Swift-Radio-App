@@ -11,13 +11,11 @@ import UIKit
 final class InitialSceneDIContainer {
     
     struct Dependencies {
-        let datTransferService: DataTransferService
+        let dataTransferService: DataTransferService
+        let stationsLocalStorage: StationsLocalStorage
     }
     
     private let dependencies: Dependencies
-    
-    // MARK: - TODO Persistence
-    lazy var stationsLocalStorage: StationsLocalStorage = CoreDataStorage(maxStorageLimit: 10)
     
     // MARK: - Initializers
     
@@ -51,10 +49,10 @@ extension InitialSceneDIContainer {
     // MARK: - Repositories
     
     private func makeStationsRepository() -> StationsRepository {
-        return DefaultStationsRepository(dataTransferService: dependencies.datTransferService)
+        return DefaultStationsRepository(dataTransferService: dependencies.dataTransferService)
     }
     
     private func makeStationsLocalRepository() -> StationsLocalRepository {
-        return DefaultStationsLocalRepository(stationsPersistentStorage: stationsLocalStorage)
+        return DefaultStationsLocalRepository(stationsPersistentStorage: dependencies.stationsLocalStorage)
     }
 }

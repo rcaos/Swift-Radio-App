@@ -22,7 +22,7 @@ final class DefaultFetchStationsLocalUseCase: FetchStationsLocalUseCase {
     
     private let stationsLocalRepository: StationsLocalRepository
     
-    init(stationsRepository: StationsRepository, stationsLocalRepository: StationsLocalRepository) {
+    init(stationsLocalRepository: StationsLocalRepository) {
         self.stationsLocalRepository = stationsLocalRepository
     }
     
