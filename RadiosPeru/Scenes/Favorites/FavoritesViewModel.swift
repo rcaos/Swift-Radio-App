@@ -10,7 +10,7 @@ import Foundation
 
 protocol FavoritesViewModelDelegate: class {
     
-    func stationFavoriteDidSelect(station: SimpleStation)
+    func stationFavoriteDidSelect(station: StationRemote)
 }
 
 
@@ -61,10 +61,7 @@ final class FavoritesViewModel {
     //MARK: - Public Methods
     
     func getStationSelection(by index: Int) {
-        let selectedStation = stations[index]
-        let simpleStation = SimpleStation(name: selectedStation.name, group: selectedStation.group)
-        
-        delegate?.stationFavoriteDidSelect(station: simpleStation)
+        delegate?.stationFavoriteDidSelect(station: stations[index])
     }
 }
 

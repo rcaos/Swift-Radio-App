@@ -18,24 +18,24 @@ final class MainViewModel {
     init(radioPlayer: RadioPlayer) {
         self.radioPlayer = radioPlayer
         
-        miniPlayer = MiniPlayerViewModel(name: nil, group: nil, service: radioPlayer)
+        miniPlayer = MiniPlayerViewModel(service: radioPlayer)
     }
     
-    func selectStation(with station: SimpleStation) {
-        miniPlayer.configStation(by: station.name, group: station.group)
+    func selectStation(with station: StationRemote) {
+        miniPlayer.configStation(with: station)
     }
 }
 
 extension MainViewModel: PopularViewModelDelegate {
     
-    func stationDidSelect(station: SimpleStation) {
+    func stationDidSelect(station: StationRemote) {
         selectStation(with: station)
     }
 }
 
 extension MainViewModel: FavoritesViewModelDelegate {
     
-    func stationFavoriteDidSelect(station: SimpleStation) {
+    func stationFavoriteDidSelect(station: StationRemote) {
         selectStation(with: station)
     }
 }

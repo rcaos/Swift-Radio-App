@@ -12,16 +12,13 @@ final class MiniPlayerViewModel {
         
     private var radioPlayer: RadioPlayer?
     
-    private var nameSelected: String?
-    private var groupSelected: String?
+    private var stationSelected: StationRemote?
     
     var name: String = "Pick a Radio Station"
     
     // MARK: - TODO
     var isSelected: Bool {
-//        guard let name  = nameSelected, let _ = groupSelected,
-//            let _ = PersistenceManager.shared.findStation(with: name) else { return false }
-        return true
+        stationSelected != nil
     }
     
     //Reactive
@@ -33,10 +30,7 @@ final class MiniPlayerViewModel {
     
     //MARK: - Initializers
     
-    init(name: String?, group: String?, service: RadioPlayer?) {
-        self.nameSelected = name
-        self.groupSelected = group
-        
+    init(service: RadioPlayer?) {
         radioPlayer = service
         radioPlayer?.addObserver(self)
     }
@@ -47,17 +41,13 @@ final class MiniPlayerViewModel {
     
     //MARK: - Public
     
-    func configStation(by name: String, group: String, playAutomatically: Bool = true) {
-        self.nameSelected = name
-        self.groupSelected = group
-        
-        //MARK: - TODO, también necesitaría consultar + .group
-        guard let station = getSelectedStation() else { return }
+    func configStation(with station: StationRemote, playAutomatically: Bool = true) {
+        stationSelected = station
         
         setupRadio(station)
         
         viewState.value = .stopped
-        radioPlayer?.setupRadio(with: name, playWhenReady: playAutomatically)
+        radioPlayer?.setupRadio(with: station, playWhenReady: playAutomatically)
     }
     
     func togglePlayPause() {
@@ -66,7 +56,7 @@ final class MiniPlayerViewModel {
     }
     
     func markAsFavorite() {
-        guard let selected = getSelectedStation() else { return }
+        //guard let selected = getSelectedStation() else { return }
 //        isFavorite.value = favoritesStore.toggleFavorite(with: selected.name, group: selected.group)
     }
     
@@ -74,8 +64,8 @@ final class MiniPlayerViewModel {
         guard let player = radioPlayer else { return }
         viewState.value = player.state
         
-        guard let selected = getSelectedStation() else { return }
-        setupRadio( selected )
+        //guard let selected = getSelectedStation() else { return }
+        //setupRadio( selected )
     }
     
     func getDescription() -> String {
@@ -86,26 +76,19 @@ final class MiniPlayerViewModel {
     
     //MARK: - Private
     
-    private func setupRadio(_ radio: Station) {
+    private func setupRadio(_ radio: StationRemote) {
         self.name = radio.name
         
 //        isFavorite.value = favoritesStore.isFavorite(with: radio.name, group: radio.group)
     }
-    
-    private func getSelectedStation() -> Station? {
-//        guard let name  = nameSelected, let _ = groupSelected,
-//            let selected = PersistenceManager.shared.findStation(with: name) else { return nil }
-//        return selected
         
-        return nil
-    }
-    
     //MARK: - View Models Building
     
     func buildPlayerViewModel() -> PlayerViewModel? {
-        guard let name = self.nameSelected, let group = self.groupSelected else { return nil }
-        
-        return PlayerViewModel(name: name, group: group, player: radioPlayer)
+//        guard let name = self.nameSelected, let group = self.groupSelected else { return nil }
+//
+//        return PlayerViewModel(name: name, group: group, player: radioPlayer)
+        return nil
     }
 }
 

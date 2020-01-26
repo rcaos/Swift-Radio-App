@@ -45,6 +45,8 @@ class RadioPlayer {
         }
     }
     
+    private var stationSelected: StationRemote?
+    
     //MARK: - Life Cycle
     
     init(showDetailsUseCase: FetchShowOnlineInfoUseCase) {
@@ -54,17 +56,19 @@ class RadioPlayer {
     
     //MARK: - Publics
     
-    func setupRadio(with station: String?, playWhenReady: Bool = false) {
-        guard let stationSelected = getSelectedStation(with: station) else { return }
-        nameSelected = station
+    func setupRadio(with station: StationRemote, playWhenReady: Bool = false) {
+//        guard let stationSelected = getSelectedStation(with: station) else { return }
+        stationSelected = station
+        
+        nameSelected = station.name
         
         resetRadio()
         
-        if let url = URL(string: stationSelected.urlStream) {
+        if let url = URL(string: station.urlStream) {
             player.prepare(with: url, playWhenReady: playWhenReady)
         }
         
-        setupSource(with: stationSelected)
+        setupSource(with: station)
     }
     
     func refreshOnlineInfo() {
@@ -83,7 +87,7 @@ class RadioPlayer {
     
     func getRadioDescription() -> String {
         
-        guard let stationSelected = getSelectedStation(with: nameSelected) else { return "" }
+        guard let stationSelected = stationSelected else { return "" }
         
         let defaultDescription = stationSelected.city + " - " +
             stationSelected.frecuency + " - " +
@@ -126,7 +130,7 @@ class RadioPlayer {
     //MARK : - Networking
     
     private func getAiringNowDetails() {
-        guard let stationSelected = getSelectedStation(with: nameSelected) else { return }
+        guard let stationSelected = stationSelected else { return }
         
         let request = FetchShowOnlineInfoUseCaseRequestValue(group: stationSelected.type)
 
@@ -150,20 +154,20 @@ class RadioPlayer {
         changeOnlineInfo()
         
         // MARK: - TODO, call to CoreData
-        guard let stationSelected = getSelectedStation(with: nameSelected) else { return }
+        guard let stationSelected = stationSelected else { return }
         setupSource(with: stationSelected)
     }
     
-    private func getSelectedStation(with name: String?) -> Station? {
-        //MARK: - TODO
-        //, let _ = groupSelected,
-//        guard let stationName = name,
-//            let station = PersistenceManager.shared.findStation(with: stationName) else { return nil }
-//        return station
-        return nil
-    }
+//    private func getSelectedStation(with name: String?) -> StationRemote? {
+//        //MARK: - TODO
+//        //, let _ = groupSelected,
+////        guard let stationName = name,
+////            let station = PersistenceManager.shared.findStation(with: stationName) else { return nil }
+////        return station
+//        return nil
+//    }
     
-    private func setupSource(with selected: Station) {
+    private func setupSource(with selected: StationRemote) {
         let defaultInfo = selected.city + " - " +
             selected.frecuency + " - " +
             selected.slogan

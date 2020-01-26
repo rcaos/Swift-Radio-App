@@ -10,7 +10,7 @@ import Foundation
 
 protocol PopularViewModelDelegate: class {
     
-    func stationDidSelect(station: SimpleStation)
+    func stationDidSelect(station: StationRemote)
 }
 
 final class PopularViewModel {
@@ -60,10 +60,7 @@ final class PopularViewModel {
     //MARK: - Public Methods
     
     func getStationSelection(by index: Int) {
-        let selectedStation = stations[index]
-        let simpleStation = SimpleStation(name: selectedStation.name, group: selectedStation.group)
-        
-        delegate?.stationDidSelect(station: simpleStation)
+        delegate?.stationDidSelect(station: stations[index])
     }
 }
 
