@@ -28,5 +28,17 @@ Proyecto personal que muestra las principales estaciones de radio Peruanas.
 <img src="https://github.com/rcaos/RadiosPeru/blob/master/Screenshots/IMG_1532.PNG" width="210" height="374">
 </p>
 
+## Clean Architecture
+- Arquitectura basada en: https://github.com/kudoleh/iOS-Clean-Architecture-MVVM
+<br>
+<center>
+<p>
+<img src="https://github.com/rcaos/TVToday/blob/master/Screens/CleanArchitecture%2BMVVM.png">
+<img src="https://github.com/rcaos/TVToday/blob/master/Screens/CleanArchitectureDependencies.png">
+</p>
+</center>
+<br>
+
 # Author
 Jeans Ruiz, jeansruiz.c@gmail.com
+
