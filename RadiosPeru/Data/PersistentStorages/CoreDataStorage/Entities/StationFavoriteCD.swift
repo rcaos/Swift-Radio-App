@@ -1,0 +1,24 @@
+//
+//  StationFavorite.swift
+//  RadiosPeru
+//
+//  Created by Jeans on 11/13/19.
+//  Copyright © 2019 Jeans. All rights reserved.
+//
+
+import Foundation
+import CoreData
+
+final class StationFavoriteCD: NSManagedObject {
+    
+    @NSManaged var createAt: Date
+    @NSManaged var name: String
+    @NSManaged var group: String
+}
+
+extension StationFavoriteCD {
+    
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<StationFavoriteCD> {
+        return NSFetchRequest<StationFavoriteCD>(entityName: "StationFavoriteCD")
+    }
+}

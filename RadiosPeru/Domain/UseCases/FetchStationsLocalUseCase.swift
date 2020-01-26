@@ -15,7 +15,7 @@ protocol FetchStationsLocalUseCase {
 }
 
 struct FetchStationsLocalUseCaseRequestValue {
-    
+    //let station: SimpleStation?
 }
 
 final class DefaultFetchStationsLocalUseCase: FetchStationsLocalUseCase {
@@ -29,6 +29,10 @@ final class DefaultFetchStationsLocalUseCase: FetchStationsLocalUseCase {
     func execute(requestValue: FetchStationsLocalUseCaseRequestValue, completion: @escaping (Result<[StationRemote], Error>) -> Void) -> Cancellable? {
         
         stationsLocalRepository.stationsList(completion: completion)
+        
+        //else
+        //stationsLocalRepository.findStations(with: [requestValue.station], completion: completion)
+        
         return nil
     }
     

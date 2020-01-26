@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-protocol MainControllerDelegate: class {
-    
-    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio name: String, group: String)
-    
-}
+//protocol MainControllerDelegate: class {
+//
+//    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio name: String, group: String)
+//
+//}
 
 class MainViewControler: UIViewController, StoryboardInstantiable {
     
@@ -74,17 +74,13 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
     
     private func buildViewControllers() -> [UIViewController] {
         
-        guard let popularVC = controllersFactory.makePopularViewController() as? PopularViewController else { return [] }
-        popularVC.delegate = self
+        guard let popularVC = controllersFactory.makePopularViewController(delegate: viewModel) as? PopularViewController else { return [] }
         popularVC.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 0)
         
-//        let favoritesVC = FavoritesViewController()
-//        favoritesVC.viewModel = viewModel.buildFavoriteViewModel()
-//        favoritesVC.delegate = self
-//        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        guard let favoritesVC = controllersFactory.makeFavoritesViewController(delegate: viewModel) as? FavoritesViewController else { return [] }
+        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
-        return [popularVC]
-        //return [popularVC, favoritesVC]
+        return [popularVC, favoritesVC]
     }
 }
 
@@ -103,12 +99,12 @@ extension MainViewControler : MiniPlayerControllerDelegate  {
     }
 }
 
-extension MainViewControler: MainControllerDelegate {
-    
-    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio name: String, group: String) {
-        viewModel.selectStation(by: name, group: group)
-    }
-}
+//extension MainViewControler: MainControllerDelegate {
+//
+//    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio name: String, group: String) {
+//        viewModel.selectStation(by: name, group: group)
+//    }
+//}
 
 // MARK: - UIViewControllerTransitioningDelegate
 
@@ -126,6 +122,7 @@ extension MainViewControler: UIViewControllerTransitioningDelegate {
 
 protocol MainViewControllersFactory {
     
-    func makePopularViewController() -> UIViewController
+    func makePopularViewController(delegate: PopularViewModelDelegate) -> UIViewController
     
+    func makeFavoritesViewController(delegate: FavoritesViewModelDelegate) -> UIViewController
 }

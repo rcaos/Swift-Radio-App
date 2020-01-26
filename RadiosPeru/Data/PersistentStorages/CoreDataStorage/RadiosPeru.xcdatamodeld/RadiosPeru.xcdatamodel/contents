@@ -16,7 +16,7 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="StationFavorite" representedClassName=".StationFavorite" syncable="YES">
+    <entity name="StationFavoriteCD" representedClassName=".StationFavorite" syncable="YES">
         <attribute name="createAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="group" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -28,6 +28,6 @@
     </entity>
     <elements>
         <element name="Station" positionX="-63" positionY="-18" width="128" height="178"/>
-        <element name="StationFavorite" positionX="-54" positionY="63" width="128" height="90"/>
+        <element name="StationFavoriteCD" positionX="-54" positionY="63" width="128" height="88"/>
     </elements>
 </model>

@@ -18,8 +18,6 @@ class PopularViewController: UIViewController {
     
     let interactor = Interactor()
     
-    var delegate: MainControllerDelegate?
-    
     static func create(with viewModel: PopularViewModel) -> PopularViewController {
         let controller = PopularViewController()
         controller.viewModel = viewModel
@@ -57,11 +55,6 @@ class PopularViewController: UIViewController {
     //MARK: - Reactive
     
     func setupBindables() {
-        viewModel?.selectedRadioStation = { [weak self] name, group in
-            guard let strongSelf = self else { return }
-            strongSelf.delegate?.mainControllerDelegate(strongSelf, didConfigRadio: name, group: group)
-        }
-        
         viewModel?.viewState.bind({ [weak self] state in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {

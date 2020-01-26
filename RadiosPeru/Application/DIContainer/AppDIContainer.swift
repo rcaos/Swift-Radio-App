@@ -18,7 +18,11 @@ final class AppDIContainer {
         return ApiClient()
     }()
     
-    lazy var stationsLocalStorage: StationsLocalStorage = CoreDataStorage(maxStorageLimit: 10)
+    lazy var localStorage = CoreDataStorage(maxStorageLimit: 10)
+    
+    lazy var stationsLocalStorage: StationsLocalStorage = localStorage
+    
+    lazy var favoritesLocalStorage: FavoritesLocalStorage = localStorage
 }
 
 extension AppDIContainer {
@@ -37,7 +41,8 @@ extension AppDIContainer {
     func makeMainSceneDIContainer() -> MainSceneDIContainer {
         let dependencies =  MainSceneDIContainer.Dependencies(
             dataTransferService: dataTransferService,
-            stationsLocalStorage: stationsLocalStorage)
+            stationsLocalStorage: stationsLocalStorage,
+            favoritesLocalStorage: favoritesLocalStorage)
         
         return MainSceneDIContainer(dependencies: dependencies)
     }

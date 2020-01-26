@@ -11,7 +11,6 @@ import UIKit
 final class PopularSceneDIContainer {
     
     struct Dependencies {
-        let dataTransferService: DataTransferService
         let stationsLocalStorage: StationsLocalStorage
     }
     
@@ -23,8 +22,9 @@ final class PopularSceneDIContainer {
         self.dependencies = dependencies
     }
     
-    public func makePopularViewController() -> UIViewController {
-        return PopularViewController.create(with: makePopularViewModel())
+    public func makePopularViewController(delegate: PopularViewModelDelegate) -> UIViewController {
+        return PopularViewController.create(with:
+            makePopularViewModel(delegate: delegate))
     }
 }
 
@@ -32,8 +32,8 @@ final class PopularSceneDIContainer {
 
 extension PopularSceneDIContainer {
     
-    private func makePopularViewModel() -> PopularViewModel {
-        return PopularViewModel(fetchStationsUseCase: makeFetchStationsUseCase())
+    private func makePopularViewModel(delegate: PopularViewModelDelegate) -> PopularViewModel {
+        return PopularViewModel(fetchStationsUseCase: makeFetchStationsUseCase(), delegate: delegate)
     }
     
     private func makeFetchStationsUseCase() -> FetchStationsLocalUseCase {

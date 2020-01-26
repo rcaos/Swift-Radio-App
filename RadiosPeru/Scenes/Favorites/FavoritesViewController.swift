@@ -18,7 +18,11 @@ class FavoritesViewController: UIViewController {
     
     let interactor = Interactor()
     
-    var delegate: MainControllerDelegate?
+    static func create(with viewModel: FavoritesViewModel) -> FavoritesViewController {
+        let controller = FavoritesViewController()
+        controller.viewModel = viewModel
+        return controller
+    }
     
     //MARK: - Initializers
     
@@ -49,14 +53,8 @@ class FavoritesViewController: UIViewController {
     }
     
     //MARK: - Reactive
+    
     private func setupViewModel() {
-        
-        viewModel.selectedRadioStation = {[weak self] name, group in
-            guard let strongSelf = self else { return }
-            self?.delegate?.mainControllerDelegate(strongSelf, didConfigRadio: name, group: group)
-            
-        }
-        
         viewModel.viewState.bindAndFire({[weak self] state in
             guard let strongSelf = self ,
                 let _ = strongSelf.customView.collectionView else { return }
@@ -65,6 +63,8 @@ class FavoritesViewController: UIViewController {
                 strongSelf.customView.collectionView?.reloadData()
             }
         })
+        
+        viewModel.getStations()
     }
     
     func configView(with state: FavoritesViewModel.ViewState) {
@@ -102,12 +102,12 @@ extension FavoritesViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
-        return viewModel.stations.count
+        return viewModel.favoriteCells.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PopularViewCell
-        cell.viewModel = viewModel.stations[indexPath.row]
+        cell.viewModel = viewModel.favoriteCells[indexPath.row]
         return cell
     }
 }

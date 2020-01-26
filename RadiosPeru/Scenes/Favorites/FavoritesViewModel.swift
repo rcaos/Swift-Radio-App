@@ -7,37 +7,51 @@
 //
 
 import Foundation
-import CoreData
+
+protocol FavoritesViewModelDelegate: class {
+    
+    func stationFavoriteDidSelect(station: SimpleStation)
+}
+
 
 final class FavoritesViewModel {
+
+    private let fetchFavoritesUseCase: FetchFavoritesStationsUseCase
+        
+    private var stations: [StationRemote] = []
     
-//    private var favoriteStore: PersistenceStore<StationFavorite>!
+    var favoriteCells: [PopularCellViewModel] = []
     
-//    var stations: [PopularCellViewModel] {
-//        let favoriteStations = PersistenceManager.shared.favorites
-//        return favoriteStations.map({ PopularCellViewModel(station: $0) })
-//    }
-    
-    var stations: [PopularCellViewModel] = []
-    
-    var selectedRadioStation: ((String, String) -> Void)?
-    
-    //Reactive
     var viewState: Bindable<ViewState> = Bindable(.empty)
     
-    init( ) {
-//        setupStores(managedObjectContext)
-        refreshStations()
+    private weak var delegate: FavoritesViewModelDelegate?
+    
+    init(fetchFavoritesUseCase: FetchFavoritesStationsUseCase, delegate: FavoritesViewModelDelegate? = nil) {
+        self.fetchFavoritesUseCase = fetchFavoritesUseCase
+        self.delegate = delegate
     }
     
-//    private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
-//        favoriteStore = PersistenceStore(managedObjectContext)
-//        favoriteStore.configureResultsController(sortDescriptors: StationFavorite.defaultSortDescriptors)
-//        favoriteStore.delegate = self
-//    }
+    func getStations() {
+        let request = FetchFavoritesStationsUseCaseRequestValue()
+        
+        _ = fetchFavoritesUseCase.execute(requestValue: request) { [weak self] result in
+            switch result {
+            case .success(let items):
+                self?.processFetched(for: items)
+            case .failure:
+                break
+            }
+        }
+    }
     
-    private func refreshStations() {
-        if stations.count == 0 {
+    private func processFetched(for items: [StationRemote]) {
+        stations = items
+        
+        favoriteCells = items.map({
+            PopularCellViewModel(station: $0)
+        })
+        
+        if favoriteCells.isEmpty {
             viewState.value = .empty
         } else {
             viewState.value = .populated
@@ -47,9 +61,10 @@ final class FavoritesViewModel {
     //MARK: - Public Methods
     
     func getStationSelection(by index: Int) {
-//        let favorites = PersistenceManager.shared.favorites
-//        let selectedStation = favorites[index]
-//        selectedRadioStation?( selectedStation.name, selectedStation.group)
+        let selectedStation = stations[index]
+        let simpleStation = SimpleStation(name: selectedStation.name, group: selectedStation.group)
+        
+        delegate?.stationFavoriteDidSelect(station: simpleStation)
     }
 }
 

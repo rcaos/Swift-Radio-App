@@ -6,13 +6,10 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
-import CoreData
+import Foundation
 
 final class MiniPlayerViewModel {
-    
-//    private var managedObjectContext: NSManagedObjectContext
-//    private var favoritesStore: PersistenceStore<StationFavorite>!
-    
+        
     private var radioPlayer: RadioPlayer?
     
     private var nameSelected: String?
@@ -37,10 +34,6 @@ final class MiniPlayerViewModel {
     //MARK: - Initializers
     
     init(name: String?, group: String?, service: RadioPlayer?) {
-        
-//        self.managedObjectContext = managedObjectContext
-        //setupStores(self.managedObjectContext)
-        
         self.nameSelected = name
         self.groupSelected = group
         
@@ -50,10 +43,6 @@ final class MiniPlayerViewModel {
     
     deinit {
         radioPlayer?.removeObserver(self)
-    }
-    
-    private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
-//        favoritesStore = PersistenceStore(managedObjectContext)
     }
     
     //MARK: - Public
@@ -103,7 +92,7 @@ final class MiniPlayerViewModel {
 //        isFavorite.value = favoritesStore.isFavorite(with: radio.name, group: radio.group)
     }
     
-    private func getSelectedStation() -> Station?{
+    private func getSelectedStation() -> Station? {
 //        guard let name  = nameSelected, let _ = groupSelected,
 //            let selected = PersistenceManager.shared.findStation(with: name) else { return nil }
 //        return selected

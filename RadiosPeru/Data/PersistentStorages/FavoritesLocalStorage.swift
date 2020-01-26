@@ -1,14 +1,14 @@
 //
-//  FavoritesRepository.swift
+//  FavoritesLocalStorage.swift
 //  RadiosPeru
 //
-//  Created by Jeans Ruiz on 1/23/20.
+//  Created by Jeans Ruiz on 1/25/20.
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
 import Foundation
 
-protocol FavoritesRepository {
+protocol FavoritesLocalStorage {
     
     func isFavorite(station: SimpleStation,
     completion: @escaping (Result<Bool, Error>) -> Void)

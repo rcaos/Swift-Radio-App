@@ -8,18 +8,26 @@
 
 import Foundation
 
+protocol PopularViewModelDelegate: class {
+    
+    func stationDidSelect(station: SimpleStation)
+}
+
 final class PopularViewModel {
     
     private let fetchStationsUseCase: FetchStationsLocalUseCase
     
-    var popularCells: [PopularCellViewModel] = []
+    private var stations: [StationRemote] = []
     
-    var selectedRadioStation: ((String, String) -> Void)?
+    var popularCells: [PopularCellViewModel] = []
     
     var viewState: Bindable<ViewState> = Bindable(.empty)
     
-    init(fetchStationsUseCase: FetchStationsLocalUseCase) {
+    private weak var delegate: PopularViewModelDelegate?
+    
+    init(fetchStationsUseCase: FetchStationsLocalUseCase, delegate: PopularViewModelDelegate? = nil) {
         self.fetchStationsUseCase = fetchStationsUseCase
+        self.delegate = delegate
     }
     
     func getStations() {
@@ -36,7 +44,9 @@ final class PopularViewModel {
     }
     
     private func processFetched(for items: [StationRemote]) {
-        popularCells = items.map({
+        stations = items
+        
+        popularCells = stations.map({
             PopularCellViewModel(station: $0)
         })
         
@@ -47,12 +57,14 @@ final class PopularViewModel {
         }
     }
     
-    func getStationSelection(by index: Int) {
-//        let stations = PersistenceManager.shared.stations
-//        let selectedStation = stations[index]
-//        selectedRadioStation?( selectedStation.name, selectedStation.group )
-    }
+    //MARK: - Public Methods
     
+    func getStationSelection(by index: Int) {
+        let selectedStation = stations[index]
+        let simpleStation = SimpleStation(name: selectedStation.name, group: selectedStation.group)
+        
+        delegate?.stationDidSelect(station: simpleStation)
+    }
 }
 
 extension PopularViewModel {

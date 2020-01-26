@@ -11,27 +11,31 @@ import CoreData
 
 final class MainViewModel {
     
-//    private var managedObjectContext: NSManagedObjectContext
-    
     var miniPlayer: MiniPlayerViewModel
     
     var radioPlayer: RadioPlayer
     
     init(radioPlayer: RadioPlayer) {
-//        self.managedObjectContext = managedObjectContext
-        
         self.radioPlayer = radioPlayer
         
         miniPlayer = MiniPlayerViewModel(name: nil, group: nil, service: radioPlayer)
     }
     
-    func selectStation(by name: String, group: String) {
-        miniPlayer.configStation(by: name, group: group)
+    func selectStation(with station: SimpleStation) {
+        miniPlayer.configStation(by: station.name, group: station.group)
     }
+}
+
+extension MainViewModel: PopularViewModelDelegate {
     
-    //MARK: - Builds Model
+    func stationDidSelect(station: SimpleStation) {
+        selectStation(with: station)
+    }
+}
+
+extension MainViewModel: FavoritesViewModelDelegate {
     
-    func buildFavoriteViewModel() -> FavoritesViewModel {
-        return FavoritesViewModel()
+    func stationFavoriteDidSelect(station: SimpleStation) {
+        selectStation(with: station)
     }
 }

@@ -35,6 +35,7 @@ final class DefaultFetchStationsUseCase: FetchStationsUseCase {
             
             switch result {
             case .success(let stationsResult):
+                print("aqui ya retornaron: [\(stationsResult.stations.count)]")
                 
                 strongSelf.stationsLocalRepository.saveStations(stations: stationsResult.stations) { coreDataResult in
                     

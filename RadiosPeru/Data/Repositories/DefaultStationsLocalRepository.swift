@@ -26,4 +26,8 @@ extension DefaultStationsLocalRepository: StationsLocalRepository {
     func stationsList(completion: @escaping (Result<[StationRemote], Error>) -> Void) {
         stationsPersistentStorage.stationsList(completion: completion)
     }
+    
+    func findStations(with stations: [SimpleStation], completion: @escaping (Result<[StationRemote], Error>) -> Void) {
+        // MARK: - TODO
+    }
 }

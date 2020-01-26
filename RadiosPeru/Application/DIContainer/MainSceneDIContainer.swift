@@ -13,6 +13,7 @@ final class MainSceneDIContainer {
     struct Dependencies {
         let dataTransferService: DataTransferService
         let stationsLocalStorage: StationsLocalStorage
+        let favoritesLocalStorage: FavoritesLocalStorage
     }
     
     private let dependencies: Dependencies
@@ -28,12 +29,19 @@ final class MainSceneDIContainer {
                                         controllersFactory: self)
     }
     
-    public func makePopularViewController() -> UIViewController {
+    public func makePopularViewController(delegate: PopularViewModelDelegate) -> UIViewController {
         let popularDependencies = PopularSceneDIContainer.Dependencies(
-            dataTransferService: dependencies.dataTransferService,
             stationsLocalStorage: dependencies.stationsLocalStorage)
         
-        return PopularSceneDIContainer(dependencies: popularDependencies).makePopularViewController()
+        return PopularSceneDIContainer(dependencies: popularDependencies).makePopularViewController(delegate: delegate)
+    }
+    
+    public func makeFavoritesViewController(delegate: FavoritesViewModelDelegate) -> UIViewController {
+        let favoriteDependencies = FavoriteSceneDIContainer.Dependencies(
+            stationsLocalStorage: dependencies.stationsLocalStorage,
+            favoritesLocalStorage: dependencies.favoritesLocalStorage)
+        
+        return FavoriteSceneDIContainer(dependencies: favoriteDependencies).makeFavoriteViewController(delegate: delegate)
     }
 }
 
