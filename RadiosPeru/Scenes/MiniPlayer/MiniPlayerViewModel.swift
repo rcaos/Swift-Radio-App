@@ -8,6 +8,11 @@
 
 import Foundation
 
+protocol MiniPlayerViewModelDelegate: class {
+    
+    func stationPLayerDidSelect(station: StationRemote)
+}
+
 final class MiniPlayerViewModel {
         
     private var radioPlayer: RadioPlayer?
@@ -16,12 +21,12 @@ final class MiniPlayerViewModel {
     
     var name: String = "Pick a Radio Station"
     
-    // MARK: - TODO
+    weak var delegate: MiniPlayerViewModelDelegate?
+    
     var isSelected: Bool {
         stationSelected != nil
     }
     
-    //Reactive
     var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
     
     var updateUI:(()-> Void)?
@@ -30,9 +35,10 @@ final class MiniPlayerViewModel {
     
     //MARK: - Initializers
     
-    init(service: RadioPlayer?) {
-        radioPlayer = service
+    init(player: RadioPlayer?, delegate: MiniPlayerViewModelDelegate? = nil) {
+        radioPlayer = player
         radioPlayer?.addObserver(self)
+        self.delegate = delegate
     }
     
     deinit {
@@ -82,13 +88,11 @@ final class MiniPlayerViewModel {
 //        isFavorite.value = favoritesStore.isFavorite(with: radio.name, group: radio.group)
     }
         
-    //MARK: - View Models Building
+    //MARK: - Public
     
-    func buildPlayerViewModel() -> PlayerViewModel? {
-//        guard let name = self.nameSelected, let group = self.groupSelected else { return nil }
-//
-//        return PlayerViewModel(name: name, group: group, player: radioPlayer)
-        return nil
+    func showPlayer() {
+        guard let selected = stationSelected else { return }
+        delegate?.stationPLayerDidSelect(station: selected)
     }
 }
 

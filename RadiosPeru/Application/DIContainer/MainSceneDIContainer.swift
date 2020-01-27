@@ -18,10 +18,13 @@ final class MainSceneDIContainer {
     
     private let dependencies: Dependencies
     
+    private var radioPlayer: RadioPlayer!
+    
     // MARK: - Initializers
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
+        self.radioPlayer = makeRadioPlayer()
     }
     
     public func makeMainViewController() -> UIViewController {
@@ -43,6 +46,18 @@ final class MainSceneDIContainer {
         
         return FavoriteSceneDIContainer(dependencies: favoriteDependencies).makeFavoriteViewController(delegate: delegate)
     }
+    
+    public func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> UIViewController {
+        let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(radioPlayer: self.radioPlayer)
+        
+        return MiniPlayerSceneDIContainer(dependencies: miniPlayerDependencies).makeMiniPlayerViewController(with: viewModel, delegate: delegate)
+    }
+    
+    public func makePlayerViewController(with station: StationRemote) -> UIViewController {
+        let playerDependencies = PlayerSceneDIContainer.Dependencies(radioPlayer: self.radioPlayer)
+        
+        return PlayerSceneDIContainer.init(dependencies: playerDependencies).makeMiniPlayerViewController(with: station)
+    }
 }
 
 // MARK: - Private
@@ -50,7 +65,11 @@ final class MainSceneDIContainer {
 extension MainSceneDIContainer {
     
     private func makeMainViewModel() -> MainViewModel {
-        return MainViewModel(radioPlayer: makeRadioPlayer())
+        let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(radioPlayer: self.radioPlayer)
+        
+        let miniPlayerViewModel = MiniPlayerSceneDIContainer(dependencies: miniPlayerDependencies) .makeMiniPlayerViewModel()
+        
+        return MainViewModel(radioPlayer: self.radioPlayer, miniPlayerViewModel: miniPlayerViewModel)
     }
     
     private func makeRadioPlayer() -> RadioPlayer {

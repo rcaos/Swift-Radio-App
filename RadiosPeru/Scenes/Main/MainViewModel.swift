@@ -9,16 +9,23 @@
 import Foundation
 import CoreData
 
+enum MainViewModelRoute {
+    case initial
+    case showPlayer(StationRemote)
+}
+
 final class MainViewModel {
     
     var miniPlayer: MiniPlayerViewModel
     
     var radioPlayer: RadioPlayer
     
-    init(radioPlayer: RadioPlayer) {
+    var route: Bindable<MainViewModelRoute> = Bindable(.initial)
+    
+    init(radioPlayer: RadioPlayer, miniPlayerViewModel: MiniPlayerViewModel) {
         self.radioPlayer = radioPlayer
         
-        miniPlayer = MiniPlayerViewModel(service: radioPlayer)
+        miniPlayer = miniPlayerViewModel
     }
     
     func selectStation(with station: StationRemote) {
@@ -37,5 +44,12 @@ extension MainViewModel: FavoritesViewModelDelegate {
     
     func stationFavoriteDidSelect(station: StationRemote) {
         selectStation(with: station)
+    }
+}
+
+extension MainViewModel: MiniPlayerViewModelDelegate {
+    
+    func stationPLayerDidSelect(station: StationRemote) {
+        route.value = .showPlayer(station)
     }
 }

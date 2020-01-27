@@ -33,6 +33,8 @@
 		7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B52B235A144F004E642B /* PopularViewCell.swift */; };
 		7755B52E235A144F004E642B /* PopularViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7755B52C235A144F004E642B /* PopularViewCell.xib */; };
 		7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B52F235A15D2004E642B /* PopularCellViewModel.swift */; };
+		7772943023DE5EEA008F5305 /* MiniPlayerSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7772942F23DE5EEA008F5305 /* MiniPlayerSceneDIContainer.swift */; };
+		7772943223DE6319008F5305 /* PlayerSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7772943123DE6319008F5305 /* PlayerSceneDIContainer.swift */; };
 		777CEDC923D90C5300FCD04B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777CEDC823D90C5300FCD04B /* Observable.swift */; };
 		777CEDCB23D90C6500FCD04B /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777CEDCA23D90C6500FCD04B /* StoryboardInstantiable.swift */; };
 		777CEDCD23D90C6F00FCD04B /* SimpleViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */; };
@@ -129,6 +131,8 @@
 		7755B52B235A144F004E642B /* PopularViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewCell.swift; sourceTree = "<group>"; };
 		7755B52C235A144F004E642B /* PopularViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularViewCell.xib; sourceTree = "<group>"; };
 		7755B52F235A15D2004E642B /* PopularCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCellViewModel.swift; sourceTree = "<group>"; };
+		7772942F23DE5EEA008F5305 /* MiniPlayerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerSceneDIContainer.swift; sourceTree = "<group>"; };
+		7772943123DE6319008F5305 /* PlayerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSceneDIContainer.swift; sourceTree = "<group>"; };
 		777CEDC823D90C5300FCD04B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		777CEDCA23D90C6500FCD04B /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleViewState.swift; sourceTree = "<group>"; };
@@ -420,6 +424,8 @@
 				77A3D7FC23DB2DF9003FF385 /* MainSceneDIContainer.swift */,
 				77B957B023DC0D1800220426 /* PopularSceneDIContainer.swift */,
 				77DB241123DD2AEC001082E9 /* FavoriteSceneDIContainer.swift */,
+				7772942F23DE5EEA008F5305 /* MiniPlayerSceneDIContainer.swift */,
+				7772943123DE6319008F5305 /* PlayerSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -785,6 +791,7 @@
 				77236FAC236786F8009C80D0 /* ShowRPP.swift in Sources */,
 				774714612363A39100198D9E /* PlayingBarsView.swift in Sources */,
 				77D9A0E223DA38F900DDCE06 /* FavoritesRepository.swift in Sources */,
+				7772943023DE5EEA008F5305 /* MiniPlayerSceneDIContainer.swift in Sources */,
 				77D51755237C990800B7DCC9 /* CodingUserInfoKey.swift in Sources */,
 				77A3D7FD23DB2DF9003FF385 /* MainSceneDIContainer.swift in Sources */,
 				77D9A0F723DA526100DDCE06 /* ApiClient.swift in Sources */,
@@ -813,6 +820,7 @@
 				77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */,
 				7739E809235E4A610071882A /* RadioPlayer.swift in Sources */,
 				777CEDCB23D90C6500FCD04B /* StoryboardInstantiable.swift in Sources */,
+				7772943223DE6319008F5305 /* PlayerSceneDIContainer.swift in Sources */,
 				77D51766237C9FD200B7DCC9 /* StationResult.swift in Sources */,
 				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,

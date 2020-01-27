@@ -8,14 +8,6 @@
 
 import UIKit
 
-protocol MiniPlayerControllerDelegate: class {
-    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectRadio radio: PlayerViewModel)
-    
-    //func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectPlay radio: String)
-    
-    //func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectFavorite radio : String)
-}
-
 class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
 
     @IBOutlet weak var favoriteButton: UIButton!
@@ -30,8 +22,6 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     private var playView: UIView!
     private var loadingView: UIView!
     private var pauseView: UIView!
-    
-    weak var delegate: MiniPlayerControllerDelegate?
     
     var viewModel: MiniPlayerViewModel!
     
@@ -195,11 +185,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     }
     
     @objc func handleGestureView(_ sender: UITapGestureRecognizer) {
-        guard viewModel.isSelected else { return }
-        
-        if let modelForPlayer = viewModel.buildPlayerViewModel() {
-            delegate?.miniPlayerController(self, didSelectRadio: modelForPlayer )
-        }
+        viewModel.showPlayer()
     }
     
     @objc func handleGestureStack(_ sender: UITapGestureRecognizer) {

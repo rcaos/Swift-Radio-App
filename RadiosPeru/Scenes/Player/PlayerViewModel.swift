@@ -7,23 +7,17 @@
 //
 
 import Foundation
-import CoreData
 
 final class PlayerViewModel {
     
-//    private var managedObjectContext: NSManagedObjectContext
-//    private var favoritesStore: PersistenceStore<StationFavorite>!
-    
     private var radioPlayer: RadioPlayer?
     
-    private var nameSelected: String!
-    private var groupSelected: String!
+    private var stationSelected: StationRemote
     
     var image: String?
     
     var name: String?
     
-    //Reactive
     var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
     
     var updateUI:(() -> Void)?
@@ -32,18 +26,12 @@ final class PlayerViewModel {
     
     //MARK: - Initializers
     
-    init(name: String, group: String, player: RadioPlayer?) {
-        
-        //self.managedObjectContext = managedObjectContext
-        //setupStores(self.managedObjectContext)
-        
-        self.nameSelected = name
-        self.groupSelected = group
-        
+    init(player: RadioPlayer?, station: StationRemote) {
+        self.stationSelected = station
         self.radioPlayer = player
         radioPlayer?.addObserver(self)
         
-        setupRadio()
+        setupRadio(with: stationSelected)
     }
     
     deinit {
@@ -52,24 +40,11 @@ final class PlayerViewModel {
     
     //MARK: - Private
     
-//    private func setupStores(_ managedObjectContext: NSManagedObjectContext) {
-//        favoritesStore = PersistenceStore(managedObjectContext)
-//    }
-    
-    private func setupRadio() {
-        guard let radioStation = getSelectedStation() else { return }
-        
-        name = radioStation.name
-        image = radioStation.image
+    private func setupRadio(with station: StationRemote) {
+        name = station.name
+        image = station.image
         
 //        isFavorite.value = favoritesStore.isFavorite(with: radioStation.name, group: radioStation.group)
-    }
-    
-    private func getSelectedStation() -> Station? {
-//        guard let name  = nameSelected, let _ = groupSelected,
-//            let selected = PersistenceManager.shared.findStation(with: name) else { return nil }
-//        return selected
-        return nil
     }
     
     //MARK: - Public

@@ -6,14 +6,7 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
-import Foundation
 import UIKit
-
-//protocol MainControllerDelegate: class {
-//
-//    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio name: String, group: String)
-//
-//}
 
 class MainViewControler: UIViewController, StoryboardInstantiable {
     
@@ -44,11 +37,17 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
         
         setupTabBarView()
         setupMiniPlayerView()
+        setupViewModel()
+    }
+    
+    func setupViewModel() {
+        viewModel.route.bind{ [weak self] routing in
+            self?.handle(routing)
+        }
     }
     
     private func setupMiniPlayerView() {
-        miniPlayerVC = MiniPlayerViewController.create(with: viewModel.miniPlayer)
-        miniPlayerVC.delegate = self
+        miniPlayerVC = controllersFactory.makeMiniPlayerViewController(with: viewModel.miniPlayer, delegate: viewModel) as? MiniPlayerViewController
         miniPlayerVC.view.translatesAutoresizingMaskIntoConstraints = false
         
         miniPlayerView.addSubview( miniPlayerVC.view )
@@ -84,28 +83,6 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
     }
 }
 
-extension MainViewControler : MiniPlayerControllerDelegate  {
-    
-    func miniPlayerController(_ miniPlayerViewController: MiniPlayerViewController, didSelectRadio radio: PlayerViewModel) {
-        
-        // MARK: - TODO, esto debe ir en una extension, controlado.
-        // Handle navigation
-        let playerVC = PlayerViewController.create(with: radio)
-        playerVC.transitioningDelegate = self
-        playerVC.interactor = interactor
-        
-        present(playerVC, animated: true, completion: nil)
-        
-    }
-}
-
-//extension MainViewControler: MainControllerDelegate {
-//
-//    func mainControllerDelegate(_ miniPlayerViewController: UIViewController, didConfigRadio name: String, group: String) {
-//        viewModel.selectStation(by: name, group: group)
-//    }
-//}
-
 // MARK: - UIViewControllerTransitioningDelegate
 
 extension MainViewControler: UIViewControllerTransitioningDelegate {
@@ -118,6 +95,25 @@ extension MainViewControler: UIViewControllerTransitioningDelegate {
     }
 }
 
+// MARK: - Navigation
+
+extension MainViewControler {
+    
+    func handle(_ route: MainViewModelRoute) {
+        switch route {
+        case .initial: break
+            
+        case .showPlayer(let station):
+            guard let playerController =
+                controllersFactory.makePlayerViewController(with: station) as? PlayerViewController else { break }
+            playerController.transitioningDelegate = self
+            playerController.interactor = interactor
+            present(playerController, animated: true, completion: nil)
+        }
+        
+    }
+}
+
 // MARK: - MainViewControllersFactory
 
 protocol MainViewControllersFactory {
@@ -125,4 +121,8 @@ protocol MainViewControllersFactory {
     func makePopularViewController(delegate: PopularViewModelDelegate) -> UIViewController
     
     func makeFavoritesViewController(delegate: FavoritesViewModelDelegate) -> UIViewController
+    
+    func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> UIViewController
+    
+    func makePlayerViewController(with station: StationRemote) -> UIViewController
 }
