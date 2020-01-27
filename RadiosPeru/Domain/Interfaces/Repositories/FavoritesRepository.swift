@@ -8,6 +8,11 @@
 
 import Foundation
 
+protocol FavoritesRepositoryDelegate: class {
+    
+    func stationsLocalRepository(didUpdateEntity update: Bool)
+}
+
 protocol FavoritesRepository {
     
     func isFavorite(station: SimpleStation,
@@ -17,4 +22,8 @@ protocol FavoritesRepository {
     completion: @escaping (Result<Bool, Error>) -> Void)
     
     func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void)
+    
+    func configStore()
+    
+    var delegate: FavoritesRepositoryDelegate? { get set }
 }

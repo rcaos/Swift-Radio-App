@@ -17,10 +17,13 @@ final class FavoriteSceneDIContainer {
     
     private let dependencies: Dependencies
     
+    private var defaultRepository: FavoritesRepository!
+    
     // MARK: - Initializers
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
+        defaultRepository = makeFavoritesRepository()
     }
     
     public func makeFavoriteViewController(delegate: FavoritesViewModelDelegate) -> UIViewController {
@@ -34,12 +37,14 @@ final class FavoriteSceneDIContainer {
 extension FavoriteSceneDIContainer {
     
     private func makeFavoriteViewModel(delegate: FavoritesViewModelDelegate) -> FavoritesViewModel {
-        return FavoritesViewModel(fetchFavoritesUseCase: makeFetchFavoriteStationsUseCase(), delegate: delegate)
+        return FavoritesViewModel(fetchFavoritesUseCase: makeFetchFavoriteStationsUseCase(),
+                                  favoritesRepository: self.defaultRepository,
+                                  delegate: delegate)
     }
     
     private func makeFetchFavoriteStationsUseCase() -> FetchFavoritesStationsUseCase {
         return DefaultFetchFavoritesStationsUseCase(
-            favoritesRepository: makeFavoritesRepository(),
+            favoritesRepository: self.defaultRepository ,
             localsRepository: makeStationsLocalRepository())
     }
     

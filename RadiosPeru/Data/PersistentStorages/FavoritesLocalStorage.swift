@@ -8,6 +8,11 @@
 
 import Foundation
 
+protocol FavoritesLocalStorageDelegate: class {
+    
+    func favoritesLocalStorage(didUpdateEntity update: Bool)
+}
+
 protocol FavoritesLocalStorage {
     
     func isFavorite(station: SimpleStation,
@@ -17,4 +22,8 @@ protocol FavoritesLocalStorage {
     completion: @escaping (Result<Bool, Error>) -> Void)
     
     func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void)
+    
+    func configStore()
+    
+    var delegate: FavoritesLocalStorageDelegate? { get set }
 }

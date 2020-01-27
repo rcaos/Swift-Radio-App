@@ -12,6 +12,8 @@ final class DefaultFavoritesRepository {
     
     private var favoritesPersistentStorage: FavoritesLocalStorage
     
+    weak var delegate: FavoritesRepositoryDelegate?
+    
     init(favoritesPersistentStorage: FavoritesLocalStorage) {
         self.favoritesPersistentStorage = favoritesPersistentStorage
     }
@@ -29,5 +31,17 @@ extension DefaultFavoritesRepository: FavoritesRepository {
     
     func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void) {
         favoritesPersistentStorage.favoritesList(completion: completion)
+    }
+    
+    func configStore() {
+        favoritesPersistentStorage.configStore()
+        favoritesPersistentStorage.delegate = self
+    }
+}
+
+extension DefaultFavoritesRepository: FavoritesLocalStorageDelegate {
+    
+    func favoritesLocalStorage(didUpdateEntity update: Bool) {
+        delegate?.stationsLocalRepository(didUpdateEntity: update)
     }
 }

@@ -17,6 +17,8 @@ protocol FavoritesViewModelDelegate: class {
 final class FavoritesViewModel {
 
     private let fetchFavoritesUseCase: FetchFavoritesStationsUseCase
+    
+    private var favoritesRepository: FavoritesRepository
         
     private var stations: [StationRemote] = []
     
@@ -26,9 +28,17 @@ final class FavoritesViewModel {
     
     private weak var delegate: FavoritesViewModelDelegate?
     
-    init(fetchFavoritesUseCase: FetchFavoritesStationsUseCase, delegate: FavoritesViewModelDelegate? = nil) {
+    init(fetchFavoritesUseCase: FetchFavoritesStationsUseCase,
+         favoritesRepository: FavoritesRepository,
+         delegate: FavoritesViewModelDelegate? = nil) {
         self.fetchFavoritesUseCase = fetchFavoritesUseCase
         self.delegate = delegate
+        self.favoritesRepository = favoritesRepository
+    }
+    
+    func suscribe() {
+        favoritesRepository.configStore()
+        favoritesRepository.delegate = self
     }
     
     func getStations() {
@@ -41,6 +51,8 @@ final class FavoritesViewModel {
             case .failure:
                 break
             }
+            
+            self?.suscribe()
         }
     }
     
@@ -67,12 +79,12 @@ final class FavoritesViewModel {
 
 //MARK: - PersistenceStoreDelegate
 
-//extension FavoritesViewModel: PersistenceStoreDelegate {
-//    
-//    func persistenceStore(didUpdateEntity update: Bool) {
-//        refreshStations()
-//    }
-//}
+extension FavoritesViewModel: FavoritesRepositoryDelegate {
+    
+    func stationsLocalRepository(didUpdateEntity update: Bool) {
+        getStations()
+    }
+}
 
 extension FavoritesViewModel {
     
