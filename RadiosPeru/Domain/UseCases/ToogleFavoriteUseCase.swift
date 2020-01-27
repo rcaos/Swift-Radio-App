@@ -8,8 +8,9 @@
 
 import Foundation
 
-protocol ToogleFavoriteUseCase {
+protocol ToggleFavoriteUseCase {
     
+    @discardableResult
     func execute(requestValue: ToogleFavoriteUseCaseRequestValue,
                  completion: @escaping (Result<Bool, Error>) -> Void ) -> Cancellable?
 }
@@ -18,7 +19,7 @@ struct ToogleFavoriteUseCaseRequestValue {
     let station: SimpleStation
 }
 
-final class DefaultSaveAsFavoriteUseCase: ToogleFavoriteUseCase {
+final class DefaultToogleFavoriteUseCase: ToggleFavoriteUseCase {
     
     private let favoritesRepository: FavoritesRepository
     

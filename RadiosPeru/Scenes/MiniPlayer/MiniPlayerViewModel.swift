@@ -26,11 +26,7 @@ final class MiniPlayerViewModel {
     var name: String = "Pick a Radio Station"
     
     weak var delegate: MiniPlayerViewModelDelegate?
-    
-    var isSelected: Bool {
-        stationSelected != nil
-    }
-    
+        
     var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
     
     var updateUI:(()-> Void)?
@@ -61,14 +57,16 @@ final class MiniPlayerViewModel {
     func configStation(with station: StationRemote, playAutomatically: Bool = true) {
         stationSelected = station
         
-        setupRadio(station)
+        setupRadio(with: station)
+        checkIsFavorite(with: station)
         
         viewState.value = .stopped
         radioPlayer?.setupRadio(with: station, playWhenReady: playAutomatically)
     }
     
     func togglePlayPause() {
-        guard let player = radioPlayer else { return }
+        guard let player = radioPlayer,
+                let _ = stationSelected else { return }
         player.togglePlayPause()
     }
     
@@ -90,30 +88,15 @@ final class MiniPlayerViewModel {
         }
     }
     
-    func refreshStatus() {
-        guard let player = radioPlayer else { return }
-        viewState.value = player.state
-        
-        //guard let selected = getSelectedStation() else { return }
-        //setupRadio( selected )
-    }
-    
-    func getDescription() -> String {
-        guard let radioPlayer = radioPlayer else { return "" }
-        
-        return radioPlayer.getRadioDescription()
-    }
-    
     //MARK: - Private
     
-    private func setupRadio(_ radio: StationRemote) {
-        self.name = radio.name
-        self.isFavorite.value = false
-        
-        checkIsFavorite(with: stationSelected)
+    private func setupRadio(with station: StationRemote) {
+        self.name = station.name
     }
     
     private func checkIsFavorite(with station: StationRemote?) {
+        isFavorite.value = false
+        
         guard let station = station else { return  }
         
         let simpleStation = SimpleStation(name: station.name, group: station.group)
@@ -134,6 +117,16 @@ final class MiniPlayerViewModel {
     func showPlayer() {
         guard let selected = stationSelected else { return }
         delegate?.stationPLayerDidSelect(station: selected)
+    }
+    
+    func viewWillAppear() {
+        checkIsFavorite(with: stationSelected)
+    }
+    
+    func getDescription() -> String {
+        guard let radioPlayer = radioPlayer else { return "" }
+        
+        return radioPlayer.getRadioDescription()
     }
 }
 

@@ -56,7 +56,9 @@ final class MainSceneDIContainer {
     }
     
     public func makePlayerViewController(with station: StationRemote) -> UIViewController {
-        let playerDependencies = PlayerSceneDIContainer.Dependencies(radioPlayer: self.radioPlayer)
+        let playerDependencies = PlayerSceneDIContainer.Dependencies(
+            favoritesLocalStorage: dependencies.favoritesLocalStorage,
+            radioPlayer: self.radioPlayer)
         
         return PlayerSceneDIContainer.init(dependencies: playerDependencies).makeMiniPlayerViewController(with: station)
     }

@@ -44,7 +44,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.refreshStatus()
+        viewModel.viewWillAppear()
     }
     
     //MARK: - Reactive
@@ -189,13 +189,10 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     }
     
     @objc func handleGestureStack(_ sender: UITapGestureRecognizer) {
-        guard viewModel.isSelected else { return }
         viewModel.togglePlayPause()
     }
     
     @IBAction func tapFavorite(_ sender: Any) {
-        guard viewModel.isSelected else { return }
-        
         viewModel.markAsFavorite()
     }
 }
