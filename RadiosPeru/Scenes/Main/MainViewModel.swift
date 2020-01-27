@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreData
 
 enum MainViewModelRoute {
     case initial

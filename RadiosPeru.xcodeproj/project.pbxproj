@@ -50,7 +50,6 @@
 		77B957B323DC170D00220426 /* FetchFavoritesStationsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B223DC170D00220426 /* FetchFavoritesStationsUseCase.swift */; };
 		77B957B523DC188300220426 /* StationFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B423DC188300220426 /* StationFavorite.swift */; };
 		77B957B923DC19DD00220426 /* StationFavoriteCD+Mappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B823DC19DD00220426 /* StationFavoriteCD+Mappings.swift */; };
-		77B957BB23DC1C0A00220426 /* ToogleFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957BA23DC1C0A00220426 /* ToogleFavoriteUseCase.swift */; };
 		77B957BD23DC1D0500220426 /* FavoritesLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957BC23DC1D0500220426 /* FavoritesLocalStorage.swift */; };
 		77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */; };
 		77C9D3ED23DB990400C6FD55 /* StationsLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */; };
@@ -58,6 +57,8 @@
 		77C9D3F323DBA4F700C6FD55 /* Station+Mappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3F223DBA4F700C6FD55 /* Station+Mappings.swift */; };
 		77C9D3F723DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3F623DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift */; };
 		77CA145B23689CB9001BF04E /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CA145A23689CB9001BF04E /* ApiError.swift */; };
+		77CE5D4423DF29E1008C5ECA /* ToogleFavoritesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CE5D4323DF29E1008C5ECA /* ToogleFavoritesUseCase.swift */; };
+		77CE5D4623DF3289008C5ECA /* AskFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CE5D4523DF3289008C5ECA /* AskFavoriteUseCase.swift */; };
 		77D51745237C988B00B7DCC9 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51744237C988B00B7DCC9 /* Station.swift */; };
 		77D51747237C989200B7DCC9 /* StationFavoriteCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51746237C989200B7DCC9 /* StationFavoriteCD.swift */; };
 		77D5174A237C98B300B7DCC9 /* PersistenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51749237C98B300B7DCC9 /* PersistenceStore.swift */; };
@@ -148,7 +149,6 @@
 		77B957B223DC170D00220426 /* FetchFavoritesStationsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFavoritesStationsUseCase.swift; sourceTree = "<group>"; };
 		77B957B423DC188300220426 /* StationFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFavorite.swift; sourceTree = "<group>"; };
 		77B957B823DC19DD00220426 /* StationFavoriteCD+Mappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StationFavoriteCD+Mappings.swift"; sourceTree = "<group>"; };
-		77B957BA23DC1C0A00220426 /* ToogleFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToogleFavoriteUseCase.swift; sourceTree = "<group>"; };
 		77B957BC23DC1D0500220426 /* FavoritesLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLocalStorage.swift; sourceTree = "<group>"; };
 		77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerObserver.swift; sourceTree = "<group>"; };
 		77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsLocalStorage.swift; sourceTree = "<group>"; };
@@ -156,6 +156,8 @@
 		77C9D3F223DBA4F700C6FD55 /* Station+Mappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+Mappings.swift"; sourceTree = "<group>"; };
 		77C9D3F623DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStationsLocalUseCase.swift; sourceTree = "<group>"; };
 		77CA145A23689CB9001BF04E /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		77CE5D4323DF29E1008C5ECA /* ToogleFavoritesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToogleFavoritesUseCase.swift; sourceTree = "<group>"; };
+		77CE5D4523DF3289008C5ECA /* AskFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskFavoriteUseCase.swift; sourceTree = "<group>"; };
 		77D51744237C988B00B7DCC9 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		77D51746237C989200B7DCC9 /* StationFavoriteCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFavoriteCD.swift; sourceTree = "<group>"; };
 		77D51749237C98B300B7DCC9 /* PersistenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStore.swift; sourceTree = "<group>"; };
@@ -552,7 +554,8 @@
 				77D9A0D723DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift */,
 				77C9D3F623DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift */,
 				77B957B223DC170D00220426 /* FetchFavoritesStationsUseCase.swift */,
-				77B957BA23DC1C0A00220426 /* ToogleFavoriteUseCase.swift */,
+				77CE5D4323DF29E1008C5ECA /* ToogleFavoritesUseCase.swift */,
+				77CE5D4523DF3289008C5ECA /* AskFavoriteUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -770,7 +773,6 @@
 				77B957B923DC19DD00220426 /* StationFavoriteCD+Mappings.swift in Sources */,
 				770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */,
 				77D9A0F323DA457A00DDCE06 /* DefaultFavoritesRepository.swift in Sources */,
-				77B957BB23DC1C0A00220426 /* ToogleFavoriteUseCase.swift in Sources */,
 				77A3D80323DB46C0003FF385 /* GenericCollectionView.swift in Sources */,
 				77B957BD23DC1D0500220426 /* FavoritesLocalStorage.swift in Sources */,
 				77D9A0DA23DA373600DDCE06 /* FetchStationsUseCase.swift in Sources */,
@@ -779,8 +781,10 @@
 				77B957B523DC188300220426 /* StationFavorite.swift in Sources */,
 				77D9A0EC23DA427C00DDCE06 /* DataTransferService.swift in Sources */,
 				77236FA923677F9B009C80D0 /* GroupRPPResult.swift in Sources */,
+				77CE5D4623DF3289008C5ECA /* AskFavoriteUseCase.swift in Sources */,
 				77E5AF6A23D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift in Sources */,
 				77A3D7FF23DB307B003FF385 /* MainNavigationController.swift in Sources */,
+				77CE5D4423DF29E1008C5ECA /* ToogleFavoritesUseCase.swift in Sources */,
 				77D9A0EA23DA424B00DDCE06 /* RepositoryTask.swift in Sources */,
 				770282DC235C08B9000098DB /* MiniPlayerViewModel.swift in Sources */,
 				774F0CA023721555002852C3 /* MainViewController.swift in Sources */,

@@ -130,6 +130,7 @@ extension CoreDataStorage: FavoritesLocalStorage {
                 
                 if let exist = fetched {
                     strongSelf.mainContext.delete(exist)
+                    
                     completion( .success(false) )
                     
                 } else {

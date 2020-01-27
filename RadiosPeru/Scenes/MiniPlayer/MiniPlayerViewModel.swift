@@ -14,7 +14,11 @@ protocol MiniPlayerViewModelDelegate: class {
 }
 
 final class MiniPlayerViewModel {
-        
+    
+    private let toggleFavoritesUseCase: ToggleFavoritesUseCase
+    
+    private let askFavoriteUseCase: AskFavoriteUseCase
+    
     private var radioPlayer: RadioPlayer?
     
     private var stationSelected: StationRemote?
@@ -35,7 +39,14 @@ final class MiniPlayerViewModel {
     
     //MARK: - Initializers
     
-    init(player: RadioPlayer?, delegate: MiniPlayerViewModelDelegate? = nil) {
+    init(toggleFavoritesUseCase: ToggleFavoritesUseCase,
+         askFavoriteUseCase: AskFavoriteUseCase,
+         player: RadioPlayer?,
+         delegate: MiniPlayerViewModelDelegate? = nil) {
+        
+        self.toggleFavoritesUseCase = toggleFavoritesUseCase
+        self.askFavoriteUseCase = askFavoriteUseCase
+        
         radioPlayer = player
         radioPlayer?.addObserver(self)
         self.delegate = delegate
@@ -62,8 +73,21 @@ final class MiniPlayerViewModel {
     }
     
     func markAsFavorite() {
-        //guard let selected = getSelectedStation() else { return }
-//        isFavorite.value = favoritesStore.toggleFavorite(with: selected.name, group: selected.group)
+        guard let selected = stationSelected else { return }
+        
+        let simpleStation = SimpleStation(name: selected.name, group: selected.group)
+        
+        let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
+        
+        toggleFavoritesUseCase.execute(requestValue: request) { [weak self] result in
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let isFavorite):
+                strongSelf.isFavorite.value = isFavorite
+            case .failure: break
+            }
+        }
     }
     
     func refreshStatus() {
@@ -84,8 +108,25 @@ final class MiniPlayerViewModel {
     
     private func setupRadio(_ radio: StationRemote) {
         self.name = radio.name
+        self.isFavorite.value = false
         
-//        isFavorite.value = favoritesStore.isFavorite(with: radio.name, group: radio.group)
+        checkIsFavorite(with: stationSelected)
+    }
+    
+    private func checkIsFavorite(with station: StationRemote?) {
+        guard let station = station else { return  }
+        
+        let simpleStation = SimpleStation(name: station.name, group: station.group)
+        let request = AskFavoriteUseCaseRequestValue(station: simpleStation)
+        
+        askFavoriteUseCase.execute(requestValue: request) { [weak self] result in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let isFavorite):
+                strongSelf.isFavorite.value = isFavorite
+            case .failure: break
+            }
+        }
     }
         
     //MARK: - Public

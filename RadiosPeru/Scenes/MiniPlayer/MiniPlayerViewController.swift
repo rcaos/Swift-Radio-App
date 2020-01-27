@@ -64,7 +64,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
             }
         }
         
-        viewModel.isFavorite.bindAndFire({ [weak self] favorite in
+        viewModel.isFavorite.bind({ [weak self] favorite in
             DispatchQueue.main.async {
                 if favorite {
                     self?.favoriteButton.setImage( UIImage(named: "btn-favoriteFill") , for: .normal)

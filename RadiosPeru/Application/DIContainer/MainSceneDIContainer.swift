@@ -48,7 +48,9 @@ final class MainSceneDIContainer {
     }
     
     public func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> UIViewController {
-        let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(radioPlayer: self.radioPlayer)
+        let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(
+            favoritesLocalStorage: dependencies.favoritesLocalStorage,
+            radioPlayer: self.radioPlayer)
         
         return MiniPlayerSceneDIContainer(dependencies: miniPlayerDependencies).makeMiniPlayerViewController(with: viewModel, delegate: delegate)
     }
@@ -65,7 +67,9 @@ final class MainSceneDIContainer {
 extension MainSceneDIContainer {
     
     private func makeMainViewModel() -> MainViewModel {
-        let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(radioPlayer: self.radioPlayer)
+        let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(
+            favoritesLocalStorage: dependencies.favoritesLocalStorage,
+            radioPlayer: self.radioPlayer)
         
         let miniPlayerViewModel = MiniPlayerSceneDIContainer(dependencies: miniPlayerDependencies) .makeMiniPlayerViewModel()
         
