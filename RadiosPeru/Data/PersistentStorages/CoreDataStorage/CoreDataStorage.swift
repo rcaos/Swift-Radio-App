@@ -88,18 +88,14 @@ extension CoreDataStorage: StationsLocalStorage {
     
     func stationsList(completion: @escaping (Result<[StationRemote], Error>) -> Void) {
         
-        // Los SortDescriptors los puedo tener en una clase aparte.
-        
         persistentContainer.performBackgroundTask { [weak self] _ in
             guard let strongSelf = self else { return }
             
             do {
-                let request: NSFetchRequest<Station> = Station.fetchRequest()
-                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Station.name),
-                                                            ascending: false)]
-                //request.fetchLimit = number
+                let entities = try strongSelf.fetchStations(inContext: strongSelf.mainContext)
+
+                let result = entities.map( StationRemote.init )
                 
-                let result = try strongSelf.mainContext.fetch(request).map ( StationRemote.init )
                 DispatchQueue.global(qos: .background).async {
                     completion(.success(result))
                 }
@@ -112,8 +108,43 @@ extension CoreDataStorage: StationsLocalStorage {
         }
     }
     
-    // MARK: - En el method save .
-    //fileprivate func cleanUpQueries(for query: MovieQuery, inContext context: NSManagedObjectContext) throws { }
+    func findStations(with stations: [SimpleStation], completion: @escaping (Result<[StationRemote], Error>) -> Void) {
+        
+        persistentContainer.performBackgroundTask { [weak self] _ in
+            guard let strongSelf = self else { return }
+            
+            do {
+                
+                let localEntities = try strongSelf.fetchStations(inContext: strongSelf.mainContext)
+                
+                var filterEntities: [StationRemote] = []
+                
+                stations.forEach({ favorite in
+                    if let found = localEntities.first(where: { $0.name == favorite.name }) {
+                        filterEntities.append( StationRemote(stationLocal: found) )
+                    }
+                })
+                
+                DispatchQueue.global(qos: .background).async {
+                    completion(.success(filterEntities))
+                }
+            } catch {
+                DispatchQueue.global(qos: .background).async {
+                    completion(.failure(CoreDataStorageError.readError(error)))
+                }
+                print(error)
+            }
+        }
+    }
+    
+    fileprivate func fetchStations(inContext context: NSManagedObjectContext) throws -> [Station] {
+        let request: NSFetchRequest<Station> = Station.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Station.name),
+                                                    ascending: false)]
+        //request.fetchLimit = number
+        
+        return try context.fetch(request)
+    }
 }
 
 // MARK: - FavoritesLocalStorage
@@ -158,7 +189,7 @@ extension CoreDataStorage: FavoritesLocalStorage {
             guard let strongSelf = self else { return }
             
             do {
-                let entities = try strongSelf.fetch(inContext: strongSelf.mainContext)
+                let entities = try strongSelf.fetchFavorites(inContext: strongSelf.mainContext)
                 let result = entities.map( SimpleStation.init )
                 
                 DispatchQueue.global(qos: .background).async {
@@ -203,20 +234,20 @@ extension CoreDataStorage: FavoritesLocalStorage {
     
     fileprivate func find(for station: SimpleStation, inContext context: NSManagedObjectContext) throws -> StationFavoriteCD? {
         
-        let entities = try fetch(inContext: context)
+        let entities = try fetchFavorites(inContext: context)
         
         let filter = entities.filter({ $0.name == station.name })
         
         return filter.first
     }
     
-    fileprivate func fetch(inContext context: NSManagedObjectContext) throws -> [StationFavoriteCD] {
+    fileprivate func fetchFavorites(inContext context: NSManagedObjectContext) throws -> [StationFavoriteCD] {
         let request: NSFetchRequest<StationFavoriteCD> = StationFavoriteCD.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(StationFavoriteCD.createAt),
                                                     ascending: false)]
         //request.fetchLimit = number
         
-        return try mainContext.fetch(request)
+        return try context.fetch(request)
     }
     
 }
