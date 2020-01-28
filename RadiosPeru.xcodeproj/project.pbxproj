@@ -208,8 +208,8 @@
 		770282DD235C08BD000098DB /* MiniPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				770282D9235C08AC000098DB /* MiniPlayerViewController.swift */,
-				770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */,
+				77BCBBE523DFB5BC00CA5281 /* ViewModel */,
+				77BCBBEB23DFB5F100CA5281 /* View */,
 			);
 			path = MiniPlayer;
 			sourceTree = "<group>";
@@ -252,8 +252,8 @@
 		773D455E2368EE72007B755D /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
-				773D455A2368EE58007B755D /* FavoritesViewController.swift */,
-				773D455C2368EE6E007B755D /* FavoritesViewModel.swift */,
+				77BCBBE323DFB5B000CA5281 /* ViewModel */,
+				77BCBBE923DFB5E100CA5281 /* View */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -282,76 +282,20 @@
 				777CEDCF23D90C8200FCD04B /* Presentation */,
 				77E5AF6023D9F31800509BC2 /* Data */,
 				77E5AF6123D9F35B00509BC2 /* Infraestructure */,
-				7755B525235A13E9004E642B /* Scenes */,
 				7739E80A235E4A690071882A /* Libraries */,
-				77B9469E235AD802006C3EEA /* Helpers */,
-				7755B529235A141A004E642B /* ViewComponents */,
-				77421B2A235901AE00A23C79 /* StoryBoards */,
 				777CEDD023D90CA100FCD04B /* Resources */,
 				77D9A0DD23DA388C00DDCE06 /* Common */,
 			);
 			path = RadiosPeru;
 			sourceTree = "<group>";
 		};
-		77421B2A235901AE00A23C79 /* StoryBoards */ = {
-			isa = PBXGroup;
-			children = (
-				77D5175E237C9CD500B7DCC9 /* MainViewControler.storyboard */,
-				77421B2B2359116600A23C79 /* PlayerViewController.storyboard */,
-				77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */,
-			);
-			path = StoryBoards;
-			sourceTree = "<group>";
-		};
-		774714622363A39500198D9E /* MiniPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				779DF55F23634D8C001F034F /* LoadingPlayerView.swift */,
-				774714602363A39100198D9E /* PlayingBarsView.swift */,
-			);
-			path = MiniPlayer;
-			sourceTree = "<group>";
-		};
-		7755B525235A13E9004E642B /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				77A3D80023DB3442003FF385 /* Initial */,
-				77A3D80123DB344E003FF385 /* Main */,
-				7755B526235A13F0004E642B /* Popular */,
-				773D455E2368EE72007B755D /* Favorites */,
-				77964892235A569D00813C48 /* Player */,
-				770282DD235C08BD000098DB /* MiniPlayer */,
-				77A3D80223DB46C0003FF385 /* GenericCollectionView.swift */,
-			);
-			path = Scenes;
-			sourceTree = "<group>";
-		};
 		7755B526235A13F0004E642B /* Popular */ = {
 			isa = PBXGroup;
 			children = (
-				7755B521235A1241004E642B /* PopularViewController.swift */,
-				7755B523235A1350004E642B /* PopularViewModel.swift */,
+				77BCBBE223DFB5AA00CA5281 /* ViewModel */,
+				77BCBBE823DFB5D900CA5281 /* View */,
 			);
 			path = Popular;
-			sourceTree = "<group>";
-		};
-		7755B529235A141A004E642B /* ViewComponents */ = {
-			isa = PBXGroup;
-			children = (
-				7755B52A235A142B004E642B /* Cells */,
-				779DF56123634D90001F034F /* Views */,
-			);
-			path = ViewComponents;
-			sourceTree = "<group>";
-		};
-		7755B52A235A142B004E642B /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				7755B52B235A144F004E642B /* PopularViewCell.swift */,
-				7755B52F235A15D2004E642B /* PopularCellViewModel.swift */,
-				7755B52C235A144F004E642B /* PopularViewCell.xib */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		777CEDCE23D90C7A00FCD04B /* Utils */ = {
@@ -360,6 +304,8 @@
 				777CEDC823D90C5300FCD04B /* Observable.swift */,
 				777CEDCA23D90C6500FCD04B /* StoryboardInstantiable.swift */,
 				777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */,
+				770282DE235C27A7000098DB /* Bindable.swift */,
+				77B9469F235AD80D006C3EEA /* Transitions */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -367,6 +313,13 @@
 		777CEDCF23D90C8200FCD04B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				77A3D80023DB3442003FF385 /* Initial */,
+				77A3D80123DB344E003FF385 /* Main */,
+				7755B526235A13F0004E642B /* Popular */,
+				773D455E2368EE72007B755D /* Favorites */,
+				77964892235A569D00813C48 /* Player */,
+				770282DD235C08BD000098DB /* MiniPlayer */,
+				77BCBBDF23DFB55E00CA5281 /* Common Views */,
 				777CEDCE23D90C7A00FCD04B /* Utils */,
 			);
 			path = Presentation;
@@ -395,18 +348,10 @@
 		77964892235A569D00813C48 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				7755B51D2359F1E2004E642B /* PlayerViewController.swift */,
-				77964890235A569900813C48 /* PlayerViewModel.swift */,
+				77BCBBE423DFB5B700CA5281 /* ViewModel */,
+				77BCBBEA23DFB5E900CA5281 /* View */,
 			);
 			path = Player;
-			sourceTree = "<group>";
-		};
-		779DF56123634D90001F034F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				774714622363A39500198D9E /* MiniPlayer */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		77A3D7FB23DB2AFC003FF385 /* DIContainer */ = {
@@ -426,9 +371,8 @@
 		77A3D80023DB3442003FF385 /* Initial */ = {
 			isa = PBXGroup;
 			children = (
-				77D9A0FE23DA628300DDCE06 /* InitialTabBarController.swift */,
-				77D51761237C9DA500B7DCC9 /* InitialViewController.swift */,
-				77D51763237C9DB200B7DCC9 /* InitialViewModel.swift */,
+				77BCBBE023DFB59E00CA5281 /* ViewModel */,
+				77BCBBE623DFB5C500CA5281 /* View */,
 			);
 			path = Initial;
 			sourceTree = "<group>";
@@ -436,20 +380,10 @@
 		77A3D80123DB344E003FF385 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				77A3D7FE23DB307B003FF385 /* MainNavigationController.swift */,
-				774F0C9F23721555002852C3 /* MainViewController.swift */,
-				774F0CA12372163E002852C3 /* MainViewModel.swift */,
+				77BCBBE123DFB5A400CA5281 /* ViewModel */,
+				77BCBBE723DFB5D000CA5281 /* View */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		77B9469E235AD802006C3EEA /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				77B9469F235AD80D006C3EEA /* Transitions */,
-				770282DE235C27A7000098DB /* Bindable.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		77B9469F235AD80D006C3EEA /* Transitions */ = {
@@ -477,6 +411,144 @@
 				77B957B823DC19DD00220426 /* StationFavoriteCD+Mappings.swift */,
 			);
 			path = EntityMapping;
+			sourceTree = "<group>";
+		};
+		77BCBBDF23DFB55E00CA5281 /* Common Views */ = {
+			isa = PBXGroup;
+			children = (
+				77A3D80223DB46C0003FF385 /* GenericCollectionView.swift */,
+				77BCBBEC23DFB69B00CA5281 /* Cells */,
+			);
+			path = "Common Views";
+			sourceTree = "<group>";
+		};
+		77BCBBE023DFB59E00CA5281 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				77D51763237C9DB200B7DCC9 /* InitialViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		77BCBBE123DFB5A400CA5281 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				774F0CA12372163E002852C3 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		77BCBBE223DFB5AA00CA5281 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7755B523235A1350004E642B /* PopularViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		77BCBBE323DFB5B000CA5281 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				773D455C2368EE6E007B755D /* FavoritesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		77BCBBE423DFB5B700CA5281 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				77964890235A569900813C48 /* PlayerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		77BCBBE523DFB5BC00CA5281 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		77BCBBE623DFB5C500CA5281 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				77D9A0FE23DA628300DDCE06 /* InitialTabBarController.swift */,
+				77D51761237C9DA500B7DCC9 /* InitialViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77BCBBE723DFB5D000CA5281 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				77A3D7FE23DB307B003FF385 /* MainNavigationController.swift */,
+				774F0C9F23721555002852C3 /* MainViewController.swift */,
+				77D5175E237C9CD500B7DCC9 /* MainViewControler.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77BCBBE823DFB5D900CA5281 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7755B521235A1241004E642B /* PopularViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77BCBBE923DFB5E100CA5281 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				773D455A2368EE58007B755D /* FavoritesViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77BCBBEA23DFB5E900CA5281 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7755B51D2359F1E2004E642B /* PlayerViewController.swift */,
+				77421B2B2359116600A23C79 /* PlayerViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77BCBBEB23DFB5F100CA5281 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				770282D9235C08AC000098DB /* MiniPlayerViewController.swift */,
+				77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */,
+				779DF55F23634D8C001F034F /* LoadingPlayerView.swift */,
+				774714602363A39100198D9E /* PlayingBarsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77BCBBEC23DFB69B00CA5281 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				77BCBBEE23DFB6A500CA5281 /* ViewModel */,
+				77BCBBED23DFB6A000CA5281 /* View */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		77BCBBED23DFB6A000CA5281 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7755B52B235A144F004E642B /* PopularViewCell.swift */,
+				7755B52C235A144F004E642B /* PopularViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77BCBBEE23DFB6A500CA5281 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7755B52F235A15D2004E642B /* PopularCellViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		77C9D3EE23DB990700C6FD55 /* PersistentStorages */ = {

@@ -57,7 +57,6 @@ class RadioPlayer {
     //MARK: - Publics
     
     func setupRadio(with station: StationRemote, playWhenReady: Bool = false) {
-//        guard let stationSelected = getSelectedStation(with: station) else { return }
         stationSelected = station
         
         nameSelected = station.name
@@ -121,12 +120,6 @@ class RadioPlayer {
         //Reset Image for Station
     }
     
-    //MARK: - Private
-    
-    //func getImage(for station: RadioStation) {
-        //Consulta imagen
-    //}
-    
     //MARK : - Networking
     
     private func getAiringNowDetails() {
@@ -153,19 +146,9 @@ class RadioPlayer {
         onlineInfo = show.name
         changeOnlineInfo()
         
-        // MARK: - TODO, call to CoreData
         guard let stationSelected = stationSelected else { return }
         setupSource(with: stationSelected)
     }
-    
-//    private func getSelectedStation(with name: String?) -> StationRemote? {
-//        //MARK: - TODO
-//        //, let _ = groupSelected,
-////        guard let stationName = name,
-////            let station = PersistenceManager.shared.findStation(with: stationName) else { return nil }
-////        return station
-//        return nil
-//    }
     
     private func setupSource(with selected: StationRemote) {
         let defaultInfo = selected.city + " - " +
