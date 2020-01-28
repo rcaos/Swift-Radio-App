@@ -19,15 +19,10 @@ extension CoreDataStorage: StationsLocalStorage {
                 
                 // MARK: - TODO, replicate error
                 
-                var stationsToSave: [Station] = []
-                
                 for station in stations {
-                    let newStation = Station(stationRemote: station, insertInto: strongSelf.mainContext)
-                    stationsToSave.append( newStation )
-                    
-                    try strongSelf.mainContext.save()
+                    let _ = Station(stationRemote: station, insertInto: strongSelf.mainContext)
                 }
-                stationsToSave.removeAll()
+                try strongSelf.mainContext.save()
                 
                 DispatchQueue.global(qos: .background).async {
                     completion( .success( () ) )
@@ -37,7 +32,7 @@ extension CoreDataStorage: StationsLocalStorage {
                 DispatchQueue.global(qos: .background).async {
                     completion(.failure(CoreDataStorageError.writeError(error)))
                 }
-                print(error)
+                print("error CoreDataStorage: [\(error)]")
             }
         }
     }
