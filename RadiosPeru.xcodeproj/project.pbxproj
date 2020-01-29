@@ -16,6 +16,7 @@
 		77236FA923677F9B009C80D0 /* GroupRPPResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FA823677F9B009C80D0 /* GroupRPPResult.swift */; };
 		77236FAC236786F8009C80D0 /* ShowRPP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FAB236786F8009C80D0 /* ShowRPP.swift */; };
 		77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */; };
+		772B267E23E1B7D700B0409B /* StationRemote+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772B267D23E1B7D700B0409B /* StationRemote+Decodable.swift */; };
 		7739E809235E4A610071882A /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739E808235E4A610071882A /* RadioPlayer.swift */; };
 		7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739E80B235E4B980071882A /* ApiPlayer.swift */; };
 		773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773D455A2368EE58007B755D /* FavoritesViewController.swift */; };
@@ -109,6 +110,7 @@
 		77236FA823677F9B009C80D0 /* GroupRPPResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRPPResult.swift; sourceTree = "<group>"; };
 		77236FAB236786F8009C80D0 /* ShowRPP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRPP.swift; sourceTree = "<group>"; };
 		77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRPPProvider.swift; sourceTree = "<group>"; };
+		772B267D23E1B7D700B0409B /* StationRemote+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StationRemote+Decodable.swift"; sourceTree = "<group>"; };
 		7739E808235E4A610071882A /* RadioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
 		7739E80B235E4B980071882A /* ApiPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPlayer.swift; sourceTree = "<group>"; };
 		773D455A2368EE58007B755D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -682,6 +684,7 @@
 				77E5AF6523D9F45200509BC2 /* ShowCRP+Decodable.swift */,
 				77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */,
 				77E5AF6923D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift */,
+				772B267D23E1B7D700B0409B /* StationRemote+Decodable.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -863,6 +866,7 @@
 				77D9A0FB23DA55C500DDCE06 /* InitialSceneDIContainer.swift in Sources */,
 				770A6BFF2368978500FDE4F6 /* Show.swift in Sources */,
 				77D9A0FD23DA5F8F00DDCE06 /* StationRemote.swift in Sources */,
+				772B267E23E1B7D700B0409B /* StationRemote+Decodable.swift in Sources */,
 				77D51764237C9DB200B7DCC9 /* InitialViewModel.swift in Sources */,
 				7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */,
 				774F0CA22372163E002852C3 /* MainViewModel.swift in Sources */,
