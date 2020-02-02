@@ -34,8 +34,6 @@ class InitialViewController: UIViewController {
         viewModel.getStations()
     }
     
-    //MARK: - Reactive Behaviour
-    
     private func setupBindables() {
         viewModel.stationsFetched = { [weak self] in
             self?.appDelegate?.initialTransition()

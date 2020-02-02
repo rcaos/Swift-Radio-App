@@ -57,8 +57,6 @@ final class PopularViewModel {
         }
     }
     
-    //MARK: - Public Methods
-    
     func getStationSelection(by index: Int) {
         delegate?.stationDidSelect(station: stations[index])
     }

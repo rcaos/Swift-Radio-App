@@ -35,19 +35,14 @@ final class DefaultFetchStationsUseCase: FetchStationsUseCase {
             
             switch result {
             case .success(let stationsResult):
-                print("aqui ya retornaron: [\(stationsResult.stations.count)]")
                 
                 strongSelf.stationsLocalRepository.saveStations(stations: stationsResult.stations) { coreDataResult in
                     
-                    // Necesario volver al Main Thread
-                    // porque CoreData save in .background
                     DispatchQueue.main.async {
                         switch coreDataResult {
                         case .success :
-                            print("-- Ok al guardar en CoreData")
                             completion( result )
                         case .failure(let error):
-                            print("-- error al guardar en CoreData:\(error)")
                             completion( .failure(error) )
                         }
                     }

@@ -33,17 +33,13 @@ final class InitialViewModel {
             guard let strongSelf = self else { return }
             
             switch result {
-            case .success(let response):
-                strongSelf.processFetched(for: response)
+            case .success: break
+                
             case .failure(let error):
                 print("error to Fetch Stations: [\(error)]")
             }
             
             strongSelf.stationsFetched?()
         }
-    }
-    
-    private func processFetched(for response: StationResult) {
-        print("retornaron: \(response.stations.count) stations")
     }
 }

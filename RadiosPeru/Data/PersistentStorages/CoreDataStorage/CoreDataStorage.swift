@@ -41,14 +41,11 @@ final class CoreDataStorage {
         return context
     }
     
-    // MARK: - Debería encontrar otra Manera...
-    // Si agrego otro Store, necesito agregar una variable aquí.
+    // MARK: - Find other way, what if i need add another Store?
     var storeFavorites: PersistenceStore<StationFavoriteCD>?
     var delegate: FavoritesLocalStorageDelegate?
     
     // MARK: - Core Data Saving support
-    
-    // MARK: -  Cuando lo llama ???
     
     private func saveContext () {
         

@@ -9,11 +9,7 @@
 import Foundation
 
 final class AppDIContainer {
-    
-    // MARK: - TODO, Las URLS son completamente diferentes !!
-    // Group RPP: tiene base fixed
-    // Group CRP: tiene bases variables
-    
+
     lazy var dataTransferService: DataTransferService = {
         return ApiClient()
     }()

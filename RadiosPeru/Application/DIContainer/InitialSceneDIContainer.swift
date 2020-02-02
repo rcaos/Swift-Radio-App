@@ -23,8 +23,6 @@ final class InitialSceneDIContainer {
         self.dependencies = dependencies
     }
     
-    // MARK: - TODO
-    
     public func makeInitialViewController() -> UIViewController {
         return InitialViewController.create(with: makeInitialViewModel())
     }

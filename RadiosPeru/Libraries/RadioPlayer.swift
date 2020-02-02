@@ -81,7 +81,6 @@ class RadioPlayer {
     func resetRadio() {
         player.stop()
         onlineInfo = nil
-        //Clean DataSource
     }
     
     func getRadioDescription() -> String {
@@ -108,19 +107,7 @@ class RadioPlayer {
         }
     }
     
-    func updateCurrentTrack() {
-        //delegate?.didChangeTrack()
-    }
-    
-    func updateTrackArt() {
-        //delegate?.didChangeImage()
-    }
-    
-    func resetTrackArt() {
-        //Reset Image for Station
-    }
-    
-    //MARK : - Networking
+    //MARK: - Networking
     
     private func getAiringNowDetails() {
         guard let stationSelected = stationSelected else { return }
@@ -202,7 +189,6 @@ private extension RadioPlayer {
 private extension RadioPlayer {
     
     func stateDidChange(with state: RadioPlayerState) {
-        print("Informar a \(observations.count) suscriptores. didChangeState")
         for(id, observation) in observations {
             guard let observer = observation.observer else {
                 observations.removeValue(forKey: id)
@@ -213,7 +199,6 @@ private extension RadioPlayer {
     }
     
     func changeOnlineInfo( ) {
-        print("Informar a \(observations.count) suscriptores. didChangeOnlineInfo")
         for(id, observation) in observations {
             guard let observer = observation.observer else {
                 observations.removeValue(forKey: id)
@@ -231,12 +216,10 @@ extension RadioPlayer {
     func addObserver(_ observer: RadioPlayerObserver) {
         let id = ObjectIdentifier(observer)
         observations[id] = Observation(observer: observer)
-        print("Nuevo suscriptor: \(id)")
     }
     
     func removeObserver(_ observer: RadioPlayerObserver) {
         let id = ObjectIdentifier(observer)
         observations.removeValue(forKey: id)
-        print("Se dió de baja a suscriptor: \(id)")
     }
 }

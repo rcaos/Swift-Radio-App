@@ -27,6 +27,7 @@ protocol ApiPlayerDelegate: class {
 class ApiPlayer : NSObject{
     
     //MARK: - Public
+    
     public static let shared = ApiPlayer()
     
     weak var delegate: ApiPlayerDelegate?
@@ -39,6 +40,7 @@ class ApiPlayer : NSObject{
     }
     
     //MARK: - Private
+    
     private var player: AVPlayer
     
     private var currentPlayerItemObserver: NSObjectProtocol?
@@ -57,7 +59,6 @@ class ApiPlayer : NSObject{
         }
     }
     
-    //TO DO
     private var isHeadPhonesConnected = false
     private var isInterrupted = false
     private var isConnected = false
@@ -66,8 +67,7 @@ class ApiPlayer : NSObject{
     
     override private init() {
         
-        //Enable Speaker
-        //TODO: Check other optiones, bluetooth? airPlay?, .mixWithOthers
+        // MARK: - TODO: Check other optiones, bluetooth? airPlay?, .mixWithOthers
         let audioSession = AVAudioSession.sharedInstance()
         try? audioSession.setCategory(AVAudioSession.Category.playback, options: [.defaultToSpeaker])
         try? audioSession.setMode(AVAudioSession.Mode.default)
@@ -87,7 +87,6 @@ class ApiPlayer : NSObject{
     public func prepare(with url: URL, playWhenReady: Bool = false) {
         
         if let currentItem = currentPlayerItem {
-            //It's the same URL
             if let currentURL = (currentItem.asset as? AVURLAsset)?.url ,
                 currentURL == url {
                 return
@@ -113,7 +112,6 @@ class ApiPlayer : NSObject{
     }
     
     public func play() {
-        //print("--Api.play(). Current Status:[\(status)]")
         switch status {
         case .paused, .preparing:
             player.play()
@@ -127,7 +125,6 @@ class ApiPlayer : NSObject{
     }
     
     public func togglePlayPause() {
-        //print("Toogle for status: [\(status)]")
         switch status {
         case .paused, .stopped, .error:
             play()
@@ -145,13 +142,11 @@ class ApiPlayer : NSObject{
     
     private func removeObservers(for item: AVPlayerItem?) {
         guard let item = item else { return }
-        //print("--Remove Observers for: \((item.asset as? AVURLAsset)?.url)")
         item.removeObserver(self, forKeyPath: "status")
     }
     
     private func addObservers(for item: AVPlayerItem?) {
         guard let item = item else { return }
-        //print("--Add Observers for:\((item.asset as? AVURLAsset)?.url)")
         item.addObserver(self, forKeyPath: "status", options: .new, context: nil)
         
         if let observer = currentPlayerItemObserver {
@@ -165,9 +160,7 @@ class ApiPlayer : NSObject{
                                                 guard let object = note.object as AnyObject? else { return }
                                                 guard object === self?.currentPlayerItem else { return }
                                                 
-                                                
                                                 self?.stop()
-                                                
         })
     }
 }
@@ -198,10 +191,10 @@ extension ApiPlayer {
     }
     
     private func playerItemDidChangeStatus(_ item : AVPlayerItem) {
-        //Check Apple documentation
-        //case unknown: The item’s status is unknown.
-        //case readyToPlay: The item is ready to play.
-        //case failed: The item no longer plays due to an error.
+        // MARK: - Check Apple documentation
+        // case unknown: The item’s status is unknown.
+        // case readyToPlay: The item is ready to play.
+        // case failed: The item no longer plays due to an error.
         
         switch item.status {
         case .readyToPlay:
@@ -214,22 +207,19 @@ extension ApiPlayer {
             }
             
         case .failed:
-            //print("\n(Item status failed: \(item.error))")
             status = .error
         case .unknown:
-            //print("(\nItem status unknown)")
             status = .error
         @unknown default:
-            //print("\n(Unknow statue)")
             status = .error
         }
     }
     
     private func playerDidChangeTimeControlStatus() {
-        //Check Apple documentation
-        //case paused : The player is paused.
-        //case waitingToPlayAtSpecifiedRate :The player is in a waiting state due to empty buffers or insufficient buffering.
-        //case playing: The player is currently playing a media item.
+        // MARK: - Check Apple documentation
+        // case paused : The player is paused.
+        // case waitingToPlayAtSpecifiedRate :The player is in a waiting state due to empty buffers or insufficient buffering.
+        // case playing: The player is currently playing a media item.
         
         switch player.timeControlStatus {
         case .paused:
@@ -267,28 +257,17 @@ extension ApiPlayer {
         switch type {
             
         case .began:
-            //print("Interrupted began")
-            
             stop()
             
         case .ended:
-            //print("Interrupted ended")
-            //isInterrupted = false
-            
             let optionNumber = note.userInfo?[AVAudioSessionInterruptionOptionKey] as? NSNumber
             if let number = optionNumber {
                 let options = AVAudioSession.InterruptionOptions(rawValue: number.uintValue)
                 let shouldResume = options.contains(.shouldResume)
                 
-                //print("Should Resume: \(shouldResume) ")
-                
-                //Se pierde la conexión cuando Pauso el Player !!!
-                //Stop or Play
-                
                 if shouldResume {
                     play()
                 }
-                
             }
         @unknown default:
             print("No Implementation")
@@ -302,7 +281,6 @@ extension ApiPlayer {
 extension ApiPlayer {
     
     func setupRemoteCommandCenter() {
-        //Singleton
         let commandCenter = MPRemoteCommandCenter.shared()
         
         commandCenter.nextTrackCommand.isEnabled = false
@@ -310,16 +288,12 @@ extension ApiPlayer {
         commandCenter.playCommand.isEnabled = true
         commandCenter.pauseCommand.isEnabled = true
         
-        // Handle Commands
-        
         commandCenter.playCommand.addTarget { [unowned self] event in
-            //print("Play from  Remote")
             self.togglePlayPause()
             return .success
         }
         
         commandCenter.pauseCommand.addTarget { [unowned self] event in
-            //print("Pause from Remote")
             self.togglePlayPause()
             return .success
         }
@@ -341,9 +315,6 @@ extension ApiPlayer {
         default :
             info = dataSource.nowDefaultInfo()
         }
-        
-        //print("Se envia a UpdateNow: \(info)")
-        
         MPNowPlayingInfoCenter.default().nowPlayingInfo = info
     }
     

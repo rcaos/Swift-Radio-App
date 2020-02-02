@@ -17,8 +17,6 @@ extension CoreDataStorage: StationsLocalStorage {
             
             do {
                 
-                // MARK: - TODO, replicate error
-                
                 for station in stations {
                     let _ = Station(stationRemote: station, insertInto: strongSelf.mainContext)
                 }
@@ -28,11 +26,11 @@ extension CoreDataStorage: StationsLocalStorage {
                     completion( .success( () ) )
                 }
             } catch {
-                print("-- error CD here: [\(error.localizedDescription)]")
+                print("error CoreDataStorage: [\(error)]")
+                
                 DispatchQueue.global(qos: .background).async {
                     completion(.failure(CoreDataStorageError.writeError(error)))
                 }
-                print("error CoreDataStorage: [\(error)]")
             }
         }
     }

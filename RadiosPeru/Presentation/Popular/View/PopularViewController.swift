@@ -52,8 +52,6 @@ class PopularViewController: UIViewController {
         customView.collectionView.delegate = self
     }
     
-    //MARK: - Reactive
-    
     func setupBindables() {
         viewModel?.viewState.bind({ [weak self] state in
             guard let strongSelf = self else { return }

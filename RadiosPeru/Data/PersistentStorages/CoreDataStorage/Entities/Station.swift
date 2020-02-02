@@ -21,19 +21,15 @@ final class Station: NSManagedObject {
     @NSManaged var group: String
     @NSManaged var groupId: String
     @NSManaged var groupBase: String
-    
 }
 
 extension Station {
-    
-    // Lo crea xCode ??
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Station> {
         return NSFetchRequest<Station>(entityName: "Station")
     }
 }
 
-// MARK: - TODO
 extension Station {
     
     var type: Group {

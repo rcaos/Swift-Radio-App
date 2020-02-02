@@ -10,17 +10,6 @@ import CoreData
 
 extension StationFavoriteCD {
     
-    convenience init(stationFavorite: StationFavorite, insertInto context: NSManagedObjectContext) {
-        self.init(context: context)
-        
-        self.createAt = Date()
-        self.name = stationFavorite.name
-        self.group = stationFavorite.group
-    }
-}
-
-extension StationFavoriteCD {
-    
     convenience init(stationFavorite: SimpleStation, insertInto context: NSManagedObjectContext) {
         self.init(context: context)
         
@@ -37,17 +26,3 @@ extension SimpleStation {
         group = stationLocal.group
     }
 }
-
-// MARK: - TODO ya no usar
-extension StationFavorite {
-    
-    init(stationLocal: StationFavoriteCD) {
-        createAt = stationLocal.createAt
-        name = stationLocal.name
-        group = stationLocal.group
-    }
-}
-// MARK: --------
-
-
-

@@ -49,7 +49,7 @@
 		77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */; };
 		77B957B123DC0D1800220426 /* PopularSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B023DC0D1800220426 /* PopularSceneDIContainer.swift */; };
 		77B957B323DC170D00220426 /* FetchFavoritesStationsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B223DC170D00220426 /* FetchFavoritesStationsUseCase.swift */; };
-		77B957B523DC188300220426 /* StationFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B423DC188300220426 /* StationFavorite.swift */; };
+		77B957B523DC188300220426 /* SimpleStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B423DC188300220426 /* SimpleStation.swift */; };
 		77B957B923DC19DD00220426 /* StationFavoriteCD+Mappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B823DC19DD00220426 /* StationFavoriteCD+Mappings.swift */; };
 		77B957BD23DC1D0500220426 /* FavoritesLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957BC23DC1D0500220426 /* FavoritesLocalStorage.swift */; };
 		77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */; };
@@ -145,7 +145,7 @@
 		77B9469C235AD7E6006C3EEA /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 		77B957B023DC0D1800220426 /* PopularSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularSceneDIContainer.swift; sourceTree = "<group>"; };
 		77B957B223DC170D00220426 /* FetchFavoritesStationsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFavoritesStationsUseCase.swift; sourceTree = "<group>"; };
-		77B957B423DC188300220426 /* StationFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFavorite.swift; sourceTree = "<group>"; };
+		77B957B423DC188300220426 /* SimpleStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleStation.swift; sourceTree = "<group>"; };
 		77B957B823DC19DD00220426 /* StationFavoriteCD+Mappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StationFavoriteCD+Mappings.swift"; sourceTree = "<group>"; };
 		77B957BC23DC1D0500220426 /* FavoritesLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLocalStorage.swift; sourceTree = "<group>"; };
 		77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerObserver.swift; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 				77D5175C237C9BAE00B7DCC9 /* Group.swift */,
 				77D51765237C9FD200B7DCC9 /* StationResult.swift */,
 				77D9A0FC23DA5F8F00DDCE06 /* StationRemote.swift */,
-				77B957B423DC188300220426 /* StationFavorite.swift */,
+				77B957B423DC188300220426 /* SimpleStation.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -808,7 +808,7 @@
 				770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */,
 				77BCBBDE23DF8F6800CA5281 /* CoreDataStorage+FavoritesLocalStorage.swift in Sources */,
 				77C9D3F023DB992700C6FD55 /* CoreDataStorage.swift in Sources */,
-				77B957B523DC188300220426 /* StationFavorite.swift in Sources */,
+				77B957B523DC188300220426 /* SimpleStation.swift in Sources */,
 				77D9A0EC23DA427C00DDCE06 /* DataTransferService.swift in Sources */,
 				77236FA923677F9B009C80D0 /* GroupRPPResult.swift in Sources */,
 				77CE5D4623DF3289008C5ECA /* AskFavoriteUseCase.swift in Sources */,

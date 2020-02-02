@@ -76,13 +76,12 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     }
     
     func setupViewBindables() {
-        //guard let viewModel = viewModel else { return }
-        
         stationNameLabel.text = viewModel.name
         stationDescriptionLabel.text = viewModel.getDescription()
     }
     
-    //Debería usar la Enum de Radio Player? o solo conocer la ENum de su Model?
+    // MARK: - Change for State Enum but from it viewModel
+    
     func configView(with state: RadioPlayerState) {
         stationNameLabel.text = viewModel?.name
         stationDescriptionLabel.text = viewModel?.getDescription()
@@ -135,11 +134,6 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
         stationDescriptionLabel.text = ""
         stationDescriptionLabel.textColor = .lightGray
         stationDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        
-        //TODO COnfig StackView
-        //stackView. = .fill
-        //ALigment
-        //distribution
     }
     
     func setupPlayerView() {
@@ -157,7 +151,6 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
         viewForPause.contentMode = .scaleAspectFit
         pauseView = viewForPause
         
-        //Fixed Frame
         let size = CGSize(width: 60, height: 36)
         let frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
         let viewForLoading = LoadingPlayerView(frame: frame)

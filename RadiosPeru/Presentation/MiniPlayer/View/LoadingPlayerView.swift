@@ -18,7 +18,6 @@ class LoadingPlayerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //func setUpAnimationFor2(in layer: CALayer, size: CGSize, color: UIColor) {
     func setUpAnimation(size: CGSize, color: UIColor, imageName: String) {
         
         let duration: CFTimeInterval = 0.75
@@ -67,6 +66,7 @@ class LoadingPlayerView: UIView {
     }
     
     //MARK: - Helpers
+    
     private func getImage(with size: CGSize, image: String) -> CALayer {
         let imageWith = size.width
         let imageHeight = size.height

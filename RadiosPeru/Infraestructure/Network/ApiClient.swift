@@ -10,11 +10,6 @@ import Foundation
 
 class ApiClient {
     
-    //private let configuration: NetworkConfigurable
-    
-//    init(with configuration: NetworkConfigurable) {
-//        self.configuration = configuration
-//    }
 }
 
 // MARK: - DataTransferService

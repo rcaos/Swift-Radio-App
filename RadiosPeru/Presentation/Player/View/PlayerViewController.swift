@@ -35,7 +35,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
         return controller
     }
     
-    //MARK : - Life Cycle
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,15 +84,14 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
         
         if let image = viewModel.image {
             stationImageView?.image = UIImage(named: image)
-        } else {
-            //stationImageView?.image = UIImage(named: "PlaceHolder")
         }
         
         stationNameLabel?.text = viewModel.name
         stationDescriptionLabel?.text = viewModel.getDescription()
     }
     
-    //Debería usar la Enum de Radio Player? o solo conocer la ENum de su Model?
+    // MARK: - Change for State Enum but from it viewModel
+    
     func configView(with state: RadioPlayerState) {
         stationNameLabel.text = viewModel?.name
         stationDescriptionLabel.text = viewModel?.getDescription()
@@ -131,9 +130,6 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     //MARK: - Setup UI
     
     func setupUI() {
-        
-        //TODO: COnfig
-        //stationImageView
         stationImageView.contentMode = .scaleAspectFit
         
         stationNameLabel.text = ""
@@ -145,9 +141,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
         stationDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         
         
-        // MARK: - TODO Fix autolayout
-        // MARK: - Aislarlo en una View Generica
-        // Para no importar "MediaPlayer"
+        // MARK: - Moved to Generic View, do not import MediaPlayer
         let mpVolumenView = MPVolumeView(frame: volumeStackView.bounds)
         for currentView in mpVolumenView.subviews {
             if currentView.isKind(of: UISlider.self) {
@@ -165,9 +159,6 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
         playingBarsImage.contentMode = UIView.ContentMode.center
         playingBarsImage.animationImages = PlayingBarsViews.createFrames()
         playingBarsImage.animationDuration = 0.6
-        
-        //TODO
-        //Config Stack View Here ..
         
         favoriteButton.setImage( UIImage(named: "btn-favorite") , for: .normal)
     }
@@ -224,7 +215,6 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     @objc func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         let percentThreshold:CGFloat = 0.3
         
-        // convert y-position to downward pull progress (percentage)
         let translation = sender.translation(in: view)
         let verticalMovement = translation.y / view.bounds.height
         let downwardMovement = fmaxf(Float(verticalMovement), 0.0)

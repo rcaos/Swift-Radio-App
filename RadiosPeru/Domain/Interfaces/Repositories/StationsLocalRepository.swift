@@ -14,7 +14,5 @@ protocol StationsLocalRepository {
     
     func stationsList(completion: @escaping (Result<[StationRemote], Error>) -> Void)
     
-    // 1ero lo usar "DefaultFetchFavoritesStationsUseCase"
-    // Usar en "DefaultFetchStationsLocalUseCase"
     func findStations(with stations: [SimpleStation] ,completion: @escaping (Result<[StationRemote], Error>) -> Void)
 }
