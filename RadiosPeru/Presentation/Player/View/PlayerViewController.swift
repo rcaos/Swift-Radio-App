@@ -193,8 +193,12 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   }
   
   func setupGestures() {
-    let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-    view.addGestureRecognizer( panGesture )
+    
+    if #available(iOS 13, *) {
+    } else {
+      let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+      view.addGestureRecognizer( panGesture )
+    }
     
     let tapForStack = UITapGestureRecognizer(target: self, action: #selector(handleGestureStack(_:)))
     playerStackView.addGestureRecognizer( tapForStack )

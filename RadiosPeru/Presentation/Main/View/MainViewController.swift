@@ -106,8 +106,12 @@ extension MainViewControler {
     case .showPlayer(let station):
       guard let playerController =
         controllersFactory.makePlayerViewController(with: station) as? PlayerViewController else { break }
-      playerController.transitioningDelegate = self
-      playerController.interactor = interactor
+      
+      if #available(iOS 13, *) {
+      } else {
+        playerController.transitioningDelegate = self
+        playerController.interactor = interactor
+      }
       present(playerController, animated: true, completion: nil)
     }
     
