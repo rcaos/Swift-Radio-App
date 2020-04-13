@@ -30,7 +30,7 @@ extension CoreDataStorage: FavoritesLocalStorage {
           completion( .success(false) )
           
         } else {
-          let _ = StationFavoriteCD(stationFavorite: station, insertInto: strongSelf.mainContext)
+          _ = StationFavoriteCD.insert(into: strongSelf.mainContext, stationFavorite: station)
           
           try strongSelf.mainContext.save()
           

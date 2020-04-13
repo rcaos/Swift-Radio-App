@@ -22,3 +22,13 @@ extension StationFavoriteCD {
         return NSFetchRequest<StationFavoriteCD>(entityName: "StationFavoriteCD")
     }
 }
+
+// MARK: - Managed
+
+extension StationFavoriteCD: Managed {
+  
+  static var defaultSortDescriptors: [NSSortDescriptor] {
+    return [NSSortDescriptor(key: #keyPath(createAt), ascending: false )]
+  }
+  
+}

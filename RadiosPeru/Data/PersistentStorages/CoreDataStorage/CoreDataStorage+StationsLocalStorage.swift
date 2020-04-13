@@ -15,22 +15,14 @@ extension CoreDataStorage: StationsLocalStorage {
     persistentContainer.performBackgroundTask { [weak self] _ in
       guard let strongSelf = self else { return }
       
-      do {
-        
-        for station in stations {
-          let _ = Station(stationRemote: station, insertInto: strongSelf.mainContext)
+      for station in stations {
+        strongSelf.mainContext.performChanges {
+          _ = Station.insert(into: strongSelf.mainContext, stationRemote: station)
         }
-        try strongSelf.mainContext.save()
-        
-        DispatchQueue.global(qos: .background).async {
-          completion( .success( () ) )
-        }
-      } catch {
-        print("error CoreDataStorage: [\(error)]")
-        
-        DispatchQueue.global(qos: .background).async {
-          completion(.failure(CoreDataStorageError.writeError(error)))
-        }
+      }
+      
+      DispatchQueue.global(qos: .background).async {
+        completion( .success( () ) )
       }
     }
   }

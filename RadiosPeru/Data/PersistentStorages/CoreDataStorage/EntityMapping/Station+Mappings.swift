@@ -11,17 +11,19 @@ import CoreData
 
 extension Station {
   
-  convenience init(stationRemote: StationRemote, insertInto context: NSManagedObjectContext) {
-    self.init(context: context)
-    self.name = stationRemote.name
-    self.city = stationRemote.city
-    self.frecuency = stationRemote.frecuency
-    self.slogan = stationRemote.slogan
-    self.urlStream = stationRemote.urlStream
-    self.image = stationRemote.pathImage
-    self.group = stationRemote.group
-    self.groupId = stationRemote.groupId
-    self.groupBase = stationRemote.groupBase
+  static func insert(into context: NSManagedObjectContext, stationRemote: StationRemote) -> Station {
+    let stationLocal: Station = context.insertObject()
+    
+    stationLocal.name = stationRemote.name
+    stationLocal.city = stationRemote.city
+    stationLocal.frecuency = stationRemote.frecuency
+    stationLocal.slogan = stationRemote.slogan
+    stationLocal.urlStream = stationRemote.urlStream
+    stationLocal.image = stationRemote.pathImage
+    stationLocal.group = stationRemote.group
+    stationLocal.groupId = stationRemote.groupId
+    stationLocal.groupBase = stationRemote.groupBase
+    return stationLocal
   }
 }
 

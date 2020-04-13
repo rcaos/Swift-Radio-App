@@ -9,20 +9,21 @@
 import CoreData
 
 extension StationFavoriteCD {
+  
+  static func insert(into context: NSManagedObjectContext, stationFavorite: SimpleStation) -> StationFavoriteCD {
+    let favoriteLocal: StationFavoriteCD = context.insertObject()
     
-    convenience init(stationFavorite: SimpleStation, insertInto context: NSManagedObjectContext) {
-        self.init(context: context)
-        
-        self.createAt = Date()
-        self.name = stationFavorite.name
-        self.group = stationFavorite.group
-    }
+    favoriteLocal.createAt = Date()
+    favoriteLocal.name = stationFavorite.name
+    favoriteLocal.group = stationFavorite.group
+    return favoriteLocal
+  }
 }
 
 extension SimpleStation {
-    
-    init(stationLocal: StationFavoriteCD) {
-        name = stationLocal.name
-        group = stationLocal.group
-    }
+  
+  init(stationLocal: StationFavoriteCD) {
+    name = stationLocal.name
+    group = stationLocal.group
+  }
 }
