@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46C2B5DB0D95030F78473554 /* Pods_RadiosPeru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94248943F3189C2289A883 /* Pods_RadiosPeru.framework */; };
 		770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282D9235C08AC000098DB /* MiniPlayerViewController.swift */; };
 		770282DC235C08B9000098DB /* MiniPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */; };
 		770282DF235C27A7000098DB /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282DE235C27A7000098DB /* Bindable.swift */; };
@@ -26,6 +27,7 @@
 		77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */; };
 		77421B2C2359116600A23C79 /* PlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B2B2359116600A23C79 /* PlayerViewController.storyboard */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
+		774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774778D92444CA780020245A /* UIImageView+Kingfisher.swift */; };
 		774F0CA023721555002852C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0C9F23721555002852C3 /* MainViewController.swift */; };
 		774F0CA22372163E002852C3 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0CA12372163E002852C3 /* MainViewModel.swift */; };
 		7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B51D2359F1E2004E642B /* PlayerViewController.swift */; };
@@ -122,6 +124,7 @@
 		77421B202358FEE700A23C79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77421B2B2359116600A23C79 /* PlayerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayerViewController.storyboard; sourceTree = "<group>"; };
 		774714602363A39100198D9E /* PlayingBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingBarsView.swift; sourceTree = "<group>"; };
+		774778D92444CA780020245A /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		774F0C9F23721555002852C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		774F0CA12372163E002852C3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7755B51D2359F1E2004E642B /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +197,9 @@
 		77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoSource.swift; sourceTree = "<group>"; };
 		77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MiniPlayerViewController.storyboard; sourceTree = "<group>"; };
 		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
+		81BC95517D36B535BE7997A1 /* Pods-RadiosPeru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiosPeru.debug.xcconfig"; path = "Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru.debug.xcconfig"; sourceTree = "<group>"; };
+		8FB612EA606C779819BEE49F /* Pods-RadiosPeru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiosPeru.release.xcconfig"; path = "Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru.release.xcconfig"; sourceTree = "<group>"; };
+		CE94248943F3189C2289A883 /* Pods_RadiosPeru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiosPeru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,12 +207,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46C2B5DB0D95030F78473554 /* Pods_RadiosPeru.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54521FDC5C65B6C9C9BF7229 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				81BC95517D36B535BE7997A1 /* Pods-RadiosPeru.debug.xcconfig */,
+				8FB612EA606C779819BEE49F /* Pods-RadiosPeru.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		770282DD235C08BD000098DB /* MiniPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +281,8 @@
 			children = (
 				77421B132358FEE500A23C79 /* RadiosPeru */,
 				77421B122358FEE500A23C79 /* Products */,
+				54521FDC5C65B6C9C9BF7229 /* Pods */,
+				D7AA83EDDBF66C8DEADF4CE4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -308,6 +326,7 @@
 				777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */,
 				770282DE235C27A7000098DB /* Bindable.swift */,
 				77B9469F235AD80D006C3EEA /* Transitions */,
+				774778D92444CA780020245A /* UIImageView+Kingfisher.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -706,6 +725,14 @@
 			path = Crp;
 			sourceTree = "<group>";
 		};
+		D7AA83EDDBF66C8DEADF4CE4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE94248943F3189C2289A883 /* Pods_RadiosPeru.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -713,9 +740,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77421B232358FEE700A23C79 /* Build configuration list for PBXNativeTarget "RadiosPeru" */;
 			buildPhases = (
+				9388DDE98FE366DAE9411276 /* [CP] Check Pods Manifest.lock */,
+				774778D82444B18C0020245A /* ShellScript */,
 				77421B0D2358FEE500A23C79 /* Sources */,
 				77421B0E2358FEE500A23C79 /* Frameworks */,
 				77421B0F2358FEE500A23C79 /* Resources */,
+				D3865EBF1933905D45EA1E1C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -780,6 +810,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		774778D82444B18C0020245A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		9388DDE98FE366DAE9411276 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RadiosPeru-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3865EBF1933905D45EA1E1C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		77421B0D2358FEE500A23C79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -791,6 +880,7 @@
 				77CE5D4823DF4DE6008C5ECA /* PersistenceStorage.swift in Sources */,
 				77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */,
 				77D5175D237C9BAE00B7DCC9 /* Group.swift in Sources */,
+				774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */,
 				7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */,
 				773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */,
 				77D9A0F923DA556600DDCE06 /* AppDIContainer.swift in Sources */,
@@ -1013,6 +1103,7 @@
 		};
 		77421B242358FEE700A23C79 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81BC95517D36B535BE7997A1 /* Pods-RadiosPeru.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1033,6 +1124,7 @@
 		};
 		77421B252358FEE700A23C79 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FB612EA606C779819BEE49F /* Pods-RadiosPeru.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

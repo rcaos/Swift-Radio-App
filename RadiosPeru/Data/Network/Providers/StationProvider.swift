@@ -16,7 +16,7 @@ enum StationProvider {
 
 // MARK: - EndPoint
 
-//https://www.dropbox.com/s/95idd63yx1r5jn7/stationsNew.json?dl=1
+//https://www.dropbox.com/s/t5b5nqxxro5a9tu/stations-20200413.json?dl=1
 
 extension StationProvider: EndPoint {
   
@@ -25,7 +25,7 @@ extension StationProvider: EndPoint {
   }
   
   var path: String {
-    return "/s/95idd63yx1r5jn7/stationsNew.json"
+    return "/s/t5b5nqxxro5a9tu/stations-20200413.json"
   }
   
   var parameters: [String: Any]? {

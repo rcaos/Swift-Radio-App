@@ -17,6 +17,7 @@ extension StationRemote: Decodable {
     case frecuency
     case slogan
     case urlStream
+    case pathImage = "path_image"
     case group
   }
   
@@ -27,11 +28,12 @@ extension StationRemote: Decodable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
     self.name = try container.decode(String.self, forKey: .name)
-    self.image = try container.decode(String.self, forKey: .image)
+    
     self.city = try container.decode(String.self, forKey: .city)
     self.frecuency = try container.decode(String.self, forKey: .frecuency)
     self.slogan = try container.decode(String.self, forKey: .slogan)
     self.urlStream = try container.decode(String.self, forKey: .urlStream)
+    self.pathImage = try container.decode(String.self, forKey: .pathImage)
     
     let customGroup = try container.decode(Group.self, forKey: .group)
     switch customGroup {

@@ -12,8 +12,8 @@ final class PopularCellViewModel {
     
     var radioStation: StationRemote
     
-    lazy var image: String = {
-        return radioStation.image
+    lazy var imageURL: URL? = {
+      return URL(string: radioStation.pathImage)
     }()
     
     init(station: StationRemote) {

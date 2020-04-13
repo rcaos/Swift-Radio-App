@@ -10,34 +10,33 @@ import Foundation
 import CoreData
 
 extension Station {
-    
-    convenience init(stationRemote: StationRemote, insertInto context: NSManagedObjectContext) {
-        self.init(context: context)
-        
-        self.name = stationRemote.name
-        self.image = stationRemote.image
-        self.city = stationRemote.city
-        self.frecuency = stationRemote.frecuency
-        self.slogan = stationRemote.slogan
-        self.urlStream = stationRemote.urlStream
-        self.group = stationRemote.group
-        self.groupId = stationRemote.groupId
-        self.groupBase = stationRemote.groupBase
-    }
+  
+  convenience init(stationRemote: StationRemote, insertInto context: NSManagedObjectContext) {
+    self.init(context: context)
+    self.name = stationRemote.name
+    self.city = stationRemote.city
+    self.frecuency = stationRemote.frecuency
+    self.slogan = stationRemote.slogan
+    self.urlStream = stationRemote.urlStream
+    self.image = stationRemote.pathImage
+    self.group = stationRemote.group
+    self.groupId = stationRemote.groupId
+    self.groupBase = stationRemote.groupBase
+  }
 }
 
 extension StationRemote {
+  
+  init(stationLocal: Station) {
+    name = stationLocal.name
+    city = stationLocal.city
+    frecuency = stationLocal.frecuency
+    slogan = stationLocal.slogan
+    urlStream = stationLocal.urlStream
+    pathImage = stationLocal.image
     
-    init(stationLocal: Station) {
-        name = stationLocal.name
-        image = stationLocal.image
-        city = stationLocal.city
-        frecuency = stationLocal.frecuency
-        slogan = stationLocal.slogan
-        urlStream = stationLocal.urlStream
-        
-        group = stationLocal.group
-        groupId = stationLocal.groupId
-        groupBase = stationLocal.groupBase
-    }
+    group = stationLocal.group
+    groupId = stationLocal.groupId
+    groupBase = stationLocal.groupBase
+  }
 }

@@ -25,8 +25,7 @@ class PopularViewCell: UICollectionViewCell {
   func setupUI() {
     guard let viewModel = viewModel else { return }
     
-    stationImageView.image = UIImage(named: viewModel.image )
-    
+    stationImageView.setImage(with: viewModel.imageURL, placeholder: UIImage(named: "radio-default"))
     stationImageView.layer.cornerRadius = 5
     stationImageView.clipsToBounds = true
     stationImageView.contentMode = .scaleAspectFit

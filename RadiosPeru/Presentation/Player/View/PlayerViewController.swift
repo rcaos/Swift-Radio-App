@@ -82,10 +82,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   func setupViewBindables() {
     guard let viewModel = viewModel else { return }
     
-    if let image = viewModel.image {
-      stationImageView?.image = UIImage(named: image)
-    }
-    
+    stationImageView.setImage(with: viewModel.image, placeholder: UIImage(named: "radio-default"))
     stationNameLabel?.text = viewModel.name
     stationDescriptionLabel?.text = viewModel.getDescription()
   }

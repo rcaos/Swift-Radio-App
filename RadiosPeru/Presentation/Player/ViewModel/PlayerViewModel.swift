@@ -18,7 +18,7 @@ final class PlayerViewModel {
   
   private var stationSelected: StationRemote
   
-  var image: String?
+  var image: URL?
   
   var name: String?
   
@@ -53,8 +53,7 @@ final class PlayerViewModel {
   
   private func setupRadio(with station: StationRemote) {
     name = station.name
-    image = station.image
-    
+    image = URL(string: station.pathImage)
     checkIsFavorite(with: station)
   }
   

@@ -142,7 +142,7 @@ class RadioPlayer {
       selected.frecuency + " - " +
       selected.slogan
     
-    dataSource = PlayerDataSource(title: selected.name, defaultInfo: defaultInfo, onlineNowInfo: self.onlineInfo, artWork: selected.image)
+    dataSource = PlayerDataSource(title: selected.name, defaultInfo: defaultInfo, onlineNowInfo: self.onlineInfo, artWork: selected.pathImage)
   }
 }
 
