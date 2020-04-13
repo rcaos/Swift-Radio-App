@@ -9,35 +9,35 @@
 import Foundation
 
 enum GroupRPPProvider {
-    
-    case getNowShowDetail(String)
-    
+  
+  case getNowShowDetail(String)
+  
 }
 
-//MARK: - EndPoint
+// MARK: - EndPoint
 
 extension GroupRPPProvider: EndPoint {
+  
+  var baseURL: String {
+    return "https://radio.rpp.pe"
+  }
+  
+  var path: String {
+    return "/now/live"
+  }
+  
+  var parameters: [String: Any]? {
+    var params: [String: Any] = [:]
     
-    var baseURL: String {
-        return "https://radio.rpp.pe"
+    switch self {
+    case .getNowShowDetail(let id):
+      params["rpIds"] = id
     }
     
-    var path: String {
-        return "/now/live"
-    }
-    
-    var parameters: [String:Any]? {
-        var params: [String: Any] = [:]
-        
-        switch self {
-        case .getNowShowDetail(let id):
-            params["rpIds"] = id
-        }
-        
-        return params
-    }
-    
-    var method: ServiceMethod {
-        return .get
-    }
+    return params
+  }
+  
+  var method: ServiceMethod {
+    return .get
+  }
 }

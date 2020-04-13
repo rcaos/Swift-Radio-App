@@ -9,26 +9,27 @@
 import Foundation
 
 protocol FetchStationsLocalUseCase {
-    
-    func execute(requestValue: FetchStationsLocalUseCaseRequestValue,
-                 completion: @escaping (Result<[StationRemote], Error>) -> Void ) -> Cancellable?
+  
+  func execute(requestValue: FetchStationsLocalUseCaseRequestValue,
+               completion: @escaping (Result<[StationRemote], Error>) -> Void ) -> Cancellable?
 }
 
 struct FetchStationsLocalUseCaseRequestValue {
-    
+  
 }
 
 final class DefaultFetchStationsLocalUseCase: FetchStationsLocalUseCase {
-    
-    private let stationsLocalRepository: StationsLocalRepository
-    
-    init(stationsLocalRepository: StationsLocalRepository) {
-        self.stationsLocalRepository = stationsLocalRepository
-    }
-    
-    func execute(requestValue: FetchStationsLocalUseCaseRequestValue, completion: @escaping (Result<[StationRemote], Error>) -> Void) -> Cancellable? {
-        stationsLocalRepository.stationsList(completion: completion)
-        return nil
-    }
-    
+  
+  private let stationsLocalRepository: StationsLocalRepository
+  
+  init(stationsLocalRepository: StationsLocalRepository) {
+    self.stationsLocalRepository = stationsLocalRepository
+  }
+  
+  func execute(requestValue: FetchStationsLocalUseCaseRequestValue,
+               completion: @escaping (Result<[StationRemote], Error>) -> Void) -> Cancellable? {
+    stationsLocalRepository.stationsList(completion: completion)
+    return nil
+  }
+  
 }

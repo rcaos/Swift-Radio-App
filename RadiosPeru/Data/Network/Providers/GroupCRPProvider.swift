@@ -9,34 +9,32 @@
 import Foundation
 
 enum GroupCRPProvider {
-    
-    case getNowShowDetail(String)
-    
+  
+  case getNowShowDetail(String)
+  
 }
 
-//MARK: - EndPoint
+// MARK: - EndPoint
 
 extension GroupCRPProvider: EndPoint {
-    
-    var baseURL: String {
-        switch self {
-        case .getNowShowDetail(let base) :
-            return base
-        }
+  
+  var baseURL: String {
+    switch self {
+    case .getNowShowDetail(let base) :
+      return base
     }
-    
-    var path: String {
-        return "/programacion/get_parrilla"
-    }
-    
-    var parameters: [String : Any]? {
-        return nil
-    }
-    
-    var method: ServiceMethod {
-        return .get
-    }
-    
-    
+  }
+  
+  var path: String {
+    return "/programacion/get_parrilla"
+  }
+  
+  var parameters: [String: Any]? {
+    return nil
+  }
+  
+  var method: ServiceMethod {
+    return .get
+  }
+  
 }
-

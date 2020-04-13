@@ -9,138 +9,137 @@
 import Foundation
 
 protocol MiniPlayerViewModelDelegate: class {
-    
-    func stationPLayerDidSelect(station: StationRemote)
+  
+  func stationPLayerDidSelect(station: StationRemote)
 }
 
 final class MiniPlayerViewModel {
+  
+  private let toggleFavoritesUseCase: ToggleFavoritesUseCase
+  
+  private let askFavoriteUseCase: AskFavoriteUseCase
+  
+  private var radioPlayer: RadioPlayer?
+  
+  private var stationSelected: StationRemote?
+  
+  var name: String = "Pick a Radio Station"
+  
+  weak var delegate: MiniPlayerViewModelDelegate?
+  
+  var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
+  
+  var updateUI:(() -> Void)?
+  
+  var isFavorite: Bindable<Bool> = Bindable(false)
+  
+  // MARK: - Initializers
+  
+  init(toggleFavoritesUseCase: ToggleFavoritesUseCase,
+       askFavoriteUseCase: AskFavoriteUseCase,
+       player: RadioPlayer?,
+       delegate: MiniPlayerViewModelDelegate? = nil) {
     
-    private let toggleFavoritesUseCase: ToggleFavoritesUseCase
+    self.toggleFavoritesUseCase = toggleFavoritesUseCase
+    self.askFavoriteUseCase = askFavoriteUseCase
     
-    private let askFavoriteUseCase: AskFavoriteUseCase
+    radioPlayer = player
+    radioPlayer?.addObserver(self)
+    self.delegate = delegate
+  }
+  
+  deinit {
+    radioPlayer?.removeObserver(self)
+  }
+  
+  // MARK: - Public
+  
+  func configStation(with station: StationRemote, playAutomatically: Bool = true) {
+    stationSelected = station
     
-    private var radioPlayer: RadioPlayer?
+    setupRadio(with: station)
+    checkIsFavorite(with: station)
     
-    private var stationSelected: StationRemote?
+    viewState.value = .stopped
+    radioPlayer?.setupRadio(with: station, playWhenReady: playAutomatically)
+  }
+  
+  func togglePlayPause() {
+    guard let player = radioPlayer,
+      stationSelected != nil else { return }
+    player.togglePlayPause()
+  }
+  
+  func markAsFavorite() {
+    guard let selected = stationSelected else { return }
     
-    var name: String = "Pick a Radio Station"
+    let simpleStation = SimpleStation(name: selected.name, group: selected.group)
     
-    weak var delegate: MiniPlayerViewModelDelegate?
-        
-    var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
+    let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
     
-    var updateUI:(()-> Void)?
-    
-    var isFavorite: Bindable<Bool> = Bindable(false)
-    
-    //MARK: - Initializers
-    
-    init(toggleFavoritesUseCase: ToggleFavoritesUseCase,
-         askFavoriteUseCase: AskFavoriteUseCase,
-         player: RadioPlayer?,
-         delegate: MiniPlayerViewModelDelegate? = nil) {
-        
-        self.toggleFavoritesUseCase = toggleFavoritesUseCase
-        self.askFavoriteUseCase = askFavoriteUseCase
-        
-        radioPlayer = player
-        radioPlayer?.addObserver(self)
-        self.delegate = delegate
+    toggleFavoritesUseCase.execute(requestValue: request) { [weak self] result in
+      guard let strongSelf = self else { return }
+      
+      switch result {
+      case .success(let isFavorite):
+        strongSelf.isFavorite.value = isFavorite
+      case .failure: break
+      }
     }
+  }
+  
+  // MARK: - Private
+  
+  private func setupRadio(with station: StationRemote) {
+    self.name = station.name
+  }
+  
+  private func checkIsFavorite(with station: StationRemote?) {
+    isFavorite.value = false
     
-    deinit {
-        radioPlayer?.removeObserver(self)
+    guard let station = station else { return  }
+    
+    let simpleStation = SimpleStation(name: station.name, group: station.group)
+    let request = AskFavoriteUseCaseRequestValue(station: simpleStation)
+    
+    askFavoriteUseCase.execute(requestValue: request) { [weak self] result in
+      guard let strongSelf = self else { return }
+      switch result {
+      case .success(let isFavorite):
+        strongSelf.isFavorite.value = isFavorite
+      case .failure: break
+      }
     }
+  }
+  
+  // MARK: - Public
+  
+  func showPlayer() {
+    guard let selected = stationSelected else { return }
+    delegate?.stationPLayerDidSelect(station: selected)
+  }
+  
+  func viewWillAppear() {
+    checkIsFavorite(with: stationSelected)
+  }
+  
+  func getDescription() -> String {
+    guard let radioPlayer = radioPlayer else { return "" }
     
-    //MARK: - Public
-    
-    func configStation(with station: StationRemote, playAutomatically: Bool = true) {
-        stationSelected = station
-        
-        setupRadio(with: station)
-        checkIsFavorite(with: station)
-        
-        viewState.value = .stopped
-        radioPlayer?.setupRadio(with: station, playWhenReady: playAutomatically)
-    }
-    
-    func togglePlayPause() {
-        guard let player = radioPlayer,
-                let _ = stationSelected else { return }
-        player.togglePlayPause()
-    }
-    
-    func markAsFavorite() {
-        guard let selected = stationSelected else { return }
-        
-        let simpleStation = SimpleStation(name: selected.name, group: selected.group)
-        
-        let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
-        
-        toggleFavoritesUseCase.execute(requestValue: request) { [weak self] result in
-            guard let strongSelf = self else { return }
-            
-            switch result {
-            case .success(let isFavorite):
-                strongSelf.isFavorite.value = isFavorite
-            case .failure: break
-            }
-        }
-    }
-    
-    //MARK: - Private
-    
-    private func setupRadio(with station: StationRemote) {
-        self.name = station.name
-    }
-    
-    private func checkIsFavorite(with station: StationRemote?) {
-        isFavorite.value = false
-        
-        guard let station = station else { return  }
-        
-        let simpleStation = SimpleStation(name: station.name, group: station.group)
-        let request = AskFavoriteUseCaseRequestValue(station: simpleStation)
-        
-        askFavoriteUseCase.execute(requestValue: request) { [weak self] result in
-            guard let strongSelf = self else { return }
-            switch result {
-            case .success(let isFavorite):
-                strongSelf.isFavorite.value = isFavorite
-            case .failure: break
-            }
-        }
-    }
-        
-    //MARK: - Public
-    
-    func showPlayer() {
-        guard let selected = stationSelected else { return }
-        delegate?.stationPLayerDidSelect(station: selected)
-    }
-    
-    func viewWillAppear() {
-        checkIsFavorite(with: stationSelected)
-    }
-    
-    func getDescription() -> String {
-        guard let radioPlayer = radioPlayer else { return "" }
-        
-        return radioPlayer.getRadioDescription()
-    }
+    return radioPlayer.getRadioDescription()
+  }
 }
 
-
-//MARK: - RadioPlayerObserver
+// MARK: - RadioPlayerObserver
 
 extension MiniPlayerViewModel: RadioPlayerObserver {
-    
-    func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
-        viewState.value = state
-    }
-    
-    func radioPlayerDidChangeOnlineInfo(_ radioPlayer: RadioPlayer) {
-        updateUI?()
-    }
-    
+  
+  func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
+    viewState.value = state
+  }
+  
+  func radioPlayerDidChangeOnlineInfo(_ radioPlayer: RadioPlayer) {
+    updateUI?()
+  }
+  
 }

@@ -9,21 +9,21 @@
 import Foundation
 
 protocol FavoritesLocalStorageDelegate: class {
-    
-    func favoritesLocalStorage(didUpdateEntity update: Bool)
+  
+  func favoritesLocalStorage(didUpdateEntity update: Bool)
 }
 
 protocol FavoritesLocalStorage {
-    
-    func isFavorite(station: SimpleStation,
-    completion: @escaping (Result<Bool, Error>) -> Void)
-    
-    func toogleFavorite(station: SimpleStation,
-    completion: @escaping (Result<Bool, Error>) -> Void)
-    
-    func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void)
-    
-    func configStore()
-    
-    var delegate: FavoritesLocalStorageDelegate? { get set }
+  
+  func isFavorite(station: SimpleStation,
+                  completion: @escaping (Result<Bool, Error>) -> Void)
+  
+  func toogleFavorite(station: SimpleStation,
+                      completion: @escaping (Result<Bool, Error>) -> Void)
+  
+  func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void)
+  
+  func configStore()
+  
+  var delegate: FavoritesLocalStorageDelegate? { get set }
 }

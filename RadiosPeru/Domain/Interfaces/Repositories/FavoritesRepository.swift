@@ -9,21 +9,21 @@
 import Foundation
 
 protocol FavoritesRepositoryDelegate: class {
-    
-    func stationsLocalRepository(didUpdateEntity update: Bool)
+  
+  func stationsLocalRepository(didUpdateEntity update: Bool)
 }
 
 protocol FavoritesRepository {
-    
-    func isFavorite(station: SimpleStation,
-    completion: @escaping (Result<Bool, Error>) -> Void)
-    
-    func toogleFavorite(station: SimpleStation,
-    completion: @escaping (Result<Bool, Error>) -> Void)
-    
-    func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void)
-    
-    func configStore()
-    
-    var delegate: FavoritesRepositoryDelegate? { get set }
+  
+  func isFavorite(station: SimpleStation,
+                  completion: @escaping (Result<Bool, Error>) -> Void)
+  
+  func toogleFavorite(station: SimpleStation,
+                      completion: @escaping (Result<Bool, Error>) -> Void)
+  
+  func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void)
+  
+  func configStore()
+  
+  var delegate: FavoritesRepositoryDelegate? { get set }
 }

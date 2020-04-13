@@ -11,64 +11,64 @@ import UIKit
 import MediaPlayer
 
 public protocol PlayInfoSource {
-    
-    var title: String { get }
-    
-    var defaultInfo: String { get }
-    
-    var onlineNowInfo: String? { get }
-    
-    var artWork: String? { get }
-    
+  
+  var title: String { get }
+  
+  var defaultInfo: String { get }
+  
+  var onlineNowInfo: String? { get }
+  
+  var artWork: String? { get }
+  
 }
 
 extension PlayInfoSource {
+  
+  func nowPlayInfo() -> [String: Any] {
+    var info: [String: Any] = [:]
     
-    func nowPlayInfo() -> [String: Any] {
-        var info:[String: Any] = [:]
-        
-        info[MPMediaItemPropertyTitle] = title
-        
-        if let online = onlineNowInfo {
-            info[MPMediaItemPropertyArtist] = online
-        }
-        
-        info[MPMediaItemPropertyAlbumTitle] = defaultInfo
-        
-        if let named = artWork, let image = UIImage(named: named) {
-            let imageArtWork = MPMediaItemArtwork(boundsSize: image.size) { (inputSize) -> UIImage in
-                return image 
-            }
-            info[MPMediaItemPropertyArtwork] = imageArtWork
-        }
-        
-        return info
+    info[MPMediaItemPropertyTitle] = title
+    
+    if let online = onlineNowInfo {
+      info[MPMediaItemPropertyArtist] = online
     }
     
-    func nowDefaultInfo() -> [String: Any] {
-        var info:[String: Any] = [:]
-        
-        info[MPMediaItemPropertyTitle] = title
-        info[MPMediaItemPropertyArtist] = defaultInfo
-        
-        if let named = artWork, let image = UIImage(named: named) {
-            let imageArtWork = MPMediaItemArtwork(boundsSize: image.size) { (inputSize) -> UIImage in
-                return image
-            }
-             info[MPMediaItemPropertyArtwork] = imageArtWork
-        }
-        
-        return info
+    info[MPMediaItemPropertyAlbumTitle] = defaultInfo
+    
+    if let named = artWork, let image = UIImage(named: named) {
+      let imageArtWork = MPMediaItemArtwork(boundsSize: image.size) { _ -> UIImage in
+        return image 
+      }
+      info[MPMediaItemPropertyArtwork] = imageArtWork
     }
+    
+    return info
+  }
+  
+  func nowDefaultInfo() -> [String: Any] {
+    var info: [String: Any] = [:]
+    
+    info[MPMediaItemPropertyTitle] = title
+    info[MPMediaItemPropertyArtist] = defaultInfo
+    
+    if let named = artWork, let image = UIImage(named: named) {
+      let imageArtWork = MPMediaItemArtwork(boundsSize: image.size) { _ -> UIImage in
+        return image
+      }
+      info[MPMediaItemPropertyArtwork] = imageArtWork
+    }
+    
+    return info
+  }
 }
 
 struct PlayerDataSource: PlayInfoSource {
-    
-    var title: String
-    
-    var defaultInfo: String
-    
-    var onlineNowInfo: String?
-    
-    var artWork: String?
+  
+  var title: String
+  
+  var defaultInfo: String
+  
+  var onlineNowInfo: String?
+  
+  var artWork: String?
 }

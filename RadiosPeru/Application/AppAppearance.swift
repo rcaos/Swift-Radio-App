@@ -9,23 +9,23 @@
 import UIKit
 
 final class AppAppearance {
+  
+  static func setupAppearance() {
     
-    static func setupAppearance() {
-        
-        let customColor = UIColor(red:55/255, green:55/255, blue:55/255, alpha:1.0)
-        
-        UINavigationBar.appearance().barTintColor = customColor
-        UINavigationBar.appearance().prefersLargeTitles = false
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        UITabBar.appearance().barTintColor = customColor
-        UITabBar.appearance().tintColor = .white
-    }
+    let customColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1.0)
+    
+    UINavigationBar.appearance().barTintColor = customColor
+    UINavigationBar.appearance().prefersLargeTitles = false
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+    
+    UITabBar.appearance().barTintColor = customColor
+    UITabBar.appearance().tintColor = .white
+  }
 }
 
 extension UINavigationController {
-    
-    override open var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+  
+  override open var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
 }
