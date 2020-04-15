@@ -45,12 +45,8 @@ extension Station {
   var type: Group {
     if group == "rpp" {
       return .rpp( RPP(type: self.group, id: self.groupId) )
-      
-    } else if group == "crp" {
+    } else { //"crp"
       return .crp( CRP(type: self.group, base: self.groupBase) )
-      
-    } else {
-      return .unknown
     }
   }
 }

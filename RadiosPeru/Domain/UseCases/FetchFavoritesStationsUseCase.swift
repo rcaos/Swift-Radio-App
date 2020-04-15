@@ -6,12 +6,11 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol FetchFavoritesStationsUseCase {
   
-  func execute(requestValue: FetchFavoritesStationsRequestValue,
-               completion: @escaping (Result<[StationRemote], Error>) -> Void ) -> Cancellable?
+  func execute(requestValue: FetchFavoritesStationsRequestValue) -> Observable<[StationRemote]>
 }
 
 struct FetchFavoritesStationsRequestValue {
@@ -28,20 +27,12 @@ final class DefaultFetchFavoritesStationsUseCase: FetchFavoritesStationsUseCase 
     self.localsRepository = localsRepository
   }
   
-  func execute(requestValue: FetchFavoritesStationsRequestValue,
-               completion: @escaping (Result<[StationRemote], Error>) -> Void) -> Cancellable? {
-    
-    favoritesRepository.favoritesList { [weak self] result in
-      guard let strongSelf = self else { return }
-      
-      switch result {
-      case .success(let stations):
-        strongSelf.localsRepository.findStations(with: stations, completion: completion)
-      case .failure :
-        completion( .success([]) )
-      }
+  func execute(requestValue: FetchFavoritesStationsRequestValue) -> Observable<[StationRemote]> {
+    return favoritesRepository.favoritesList()
+      .flatMap { [weak self] stations -> Observable<[StationRemote]> in
+        guard let strongself = self else { return Observable.just([]) }
+        return strongself.localsRepository.findStations(with: stations)
     }
-    return nil
   }
   
 }

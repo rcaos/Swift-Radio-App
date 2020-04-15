@@ -6,29 +6,27 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol FetchShowOnlineInfoUseCase {
-    
-    func execute(requestValue: FetchShowOnlineInfoUseCaseRequestValue,
-                 completion: @escaping (Result<Show, Error>) -> Void ) -> Cancellable?
+  
+  func execute(requestValue: FetchShowOnlineInfoUseCaseRequestValue) -> Observable<Show>
 }
 
 struct FetchShowOnlineInfoUseCaseRequestValue {
-    let group: Group
+  let group: Group
 }
 
 final class DefaultFetchShowOnlineInfoUseCase: FetchShowOnlineInfoUseCase {
-    
-    private let showDetailRepository: ShowDetailsRepository
-    
-    init(showDetailRepository: ShowDetailsRepository) {
-        self.showDetailRepository = showDetailRepository
-    }
-    
-    func execute(requestValue: FetchShowOnlineInfoUseCaseRequestValue, completion: @escaping (Result<Show, Error>) -> Void) -> Cancellable? {
-        
-        return showDetailRepository.fetchShowDetails(group: requestValue.group, completion: completion)
-    }
-    
+  
+  private let showDetailRepository: ShowDetailsRepository
+  
+  init(showDetailRepository: ShowDetailsRepository) {
+    self.showDetailRepository = showDetailRepository
+  }
+  
+  func execute(requestValue: FetchShowOnlineInfoUseCaseRequestValue) -> Observable<Show> {
+    return showDetailRepository.fetchShowDetails(group: requestValue.group)
+  }
+  
 }

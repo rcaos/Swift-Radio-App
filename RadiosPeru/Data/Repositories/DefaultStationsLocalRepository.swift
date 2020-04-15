@@ -6,28 +6,28 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 final class DefaultStationsLocalRepository {
-    
-    private var stationsPersistentStorage: StationsLocalStorage
-    
-    init(stationsPersistentStorage: StationsLocalStorage) {
-        self.stationsPersistentStorage = stationsPersistentStorage
-    }
+  
+  private var stationsPersistentStorage: StationsLocalStorage
+  
+  init(stationsPersistentStorage: StationsLocalStorage) {
+    self.stationsPersistentStorage = stationsPersistentStorage
+  }
 }
 
 extension DefaultStationsLocalRepository: StationsLocalRepository {
-    
-    func saveStations(stations: [StationRemote], completion: @escaping (Result<Void, Error>) -> Void) {
-        stationsPersistentStorage.saveStations(stations: stations, completion: completion)
-    }
-    
-    func stationsList(completion: @escaping (Result<[StationRemote], Error>) -> Void) {
-        stationsPersistentStorage.stationsList(completion: completion)
-    }
-    
-    func findStations(with stations: [SimpleStation], completion: @escaping (Result<[StationRemote], Error>) -> Void) {
-        stationsPersistentStorage.findStations(with: stations, completion: completion)
-    }
+  
+  func saveStations(stations: [StationRemote])-> Observable<Void> {
+    return stationsPersistentStorage.saveStations(stations: stations)
+  }
+  
+  func stationsList() -> Observable<[StationRemote]> {
+    return stationsPersistentStorage.stationsList()
+  }
+  
+  func findStations(with stations: [SimpleStation]) -> Observable<[StationRemote]> {
+    return stationsPersistentStorage.findStations(with: stations)
+  }
 }

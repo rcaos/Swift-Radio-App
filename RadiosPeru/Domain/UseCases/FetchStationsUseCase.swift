@@ -6,12 +6,11 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol FetchStationsUseCase {
   
-  func execute(requestValue: FetchStationsUseCaseRequestValue,
-               completion: @escaping (Result<StationResult, Error>) -> Void ) -> Cancellable?
+  func execute(requestValue: FetchStationsUseCaseRequestValue) -> Observable<StationResult>
 }
 
 struct FetchStationsUseCaseRequestValue {
@@ -28,29 +27,10 @@ final class DefaultFetchStationsUseCase: FetchStationsUseCase {
     self.stationsLocalRepository = stationsLocalRepository
   }
   
-  func execute(requestValue: FetchStationsUseCaseRequestValue, completion: @escaping (Result<StationResult, Error>) -> Void) -> Cancellable? {
-    
-    return stationsRepository.stationsList { [weak self] result in
-      guard let strongSelf = self else { return }
-      
-      switch result {
-      case .success(let stationsResult):
-        
-        strongSelf.stationsLocalRepository.saveStations(stations: stationsResult.stations) { coreDataResult in
-          
-          DispatchQueue.main.async {
-            switch coreDataResult {
-            case .success :
-              completion( result )
-            case .failure(let error):
-              completion( .failure(error) )
-            }
-          }
-        }
-      case .failure:
-        completion(result)
-      }
-    }
+  // MARK: - TODO, save Stations Locally
+  func execute(requestValue: FetchStationsUseCaseRequestValue)-> Observable<StationResult> {
+    return stationsRepository.stationsList()
+    //self.stationsLocalRepository.saveStations(stations: result.stations)
   }
   
 }

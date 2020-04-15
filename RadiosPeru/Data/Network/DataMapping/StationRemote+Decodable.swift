@@ -45,10 +45,6 @@ extension StationRemote: Decodable {
       self.group = crp.type
       self.groupId = ""
       self.groupBase = crp.base
-    case .unknown:
-      self.group = ""
-      self.groupId = ""
-      self.groupBase = ""
     }
   }
 }

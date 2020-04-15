@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol FavoritesRepositoryDelegate: class {
   
@@ -15,13 +15,11 @@ protocol FavoritesRepositoryDelegate: class {
 
 protocol FavoritesRepository {
   
-  func isFavorite(station: SimpleStation,
-                  completion: @escaping (Result<Bool, Error>) -> Void)
+  func isFavorite(station: SimpleStation) -> Observable<Bool>
   
-  func toogleFavorite(station: SimpleStation,
-                      completion: @escaping (Result<Bool, Error>) -> Void)
+  func toogleFavorite(station: SimpleStation) -> Observable<Bool>
   
-  func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void)
+  func favoritesList() -> Observable<[SimpleStation]>
   
   func configStore()
   

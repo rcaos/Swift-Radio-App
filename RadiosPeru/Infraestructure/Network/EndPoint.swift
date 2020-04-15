@@ -11,12 +11,16 @@ import Foundation
 public protocol EndPoint {
   
   var baseURL: String { get }
+  
   var path: String { get }
+  
   var parameters: [String: Any]? { get }
+  
   var method: ServiceMethod { get }
 }
 
 extension EndPoint {
+  
   var urlRequest: URLRequest {
     guard let url = self.url else {
       fatalError("URL could not be built")

@@ -12,8 +12,6 @@ enum Group {
     case rpp(RPP)
     
     case crp(CRP)
-    
-    case unknown
 }
 
 struct RPP {

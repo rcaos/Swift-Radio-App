@@ -6,7 +6,7 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 final class InitialViewModel {
   
@@ -14,11 +14,9 @@ final class InitialViewModel {
   
   var stationsFetched: (() -> Void)?
   
-  var loadTask: Cancellable? {
-    willSet {
-      loadTask?.cancel()
-    }
-  }
+  private let disposeBag = DisposeBag()
+  
+  // MARK: - Initializers
   
   init(fetchStationsUseCase: FetchStationsUseCase) {
     self.fetchStationsUseCase = fetchStationsUseCase
@@ -29,17 +27,13 @@ final class InitialViewModel {
   public func getStations() {
     let request = FetchStationsUseCaseRequestValue()
     
-    loadTask = fetchStationsUseCase.execute(requestValue: request) { [weak self] result in
-      guard let strongSelf = self else { return }
-      
-      switch result {
-      case .success: break
-        
-      case .failure(let error):
-        print("error to Fetch Stations: [\(error)]")
-      }
-      
-      strongSelf.stationsFetched?()
-    }
+    fetchStationsUseCase.execute(requestValue: request)
+      .subscribe(onNext: { [weak self] _ in
+        guard let strongSelf = self else { return }
+        strongSelf.stationsFetched?()
+        }, onError: { error in
+          print("error to Fetch Stations: [\(error)]")
+      })
+      .disposed(by: disposeBag)
   }
 }

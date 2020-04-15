@@ -6,13 +6,13 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol StationsLocalRepository {
   
-  func saveStations(stations: [StationRemote], completion: @escaping (Result<Void, Error>) -> Void)
+  func saveStations(stations: [StationRemote]) -> Observable<Void>
   
-  func stationsList(completion: @escaping (Result<[StationRemote], Error>) -> Void)
+  func stationsList() -> Observable<[StationRemote]>
   
-  func findStations(with stations: [SimpleStation], completion: @escaping (Result<[StationRemote], Error>) -> Void)
+  func findStations(with stations: [SimpleStation]) -> Observable<[StationRemote]>
 }

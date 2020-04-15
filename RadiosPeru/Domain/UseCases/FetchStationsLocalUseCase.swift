@@ -6,12 +6,11 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol FetchStationsLocalUseCase {
   
-  func execute(requestValue: FetchStationsLocalUseCaseRequestValue,
-               completion: @escaping (Result<[StationRemote], Error>) -> Void ) -> Cancellable?
+  func execute(requestValue: FetchStationsLocalUseCaseRequestValue) -> Observable<[StationRemote]>
 }
 
 struct FetchStationsLocalUseCaseRequestValue {
@@ -26,10 +25,8 @@ final class DefaultFetchStationsLocalUseCase: FetchStationsLocalUseCase {
     self.stationsLocalRepository = stationsLocalRepository
   }
   
-  func execute(requestValue: FetchStationsLocalUseCaseRequestValue,
-               completion: @escaping (Result<[StationRemote], Error>) -> Void) -> Cancellable? {
-    stationsLocalRepository.stationsList(completion: completion)
-    return nil
+  func execute(requestValue: FetchStationsLocalUseCaseRequestValue) -> Observable<[StationRemote]> {
+    return stationsLocalRepository.stationsList()
   }
   
 }

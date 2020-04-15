@@ -7,74 +7,53 @@
 //
 
 import CoreData
+import RxSwift
 
 extension CoreDataStorage: StationsLocalStorage {
   
-  func saveStations(stations: [StationRemote], completion: @escaping (Result<Void, Error>) -> Void) {
+  func saveStations(stations: [StationRemote]) -> Observable<Void> {
     
-    persistentContainer.performBackgroundTask { [weak self] _ in
-      guard let strongSelf = self else { return }
-      
-      for station in stations {
-        strongSelf.mainContext.performChanges {
-          _ = Station.insert(into: strongSelf.mainContext, stationRemote: station)
-        }
+    for station in stations {
+      mainContext.performChanges { [weak self] in
+        guard let strongSelf = self else { return }
+        _ = Station.insert(into: strongSelf.mainContext, stationRemote: station)
       }
+    }
+    return Observable.just(())
+  }
+  
+  func stationsList() -> Observable<[StationRemote]> {
+    
+    do {
+      let entities = try fetchStations(inContext: mainContext)
       
-      DispatchQueue.global(qos: .background).async {
-        completion( .success( () ) )
-      }
+      let result = entities.map( StationRemote.init )
+      
+      return Observable.just(result)
+      
+    } catch {
+      print(error)
+      return Observable.error( CoreDataStorageError.readError(error) )
     }
   }
   
-  func stationsList(completion: @escaping (Result<[StationRemote], Error>) -> Void) {
+  func findStations(with stations: [SimpleStation]) -> Observable<[StationRemote]> {
     
-    persistentContainer.performBackgroundTask { [weak self] _ in
-      guard let strongSelf = self else { return }
+    do {
+      let localEntities = try fetchStations(inContext: mainContext)
       
-      do {
-        let entities = try strongSelf.fetchStations(inContext: strongSelf.mainContext)
-        
-        let result = entities.map( StationRemote.init )
-        
-        DispatchQueue.global(qos: .background).async {
-          completion(.success(result))
-        }
-      } catch {
-        DispatchQueue.global(qos: .background).async {
-          completion(.failure(CoreDataStorageError.readError(error)))
-        }
-        print(error)
-      }
-    }
-  }
-  
-  func findStations(with stations: [SimpleStation], completion: @escaping (Result<[StationRemote], Error>) -> Void) {
-    
-    persistentContainer.performBackgroundTask { [weak self] _ in
-      guard let strongSelf = self else { return }
+      var filterEntities: [StationRemote] = []
       
-      do {
-        
-        let localEntities = try strongSelf.fetchStations(inContext: strongSelf.mainContext)
-        
-        var filterEntities: [StationRemote] = []
-        
-        stations.forEach({ favorite in
-          if let found = localEntities.first(where: { $0.name == favorite.name }) {
-            filterEntities.append( StationRemote(stationLocal: found) )
-          }
-        })
-        
-        DispatchQueue.global(qos: .background).async {
-          completion(.success(filterEntities))
+      stations.forEach({ favorite in
+        if let found = localEntities.first(where: { $0.name == favorite.name }) {
+          filterEntities.append( StationRemote(stationLocal: found) )
         }
-      } catch {
-        DispatchQueue.global(qos: .background).async {
-          completion(.failure(CoreDataStorageError.readError(error)))
-        }
-        print(error)
-      }
+      })
+      return Observable.just(filterEntities)
+      
+    } catch {
+      print(error)
+      return Observable.error( CoreDataStorageError.readError(error) )
     }
   }
   

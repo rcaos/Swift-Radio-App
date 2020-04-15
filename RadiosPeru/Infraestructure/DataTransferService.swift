@@ -6,19 +6,8 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 public protocol DataTransferService {
-    
-    typealias CompletionHandler<T> = (Result<T, Error>) -> Void
-    
-    func request<T: EndPoint> (service: T, completion: @escaping CompletionHandler<Data>) -> NetworkCancellable?
-    
-    func request<T: EndPoint, U: Decodable>(service: T, decodeType: U.Type, completion: @escaping CompletionHandler<U>) -> NetworkCancellable?
+  func request<Element: Decodable>(_ router: EndPoint, _ type: Element.Type) -> Observable<Element>
 }
-
-public protocol NetworkCancellable {
-    func cancel()
-}
-
-extension URLSessionTask: NetworkCancellable { }

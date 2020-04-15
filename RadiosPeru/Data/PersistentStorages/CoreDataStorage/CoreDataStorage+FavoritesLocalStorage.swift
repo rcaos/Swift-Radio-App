@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import RxSwift
 
 extension CoreDataStorage: FavoritesLocalStorage {
   
@@ -16,83 +17,52 @@ extension CoreDataStorage: FavoritesLocalStorage {
     storeFavorites?.delegate = self
   }
   
-  func toogleFavorite(station: SimpleStation, completion: @escaping (Result<Bool, Error>) -> Void) {
+  func toogleFavorite(station: SimpleStation) -> Observable<Bool> {
     
-    persistentContainer.performBackgroundTask { [weak self] _ in
-      guard let strongSelf = self else { return }
+    do {
+      let fetched = try find(for: station, inContext: mainContext)
       
-      do {
-        let fetched = try strongSelf.find(for: station, inContext: strongSelf.mainContext)
-        
-        if let exist = fetched {
-          strongSelf.mainContext.delete(exist)
-          
-          completion( .success(false) )
-          
-        } else {
-          _ = StationFavoriteCD.insert(into: strongSelf.mainContext, stationFavorite: station)
-          
-          try strongSelf.mainContext.save()
-          
-          DispatchQueue.global(qos: .background).async {
-            completion( .success( (true) ) )
-          }
-        }
-      } catch {
-        
-        DispatchQueue.global(qos: .background).async {
-          completion(.failure(CoreDataStorageError.writeError(error)))
-        }
-        print(error)
+      if let exist = fetched {
+        mainContext.delete(exist)
+        return Observable.just(false)
+      } else {
+        _ = StationFavoriteCD.insert(into: mainContext, stationFavorite: station)
+        try mainContext.save()
+        return Observable.just(true)
       }
+    } catch {
+      print(error)
+      return Observable.error( CoreDataStorageError.writeError(error) )
     }
   }
   
-  func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void) {
+  func favoritesList() -> Observable<[SimpleStation]> {
     
-    persistentContainer.performBackgroundTask { [weak self] _ in
-      guard let strongSelf = self else { return }
+    do {
+      let entities = try fetchFavorites(inContext: mainContext)
+      let result = entities.map( SimpleStation.init )
       
-      do {
-        let entities = try strongSelf.fetchFavorites(inContext: strongSelf.mainContext)
-        let result = entities.map( SimpleStation.init )
-        
-        DispatchQueue.global(qos: .background).async {
-          completion(.success(result))
-        }
-      } catch {
-        DispatchQueue.global(qos: .background).async {
-          completion(.failure(CoreDataStorageError.readError(error)))
-        }
-        print(error)
-      }
+      return Observable.just(result)
+    } catch {
+      print(error)
+      return Observable.error( CoreDataStorageError.readError(error) )
     }
   }
   
-  func isFavorite(station: SimpleStation, completion: @escaping (Result<Bool, Error>) -> Void) {
+  func isFavorite(station: SimpleStation) -> Observable<Bool> {
     
-    persistentContainer.performBackgroundTask { [weak self] _ in
-      guard let strongSelf = self else { return }
+    do {
+      let fetched = try find(for: station, inContext: mainContext)
       
-      do {
-        let fetched = try strongSelf.find(for: station, inContext: strongSelf.mainContext)
-        
-        if fetched != nil {
-          DispatchQueue.global(qos: .background).async {
-            completion(.success(true))
-          }
-        } else {
-          DispatchQueue.global(qos: .background).async {
-            completion(.success(false) )
-          }
-        }
-        
-      } catch {
-        DispatchQueue.global(qos: .background).async {
-          completion(.failure(CoreDataStorageError.readError(error)))
-        }
-        print(error)
+      if fetched != nil {
+        return Observable.just(true)
+      } else {
+        return Observable.just(false)
       }
+      
+    } catch {
+      print(error)
+      return Observable.error(CoreDataStorageError.readError(error))
     }
   }
   
@@ -100,7 +70,7 @@ extension CoreDataStorage: FavoritesLocalStorage {
     
     let entities = try fetchFavorites(inContext: context)
     
-    let filter = entities.filter({ $0.name == station.name })
+    let filter = entities.filter { $0.name == station.name }
     
     return filter.first
   }

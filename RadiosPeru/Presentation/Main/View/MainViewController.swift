@@ -112,6 +112,9 @@ extension MainViewControler {
         playerController.transitioningDelegate = self
         playerController.interactor = interactor
       }
+      
+      // Necessary for call viewWillAppear on Dismiss PlayerVC
+      playerController.modalPresentationStyle = .fullScreen
       present(playerController, animated: true, completion: nil)
     }
     

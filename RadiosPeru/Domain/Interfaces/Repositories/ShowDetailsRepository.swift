@@ -6,9 +6,9 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol ShowDetailsRepository {
-    
-    func fetchShowDetails(group: Group, completion: @escaping (Result<Show, Error>) -> Void) -> Cancellable?
+  
+  func fetchShowDetails(group: Group) -> Observable<Show>
 }

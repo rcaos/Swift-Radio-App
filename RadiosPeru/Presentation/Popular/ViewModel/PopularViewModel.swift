@@ -6,68 +6,68 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol PopularViewModelDelegate: class {
-    
-    func stationDidSelect(station: StationRemote)
+  
+  func stationDidSelect(station: StationRemote)
 }
 
 final class PopularViewModel {
+  
+  private let fetchStationsUseCase: FetchStationsLocalUseCase
+  
+  private var stations: [StationRemote] = []
+  
+  var popularCells: [PopularCellViewModel] = []
+  
+  var viewState: Bindable<ViewState> = Bindable(.empty)
+  
+  private weak var delegate: PopularViewModelDelegate?
+  
+  private let disposeBag = DisposeBag()
+  
+  init(fetchStationsUseCase: FetchStationsLocalUseCase, delegate: PopularViewModelDelegate? = nil) {
+    self.fetchStationsUseCase = fetchStationsUseCase
+    self.delegate = delegate
+  }
+  
+  func getStations() {
+    let request = FetchStationsLocalUseCaseRequestValue()
     
-    private let fetchStationsUseCase: FetchStationsLocalUseCase
+    fetchStationsUseCase.execute(requestValue: request)
+      .subscribe(onNext: { [weak self] entities in
+        guard let strongSelf = self else { return }
+        strongSelf.processFetched(for: entities)
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  private func processFetched(for items: [StationRemote]) {
+    stations = items
     
-    private var stations: [StationRemote] = []
+    popularCells = stations.map({
+      PopularCellViewModel(station: $0)
+    })
     
-    var popularCells: [PopularCellViewModel] = []
-    
-    var viewState: Bindable<ViewState> = Bindable(.empty)
-    
-    private weak var delegate: PopularViewModelDelegate?
-    
-    init(fetchStationsUseCase: FetchStationsLocalUseCase, delegate: PopularViewModelDelegate? = nil) {
-        self.fetchStationsUseCase = fetchStationsUseCase
-        self.delegate = delegate
+    if popularCells.isEmpty {
+      viewState.value = .empty
+    } else {
+      viewState.value = .populated
     }
-    
-    func getStations() {
-        let request = FetchStationsLocalUseCaseRequestValue()
-        
-        _ = fetchStationsUseCase.execute(requestValue: request) { [weak self] result in
-            switch result {
-            case .success(let items):
-                self?.processFetched(for: items)
-            case .failure:
-                break
-            }
-        }
-    }
-    
-    private func processFetched(for items: [StationRemote]) {
-        stations = items
-        
-        popularCells = stations.map({
-            PopularCellViewModel(station: $0)
-        })
-        
-        if popularCells.isEmpty {
-            viewState.value = .empty
-        } else {
-            viewState.value = .populated
-        }
-    }
-    
-    func getStationSelection(by index: Int) {
-        delegate?.stationDidSelect(station: stations[index])
-    }
+  }
+  
+  func getStationSelection(by index: Int) {
+    delegate?.stationDidSelect(station: stations[index])
+  }
 }
 
 extension PopularViewModel {
+  
+  enum ViewState {
     
-    enum ViewState {
-        
-        case populated
-        case empty
-        
-    }
+    case populated
+    case empty
+    
+  }
 }

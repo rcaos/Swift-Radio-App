@@ -6,9 +6,9 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol StationsRepository {
-    
-    func stationsList(completion: @escaping (Result<StationResult, Error>) -> Void) -> Cancellable?
+  
+  func stationsList() -> Observable<StationResult>
 }

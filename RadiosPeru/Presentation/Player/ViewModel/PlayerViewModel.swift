@@ -6,7 +6,7 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 final class PlayerViewModel {
   
@@ -27,6 +27,8 @@ final class PlayerViewModel {
   var updateUI:(() -> Void)?
   
   var isFavorite: Bindable<Bool> = Bindable(false)
+  
+  private let disposeBag = DisposeBag()
   
   // MARK: - Initializers
   
@@ -84,15 +86,12 @@ final class PlayerViewModel {
     
     let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
     
-    toggleFavoritesUseCase.execute(requestValue: request) { [weak self] result in
-      guard let strongSelf = self else { return }
-      
-      switch result {
-      case .success(let isFavorite):
+    toggleFavoritesUseCase.execute(requestValue: request)
+      .subscribe(onNext: { [weak self] isFavorite in
+        guard let strongSelf = self else { return }
         strongSelf.isFavorite.value = isFavorite
-      case .failure: break
-      }
-    }
+      })
+      .disposed(by: disposeBag)
   }
   
   private func checkIsFavorite(with station: StationRemote?) {
@@ -101,14 +100,12 @@ final class PlayerViewModel {
     let simpleStation = SimpleStation(name: station.name, group: station.group)
     let request = AskFavoriteUseCaseRequestValue(station: simpleStation)
     
-    askFavoriteUseCase.execute(requestValue: request) { [weak self] result in
-      guard let strongSelf = self else { return }
-      switch result {
-      case .success(let isFavorite):
+    askFavoriteUseCase.execute(requestValue: request)
+      .subscribe(onNext: { [weak self] isFavorite in
+        guard let strongSelf = self else { return }
         strongSelf.isFavorite.value = isFavorite
-      case .failure: break
-      }
-    }
+      })
+      .disposed(by: disposeBag)
   }
 }
 

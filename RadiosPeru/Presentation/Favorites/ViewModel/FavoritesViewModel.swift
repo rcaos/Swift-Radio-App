@@ -6,7 +6,7 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol FavoritesViewModelDelegate: class {
   
@@ -27,6 +27,10 @@ final class FavoritesViewModel {
   
   private weak var delegate: FavoritesViewModelDelegate?
   
+  private let disposeBag = DisposeBag()
+  
+  // MARK: - Initializers
+  
   init(fetchFavoritesUseCase: FetchFavoritesStationsUseCase,
        favoritesRepository: FavoritesRepository,
        delegate: FavoritesViewModelDelegate? = nil) {
@@ -43,16 +47,13 @@ final class FavoritesViewModel {
   func getStations() {
     let request = FetchFavoritesStationsRequestValue()
     
-    _ = fetchFavoritesUseCase.execute(requestValue: request) { [weak self] result in
-      switch result {
-      case .success(let items):
-        self?.processFetched(for: items)
-      case .failure:
-        break
-      }
-      
-      self?.suscribe()
-    }
+    fetchFavoritesUseCase.execute(requestValue: request)
+      .subscribe(onNext: { [weak self] items in
+        guard let strongSelf = self else { return }
+        strongSelf.processFetched(for: items)
+        strongSelf.suscribe()
+      })
+      .disposed(by: disposeBag)
   }
   
   private func processFetched(for items: [StationRemote]) {

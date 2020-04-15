@@ -6,7 +6,7 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 // MARK: - Visual States
 
@@ -39,13 +39,9 @@ class RadioPlayer {
     }
   }
   
-  var loadTask: Cancellable? {
-    willSet {
-      loadTask?.cancel()
-    }
-  }
-  
   private var stationSelected: StationRemote?
+  
+  private let disposeBag = DisposeBag()
   
   // MARK: - Life Cycle
   
@@ -114,19 +110,17 @@ class RadioPlayer {
     
     let request = FetchShowOnlineInfoUseCaseRequestValue(group: stationSelected.type)
     
-    loadTask = showDetailsUseCase.execute(requestValue: request) { [weak self] result in
-      guard let strongSelf = self else { return }
-      
-      switch result {
-      case .success(let response):
-        strongSelf.processResponse(for: response)
-        
-      case .failure(let error):
-        print("Error to get online Description: \(error)")
-        strongSelf.onlineInfo = ""
-        strongSelf.setupSource(with: stationSelected)
-      }
-    }
+    showDetailsUseCase.execute(requestValue: request)
+      .subscribe(onNext: { [weak self] showDetail in
+        guard let strongSelf = self else { return }
+        strongSelf.processResponse(for: showDetail)
+        }, onError: { [weak self] error in
+          guard let strongSelf = self else { return }
+          print("Error to get online Description: \(error)")
+          strongSelf.onlineInfo = ""
+          strongSelf.setupSource(with: stationSelected)
+      })
+      .disposed(by: disposeBag)
   }
   
   private func processResponse(for show: Show) {

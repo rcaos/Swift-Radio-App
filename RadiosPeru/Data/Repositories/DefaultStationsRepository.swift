@@ -6,26 +6,24 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 final class DefaultStationsRepository {
-    
-    private let dataTransferService: DataTransferService
-    
-    init(dataTransferService: DataTransferService) {
-        self.dataTransferService = dataTransferService
-    }
+  
+  private let dataTransferService: DataTransferService
+  
+  init(dataTransferService: DataTransferService) {
+    self.dataTransferService = dataTransferService
+  }
 }
 
 // MARK: - StationsRepository
 
 extension DefaultStationsRepository: StationsRepository {
+  
+  func stationsList() -> Observable<StationResult> {
+    let endPoint = StationProvider.getAll
     
-    func stationsList(completion: @escaping (Result<StationResult, Error>) -> Void) -> Cancellable? {
-        let endPoint = StationProvider.getAll
-        
-        let networkTask = dataTransferService.request(service: endPoint,
-                                                      decodeType: StationResult.self, completion: completion)
-        return RepositoryTask(networkTask: networkTask)
-    }
+    return dataTransferService.request(endPoint, StationResult.self)
+  }
 }

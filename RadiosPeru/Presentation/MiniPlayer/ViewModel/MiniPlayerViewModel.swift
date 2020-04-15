@@ -6,7 +6,7 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol MiniPlayerViewModelDelegate: class {
   
@@ -32,6 +32,8 @@ final class MiniPlayerViewModel {
   var updateUI:(() -> Void)?
   
   var isFavorite: Bindable<Bool> = Bindable(false)
+  
+  private let disposeBag = DisposeBag()
   
   // MARK: - Initializers
   
@@ -77,15 +79,12 @@ final class MiniPlayerViewModel {
     
     let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
     
-    toggleFavoritesUseCase.execute(requestValue: request) { [weak self] result in
-      guard let strongSelf = self else { return }
-      
-      switch result {
-      case .success(let isFavorite):
+    toggleFavoritesUseCase.execute(requestValue: request)
+      .subscribe(onNext: { [weak self] isFavorite in
+        guard let strongSelf = self else { return }
         strongSelf.isFavorite.value = isFavorite
-      case .failure: break
-      }
-    }
+      })
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Private
@@ -95,6 +94,7 @@ final class MiniPlayerViewModel {
   }
   
   private func checkIsFavorite(with station: StationRemote?) {
+    print("checkIsFavorite")
     isFavorite.value = false
     
     guard let station = station else { return  }
@@ -102,14 +102,12 @@ final class MiniPlayerViewModel {
     let simpleStation = SimpleStation(name: station.name, group: station.group)
     let request = AskFavoriteUseCaseRequestValue(station: simpleStation)
     
-    askFavoriteUseCase.execute(requestValue: request) { [weak self] result in
-      guard let strongSelf = self else { return }
-      switch result {
-      case .success(let isFavorite):
+    askFavoriteUseCase.execute(requestValue: request)
+      .subscribe(onNext: {[weak self] isFavorite in
+        guard let strongSelf = self else { return }
         strongSelf.isFavorite.value = isFavorite
-      case .failure: break
-      }
-    }
+      })
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Public

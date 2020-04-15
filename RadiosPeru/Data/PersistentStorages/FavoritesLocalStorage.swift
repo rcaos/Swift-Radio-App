@@ -6,7 +6,9 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
-import Foundation
+import RxSwift
+
+// MARK: - TODO, changue delegate with Observable, but who?
 
 protocol FavoritesLocalStorageDelegate: class {
   
@@ -15,14 +17,13 @@ protocol FavoritesLocalStorageDelegate: class {
 
 protocol FavoritesLocalStorage {
   
-  func isFavorite(station: SimpleStation,
-                  completion: @escaping (Result<Bool, Error>) -> Void)
+  func isFavorite(station: SimpleStation) -> Observable<Bool>
   
-  func toogleFavorite(station: SimpleStation,
-                      completion: @escaping (Result<Bool, Error>) -> Void)
+  func toogleFavorite(station: SimpleStation) -> Observable<Bool>
   
-  func favoritesList(completion: @escaping (Result<[SimpleStation], Error>) -> Void)
+  func favoritesList() -> Observable<[SimpleStation]>
   
+  // MARK: - TODO
   func configStore()
   
   var delegate: FavoritesLocalStorageDelegate? { get set }
