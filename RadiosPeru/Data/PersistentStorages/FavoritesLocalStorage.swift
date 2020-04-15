@@ -8,13 +8,6 @@
 
 import RxSwift
 
-// MARK: - TODO, changue delegate with Observable, but who?
-
-protocol FavoritesLocalStorageDelegate: class {
-  
-  func favoritesLocalStorage(didUpdateEntity update: Bool)
-}
-
 protocol FavoritesLocalStorage {
   
   func isFavorite(station: SimpleStation) -> Observable<Bool>
@@ -22,9 +15,4 @@ protocol FavoritesLocalStorage {
   func toogleFavorite(station: SimpleStation) -> Observable<Bool>
   
   func favoritesList() -> Observable<[SimpleStation]>
-  
-  // MARK: - TODO
-  func configStore()
-  
-  var delegate: FavoritesLocalStorageDelegate? { get set }
 }

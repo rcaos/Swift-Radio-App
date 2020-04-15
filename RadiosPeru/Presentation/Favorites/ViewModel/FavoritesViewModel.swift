@@ -39,11 +39,6 @@ final class FavoritesViewModel {
     self.favoritesRepository = favoritesRepository
   }
   
-  func suscribe() {
-    favoritesRepository.configStore()
-    favoritesRepository.delegate = self
-  }
-  
   func getStations() {
     let request = FetchFavoritesStationsRequestValue()
     
@@ -51,7 +46,6 @@ final class FavoritesViewModel {
       .subscribe(onNext: { [weak self] items in
         guard let strongSelf = self else { return }
         strongSelf.processFetched(for: items)
-        strongSelf.suscribe()
       })
       .disposed(by: disposeBag)
   }
@@ -74,15 +68,6 @@ final class FavoritesViewModel {
   
   func getStationSelection(by index: Int) {
     delegate?.stationFavoriteDidSelect(station: stations[index])
-  }
-}
-
-// MARK: - PersistenceStoreDelegate
-
-extension FavoritesViewModel: FavoritesRepositoryDelegate {
-  
-  func stationsLocalRepository(didUpdateEntity update: Bool) {
-    getStations()
   }
 }
 

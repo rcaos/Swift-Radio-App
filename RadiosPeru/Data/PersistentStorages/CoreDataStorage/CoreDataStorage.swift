@@ -40,22 +40,4 @@ final class CoreDataStorage {
     context.mergePolicy = NSMergePolicy.overwrite
     return context
   }
-  
-  // MARK: - Find other way, what if i need add another Store?
-  var storeFavorites: PersistenceStore<StationFavoriteCD>?
-  weak var delegate: FavoritesLocalStorageDelegate?
-  
-  // MARK: - Core Data Saving support
-  
-  private func saveContext () {
-    
-    if mainContext.hasChanges {
-      do {
-        try mainContext.save()
-      } catch {
-        let nserror = error as NSError
-        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-      }
-    }
-  }
 }

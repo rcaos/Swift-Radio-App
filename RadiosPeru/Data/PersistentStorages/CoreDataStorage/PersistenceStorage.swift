@@ -22,6 +22,10 @@ class PersistenceStore<Entity: NSManagedObject>: NSObject, NSFetchedResultsContr
   
   weak var delegate: PersistenceStoreDelegate?
   
+  var entities: [Entity] {
+      return fetchedResultsController.fetchedObjects ?? []
+  }
+  
   // MARK: - Initializers
   
   init(_ managedObjectContext: NSManagedObjectContext) {

@@ -10,17 +10,17 @@ import Foundation
 import CoreData
 
 final class StationFavoriteCD: NSManagedObject {
-    
-    @NSManaged var createAt: Date
-    @NSManaged var name: String
-    @NSManaged var group: String
+  
+  @NSManaged var createAt: Date
+  @NSManaged var name: String
+  @NSManaged var group: String
 }
 
 extension StationFavoriteCD {
-    
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<StationFavoriteCD> {
-        return NSFetchRequest<StationFavoriteCD>(entityName: "StationFavoriteCD")
-    }
+  
+  @nonobjc public class func fetchRequest() -> NSFetchRequest<StationFavoriteCD> {
+    return NSFetchRequest<StationFavoriteCD>(entityName: "StationFavoriteCD")
+  }
 }
 
 // MARK: - Managed

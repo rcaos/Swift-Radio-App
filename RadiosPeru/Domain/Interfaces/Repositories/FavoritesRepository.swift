@@ -8,11 +8,6 @@
 
 import RxSwift
 
-protocol FavoritesRepositoryDelegate: class {
-  
-  func stationsLocalRepository(didUpdateEntity update: Bool)
-}
-
 protocol FavoritesRepository {
   
   func isFavorite(station: SimpleStation) -> Observable<Bool>
@@ -20,8 +15,4 @@ protocol FavoritesRepository {
   func toogleFavorite(station: SimpleStation) -> Observable<Bool>
   
   func favoritesList() -> Observable<[SimpleStation]>
-  
-  func configStore()
-  
-  var delegate: FavoritesRepositoryDelegate? { get set }
 }

@@ -27,10 +27,14 @@ final class DefaultFetchStationsUseCase: FetchStationsUseCase {
     self.stationsLocalRepository = stationsLocalRepository
   }
   
-  // MARK: - TODO, save Stations Locally
   func execute(requestValue: FetchStationsUseCaseRequestValue)-> Observable<StationResult> {
     return stationsRepository.stationsList()
-    //self.stationsLocalRepository.saveStations(stations: result.stations)
+      .flatMap { results -> Observable<StationResult> in
+        self.stationsLocalRepository.saveStations(stations: results.stations)
+          .flatMap { _ -> Observable<StationResult> in
+            return Observable.just(results)
+        }
+    }
   }
   
 }

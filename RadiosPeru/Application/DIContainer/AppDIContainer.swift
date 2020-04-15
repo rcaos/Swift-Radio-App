@@ -16,9 +16,9 @@ final class AppDIContainer {
   
   lazy var localStorage = CoreDataStorage(maxStorageLimit: 10)
   
-  lazy var stationsLocalStorage: StationsLocalStorage = localStorage
+  lazy var stationsLocalStorage: StationsLocalStorage = DefaultStationsLocalStorage(coreDataStack: localStorage)
   
-  lazy var favoritesLocalStorage: FavoritesLocalStorage = localStorage
+  lazy var favoritesLocalStorage: FavoritesLocalStorage = DefaultFavoritesLocalStorage(coreDataStack: localStorage)
 }
 
 extension AppDIContainer {
