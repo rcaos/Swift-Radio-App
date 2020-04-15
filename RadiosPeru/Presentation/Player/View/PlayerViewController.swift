@@ -165,10 +165,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   }
   
   func setupControlViews() {
-    let viewForPlay = UIImageView()
-    viewForPlay.image = UIImage(named: "but-play")
-    viewForPlay.contentMode = .scaleAspectFit
-    playView = viewForPlay
+    playView = buildPlayerView()
     
     let viewForPause = UIImageView(image: UIImage(named: "btn-pause"))
     viewForPause.contentMode = .scaleAspectFit
@@ -251,5 +248,25 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   
   @IBAction func tapClose(_ sender: Any) {
     dismiss(animated: true, completion: nil)
+  }
+  
+  // MARK: - Build Loading Play Button
+  
+  fileprivate func buildPlayerView() -> UIView {
+    let viewForPlay = UIImageView()
+    viewForPlay.image = UIImage(named: "but-play")
+    viewForPlay.contentMode = .scaleAspectFit
+    
+    let wrapperView = UIView(frame: .zero)
+    viewForPlay.translatesAutoresizingMaskIntoConstraints = false
+    wrapperView.addSubview(viewForPlay)
+    
+    NSLayoutConstraint.activate([
+      viewForPlay.widthAnchor.constraint(equalTo: wrapperView.widthAnchor, multiplier: 0.75),
+      viewForPlay.heightAnchor.constraint(equalTo: viewForPlay.widthAnchor, multiplier: 1),
+      viewForPlay.centerXAnchor.constraint(equalTo: wrapperView.centerXAnchor),
+      viewForPlay.centerYAnchor.constraint(equalTo: wrapperView.centerYAnchor)
+    ])
+    return wrapperView
   }
 }

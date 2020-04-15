@@ -20,7 +20,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var playerStackView: UIStackView!
   
   private var playView: UIView!
-  private var loadingView: UIView!
+  private var loadingView: LoadingPlayerView!
   private var pauseView: UIView!
   
   var viewModel: MiniPlayerViewModel!
@@ -33,11 +33,15 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   
   // MARK: - Life Cycle
   
+  override func loadView() {
+    super.loadView()
+    setupPlayerView()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupUI()
-    setupPlayerView()
     setupGestures()
     setupViewModel()
   }
@@ -142,17 +146,14 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   }
   
   func setupControlViews() {
-    let viewForPlay = UIImageView()
-    viewForPlay.image = UIImage(named: "but-play")
-    viewForPlay.contentMode = .scaleAspectFit
-    playView = viewForPlay
+    playView = buildPlayerView()
     
     let viewForPause = UIImageView(image: UIImage(named: "btn-pause"))
     viewForPause.contentMode = .scaleAspectFit
     pauseView = viewForPause
     
-    let size = CGSize(width: 60, height: 36)
-    let frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+    let size = CGSize(width: 48, height: 48)
+    let frame = CGRect(origin: .zero, size: size)
     let viewForLoading = LoadingPlayerView(frame: frame)
     viewForLoading.setUpAnimation(size: size, color: .white, imageName: "pauseFill")
     loadingView = viewForLoading
@@ -187,5 +188,25 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   
   @IBAction func tapFavorite(_ sender: Any) {
     viewModel.markAsFavorite()
+  }
+  
+  // MARK: - Build Player Views
+  
+  fileprivate func buildPlayerView() -> UIView {
+    let viewForPlay = UIImageView()
+    viewForPlay.image = UIImage(named: "but-play")
+    viewForPlay.contentMode = .scaleAspectFit
+    
+    let wrapperView = UIView(frame: .zero)
+    viewForPlay.translatesAutoresizingMaskIntoConstraints = false
+    wrapperView.addSubview(viewForPlay)
+    
+    NSLayoutConstraint.activate([
+      viewForPlay.widthAnchor.constraint(equalTo: wrapperView.widthAnchor, multiplier: 0.75),
+      viewForPlay.heightAnchor.constraint(equalTo: viewForPlay.widthAnchor, multiplier: 1),
+      viewForPlay.centerXAnchor.constraint(equalTo: wrapperView.centerXAnchor),
+      viewForPlay.centerYAnchor.constraint(equalTo: wrapperView.centerYAnchor)
+    ])
+    return wrapperView
   }
 }

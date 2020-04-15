@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yxd-fs-tGp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yxd-fs-tGp">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,16 +32,16 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="3le-8F-YdW" userLabel="Station Stack View">
-                                <rect key="frame" x="392" y="76" width="52.5" height="48"/>
+                                <rect key="frame" x="392" y="76" width="232" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Enw-Ss-WaU">
-                                        <rect key="frame" x="0.0" y="0.0" width="52.5" height="26.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="232" height="26.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6k-Sr-aGT">
-                                        <rect key="frame" x="0.0" y="27.5" width="52.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="27.5" width="232" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -49,25 +49,25 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ODa-e6-Rmg">
-                                <rect key="frame" x="732" y="12" width="60" height="176"/>
+                                <rect key="frame" x="632" y="20" width="160" height="160"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="z00-3c-st2"/>
+                                    <constraint firstAttribute="width" secondItem="ODa-e6-Rmg" secondAttribute="height" multiplier="1:1" id="JTZ-lF-m6A"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="ODa-e6-Rmg" firstAttribute="leading" secondItem="3le-8F-YdW" secondAttribute="trailing" constant="8" id="0EI-Dt-HOn"/>
                             <constraint firstAttribute="trailing" secondItem="ODa-e6-Rmg" secondAttribute="trailing" constant="8" id="1xO-GX-nbd"/>
                             <constraint firstItem="Ynh-iq-l5f" firstAttribute="top" secondItem="twk-5z-v9l" secondAttribute="top" constant="16" id="FVo-I0-dOS"/>
+                            <constraint firstItem="ODa-e6-Rmg" firstAttribute="centerY" secondItem="twk-5z-v9l" secondAttribute="centerY" id="Kuz-Fe-aGr"/>
                             <constraint firstAttribute="bottom" secondItem="Ce9-yx-aXT" secondAttribute="bottom" id="URd-fW-q87"/>
-                            <constraint firstAttribute="bottom" secondItem="ODa-e6-Rmg" secondAttribute="bottom" constant="12" id="X8v-C5-wvE"/>
                             <constraint firstItem="Ce9-yx-aXT" firstAttribute="leading" secondItem="Ynh-iq-l5f" secondAttribute="trailing" constant="8" id="db7-R3-uph"/>
+                            <constraint firstItem="ODa-e6-Rmg" firstAttribute="height" secondItem="twk-5z-v9l" secondAttribute="height" multiplier="0.8" id="e7D-UI-WHL"/>
                             <constraint firstItem="Ce9-yx-aXT" firstAttribute="top" secondItem="twk-5z-v9l" secondAttribute="top" id="fbH-X1-gI0"/>
                             <constraint firstItem="Ynh-iq-l5f" firstAttribute="leading" secondItem="twk-5z-v9l" secondAttribute="leading" constant="8" id="j2L-BW-XWu"/>
-                            <constraint firstItem="ODa-e6-Rmg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3le-8F-YdW" secondAttribute="trailing" constant="8" id="lI1-8s-Axy"/>
                             <constraint firstAttribute="bottom" secondItem="Ynh-iq-l5f" secondAttribute="bottom" constant="16" id="mdC-1V-gG5"/>
                             <constraint firstItem="3le-8F-YdW" firstAttribute="leading" secondItem="Ce9-yx-aXT" secondAttribute="trailing" constant="8" id="mvd-Yf-DDA"/>
-                            <constraint firstItem="ODa-e6-Rmg" firstAttribute="top" secondItem="twk-5z-v9l" secondAttribute="top" constant="12" id="wRZ-9j-x4E"/>
                             <constraint firstItem="3le-8F-YdW" firstAttribute="centerY" secondItem="twk-5z-v9l" secondAttribute="centerY" id="wkr-Rq-TjR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="abl-jk-KcT"/>

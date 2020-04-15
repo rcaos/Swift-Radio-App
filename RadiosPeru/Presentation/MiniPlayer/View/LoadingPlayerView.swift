@@ -19,7 +19,7 @@ class LoadingPlayerView: UIView {
   }
   
   func setUpAnimation(size: CGSize, color: UIColor, imageName: String) {
-    
+    print("setupANimation with size: \(size)")
     let duration: CFTimeInterval = 0.75
     
     // Rotate animation
@@ -37,21 +37,17 @@ class LoadingPlayerView: UIView {
     animation.isRemovedOnCompletion = false
     
     //Add Play Image
-    let newScaleSize = CGSize(width: size.width * 0.5 ,
+    let newScaleSize = CGSize(width: size.width * 0.5,
                               height: size.height * 0.5)
     let image = getImage(with: newScaleSize, image: imageName)
     
-    let frameImage = CGRect(x: (layer.bounds.size.width - newScaleSize.width) / 2,
-                            y: (layer.bounds.size.height - newScaleSize.height) / 2,
-                            width: size.width,
-                            height: size.height)
-    
-    image.frame = frameImage
-    layer.addSublayer(image)
+    let imageLayer = image.layer
+    imageLayer.position = center
+    layer.addSublayer(imageLayer)
     
     // Draw circle
-    let sizeForCircle = CGSize(width: size.width * 0.65,
-                               height: size.height * 0.65)
+    let sizeForCircle = CGSize(width: CGFloat(size.width * 0.9),
+                               height: CGFloat(size.height * 0.9))
     let circle = getRingThirdFour(size: sizeForCircle, color: color)
     let frame = CGRect(x: (layer.bounds.size.width - sizeForCircle.width) / 2,
                        y: (layer.bounds.size.height - sizeForCircle.height) / 2,
@@ -60,29 +56,21 @@ class LoadingPlayerView: UIView {
     
     circle.frame = frame
     circle.add(animation, forKey: "animation")
-    
     layer.addSublayer(circle)
   }
   
   // MARK: - Helpers
   
-  private func getImage(with size: CGSize, image: String) -> CALayer {
-    let imageWith = size.width
-    let imageHeight = size.height
-    
-    let frame = CGRect(x: (size.width - imageWith) / 2,
-                       y: (size.width - imageWith) / 2,
-                       width: imageWith,
-                       height: imageHeight)
+  private func getImage(with size: CGSize, image: String) -> UIView {
+    let frame = CGRect(x: 0, y: 0,
+                       width: size.width ,
+                       height: size.height)
     let image = UIImage(named: image)
+    
     let playImageView = UIImageView(image: image)
     playImageView.contentMode = .scaleAspectFit
     playImageView.frame = frame
-    
-    let layer: CAShapeLayer = CAShapeLayer()
-    layer.addSublayer( playImageView.layer )
-    
-    return layer
+    return playImageView
   }
   
   private func getRingThirdFour(size: CGSize, color: UIColor) -> CAShapeLayer {
