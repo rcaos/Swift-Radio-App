@@ -243,6 +243,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   
   @IBAction func tapFavorite(_ sender: Any) {
     guard let  viewModel = viewModel else { return }
+    favoriteButton.favAnimate()
     viewModel.markAsFavorite()
   }
   

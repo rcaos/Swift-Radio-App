@@ -187,6 +187,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   }
   
   @IBAction func tapFavorite(_ sender: Any) {
+    self.favoriteButton.favAnimate()
     viewModel.markAsFavorite()
   }
   
