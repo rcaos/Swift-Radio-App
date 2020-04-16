@@ -18,8 +18,6 @@ class PopularViewController: UIViewController {
   
   var customView: GenericCollectionView!
   
-  let interactor = Interactor()
-  
   let disposeBag = DisposeBag()
   
   static func create(with viewModel: PopularViewModel) -> PopularViewController {

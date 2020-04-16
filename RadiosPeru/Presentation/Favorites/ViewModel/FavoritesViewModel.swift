@@ -17,26 +17,29 @@ final class FavoritesViewModel {
   
   private let fetchFavoritesUseCase: FetchFavoritesStationsUseCase
   
-  private var favoritesRepository: FavoritesRepository
+  private let toggleFavoritesUseCase: ToggleFavoritesUseCase
   
-  private var stations: [StationRemote] = []
-  
-  var favoriteCells: [PopularCellViewModel] = []
-  
-  var viewState: Bindable<ViewState> = Bindable(.empty)
+  private var viewStateSubject = BehaviorSubject<SimpleViewState<FavoriteTableViewModel>>(value: .loading)
   
   private weak var delegate: FavoritesViewModelDelegate?
   
   private let disposeBag = DisposeBag()
   
+  public let input: Input
+  
+  public let output: Output
+  
   // MARK: - Initializers
   
   init(fetchFavoritesUseCase: FetchFavoritesStationsUseCase,
-       favoritesRepository: FavoritesRepository,
+       toggleFavoritesUseCase: ToggleFavoritesUseCase,
        delegate: FavoritesViewModelDelegate? = nil) {
     self.fetchFavoritesUseCase = fetchFavoritesUseCase
+    self.toggleFavoritesUseCase = toggleFavoritesUseCase
     self.delegate = delegate
-    self.favoritesRepository = favoritesRepository
+    
+    input = Input()
+    output = Output(viewState: viewStateSubject.asObservable())
   }
   
   func getStations() {
@@ -51,32 +54,38 @@ final class FavoritesViewModel {
   }
   
   private func processFetched(for items: [StationRemote]) {
-    stations = items
+    let cells = items.map( FavoriteTableViewModel.init )
     
-    favoriteCells = items.map({
-      PopularCellViewModel(station: $0)
-    })
-    
-    if favoriteCells.isEmpty {
-      viewState.value = .empty
+    if cells.isEmpty {
+      viewStateSubject.onNext( .empty )
     } else {
-      viewState.value = .populated
+      viewStateSubject.onNext( .populated(cells) )
     }
   }
   
   // MARK: - Public Methods
   
-  func getStationSelection(by index: Int) {
-    delegate?.stationFavoriteDidSelect(station: stations[index])
+  func stationDidSelected(with station: StationRemote) {
+    delegate?.stationFavoriteDidSelect(station: station)
+  }
+  
+  func favoriteDidSelect(for station: StationRemote) {
+    let simpleStation = SimpleStation(name: station.name, group: station.group)
+    
+    let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
+    
+    toggleFavoritesUseCase.execute(requestValue: request)
+      .subscribe(onNext: { _ in
+      })
+      .disposed(by: disposeBag)
   }
 }
 
 extension FavoritesViewModel {
   
-  enum ViewState {
-    
-    case populated
-    case empty
-    
+  struct Input {}
+  
+  struct Output {
+    let viewState: Observable<SimpleViewState<FavoriteTableViewModel>>
   }
 }

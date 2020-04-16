@@ -19,7 +19,6 @@ class LoadingPlayerView: UIView {
   }
   
   func setUpAnimation(size: CGSize, color: UIColor, imageName: String) {
-    print("setupANimation with size: \(size)")
     let duration: CFTimeInterval = 0.75
     
     // Rotate animation

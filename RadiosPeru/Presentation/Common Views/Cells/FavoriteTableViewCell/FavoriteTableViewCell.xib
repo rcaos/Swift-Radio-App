@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="124" id="KGk-i7-Jjw" customClass="FavoriteTableViewCell" customModule="RadiosPeru" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OvE-VQ-kA3">
+                        <rect key="frame" x="8" y="12.5" width="99" height="99"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="OvE-VQ-kA3" secondAttribute="height" multiplier="1:1" id="ogd-Es-Jy0"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWF-PR-IbN">
+                        <rect key="frame" x="262.5" y="37" width="49.5" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="iWF-PR-IbN" secondAttribute="height" multiplier="1:1" id="TbJ-Bx-GLG"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="W1z-ir-wq6">
+                        <rect key="frame" x="112" y="39.5" width="145.5" height="45"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radio Exitosa 95.5 FM Lima" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aM-PI-8B7">
+                                <rect key="frame" x="0.0" y="0.0" width="145.5" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Noticias y Actualidad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQE-LM-8HM">
+                                <rect key="frame" x="0.0" y="28" width="145.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OvE-VQ-kA3" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.8" id="BwQ-yE-IcX"/>
+                    <constraint firstItem="iWF-PR-IbN" firstAttribute="centerY" secondItem="OvE-VQ-kA3" secondAttribute="centerY" id="CBp-3v-Rvq"/>
+                    <constraint firstItem="OvE-VQ-kA3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cBp-OB-KUU"/>
+                    <constraint firstItem="W1z-ir-wq6" firstAttribute="leading" secondItem="OvE-VQ-kA3" secondAttribute="trailing" constant="5" id="iL5-mC-Yyk"/>
+                    <constraint firstItem="iWF-PR-IbN" firstAttribute="leading" secondItem="W1z-ir-wq6" secondAttribute="trailing" constant="5" id="lrs-on-Vpq"/>
+                    <constraint firstItem="W1z-ir-wq6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mhK-Gd-Np1"/>
+                    <constraint firstItem="OvE-VQ-kA3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="rnb-ET-AkY"/>
+                    <constraint firstAttribute="trailing" secondItem="iWF-PR-IbN" secondAttribute="trailing" constant="8" id="vrS-yK-WPt"/>
+                    <constraint firstItem="iWF-PR-IbN" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.4" id="xBg-tq-zwG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="detailStationLabel" destination="jQE-LM-8HM" id="Gvi-bD-E69"/>
+                <outlet property="favoriteButton" destination="iWF-PR-IbN" id="cbo-HA-uDC"/>
+                <outlet property="nameStationLabel" destination="9aM-PI-8B7" id="kk4-0O-tnd"/>
+                <outlet property="stationImageView" destination="OvE-VQ-kA3" id="FK5-fs-nfd"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="180.13392857142856"/>
+        </tableViewCell>
+    </objects>
+</document>
