@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxDataSources
 
 private let reuseIdentifier = "PopularViewCell"
 
@@ -17,6 +19,8 @@ class PopularViewController: UIViewController {
   var customView: GenericCollectionView!
   
   let interactor = Interactor()
+  
+  let disposeBag = DisposeBag()
   
   static func create(with viewModel: PopularViewModel) -> PopularViewController {
     let controller = PopularViewController()
@@ -47,29 +51,51 @@ class PopularViewController: UIViewController {
   func setupCollection() {
     let nibName = UINib(nibName: "PopularViewCell", bundle: nil)
     customView.collectionView.register(nibName, forCellWithReuseIdentifier: reuseIdentifier)
-    
-    customView.collectionView.dataSource = self
-    customView.collectionView.delegate = self
   }
   
   func setupBindables() {
-    viewModel?.viewState.bind({ [weak self] state in
-      guard let strongSelf = self else { return }
-      DispatchQueue.main.async {
+    
+    let configureCollectionViewCell = configureCollectionViewDataSource()
+    
+    let dataSource = RxCollectionViewSectionedReloadDataSource<SectionAiringToday>(configureCell: configureCollectionViewCell)
+    
+    viewModel.output
+      .viewState
+      .map { [SectionAiringToday(header: "Shows Today", items: $0.currentEntities) ] }
+      .bind(to: customView.collectionView.rx.items(dataSource: dataSource) )
+      .disposed(by: disposeBag)
+    
+    customView.collectionView.rx
+      .modelSelected( PopularCellViewModel.self)
+      .subscribe(onNext: { [weak self] item in
+        guard let strongSelf = self else { return }
+        strongSelf.viewModel.stationDidSelect(with: item.radioStation)
+      })
+      .disposed(by: disposeBag)
+    
+    customView.collectionView.rx
+      .setDelegate(self)
+      .disposed(by: disposeBag)
+    
+    viewModel.output
+      .viewState
+      .subscribe(onNext: { [weak self] state in
+        guard let strongSelf = self else { return }
         strongSelf.configView(with: state)
-      }
-    })
+      })
+      .disposed(by: disposeBag)
     
     viewModel?.getStations()
   }
   
-  func configView(with state: PopularViewModel.ViewState) {
+  func configView(with state: SimpleViewState<PopularCellViewModel>) {
     switch state {
     case .populated :
       restoreBackground()
-      customView.collectionView.reloadData()
     case .empty :
       setBackground("There are no Stations to Show")
+    default:
+      break
     }
   }
   
@@ -90,33 +116,23 @@ class PopularViewController: UIViewController {
   func restoreBackground() {
     customView.collectionView.backgroundView = nil
   }
-  
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - Configure CollectionView Views
 
-extension PopularViewController: UICollectionViewDataSource {
+extension PopularViewController {
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    guard let viewModel = viewModel else { return 0}
-    return viewModel.popularCells.count
+  func configureCollectionViewDataSource() -> (
+    CollectionViewSectionedDataSource<SectionAiringToday>.ConfigureCell ) {
+      let configureCell: CollectionViewSectionedDataSource<SectionAiringToday>.ConfigureCell = { dataSource, collectionView, indexPath, item in
+        let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: reuseIdentifier, for: indexPath) as! PopularViewCell
+        cell.viewModel = item
+        return cell
+      }
+      return (configureCell)
   }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PopularViewCell
-    cell.viewModel = viewModel.popularCells[indexPath.row]
-    return cell
-  }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension PopularViewController: UICollectionViewDelegate {
-  
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    collectionView.deselectItem(at: indexPath, animated: true)
-    viewModel.getStationSelection(by: indexPath.row)
-  }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

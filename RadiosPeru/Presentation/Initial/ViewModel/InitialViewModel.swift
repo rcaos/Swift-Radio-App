@@ -28,11 +28,11 @@ final class InitialViewModel {
     let request = FetchStationsUseCaseRequestValue()
     
     fetchStationsUseCase.execute(requestValue: request)
-      .subscribe(onNext: { [weak self] _ in
+      .subscribe(onError: { error in
+          print("error to Fetch Stations: [\(error)]")
+      }, onCompleted: { [weak self] in
         guard let strongSelf = self else { return }
         strongSelf.stationsFetched?()
-        }, onError: { error in
-          print("error to Fetch Stations: [\(error)]")
       })
       .disposed(by: disposeBag)
   }

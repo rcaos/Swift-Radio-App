@@ -17,19 +17,24 @@ final class PopularViewModel {
   
   private let fetchStationsUseCase: FetchStationsLocalUseCase
   
-  private var stations: [StationRemote] = []
-  
-  var popularCells: [PopularCellViewModel] = []
-  
-  var viewState: Bindable<ViewState> = Bindable(.empty)
+  private let viewStateObservableSubject = BehaviorSubject<SimpleViewState<PopularCellViewModel>>(value: .empty)
   
   private weak var delegate: PopularViewModelDelegate?
   
   private let disposeBag = DisposeBag()
   
+  public var input: Input
+  
+  public var output: Output
+  
+  // MARK: - Initializers
+  
   init(fetchStationsUseCase: FetchStationsLocalUseCase, delegate: PopularViewModelDelegate? = nil) {
     self.fetchStationsUseCase = fetchStationsUseCase
     self.delegate = delegate
+    
+    self.input = Input()
+    self.output = Output(viewState: viewStateObservableSubject.asObservable())
   }
   
   func getStations() {
@@ -44,30 +49,24 @@ final class PopularViewModel {
   }
   
   private func processFetched(for items: [StationRemote]) {
-    stations = items
-    
-    popularCells = stations.map({
-      PopularCellViewModel(station: $0)
-    })
+    let popularCells = items.map( PopularCellViewModel.init )
     
     if popularCells.isEmpty {
-      viewState.value = .empty
+      viewStateObservableSubject.onNext(.empty)
     } else {
-      viewState.value = .populated
+      viewStateObservableSubject.onNext(.populated(popularCells))
     }
   }
   
-  func getStationSelection(by index: Int) {
-    delegate?.stationDidSelect(station: stations[index])
+  func stationDidSelect(with station: StationRemote) {
+    delegate?.stationDidSelect(station: station)
   }
 }
 
 extension PopularViewModel {
+  public struct Input { }
   
-  enum ViewState {
-    
-    case populated
-    case empty
-    
+  public struct Output {
+    let viewState: Observable<SimpleViewState<PopularCellViewModel>>
   }
 }
