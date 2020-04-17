@@ -52,21 +52,10 @@ extension Managed where Self: NSManagedObject {
   }
   
   static func findOrFetch(in context: NSManagedObjectContext, matching predicate: NSPredicate) -> Self? {
-    guard let object = materializedObject(in: context, matching: predicate) else {
-      return fetch(in: context) { request in
-        request.predicate = predicate
-        request.returnsObjectsAsFaults = false
-        request.fetchLimit = 1
-      }.first
-    }
-    return object
-  }
-  
-  static func materializedObject(in context: NSManagedObjectContext, matching predicate: NSPredicate) -> Self? {
-    for object in context.registeredObjects where !object.isFault {
-      guard let result = object as? Self, predicate.evaluate(with: result) else { continue }
-      return result
-    }
-    return nil
+    return fetch(in: context) { request in
+      request.predicate = predicate
+      request.returnsObjectsAsFaults = false
+      request.fetchLimit = 1
+    }.first
   }
 }

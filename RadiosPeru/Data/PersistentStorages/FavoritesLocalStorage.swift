@@ -15,4 +15,6 @@ protocol FavoritesLocalStorage {
   func toogleFavorite(station: SimpleStation) -> Observable<Bool>
   
   func favoritesList() -> Observable<[SimpleStation]>
+  
+  func favoritesDidChanged() -> Observable<Void>
 }

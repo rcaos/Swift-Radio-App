@@ -15,6 +15,8 @@ final class DefaultFavoritesLocalStorage: FavoritesLocalStorage {
   
   private let favoriteListSubject = BehaviorSubject<[SimpleStation]>(value: [])
   
+  private let favoritesDidChangedSubject = BehaviorSubject<Void>(value: ())
+  
   init(coreDataStack: CoreDataStorage) {
     self.coreDataStack = coreDataStack
     self.store = PersistenceStore(self.coreDataStack.mainContext)
@@ -22,8 +24,6 @@ final class DefaultFavoritesLocalStorage: FavoritesLocalStorage {
     
     self.store.delegate = self
   }
-  
-  // MARK: - TODO, Change Over time too?
   
   func isFavorite(station: SimpleStation) -> Observable<Bool> {
     if store.find(with: station) != nil {
@@ -34,16 +34,31 @@ final class DefaultFavoritesLocalStorage: FavoritesLocalStorage {
   }
   
   func toogleFavorite(station: SimpleStation) -> Observable<Bool> {
-    if let persistentStation = store.find(with: station) {
-      store.delete(with: persistentStation)
-      return Observable.just(false)
-    } else {
-      store.saveFavorite(station)
-      return Observable.just(true)
+    return Observable<Bool>.create { [unowned self] (event) -> Disposable in
+      let disposable = Disposables.create()
+      
+      if let persistentStation = self.store.find(with: station) {
+        
+        self.store.delete(with: persistentStation) {
+          event.onNext(false)
+          event.onCompleted()
+        }
+      } else {
+        
+        self.store.saveFavorite(station) {
+          event.onNext(true)
+          event.onCompleted()
+        }
+      }
+      return disposable
     }
   }
   
   // MARK: - Change over time
+  
+  func favoritesDidChanged() -> Observable<Void> {
+    return favoritesDidChangedSubject.asObservable()
+  }
   
   func favoritesList() -> Observable<[SimpleStation]> {
     favoriteListSubject.onNext( favoriteEntitiesList() )
@@ -61,5 +76,6 @@ extension DefaultFavoritesLocalStorage: PersistenceStoreDelegate {
   
   func persistenceStore(didUpdateEntity update: Bool) {
     favoriteListSubject.onNext( favoriteEntitiesList() )
+    favoritesDidChangedSubject.onNext( () )
   }
 }

@@ -10,11 +10,11 @@ import Foundation
 
 extension PersistenceStore where Entity == StationFavoriteCD {
   
-  func saveFavorite(_ simpleStation: SimpleStation, completion: ((Bool) -> Void)? = nil) {
-      managedObjectContext.performChanges {
-          _ = StationFavoriteCD.insert(into: self.managedObjectContext, stationFavorite: simpleStation)
-          completion?(true)
-      }
+  func saveFavorite(_ simpleStation: SimpleStation, completion: @escaping (() -> Void)) {
+    managedObjectContext.performChanges {
+      _ = StationFavoriteCD.insert(into: self.managedObjectContext, stationFavorite: simpleStation)
+      completion()
+    }
   }
   
   func find(with station: SimpleStation) -> StationFavoriteCD? {
@@ -22,10 +22,10 @@ extension PersistenceStore where Entity == StationFavoriteCD {
     return StationFavoriteCD.findOrFetch(in: managedObjectContext, matching: predicate)
   }
   
-  func delete(with station: StationFavoriteCD, completion: ((Bool) -> Void)? = nil) {
+  func delete(with station: StationFavoriteCD, completion: @escaping (() -> Void)) {
     managedObjectContext.performChanges {
       self.managedObjectContext.delete(station)
-      completion?(true)
+      completion()
     }
   }
   

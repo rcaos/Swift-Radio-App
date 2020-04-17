@@ -56,7 +56,6 @@ class FavoriteTableViewCell: UITableViewCell {
       .bind { [weak self] in
         guard let strongSelf = self,
           let viewModel = strongSelf.viewModel else { return }
-        print("tap: \(viewModel.radioStation.name)")
         strongSelf.delegate?.favoriteIsPicked(for: viewModel.radioStation)
     }
     .disposed(by: disposeBag)

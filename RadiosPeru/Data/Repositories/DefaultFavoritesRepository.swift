@@ -30,4 +30,8 @@ extension DefaultFavoritesRepository: FavoritesRepository {
   func favoritesList() -> Observable<[SimpleStation]> {
     favoritesPersistentStorage.favoritesList()
   }
+  
+  func favoritesDidChanged() -> Observable<Void> {
+    favoritesPersistentStorage.favoritesDidChanged()
+  }
 }

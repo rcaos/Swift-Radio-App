@@ -35,6 +35,7 @@ final class MiniPlayerSceneDIContainer {
         return MiniPlayerViewModel(
             toggleFavoritesUseCase: makeToggleFavoritesUseCase(),
             askFavoriteUseCase: makeAskFavoritesUseCase(),
+            favoritesChangedUseCase: makeFavoritesDidChangeUseCase(),
             player: dependencies.radioPlayer,
             delegate: nil)
     }
@@ -53,4 +54,8 @@ extension MiniPlayerSceneDIContainer {
     private func makeFavoritesRepository() -> FavoritesRepository {
         return DefaultFavoritesRepository(favoritesPersistentStorage: dependencies.favoritesLocalStorage)
     }
+  
+  private func makeFavoritesDidChangeUseCase() -> FavoritesDidChangedUseCase {
+    return DefaultFavoritesDidChangedUseCase(favoritesRepository: self.favoritesRepository)
+  }
 }

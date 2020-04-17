@@ -46,11 +46,6 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     setupViewModel()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    viewModel.viewWillAppear()
-  }
-  
   // MARK: - Reactive
   
   private func setupViewModel() {
