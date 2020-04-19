@@ -35,9 +35,7 @@ final class DefaultStationsLocalStorage: StationsLocalStorage {
             event.onCompleted()
           }
         } else {
-          self.store.saveStation(station) {
-            event.on( .next(()) )
-          }
+          self.store.saveStation(station) { }
         }
       }
       return disposable

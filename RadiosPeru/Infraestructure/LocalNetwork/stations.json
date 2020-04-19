@@ -1,0 +1,179 @@
+{ "stations" :  [
+    {
+    "name" :"RPP",
+    "city" : "Lima",
+    "frecuency" : "89.7 FM",
+    "slogan" : "Confianza por todos los medios",
+    "urlStream" : "https://17003.live.streamtheworld.com/RADIO_RPP.mp3",
+    "path_image": "https://www.dropbox.com/s/f8du4p4c7n90axt/rpp.png?dl=1",
+  "group" : {
+     "type" : "rpp",
+     "id" : "43"
+  }
+ },
+  {
+    "name" :"Capital",
+    "city" : "Lima",
+    "frecuency" : "96.7 FM",
+    "slogan" : "Tu Opinion Importa",
+    "urlStream" : "https://16693.live.streamtheworld.com/RADIO_CAPITAL.mp3",
+    "path_image": "https://www.dropbox.com/s/4kwsmyog8w4bc67/capital.jpg?dl=1",
+  "group" : {
+     "type" : "rpp",
+     "id" : "44"
+  }
+ },
+  {
+    "name" :"Studio 92",
+    "city" : "Lima",
+    "frecuency" : "92.5 FM",
+    "slogan" : "Primeros en tu Música",
+    "urlStream" : "https://16083.live.streamtheworld.com/RADIO_STUDIO92.mp3",
+    "path_image": "https://www.dropbox.com/s/hgxrkhe8ar40360/studio92.jpg?dl=1",
+  "group" : {
+     "type" : "rpp",
+     "id" : "47"
+  }
+ },
+  {
+    "name" :"Corazón",
+    "city" : "Lima",
+    "frecuency" : "94.3 FM",
+    "slogan" : "Única como tú",
+    "urlStream" : "https://17523.live.streamtheworld.com/RADIO_CORAZON.mp3",
+    "path_image": "https://www.dropbox.com/s/x1k1z50z7t1lkz1/corazon.png?dl=1",
+  "group" : {
+     "type" : "rpp",
+     "id" : "45"
+  }
+ },
+  {
+    "name" :"Oxígeno",
+    "city" : "Lima",
+    "frecuency" : "102.1 FM",
+    "slogan" : "Clásicos del rock & pop",
+    "urlStream" : "https://20813.live.streamtheworld.com/RADIO_OXIGENO.mp3",
+    "path_image": "https://www.dropbox.com/s/f6wgi3qeh7x5jyp/oxigeno.jpg?dl=1",
+  "group" : {
+     "type" : "rpp",
+     "id" : "48"
+  }
+ },
+  {
+    "name" :"La Zona",
+    "city" : "Lima",
+    "frecuency" : "90.5 FM",
+    "slogan" : "¡Tu música urbana!",
+    "urlStream" : "https://15383.live.streamtheworld.com/RADIO_LAZONA.mp3",
+    "path_image": "https://www.dropbox.com/s/e2gwyb55l0u3k31/lazona.jpg?dl=1",
+  "group" : {
+     "type" : "rpp",
+     "id" : "46"
+  }
+ },
+  {
+    "name" :"Felicidad",
+    "city" : "Lima",
+    "frecuency" : "88.7 FM",
+    "slogan" : "La música de tu vida",
+    "urlStream" : "https://18313.live.streamtheworld.com/RADIO_FELICIDAD.mp3",
+    "path_image": "https://www.dropbox.com/s/k7szd80iamwos8g/felicidad.jpg?dl=1",
+  "group" : {
+     "type" : "rpp",
+     "id" : "49"
+  }
+ },
+ 
+    {
+    "name" :"Ritmo Romantica",
+    "city" : "Lima",
+    "frecuency" : "93.1 FM",
+    "slogan" : "Tu radio de baladas",
+    "urlStream" : "https://19253.live.streamtheworld.com/CRP_RIT.mp3",
+    "path_image": "https://www.dropbox.com/s/bpb79j1lbkqxfzf/romantica.jpg?dl=1",
+  "group" : {
+     "type" : "crp",
+     "base_url" : "https://ritmoromantica.pe"
+  }
+  },
+  {
+    "name" : "La Inolvidable" ,
+    "city" : "Lima",
+    "frecuency" : "93.7 FM",
+    "slogan" : "Tus mejores momentos",
+    "urlStream" : "https://14653.live.streamtheworld.com/CRP_LI.mp3",
+    "path_image": "https://www.dropbox.com/s/4ksc402jvkf46yc/inolvidable.jpg?dl=1",
+  "group" : {
+     "type" : "crp",
+     "base_url" : "https://lainolvidable.pe"
+  }
+
+  },
+  {
+    "name" : "Moda",
+    "city" : "Lima",
+    "frecuency" : "97.3 FM",
+    "slogan" : "Te mueve! ... con la música que esta de moda",
+    "urlStream" : "https://18303.live.streamtheworld.com/CRP_MOD.mp3",
+    "path_image": "https://www.dropbox.com/s/mhofkfrvce96zf6/moda.jpg?dl=1",
+  "group" : {
+     "type" : "crp",
+     "base_url" : "https://moda.com.pe"
+  }
+
+  },
+    {
+    "name" : "Oasis",
+    "city" : "Lima",
+    "frecuency" : "100.1 FM",
+    "slogan" : "Oasis, Rock & pop",
+    "urlStream" : "https://19223.live.streamtheworld.com/CRP_OAS.mp3",
+    "path_image": "https://www.dropbox.com/s/zffkjbpupaf6dul/oasis.jpg?dl=1",
+  "group" : {
+     "type" : "crp",
+     "base_url" : "https://oasis.pe"
+  }
+
+  },
+    {
+    "name" : "Radiomar",
+    "city" : "Lima",
+    "frecuency" : "106.3 FM",
+    "slogan" : "¡Vive gozando!",
+    "urlStream" : "https://18493.live.streamtheworld.com/CRP_MAR.mp3",
+    "path_image": "https://www.dropbox.com/s/0d2r6ovlk32j20c/radiomar.jpg?dl=1",
+  "group" : {
+     "type" : "crp",
+     "base_url" : "https://radiomar.pe"
+  }
+
+  },
+    {
+    "name" : "Nueva Q",
+    "city" : "Lima",
+    "frecuency" : "107.1 FM",
+    "slogan" : "¡QQQumbia!",
+    "urlStream" : "https://19253.live.streamtheworld.com/CRP_NQ.mp3",
+    "path_image": "https://www.dropbox.com/s/nqqd4xwjfffti8e/nuevaq.jpg?dl=1",
+  "group" : {
+     "type" : "crp",
+     "base_url" : "https://radionuevaq.pe"
+  }
+
+  },
+    {
+    "name" : "Planeta",
+    "city" : "Lima",
+    "frecuency" : "107.7 FM",
+    "slogan" : "Tu música en inglés",
+    "urlStream" : "https://16643.live.streamtheworld.com/CRP_PLAAAC_SC",
+    "path_image": "https://www.dropbox.com/s/ehz5emcw3tmnxhb/planeta.png?dl=1",
+  "group" : {
+     "type" : "crp",
+     "base_url" : "https://planeta.pe"
+  }
+
+  }
+  ]
+}
+
