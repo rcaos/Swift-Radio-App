@@ -12,14 +12,19 @@ final class AppAppearance {
   
   static func setupAppearance() {
     
-    let customColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1.0)
+    UIFont.loadFonts()
     
-    UINavigationBar.appearance().barTintColor = customColor
+    UINavigationBar.appearance().barTintColor = ColorPalette.customGrayColor
     UINavigationBar.appearance().prefersLargeTitles = false
-    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+    UINavigationBar.appearance().titleTextAttributes = [
+      NSAttributedString.Key.foregroundColor: UIColor.white,
+      NSAttributedString.Key.font: Font.proximaNova.of(type: .bold, with: .normal)]
     
-    UITabBar.appearance().barTintColor = customColor
+    UITabBar.appearance().barTintColor = ColorPalette.customGrayColor
     UITabBar.appearance().tintColor = .white
+    
+    UITabBarItem.appearance().setTitleTextAttributes(
+      [NSAttributedString.Key.font: Font.proximaNova.of(type: .bold, with: .custom(10) )], for: .normal)
   }
 }
 

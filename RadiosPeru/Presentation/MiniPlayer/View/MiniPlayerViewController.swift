@@ -114,7 +114,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   }
   
   func setupUI() {
-    view.backgroundColor = UIColor(red: 38/255, green: 38/255, blue: 38/255, alpha: 1.0)
+    view.backgroundColor = ColorPalette.customGrayColor
     
     favoriteButton.setImage( UIImage(named: "btn-favorite"), for: .normal)
     
@@ -126,11 +126,11 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     
     stationNameLabel.text = ""
     stationNameLabel.textColor = UIColor.white
-    stationNameLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    stationNameLabel.font = Font.proximaNova.of(type: .bold, with: .custom(22))
     
     stationDescriptionLabel.text = ""
     stationDescriptionLabel.textColor = .lightGray
-    stationDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
+    stationDescriptionLabel.font = Font.proximaNova.of(type: .regular, with: .normal)
   }
   
   func setupPlayerView() {

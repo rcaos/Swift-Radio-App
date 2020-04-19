@@ -48,7 +48,7 @@ class FavoritesViewController: UIViewController {
     genericTableView = GenericTableView(frame: .zero)
     
     genericTableView.tableView.register(nibName, forCellReuseIdentifier: reuseIdentifier)
-    genericTableView.tableView.backgroundColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1.0)
+    genericTableView.tableView.backgroundColor = .black
     
     self.view = genericTableView
   }
@@ -98,7 +98,7 @@ class FavoritesViewController: UIViewController {
   
   func setupEmptyView() {
     messageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
-    messageView.backgroundColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1.0)
+    messageView.backgroundColor = .black
     messageView.messageLabel.textColor = .white
     messageView.messageLabel.text = "There are no Stations added to your Favorites"
     

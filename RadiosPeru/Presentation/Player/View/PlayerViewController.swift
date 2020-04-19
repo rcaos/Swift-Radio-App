@@ -131,11 +131,11 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     
     stationNameLabel.text = ""
     stationNameLabel.textColor = UIColor.white
-    stationNameLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    stationNameLabel.font = Font.proximaNova.of(type: .bold, with: .custom(22))
     
     stationDescriptionLabel.text = ""
     stationDescriptionLabel.textColor = .lightGray
-    stationDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
+    stationDescriptionLabel.font = Font.proximaNova.of(type: .regular, with: .normal)
     
     // MARK: - Moved to Generic View, do not import MediaPlayer
     let mpVolumenView = MPVolumeView(frame: volumeStackView.bounds)

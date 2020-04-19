@@ -43,7 +43,7 @@ class PopularViewController: UIViewController {
   }
   
   func setupView() {
-    customView.collectionView.backgroundColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1.0)
+    customView.collectionView.backgroundColor = .black
   }
   
   func setupCollection() {

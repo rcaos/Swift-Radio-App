@@ -32,7 +32,7 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
   // MARK: - Initializers
   
   override func viewDidLoad() {
-    view.backgroundColor = .red
+    view.backgroundColor = .black
     navigationItem.title = "Radios Perú"
     
     setupTabBarView()
@@ -74,7 +74,8 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
   private func buildViewControllers() -> [UIViewController] {
     
     guard let popularVC = controllersFactory.makePopularViewController(delegate: viewModel) as? PopularViewController else { return [] }
-    popularVC.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 0)
+    //popularVC.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 0)
+    popularVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "houseItem"), tag: 0)
     
     guard let favoritesVC = controllersFactory.makeFavoritesViewController(delegate: viewModel) as? FavoritesViewController else { return [] }
     favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)

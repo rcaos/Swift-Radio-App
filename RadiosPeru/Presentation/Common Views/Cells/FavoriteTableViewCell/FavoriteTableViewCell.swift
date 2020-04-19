@@ -35,9 +35,11 @@ class FavoriteTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    backgroundColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1.0)
+    backgroundColor = .black
     nameStationLabel.textColor = .white
     
+    nameStationLabel.font = Font.proximaNova.of(type: .bold, with: .big)
+    detailStationLabel.font = Font.proximaNova.of(type: .regular, with: .normal)
   }
   
   func setupUI() {
