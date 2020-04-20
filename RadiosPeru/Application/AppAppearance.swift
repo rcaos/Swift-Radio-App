@@ -15,6 +15,7 @@ final class AppAppearance {
     UIFont.loadFonts()
     
     UINavigationBar.appearance().barTintColor = ColorPalette.customGrayColor
+    UINavigationBar.appearance().tintColor = .white
     UINavigationBar.appearance().prefersLargeTitles = false
     UINavigationBar.appearance().titleTextAttributes = [
       NSAttributedString.Key.foregroundColor: UIColor.white,

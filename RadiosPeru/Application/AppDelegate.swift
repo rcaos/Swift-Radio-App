@@ -30,7 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - Initial Navigation
   
   func initialTransition() {
-    self.window?.rootViewController = MainNavigationController(appDIContainer: appDIContainer)
+    let mainViewController = appDIContainer.makeMainSceneDIContainer().makeMainViewController()
+    let mainNavigation = UINavigationController(rootViewController: mainViewController)
+    self.window?.rootViewController = mainNavigation
   }
   
   // MARK: - Debug

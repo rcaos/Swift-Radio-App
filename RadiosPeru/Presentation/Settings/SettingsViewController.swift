@@ -58,45 +58,43 @@ class SettingsViewController: UIViewController {
       .setDelegate(self)
       .disposed(by: disposeBag)
     
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, String>>(
-      configureCell: { (_, tableView, indexPath, element) in
+    let dataSource = setDataSource()
+    
+    viewModel.output.cells
+      .bind(to: genericTableView.tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+    
+    Observable.zip( genericTableView.tableView.rx.itemSelected,
+                    genericTableView.tableView.rx.modelSelected(SettingsSectionModel.Item.self))
+      .subscribe(onNext: { [weak self] (indexPath, element) in
+        self?.genericTableView.tableView.deselectRow(at: indexPath, animated: true)
+        self?.viewModel.didSelected(at: element)
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  fileprivate func setDataSource() -> RxTableViewSectionedReloadDataSource<SettingsSectionModel> {
+    return RxTableViewSectionedReloadDataSource<SettingsSectionModel>(
+      configureCell: { (_, tableView, _, element) in
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
         cell.textLabel?.text = "\(element)"
         cell.backgroundColor = .black
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = Font.proximaNova.of(type: .regular, with: .normal)
         
-        if indexPath.row != 3 {
+        if element.hasDisclosure {
           let chevronImageView = UIImageView(image: UIImage(named: "CollapsibleArrow"))
           chevronImageView.image = chevronImageView.image?.withRenderingMode(.alwaysTemplate)
           chevronImageView.tintColor = .white
           cell.accessoryView = chevronImageView
         }
-        
         return cell
     },
       titleForHeaderInSection: { dataSource, sectionIndex in
         return dataSource[sectionIndex].model
     }
     )
-    
-    viewModel.output.cells
-      .bind(to: genericTableView.tableView.rx.items(dataSource: dataSource))
-    .disposed(by: disposeBag)
-    
-    genericTableView.tableView.rx
-      .itemSelected
-      .bind { [weak self] indexPath in
-        self?.genericTableView.tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.section == 0 && indexPath.row == 2,
-          let url = URL(string: "https://sites.google.com/view/youngradioplus/supports") {
-          UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
-        
-    }.disposed(by: disposeBag)
   }
- 
 }
 
 extension SettingsViewController: UITableViewDelegate {

@@ -36,7 +36,7 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
   
   override func viewDidLoad() {
     view.backgroundColor = .black
-    navigationItem.title = "Radios Perú"
+    title = "Radios Perú"
     
     setupTabBarView()
     setupMiniPlayerView()
@@ -135,7 +135,8 @@ extension MainViewControler {
     case .showSettings:
       
       let settingsVC = controllersFactory.makeSettingsViewController()
-      present(settingsVC, animated: true, completion: nil)
+      settingsVC.title = "Settings"
+      navigationController?.pushViewController(settingsVC, animated: true)
     }
     
   }
