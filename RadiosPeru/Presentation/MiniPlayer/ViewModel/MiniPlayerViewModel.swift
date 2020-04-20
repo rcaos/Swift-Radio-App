@@ -31,7 +31,7 @@ final class MiniPlayerViewModel {
   
   var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
   
-  var updateUI:(() -> Void)?
+  var updateUI: (() -> Void)?
   
   var isFavorite: Bindable<Bool> = Bindable(false)
   
@@ -61,6 +61,8 @@ final class MiniPlayerViewModel {
   // MARK: - Public
   
   func configStation(with station: StationRemote, playAutomatically: Bool = true) {
+    if checkIsPlaying(with: station) { return }
+  
     disposeBag = DisposeBag()
     
     stationSelected = station
@@ -108,6 +110,19 @@ final class MiniPlayerViewModel {
       strongSelf.isFavorite.value = isFavorite
     })
       .disposed(by: disposeBag)
+  }
+  
+  fileprivate func checkIsPlaying(with station: StationRemote) -> Bool {
+    if stationSelected == station {
+      switch viewState.value {
+      case .buffering, .loading, .playing:
+        return true
+      default:
+        return false
+      }
+    } else {
+      return false
+    }
   }
   
   // MARK: - Public

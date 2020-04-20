@@ -32,3 +32,7 @@ extension StationRemote {
     }
   }
 }
+
+extension StationRemote: Equatable {
+  
+}

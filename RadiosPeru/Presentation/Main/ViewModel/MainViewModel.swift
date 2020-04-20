@@ -22,6 +22,8 @@ final class MainViewModel {
   
   var route: Bindable<MainViewModelRoute> = Bindable(.initial)
   
+  var showMiniPlayer: (() -> Void)?
+  
   init(radioPlayer: RadioPlayer, miniPlayerViewModel: MiniPlayerViewModel) {
     self.radioPlayer = radioPlayer
     
@@ -30,6 +32,7 @@ final class MainViewModel {
   
   func selectStation(with station: StationRemote) {
     miniPlayer.configStation(with: station)
+    showMiniPlayer?()
   }
 }
 

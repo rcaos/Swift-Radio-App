@@ -45,8 +45,15 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
   }
   
   func setupViewModel() {
-    viewModel.route.bind {[weak self] routing in
+    viewModel.route.bind { [weak self] routing in
       self?.handle(routing)
+    }
+    
+    viewModel.showMiniPlayer = { [weak self] in
+      guard let strongSelf = self else { return }
+      UIView.transition(with: strongSelf.miniPlayerView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+        strongSelf.miniPlayerView.isHidden = false
+      })
     }
   }
   
@@ -60,6 +67,7 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
                                  miniPlayerVC.view.leadingAnchor.constraint(equalTo: miniPlayerView.leadingAnchor),
                                  miniPlayerVC.view.trailingAnchor.constraint(equalTo: miniPlayerView.trailingAnchor),
                                  miniPlayerVC.view.bottomAnchor.constraint(equalTo: miniPlayerView.bottomAnchor)])
+    miniPlayerView.isHidden = true
   }
   
   private func setupSettingsButton() {
