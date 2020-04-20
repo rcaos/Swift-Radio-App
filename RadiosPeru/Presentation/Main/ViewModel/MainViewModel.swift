@@ -9,46 +9,47 @@
 import Foundation
 
 enum MainViewModelRoute {
-    case initial
-    case showPlayer(StationRemote)
+  case initial
+  case showPlayer(StationRemote)
+  case showSettings
 }
 
 final class MainViewModel {
+  
+  var miniPlayer: MiniPlayerViewModel
+  
+  var radioPlayer: RadioPlayer
+  
+  var route: Bindable<MainViewModelRoute> = Bindable(.initial)
+  
+  init(radioPlayer: RadioPlayer, miniPlayerViewModel: MiniPlayerViewModel) {
+    self.radioPlayer = radioPlayer
     
-    var miniPlayer: MiniPlayerViewModel
-    
-    var radioPlayer: RadioPlayer
-    
-    var route: Bindable<MainViewModelRoute> = Bindable(.initial)
-    
-    init(radioPlayer: RadioPlayer, miniPlayerViewModel: MiniPlayerViewModel) {
-        self.radioPlayer = radioPlayer
-        
-        miniPlayer = miniPlayerViewModel
-    }
-    
-    func selectStation(with station: StationRemote) {
-        miniPlayer.configStation(with: station)
-    }
+    miniPlayer = miniPlayerViewModel
+  }
+  
+  func selectStation(with station: StationRemote) {
+    miniPlayer.configStation(with: station)
+  }
 }
 
 extension MainViewModel: PopularViewModelDelegate {
-    
-    func stationDidSelect(station: StationRemote) {
-        selectStation(with: station)
-    }
+  
+  func stationDidSelect(station: StationRemote) {
+    selectStation(with: station)
+  }
 }
 
 extension MainViewModel: FavoritesViewModelDelegate {
-    
-    func stationFavoriteDidSelect(station: StationRemote) {
-        selectStation(with: station)
-    }
+  
+  func stationFavoriteDidSelect(station: StationRemote) {
+    selectStation(with: station)
+  }
 }
 
 extension MainViewModel: MiniPlayerViewModelDelegate {
-    
-    func stationPLayerDidSelect(station: StationRemote) {
-        route.value = .showPlayer(station)
-    }
+  
+  func stationPLayerDidSelect(station: StationRemote) {
+    route.value = .showPlayer(station)
+  }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class MainViewControler: UIViewController, StoryboardInstantiable {
   
@@ -20,6 +21,8 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
   
   var tabBarVC: UITabBarController!
   var miniPlayerVC: MiniPlayerViewController!
+  
+  let disposeBag = DisposeBag()
   
   static func create(with viewModel: MainViewModel, controllersFactory: MainViewControllersFactory) -> MainViewControler {
     let controller = MainViewControler.instantiateViewController()
@@ -38,6 +41,7 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
     setupTabBarView()
     setupMiniPlayerView()
     setupViewModel()
+    setupSettingsButton()
   }
   
   func setupViewModel() {
@@ -58,6 +62,17 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
                                  miniPlayerVC.view.bottomAnchor.constraint(equalTo: miniPlayerView.bottomAnchor)])
   }
   
+  private func setupSettingsButton() {
+    let settingsButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .done, target: nil, action: nil)
+    navigationItem.rightBarButtonItem = settingsButton
+    navigationItem.rightBarButtonItem?.tintColor = .white
+    
+    settingsButton.rx
+      .tap.bind { [weak self] in
+        self?.viewModel.route.value = .showSettings
+    }.disposed(by: disposeBag)
+  }
+  
   private func setupTabBarView() {
     tabBarVC = UITabBarController()
     tabBarVC.viewControllers = buildViewControllers()
@@ -74,7 +89,6 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
   private func buildViewControllers() -> [UIViewController] {
     
     guard let popularVC = controllersFactory.makePopularViewController(delegate: viewModel) as? PopularViewController else { return [] }
-    //popularVC.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 0)
     popularVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "houseItem"), tag: 0)
     
     guard let favoritesVC = controllersFactory.makeFavoritesViewController(delegate: viewModel) as? FavoritesViewController else { return [] }
@@ -117,6 +131,11 @@ extension MainViewControler {
       // Necessary for call viewWillAppear on Dismiss PlayerVC
       playerController.modalPresentationStyle = .fullScreen
       present(playerController, animated: true, completion: nil)
+      
+    case .showSettings:
+      
+      let settingsVC = controllersFactory.makeSettingsViewController()
+      present(settingsVC, animated: true, completion: nil)
     }
     
   }
@@ -133,4 +152,6 @@ protocol MainViewControllersFactory {
   func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> UIViewController
   
   func makePlayerViewController(with station: StationRemote) -> UIViewController
+  
+  func makeSettingsViewController() -> UIViewController
 }
