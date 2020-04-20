@@ -35,11 +35,16 @@ extension PlayInfoSource {
     
     info[MPMediaItemPropertyAlbumTitle] = defaultInfo
     
-    if let named = artWork, let image = UIImage(named: named) {
-      let imageArtWork = MPMediaItemArtwork(boundsSize: image.size) { _ -> UIImage in
-        return image 
+    if let named = artWork, let urlImage = URL(string: named) {
+      let imageView = UIImageView()
+      imageView.setImage(with: urlImage)
+      
+      if let image = imageView.image {
+        let imageArtWork = MPMediaItemArtwork(boundsSize: image.size) { _ -> UIImage in
+          return image
+        }
+        info[MPMediaItemPropertyArtwork] = imageArtWork
       }
-      info[MPMediaItemPropertyArtwork] = imageArtWork
     }
     
     return info
