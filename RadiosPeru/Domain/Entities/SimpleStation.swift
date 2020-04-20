@@ -9,6 +9,8 @@
 import Foundation
 
 struct SimpleStation {
-    let name: String
-    let group: String
+  
+  let name: String
+  
+  let id: Int
 }

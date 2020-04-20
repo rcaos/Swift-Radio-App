@@ -11,12 +11,15 @@ import CoreData
 
 final class Station: NSManagedObject {
   
+  @NSManaged var id: Int
   @NSManaged var name: String
+  @NSManaged var order: Int
   @NSManaged var image: String
   @NSManaged var city: String
   @NSManaged var frecuency: String
   @NSManaged var slogan: String
   @NSManaged var urlStream: String
+  @NSManaged var isActive: Bool
   
   @NSManaged var group: String
   @NSManaged var groupId: String
@@ -38,15 +41,4 @@ extension Station: Managed {
     return [NSSortDescriptor(key: #keyPath(name), ascending: true)]
   }
   
-}
-
-extension Station {
-  
-  var type: Group {
-    if group == "rpp" {
-      return .rpp( RPP(type: self.group, id: self.groupId) )
-    } else { //"crp"
-      return .crp( CRP(type: self.group, base: self.groupBase) )
-    }
-  }
 }

@@ -50,8 +50,10 @@ extension Group: Decodable {
     
     if typeKey == "rpp" {
       self = .rpp( try typeValue.decode(RPP.self) )
-    } else {
+    } else if typeKey == "crp" {
       self = .crp( try typeValue.decode(CRP.self) )
+    } else {
+      self = .unknown
     }
   }
 }

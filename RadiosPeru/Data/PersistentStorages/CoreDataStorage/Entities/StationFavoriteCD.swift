@@ -12,8 +12,8 @@ import CoreData
 final class StationFavoriteCD: NSManagedObject {
   
   @NSManaged var createAt: Date
+  @NSManaged var id: Int
   @NSManaged var name: String
-  @NSManaged var group: String
 }
 
 extension StationFavoriteCD {

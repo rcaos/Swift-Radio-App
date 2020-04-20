@@ -9,17 +9,19 @@
 import Foundation
 
 enum Group {
-    case rpp(RPP)
-    
-    case crp(CRP)
+  case rpp(RPP)
+  
+  case crp(CRP)
+  
+  case unknown
 }
 
 struct RPP {
-    let type: String
-    let id: String
+  let type: String
+  let id: String
 }
 
 struct CRP {
-    let type: String
-    let base: String
+  let type: String
+  let base: String
 }

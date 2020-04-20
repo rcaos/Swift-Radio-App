@@ -33,6 +33,9 @@ final class DefaultFetchFavoritesStationsUseCase: FetchFavoritesStationsUseCase 
         guard let strongself = self else { return Observable.just([]) }
         return strongself.localsRepository.findStations(with: stations)
     }
+    .flatMap { stations -> Observable<[StationRemote]> in
+      return Observable.just( stations.filter { $0.isActive })
+    }
   }
   
 }

@@ -29,6 +29,9 @@ extension DefaultShowDetailsRepository: ShowDetailsRepository {
       
     case .crp(let crp) :
       return fetchCRPDetails(crp.base)
+      
+    case .unknown:
+      return Observable.empty()
     }
   }
   

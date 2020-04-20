@@ -82,7 +82,7 @@ final class PlayerViewModel {
   }
   
   func markAsFavorite() {
-    let simpleStation = SimpleStation(name: stationSelected.name, group: stationSelected.group)
+    let simpleStation = SimpleStation(name: stationSelected.name, id: stationSelected.id)
     
     let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
     
@@ -97,7 +97,7 @@ final class PlayerViewModel {
   private func checkIsFavorite(with station: StationRemote?) {
     guard let station = station else { return  }
     
-    let simpleStation = SimpleStation(name: station.name, group: station.group)
+    let simpleStation = SimpleStation(name: station.name, id: station.id)
     let request = AskFavoriteUseCaseRequestValue(station: simpleStation)
     
     askFavoriteUseCase.execute(requestValue: request)

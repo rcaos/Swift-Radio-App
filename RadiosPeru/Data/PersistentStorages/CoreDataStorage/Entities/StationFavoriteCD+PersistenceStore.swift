@@ -18,7 +18,7 @@ extension PersistenceStore where Entity == StationFavoriteCD {
   }
   
   func find(with station: SimpleStation) -> StationFavoriteCD? {
-    let predicate = NSPredicate(format: "name == %@", station.name )
+    let predicate = NSPredicate(format: "id == %i", station.id )
     return StationFavoriteCD.findOrFetch(in: managedObjectContext, matching: predicate)
   }
   

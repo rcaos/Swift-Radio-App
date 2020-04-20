@@ -27,6 +27,12 @@ final class DefaultFetchStationsLocalUseCase: FetchStationsLocalUseCase {
   
   func execute(requestValue: FetchStationsLocalUseCaseRequestValue) -> Observable<[StationRemote]> {
     return stationsLocalRepository.stationsList()
+      .flatMap { stations -> Observable<[StationRemote]> in
+        let filtered = stations
+          .filter { $0.isActive }
+          .sorted { $0.order < $1.order }
+        return Observable.just(filtered)
+    }
   }
   
 }

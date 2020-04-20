@@ -15,7 +15,7 @@ extension StationFavoriteCD {
     
     favoriteLocal.createAt = Date()
     favoriteLocal.name = stationFavorite.name
-    favoriteLocal.group = stationFavorite.group
+    favoriteLocal.id = stationFavorite.id
     return favoriteLocal
   }
 }
@@ -24,6 +24,6 @@ extension SimpleStation {
   
   init(stationLocal: StationFavoriteCD) {
     name = stationLocal.name
-    group = stationLocal.group
+    id = stationLocal.id
   }
 }

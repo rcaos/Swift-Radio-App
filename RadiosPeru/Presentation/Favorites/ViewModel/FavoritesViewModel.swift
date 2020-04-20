@@ -70,7 +70,7 @@ final class FavoritesViewModel {
   }
   
   func favoriteDidSelect(for station: StationRemote) {
-    let simpleStation = SimpleStation(name: station.name, group: station.group)
+    let simpleStation = SimpleStation(name: station.name, id: station.id)
     
     let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
     

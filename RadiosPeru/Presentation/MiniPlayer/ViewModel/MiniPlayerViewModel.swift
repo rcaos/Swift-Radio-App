@@ -83,7 +83,7 @@ final class MiniPlayerViewModel {
   func markAsFavorite() {
     guard let selected = stationSelected else { return }
     
-    let simpleStation = SimpleStation(name: selected.name, group: selected.group)
+    let simpleStation = SimpleStation(name: selected.name, id: selected.id)
     
     let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
     
@@ -101,7 +101,7 @@ final class MiniPlayerViewModel {
   private func subscribeToFavoriteChanges(for station: StationRemote) {
     favoritesChangedUseCase.execute(requestValue: FavoritesDidChangedUseCaseRequestValue() )
       .flatMap { () -> Observable<Bool> in
-        let simpleStation = SimpleStation(name: station.name, group: station.group)
+        let simpleStation = SimpleStation(name: station.name, id: station.id)
         let request = AskFavoriteUseCaseRequestValue(station: simpleStation)
         return self.askFavoriteUseCase.execute(requestValue: request)
     }
