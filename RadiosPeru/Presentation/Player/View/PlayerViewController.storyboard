@@ -120,6 +120,7 @@
                         <viewLayoutGuide key="safeArea" id="keM-29-mTc"/>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="Py1-zr-zij" id="Zl2-OB-DiO"/>
                         <outlet property="favoriteButton" destination="fbp-5j-IGz" id="gfU-3l-DkI"/>
                         <outlet property="playerStackView" destination="UHg-rn-NHl" id="UlF-Vh-3HW"/>
                         <outlet property="playingBarsImage" destination="UaO-p2-Lbr" id="DUu-Mp-0ZO"/>

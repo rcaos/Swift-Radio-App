@@ -61,18 +61,18 @@ final class PlayerViewModel {
   
   // MARK: - Public
   
-  func togglePlayPause() {
-    guard let player = radioPlayer else { return }
-    player.togglePlayPause()
-  }
-  
-  func refreshStatus() {
+  func viewDidLoad() {
     guard let player = radioPlayer else { return }
     viewState.value = player.state
     
     if case .playing = viewState.value {
       player.refreshOnlineInfo()
     }
+  }
+  
+  func togglePlayPause() {
+    guard let player = radioPlayer else { return }
+    player.togglePlayPause()
   }
   
   func getDescription() -> String {

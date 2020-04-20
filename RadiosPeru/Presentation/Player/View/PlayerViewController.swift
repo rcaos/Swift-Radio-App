@@ -13,6 +13,8 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   
   var viewModel: PlayerViewModel!
   
+  @IBOutlet weak var closeButton: UIButton!
+  
   @IBOutlet weak var stationImageView: UIImageView!
   @IBOutlet weak var stationNameLabel: UILabel!
   @IBOutlet weak var stationDescriptionLabel: UILabel!
@@ -44,11 +46,8 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     setupPlayerView()
     setupGestures()
     setupViewModel()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    viewModel?.refreshStatus()
+    
+    viewModel.viewDidLoad()
   }
   
   // MARK: - ViewModel
@@ -127,6 +126,11 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   // MARK: - Setup UI
   
   func setupUI() {
+    
+    let image = UIImage(named: "btn-close")?.withRenderingMode(.alwaysTemplate)
+    closeButton.setImage(image, for: .normal)
+    closeButton.tintColor = .white
+    
     stationImageView.contentMode = .scaleAspectFit
     
     stationNameLabel.text = ""
