@@ -17,6 +17,7 @@ class GenericTableView: UIView {
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 60
     tableView.backgroundColor = .clear
+    tableView.tableFooterView = UIView()
     return tableView
   }()
   

@@ -79,12 +79,12 @@ final class SettingsViewModel {
   }
   
   fileprivate func getVersionBuildDescription() -> String {
-     let nameApp: String = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
-     let releaseVersionNumber: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-     let buildVersionNumber: String = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
-     
-     return "\(nameApp) \(releaseVersionNumber) (\(buildVersionNumber))"
-   }
+    let nameApp: String = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
+    let releaseVersionNumber: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+    let buildVersionNumber: String = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+    
+    return "\(nameApp) \(releaseVersionNumber) (\(buildVersionNumber))"
+  }
 }
 
 extension SettingsViewModel {
