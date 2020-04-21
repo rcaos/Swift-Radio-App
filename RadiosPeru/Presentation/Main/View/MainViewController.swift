@@ -97,10 +97,11 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
   private func buildViewControllers() -> [UIViewController] {
     
     guard let popularVC = controllersFactory.makePopularViewController(delegate: viewModel) as? PopularViewController else { return [] }
-    popularVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "houseItem"), tag: 0)
+    popularVC.tabBarItem = UITabBarItem(title: "home".localized(), image: UIImage(named: "houseItem"), tag: 0)
     
     guard let favoritesVC = controllersFactory.makeFavoritesViewController(delegate: viewModel) as? FavoritesViewController else { return [] }
     favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+    favoritesVC.tabBarItem.title = "favorites".localized()
     
     return [popularVC, favoritesVC]
   }
@@ -141,7 +142,7 @@ extension MainViewControler {
     case .showSettings:
       
       let settingsVC = controllersFactory.makeSettingsViewController()
-      settingsVC.title = "Settings"
+      settingsVC.title = "settings".localized()
       navigationController?.pushViewController(settingsVC, animated: true)
     }
     

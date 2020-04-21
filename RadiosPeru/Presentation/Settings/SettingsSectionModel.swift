@@ -33,13 +33,13 @@ public enum SettingsType: CustomStringConvertible {
   public var description: String {
     switch self {
     case .sendMessage:
-      return "Send a Message"
+      return "settings.send".localized()
       
     case .rateApp:
-      return "Please Rate Radios Perú"
+      return "settings.rate".localized()
       
     case .privacyPolicy:
-      return "Privacy Policy"
+      return "settings.privacy".localized()
       
     case .version(let versionNumber):
       return versionNumber

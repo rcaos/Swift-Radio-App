@@ -31,7 +31,7 @@ final class SettingsViewModel {
   func viewDidLoad() {
     
     let firstSection = SettingsSectionModel(
-      model: "About",
+      model: "settings.about".localized(),
       items: [
         .sendMessage("jeansruiz.c@gmail.com"),
         .rateApp("https://github.com/rcaos"),
@@ -39,7 +39,7 @@ final class SettingsViewModel {
     ])
     
     let secondSection = SettingsSectionModel(
-      model: "Version",
+      model: "settings.version".localized(),
       items: [
         .version( getVersionBuildDescription() )
     ])
