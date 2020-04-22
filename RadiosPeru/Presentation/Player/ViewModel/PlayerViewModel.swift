@@ -18,17 +18,17 @@ final class PlayerViewModel {
   
   private var stationSelected: StationRemote
   
-  var image: URL?
-  
-  var name: String?
-  
-  var viewState: Bindable<RadioPlayerState> = Bindable(.stopped)
-  
-  var updateUI:(() -> Void)?
-  
-  var isFavorite: Bindable<Bool> = Bindable(false)
+  private let viewStateBehaviorSubject = BehaviorSubject<RadioPlayerState>(value: .stopped)
+  private let isFavoriteBehaviorSubject = BehaviorSubject<Bool>(value: false)
+  private let stationNameBehaviorSubject = BehaviorSubject<String>(value: "Pick a Radio Station")
+  private let stationDescriptionBehaviorSubject = BehaviorSubject<String>(value: "")
+  private let stationURLBehaviorSubject = BehaviorSubject<URL?>(value: nil)
   
   private let disposeBag = DisposeBag()
+  
+  public var input: Input
+  
+  public var output: Output
   
   // MARK: - Initializers
   
@@ -42,6 +42,14 @@ final class PlayerViewModel {
     
     self.stationSelected = station
     self.radioPlayer = player
+    
+    self.input = Input()
+    self.output = Output(viewState: viewStateBehaviorSubject.asObservable(),
+                         isFavorite: isFavoriteBehaviorSubject.asObservable(),
+                         stationName: stationNameBehaviorSubject.asObservable(),
+                         stationDescription: stationDescriptionBehaviorSubject.asObservable(),
+                         stationURL: stationURLBehaviorSubject.asObservable())
+    
     radioPlayer?.addObserver(self)
     
     setupRadio(with: stationSelected)
@@ -54,31 +62,30 @@ final class PlayerViewModel {
   // MARK: - Private
   
   private func setupRadio(with station: StationRemote) {
-    name = station.name
-    image = URL(string: station.pathImage)
+    stationNameBehaviorSubject.onNext(station.name)
+    stationURLBehaviorSubject.onNext( URL(string: station.pathImage))
     checkIsFavorite(with: station)
+    stationDescriptionBehaviorSubject.onNext( getPlayerDescription() )
   }
   
   // MARK: - Public
   
   func viewDidLoad() {
     guard let player = radioPlayer else { return }
-    viewState.value = player.state
+    viewStateBehaviorSubject.onNext(player.state)
     
-    if case .playing = viewState.value {
-      player.refreshOnlineInfo()
-    }
+    viewStateBehaviorSubject
+      .subscribe(onNext: { [player] state in
+        if case .playing = state {
+          player.refreshOnlineInfo()
+        }
+      })
+      .disposed(by: disposeBag)
   }
   
   func togglePlayPause() {
     guard let player = radioPlayer else { return }
     player.togglePlayPause()
-  }
-  
-  func getDescription() -> String {
-    guard let radioPlayer = radioPlayer else { return "" }
-    
-    return radioPlayer.getRadioDescription()
   }
   
   func markAsFavorite() {
@@ -89,7 +96,7 @@ final class PlayerViewModel {
     toggleFavoritesUseCase.execute(requestValue: request)
       .subscribe(onNext: { [weak self] isFavorite in
         guard let strongSelf = self else { return }
-        strongSelf.isFavorite.value = isFavorite
+        strongSelf.isFavoriteBehaviorSubject.onNext(isFavorite)
       })
       .disposed(by: disposeBag)
   }
@@ -103,9 +110,14 @@ final class PlayerViewModel {
     askFavoriteUseCase.execute(requestValue: request)
       .subscribe(onNext: { [weak self] isFavorite in
         guard let strongSelf = self else { return }
-        strongSelf.isFavorite.value = isFavorite
+        strongSelf.isFavoriteBehaviorSubject.onNext(isFavorite)
       })
       .disposed(by: disposeBag)
+  }
+  
+  fileprivate func getPlayerDescription() -> String {
+    guard let radioPlayer = radioPlayer else { return ""}
+    return radioPlayer.getRadioDescription()
   }
 }
 
@@ -114,11 +126,28 @@ final class PlayerViewModel {
 extension PlayerViewModel: RadioPlayerObserver {
   
   func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
-    viewState.value = state
+    viewStateBehaviorSubject.onNext(state)
   }
   
   func radioPlayerDidChangeOnlineInfo(_ radioPlayer: RadioPlayer) {
-    updateUI?()
+    stationDescriptionBehaviorSubject.onNext( getPlayerDescription() )
   }
+}
+
+extension PlayerViewModel {
   
+  public struct Input { }
+  
+  public struct Output {
+    
+    let viewState: Observable<RadioPlayerState>
+    
+    let isFavorite: Observable<Bool>
+    
+    let stationName: Observable<String>
+    
+    let stationDescription: Observable<String>
+    
+    let stationURL: Observable<URL?>
+  }
 }

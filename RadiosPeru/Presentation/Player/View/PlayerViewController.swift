@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import RxSwift
 
 class PlayerViewController: UIViewController, StoryboardInstantiable {
   
@@ -31,6 +32,8 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   
   var interactor: Interactor?
   
+  let disposeBag = DisposeBag()
+  
   static func create(with viewModel: PlayerViewModel) -> PlayerViewController {
     let controller = PlayerViewController.instantiateViewController()
     controller.viewModel = viewModel
@@ -53,45 +56,44 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   // MARK: - ViewModel
   
   func setupViewModel() {
-    setupViewBindables()
     
-    viewModel?.viewState.bind({[weak self] state in
-      DispatchQueue.main.async {
-        self?.configView(with: state)
-      }
-    })
-    
-    viewModel?.updateUI = { [weak self] in
-      DispatchQueue.main.async {
-        self?.setupViewBindables()
-      }
-    }
-    
-    viewModel?.isFavorite.bindAndFire({ [weak self] favorite in
-      DispatchQueue.main.async {
-        if favorite {
-          self?.favoriteButton.setImage( UIImage(named: "btn-favoriteFill"), for: .normal)
-        } else {
-          self?.favoriteButton.setImage( UIImage(named: "btn-favorite"), for: .normal)
+    viewModel.output.viewState
+      .subscribe(onNext: { [weak self] state in
+        DispatchQueue.main.async {
+          self?.configView(with: state)
         }
-      }
-    })
-  }
-  
-  func setupViewBindables() {
-    guard let viewModel = viewModel else { return }
+      })
+      .disposed(by: disposeBag)
     
-    stationImageView.setImage(with: viewModel.image, placeholder: UIImage(named: "radio-default"))
-    stationNameLabel?.text = viewModel.name
-    stationDescriptionLabel?.text = viewModel.getDescription()
+    viewModel.output.stationURL
+      .subscribe(onNext: { [weak self] url in
+        self?.stationImageView.setImage(with: url, placeholder: UIImage(named: "radio-default"))
+        
+      })
+      .disposed(by: disposeBag)
+    
+    viewModel.output.stationName
+      .bind(to: stationNameLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    viewModel.output.stationDescription
+      .bind(to: stationDescriptionLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    viewModel.output.isFavorite
+      .subscribe(onNext: { [weak self] isFavorite in
+        DispatchQueue.main.async {
+          let imageFilled = isFavorite ?
+            UIImage(named: "btn-favoriteFill") : UIImage(named: "btn-favorite")
+          self?.favoriteButton.setImage( imageFilled, for: .normal)
+        }
+      })
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Change for State Enum but from it viewModel
   
   func configView(with state: RadioPlayerState) {
-    stationNameLabel.text = viewModel?.name
-    stationDescriptionLabel.text = viewModel?.getDescription()
-    
     switch state {
     case .stopped, .loading, .buffering, .error:
       playingBarsImage.stopAnimating()

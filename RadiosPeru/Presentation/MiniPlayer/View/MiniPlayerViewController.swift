@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   
@@ -24,6 +25,8 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   private var pauseView: UIView!
   
   var viewModel: MiniPlayerViewModel!
+  
+  let disposeBag = DisposeBag()
   
   static func create(with viewModel: MiniPlayerViewModel) -> MiniPlayerViewController {
     let controller = MiniPlayerViewController.instantiateViewController()
@@ -49,40 +52,36 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   // MARK: - Reactive
   
   private func setupViewModel() {
-    setupViewBindables()
+    viewModel.output.viewState
+      .subscribe(onNext: { [weak self] state in
+        DispatchQueue.main.async {
+          self?.configView(with: state)
+        }
+      })
+      .disposed(by: disposeBag)
     
-    viewModel.viewState.bind({ [weak self] state in
-      DispatchQueue.main.async {
-        self?.configView(with: state)
-      }
-    })
+    viewModel.output.stationName
+      .bind(to: stationNameLabel.rx.text)
+      .disposed(by: disposeBag)
     
-    viewModel.updateUI = { [weak self] in
-      DispatchQueue.main.async {
-        self?.setupViewBindables()
-      }
-    }
+    viewModel.output.stationDescription
+      .bind(to: stationDescriptionLabel.rx.text)
+      .disposed(by: disposeBag)
     
-    viewModel.isFavorite.bind({ [weak self] isFavorite in
-      DispatchQueue.main.async {
-        let imageFilled = isFavorite ?
-          UIImage(named: "btn-favoriteFill") : UIImage(named: "btn-favorite")
-        self?.favoriteButton.setImage( imageFilled, for: .normal)
-      }
-    })
-  }
-  
-  func setupViewBindables() {
-    stationNameLabel.text = viewModel.name
-    stationDescriptionLabel.text = viewModel.getDescription()
+    viewModel.output.isFavorite
+      .subscribe(onNext: { [weak self] isFavorite in
+        DispatchQueue.main.async {
+          let imageFilled = isFavorite ?
+            UIImage(named: "btn-favoriteFill") : UIImage(named: "btn-favorite")
+          self?.favoriteButton.setImage( imageFilled, for: .normal)
+        }
+      })
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Change for State Enum but from it viewModel
   
   func configView(with state: RadioPlayerState) {
-    stationNameLabel.text = viewModel?.name
-    stationDescriptionLabel.text = viewModel?.getDescription()
-    
     switch state {
     case .stopped, .loading, .buffering, .error:
       playingBarsView.stopAnimating()
@@ -172,7 +171,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   }
   
   @objc func handleGestureView(_ sender: UITapGestureRecognizer) {
-    viewModel.showPlayer()
+    viewModel.showFullPlayer()
   }
   
   @objc func handleGestureStack(_ sender: UITapGestureRecognizer) {

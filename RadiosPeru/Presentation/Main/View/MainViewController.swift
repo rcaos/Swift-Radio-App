@@ -45,9 +45,12 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
   }
   
   func setupViewModel() {
-    viewModel.route.bind { [weak self] routing in
-      self?.handle(routing)
-    }
+    
+    viewModel.output.route
+      .subscribe(onNext: { [weak self] routing in
+        self?.handle(routing)
+      })
+      .disposed(by: disposeBag)
     
     viewModel.showMiniPlayer = { [weak self] in
       guard let strongSelf = self else { return }
@@ -75,10 +78,9 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
     navigationItem.rightBarButtonItem = settingsButton
     navigationItem.rightBarButtonItem?.tintColor = .white
     
-    settingsButton.rx
-      .tap.bind { [weak self] in
-        self?.viewModel.route.value = .showSettings
-    }.disposed(by: disposeBag)
+    settingsButton.rx.tap
+      .bind(to: viewModel.input.showSettings)
+      .disposed(by: disposeBag)
   }
   
   private func setupTabBarView() {
