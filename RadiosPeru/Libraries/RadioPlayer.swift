@@ -23,15 +23,7 @@ class RadioPlayer {
   
   private let showDetailsUseCase: FetchShowOnlineInfoUseCase
   
-  var state: RadioPlayerState = .stopped
-  
   private let player = ApiPlayer.shared
-  
-  private var observations = [ObjectIdentifier: Observation]()
-  
-  private var nameSelected: String?
-  
-  private var onlineInfo: String?
   
   private var dataSource: PlayerDataSource? {
     didSet {
@@ -39,63 +31,108 @@ class RadioPlayer {
     }
   }
   
-  private var stationSelected: StationRemote?
+  private let onlineInfoBehaviorSubject: BehaviorSubject<String>
   
-  private let disposeBag = DisposeBag()
+  private var disposeBag = DisposeBag()
   
-  // MARK: - Life Cycle
+  public let statePlayerBehaviorSubject: BehaviorSubject<RadioPlayerState>
+  
+  public let airingNowBehaviorSubject: BehaviorSubject<String>
+  
+  // MARK: - Initializers
   
   init(showDetailsUseCase: FetchShowOnlineInfoUseCase) {
+    statePlayerBehaviorSubject = BehaviorSubject(value: .stopped)
+    airingNowBehaviorSubject = BehaviorSubject(value: "")
+    onlineInfoBehaviorSubject = BehaviorSubject(value: "")
+    
     self.showDetailsUseCase = showDetailsUseCase
     player.delegate = self
   }
   
-  // MARK: - Publics
+  // MARK: - Public
   
   func setupRadio(with station: StationRemote, playWhenReady: Bool = false) {
-    stationSelected = station
-    
-    nameSelected = station.name
+    disposeBag = DisposeBag()
     
     resetRadio()
+    
+    subscribeToState(for: station)
+    subscribeToDescription(for: station)
+    bindToRemoteControls(for: station)
     
     if let url = URL(string: station.urlStream) {
       player.prepare(with: url, playWhenReady: playWhenReady)
     }
-    
-    setupSource(with: station)
-  }
-  
-  func refreshOnlineInfo() {
-    getAiringNowDetails()
   }
   
   func togglePlayPause() {
     player.togglePlayPause()
   }
   
-  func resetRadio() {
+  // MARK: - Private
+  
+  fileprivate func resetRadio() {
     player.stop()
-    onlineInfo = nil
+    onlineInfoBehaviorSubject.onNext("")
   }
   
-  func getRadioDescription() -> String {
+  fileprivate func subscribeToState(for station: StationRemote) {
+    statePlayerBehaviorSubject
+      .subscribe(onNext: { [weak self] state in
+        if case .playing = state {
+          self?.getAiringNowDetails(for: station)
+        }
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  fileprivate func subscribeToDescription(for station: StationRemote) {
+    Observable.combineLatest( statePlayerBehaviorSubject, onlineInfoBehaviorSubject)
+      .flatMap { [weak self] (state, onlineInfo) -> Observable<String> in
+        guard let strongSelf = self else { return Observable.just("") }
+        return Observable.just(
+          strongSelf.buildDescription(for: state, station: station, onlineInfo))
+    }
+    .bind(to: airingNowBehaviorSubject)
+    .disposed(by: disposeBag)
+  }
+  
+  fileprivate func bindToRemoteControls(for station: StationRemote) {
+    let defaultInfo = station.city + " - " +
+      station.frecuency + " - " +
+      station.slogan
     
-    guard let stationSelected = stationSelected else { return "" }
+    onlineInfoBehaviorSubject
+      .subscribe(onNext: { [weak self] onlineInfo in
+        self?.dataSource = PlayerDataSource(title: station.name,
+                                            defaultInfo: defaultInfo,
+                                            onlineNowInfo: onlineInfo,
+                                            artWork: station.pathImage)
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  fileprivate func buildDescription(for state: RadioPlayerState,
+                                    station: StationRemote,
+                                    _ onlineInfo: String) -> String {
+    let defaultDescription =
+      station.city + " - " +
+        station.frecuency + " - " +
+        station.slogan
     
-    let defaultDescription = stationSelected.city + " - " +
-      stationSelected.frecuency + " - " +
-      stationSelected.slogan
+    var onLineDescription = defaultDescription
+    
+    if !onlineInfo.isEmpty {
+      onLineDescription =
+        station.city + " - " +
+        station.frecuency + " - " +
+      onlineInfo
+    }
     
     switch state {
     case .playing, .buffering:
-      if let onlineDescription = onlineInfo, !onlineDescription.isEmpty {
-        return stationSelected.city + " - " +
-          stationSelected.frecuency + " - " +
-        onlineDescription
-      } else {
-        return defaultDescription
-      }
+      return onLineDescription
     case .error(let message):
       return message
     default:
@@ -105,38 +142,20 @@ class RadioPlayer {
   
   // MARK: - Networking
   
-  private func getAiringNowDetails() {
-    guard let stationSelected = stationSelected else { return }
-    
-    let request = FetchShowOnlineInfoUseCaseRequestValue(group: stationSelected.type)
+  private func getAiringNowDetails(for station: StationRemote) {
+    let request = FetchShowOnlineInfoUseCaseRequestValue(group: station.type)
     
     showDetailsUseCase.execute(requestValue: request)
       .subscribe(onNext: { [weak self] showDetail in
         guard let strongSelf = self else { return }
-        strongSelf.processResponse(for: showDetail)
+        strongSelf.onlineInfoBehaviorSubject.onNext(showDetail.name)
+        
         }, onError: { [weak self] error in
           guard let strongSelf = self else { return }
           print("Error to get online Description: \(error)")
-          strongSelf.onlineInfo = ""
-          strongSelf.setupSource(with: stationSelected)
+          strongSelf.onlineInfoBehaviorSubject.onNext("")
       })
       .disposed(by: disposeBag)
-  }
-  
-  private func processResponse(for show: Show) {
-    onlineInfo = show.name
-    changeOnlineInfo()
-    
-    guard let stationSelected = stationSelected else { return }
-    setupSource(with: stationSelected)
-  }
-  
-  private func setupSource(with selected: StationRemote) {
-    let defaultInfo = selected.city + " - " +
-      selected.frecuency + " - " +
-      selected.slogan
-    
-    dataSource = PlayerDataSource(title: selected.name, defaultInfo: defaultInfo, onlineNowInfo: self.onlineInfo, artWork: selected.pathImage)
   }
 }
 
@@ -145,6 +164,10 @@ class RadioPlayer {
 extension RadioPlayer: ApiPlayerDelegate {
   
   func apiPlayerDelegate(didChangeState state: ApiPlayerState) {
+    statePlayerBehaviorSubject.onNext( mapState(with: state) )
+  }
+  
+  fileprivate func mapState(with state: ApiPlayerState) -> RadioPlayerState {
     let radioState: RadioPlayerState
     
     switch state {
@@ -159,61 +182,7 @@ extension RadioPlayer: ApiPlayerDelegate {
     default :
       radioState = .stopped
     }
-    print("Change ApiPlayer State: \(state). Informo con: \(radioState)")
     
-    self.state = radioState
-    
-    stateDidChange(with: radioState)
-    
-    if case .playing = radioState {
-      getAiringNowDetails()
-    }
-  }
-}
-
-private extension RadioPlayer {
-  
-  struct Observation {
-    weak var observer: RadioPlayerObserver?
-  }
-}
-
-// MARK: - Notify to all Observers
-
-private extension RadioPlayer {
-  
-  func stateDidChange(with state: RadioPlayerState) {
-    for(id, observation) in observations {
-      guard let observer = observation.observer else {
-        observations.removeValue(forKey: id)
-        continue
-      }
-      observer.radioPlayer(self, didChangeState: state)
-    }
-  }
-  
-  func changeOnlineInfo( ) {
-    for(id, observation) in observations {
-      guard let observer = observation.observer else {
-        observations.removeValue(forKey: id)
-        continue
-      }
-      observer.radioPlayerDidChangeOnlineInfo(self)
-    }
-  }
-}
-
-// MARK: - Suscribe/ Unsuscribe
-
-extension RadioPlayer {
-  
-  func addObserver(_ observer: RadioPlayerObserver) {
-    let id = ObjectIdentifier(observer)
-    observations[id] = Observation(observer: observer)
-  }
-  
-  func removeObserver(_ observer: RadioPlayerObserver) {
-    let id = ObjectIdentifier(observer)
-    observations.removeValue(forKey: id)
+    return radioState
   }
 }

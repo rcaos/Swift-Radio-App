@@ -50,13 +50,7 @@ final class PlayerViewModel {
                          stationDescription: stationDescriptionBehaviorSubject.asObservable(),
                          stationURL: stationURLBehaviorSubject.asObservable())
     
-    radioPlayer?.addObserver(self)
-    
     setupRadio(with: stationSelected)
-  }
-  
-  deinit {
-    radioPlayer?.removeObserver(self)
   }
   
   // MARK: - Private
@@ -65,23 +59,22 @@ final class PlayerViewModel {
     stationNameBehaviorSubject.onNext(station.name)
     stationURLBehaviorSubject.onNext( URL(string: station.pathImage))
     checkIsFavorite(with: station)
-    stationDescriptionBehaviorSubject.onNext( getPlayerDescription() )
+    subscribe(to: radioPlayer)
+  }
+  
+  private func subscribe(to radioPlayer: RadioPlayer?) {
+    guard let radioPlayer = radioPlayer else { return }
+    
+    radioPlayer.statePlayerBehaviorSubject
+      .bind(to: viewStateBehaviorSubject)
+      .disposed(by: disposeBag)
+    
+    radioPlayer.airingNowBehaviorSubject
+      .bind(to: stationDescriptionBehaviorSubject)
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Public
-  
-  func viewDidLoad() {
-    guard let player = radioPlayer else { return }
-    viewStateBehaviorSubject.onNext(player.state)
-    
-    viewStateBehaviorSubject
-      .subscribe(onNext: { [player] state in
-        if case .playing = state {
-          player.refreshOnlineInfo()
-        }
-      })
-      .disposed(by: disposeBag)
-  }
   
   func togglePlayPause() {
     guard let player = radioPlayer else { return }
@@ -113,24 +106,6 @@ final class PlayerViewModel {
         strongSelf.isFavoriteBehaviorSubject.onNext(isFavorite)
       })
       .disposed(by: disposeBag)
-  }
-  
-  fileprivate func getPlayerDescription() -> String {
-    guard let radioPlayer = radioPlayer else { return ""}
-    return radioPlayer.getRadioDescription()
-  }
-}
-
-// MARK: - RadioPlayerObserver
-
-extension PlayerViewModel: RadioPlayerObserver {
-  
-  func radioPlayer(_ radioPlayer: RadioPlayer, didChangeState state: RadioPlayerState) {
-    viewStateBehaviorSubject.onNext(state)
-  }
-  
-  func radioPlayerDidChangeOnlineInfo(_ radioPlayer: RadioPlayer) {
-    stationDescriptionBehaviorSubject.onNext( getPlayerDescription() )
   }
 }
 

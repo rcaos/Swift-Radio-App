@@ -32,7 +32,7 @@ class ApiPlayer: NSObject {
   
   weak var delegate: ApiPlayerDelegate?
   
-  var status: ApiPlayerState = .initial {
+  private var status: ApiPlayerState = .initial {
     didSet {
       delegate?.apiPlayerDelegate(didChangeState: status)
       updateNowPlayingInfo()
