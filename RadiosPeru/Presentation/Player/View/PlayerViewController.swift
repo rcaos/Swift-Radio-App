@@ -49,8 +49,6 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     setupPlayerView()
     setupGestures()
     setupViewModel()
-    
-    viewModel.viewDidLoad()
   }
   
   // MARK: - ViewModel

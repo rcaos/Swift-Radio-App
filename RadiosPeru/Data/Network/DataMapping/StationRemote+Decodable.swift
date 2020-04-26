@@ -14,7 +14,6 @@ extension StationRemote: Decodable {
     case id
     case name
     case order
-    case image
     case city
     case frecuency
     case slogan
