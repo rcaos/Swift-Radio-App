@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 final class AppDIContainer {
   
@@ -16,6 +17,11 @@ final class AppDIContainer {
   
   lazy var localClient: DataTransferService = {
     return LocalClient(pathLocalFile: "stations", extensionLocalFile: "json")
+  }()
+  
+  lazy var fireStoreClient: DataTransferService = {
+    FirebaseApp.configure()
+    return FireStoreClient(stationsCollection: "stations")
   }()
   
   lazy var localStorage = CoreDataStorage(maxStorageLimit: 10)

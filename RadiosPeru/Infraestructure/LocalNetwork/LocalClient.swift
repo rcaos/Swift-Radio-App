@@ -28,6 +28,7 @@ extension LocalClient: DataTransferService {
       forResource: self.pathLocalFile,
       withExtension: self.extensionLocalFile) {
       do {
+        print("Reading Local file: \(self.pathLocalFile).\(self.extensionLocalFile)")
         let data = try Data(contentsOf: filePathURL)
         
         let decoder = JSONDecoder()
