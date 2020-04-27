@@ -21,6 +21,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var stationDescriptionLabel: UILabel!
   
   @IBOutlet weak var volumeStackView: UIStackView!
+  var volumeView: MPVolumeView!
   
   @IBOutlet weak var playingBarsImage: UIImageView!
   @IBOutlet weak var playerStackView: UIStackView!
@@ -141,18 +142,14 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     stationDescriptionLabel.textColor = .lightGray
     stationDescriptionLabel.font = Font.proximaNova.of(type: .regular, with: .normal)
     
-    // MARK: - Moved to Generic View, do not import MediaPlayer
-    let mpVolumenView = MPVolumeView(frame: volumeStackView.bounds)
-    for currentView in mpVolumenView.subviews {
-      if currentView.isKind(of: UISlider.self) {
-        let tempSlider = currentView as! UISlider
-        tempSlider.minimumTrackTintColor = UIColor.white
-        tempSlider.maximumTrackTintColor = UIColor.darkGray
+    volumeView = MPVolumeView(frame: volumeStackView.frame)
+    volumeView.subviews.forEach {
+      if let childSlider = $0 as? UISlider {
+        childSlider.minimumTrackTintColor = .white
+        childSlider.maximumTrackTintColor = .darkGray
+        volumeStackView.addArrangedSubview(childSlider)
       }
     }
-    mpVolumenView.showsRouteButton = false
-    mpVolumenView.showsVolumeSlider = true
-    volumeStackView.addArrangedSubview(mpVolumenView)
     
     playingBarsImage.image = UIImage(named: "NowPlayingBars-2")
     playingBarsImage.autoresizingMask = []
