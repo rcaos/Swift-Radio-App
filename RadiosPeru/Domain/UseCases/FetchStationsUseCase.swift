@@ -10,7 +10,7 @@ import RxSwift
 
 protocol FetchStationsUseCase {
   
-  func execute(requestValue: FetchStationsUseCaseRequestValue) -> Observable<StationResult>
+  func execute(requestValue: FetchStationsUseCaseRequestValue) -> Observable<[StationRemote]>
 }
 
 struct FetchStationsUseCaseRequestValue {
@@ -27,12 +27,12 @@ final class DefaultFetchStationsUseCase: FetchStationsUseCase {
     self.stationsLocalRepository = stationsLocalRepository
   }
   
-  func execute(requestValue: FetchStationsUseCaseRequestValue)-> Observable<StationResult> {
+  func execute(requestValue: FetchStationsUseCaseRequestValue)-> Observable<[StationRemote]> {
     return stationsRepository.stationsList()
-      .flatMap { results -> Observable<StationResult> in
-        self.stationsLocalRepository.saveStations(stations: results.stations)
-          .flatMap { _ -> Observable<StationResult> in
-            return Observable.just(results)
+      .flatMap { stations -> Observable<[StationRemote]> in
+        self.stationsLocalRepository.saveStations(stations: stations)
+          .flatMap { _ -> Observable<[StationRemote]> in
+            return Observable.just(stations)
         }
     }
   }

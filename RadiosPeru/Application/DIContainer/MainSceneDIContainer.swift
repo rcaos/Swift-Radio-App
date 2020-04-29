@@ -14,6 +14,7 @@ final class MainSceneDIContainer {
     let dataTransferService: DataTransferService
     let stationsLocalStorage: StationsLocalStorage
     let favoritesLocalStorage: FavoritesLocalStorage
+    let backendTransferService: TransferServiceProtocol?
   }
   
   private let dependencies: Dependencies
@@ -84,7 +85,8 @@ extension MainSceneDIContainer {
   }
   
   private func makeRadioPlayer() -> RadioPlayer {
-    return RadioPlayer(showDetailsUseCase: makeShowDetailsUseCase())
+    return RadioPlayer(showDetailsUseCase: makeShowDetailsUseCase(),
+                       saveStreamErrorUseCase: makeSaveStationErrorsUseCase())
   }
   
   private func makeShowDetailsUseCase() -> FetchShowOnlineInfoUseCase {
@@ -93,6 +95,18 @@ extension MainSceneDIContainer {
   
   private func makeShowDetailsRepository() -> ShowDetailsRepository {
     return DefaultShowDetailsRepository(dataTransferService: dependencies.dataTransferService)
+  }
+  
+  private func makeSaveStationErrorsUseCase() -> SaveStationStreamError? {
+    if let repository = dependencies.backendTransferService {
+      return DefaultSaveStationError(eventsRepository: makeEventsRepository( with: repository ))
+    } else {
+      return nil
+    }
+  }
+  
+  private func makeEventsRepository(with repository: TransferServiceProtocol) -> EventsRepository {
+    return DefaultEventsRepository(dataTransferService: repository)
   }
 }
 

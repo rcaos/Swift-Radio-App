@@ -10,5 +10,5 @@ import RxSwift
 
 protocol StationsRepository {
   
-  func stationsList() -> Observable<StationResult>
+  func stationsList() -> Observable<[StationRemote]>
 }

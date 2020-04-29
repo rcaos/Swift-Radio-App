@@ -21,9 +21,9 @@ final class DefaultStationsRepository {
 
 extension DefaultStationsRepository: StationsRepository {
   
-  func stationsList() -> Observable<StationResult> {
+  func stationsList() -> Observable<[StationRemote]> {
     let endPoint = StationProvider.getAll
     
-    return dataTransferService.request(endPoint, StationResult.self)
+    return dataTransferService.request(endPoint, [StationRemote].self)
   }
 }

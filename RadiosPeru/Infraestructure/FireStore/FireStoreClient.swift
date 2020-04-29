@@ -20,16 +20,33 @@ class FireStoreClient {
   
 }
 
-// MARK: - DataTransferService
-
-extension FireStoreClient: DataTransferService {
+extension FireStoreClient {
   
-  func request<Element>(_ router: EndPoint, _ decodingType: Element.Type) -> Observable<Element> where Element: Decodable {
-    return Observable<Element>.create { [unowned self] (event) -> Disposable in
+  fileprivate func processDocuments<Element>(documents: [QueryDocumentSnapshot]) -> [Element] where Element: Decodable {
+    var results: [Element] = []
+    
+    do {
+      results = try documents.compactMap {
+        try $0.data(as: Element.self)
+      }
+    } catch let error {
+      print("Error to read entitie: \(error)")
+    }
+    
+    return results
+  }
+}
+
+// MARK: - TransferServiceProtocol
+
+extension FireStoreClient: TransferServiceProtocol {
+  
+  func request<Element>(path: String, type: Element.Type) -> Observable<[Element]> where Element: Decodable {
+    return Observable<[Element]>.create { [unowned self] (event) -> Disposable in
       
       let disposable = Disposables.create()
       
-      Firestore.firestore().collection(self.stationsCollection).getDocuments { [weak self] (querySnapshot, err) in
+      Firestore.firestore().collection(path).getDocuments { [weak self] (querySnapshot, err) in
         guard let strongSelf = self else {
           event.onCompleted()
           return
@@ -40,13 +57,10 @@ extension FireStoreClient: DataTransferService {
         } else {
           
           if let documents = querySnapshot?.documents {
-            let stations = strongSelf.processDocuments(documents: documents)
+            let entities: [Element] = strongSelf.processDocuments(documents: documents)
             
-            print("Readed \(stations.count) stations from FireStore")
-            if let result = StationResult(stations: stations) as? Element {
-              event.onNext( result )
-            }
-            
+            print("Readed \(entities.count) Entities from FireStore")
+            event.onNext( entities )
           }
           
           event.onCompleted()
@@ -56,17 +70,43 @@ extension FireStoreClient: DataTransferService {
     }
   }
   
-  fileprivate func processDocuments(documents: [QueryDocumentSnapshot]) -> [StationRemote] {
-    var results: [StationRemote] = []
-    
-    do {
-      results = try documents.compactMap {
-        try $0.data(as: StationRemote.self)
+  func save<Element>(path: String, _ entitie: Element, _ id: String?) -> Observable<String> where Element: Encodable {
+        return Observable<String>.create { (event) -> Disposable in
+      
+      let disposable = Disposables.create()
+      
+      do {
+        var documentRef: DocumentReference?
+        try documentRef = Firestore.firestore().collection(path).addDocument(from: entitie) { error in
+          if let error = error {
+            event.onError(error)
+          } else if let id = documentRef?.documentID {
+            event.onNext(id)
+          }
+          event.onCompleted()
+        }
+      } catch let error {
+        event.onError(error)
       }
-    } catch let error {
-      print("Error to read Station: \(error)")
+      
+      return disposable
     }
-    
-    return results
+  }
+}
+
+// MARK: - DataTransferService
+
+extension FireStoreClient: DataTransferService {
+  
+  func request<Element>(_ router: EndPoint, _ type: Element.Type) -> Observable<Element> where Element: Decodable {
+    return request(path: stationsCollection, type: StationRemote.self)
+      .flatMap { result -> Observable<Element> in
+        if let isTypeElement = result as? Element {
+          return Observable.just( isTypeElement )
+        } else {
+          return Observable.empty()
+        }
+        
+    }
   }
 }

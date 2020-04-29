@@ -23,6 +23,8 @@ class RadioPlayer {
   
   private let showDetailsUseCase: FetchShowOnlineInfoUseCase
   
+  private let saveStreamErrorUseCase: SaveStationStreamError?
+  
   private let player = ApiPlayer.shared
   
   private var dataSource: PlayerDataSource? {
@@ -41,12 +43,14 @@ class RadioPlayer {
   
   // MARK: - Initializers
   
-  init(showDetailsUseCase: FetchShowOnlineInfoUseCase) {
+  init(showDetailsUseCase: FetchShowOnlineInfoUseCase,
+       saveStreamErrorUseCase: SaveStationStreamError?) {
     statePlayerBehaviorSubject = BehaviorSubject(value: .stopped)
     airingNowBehaviorSubject = BehaviorSubject(value: "")
     onlineInfoBehaviorSubject = BehaviorSubject(value: "")
     
     self.showDetailsUseCase = showDetailsUseCase
+    self.saveStreamErrorUseCase = saveStreamErrorUseCase
     player.delegate = self
   }
   
@@ -80,9 +84,32 @@ class RadioPlayer {
   fileprivate func subscribeToState(for station: StationRemote) {
     statePlayerBehaviorSubject
       .subscribe(onNext: { [weak self] state in
-        if case .playing = state {
+        switch state {
+        case .playing:
           self?.getAiringNowDetails(for: station)
+        case .error(let error):
+          self?.handleError(for: station, error: error)
+        default:
+          break
         }
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  fileprivate func handleError(for station: StationRemote, error: String) {
+    let event = Event(radioId: station.id,
+                      radioName: station.name,
+                      urlStream: station.urlStream,
+                      description: error,
+                      date: Date(),
+                      uuid: UIDevice.current.identifierForVendor?.uuidString)
+    let request = SaveStationErrorUseCaseRequestValue(event: event)
+    
+    saveStreamErrorUseCase?.execute(requestValue: request)
+      .subscribe(onNext: { id in
+        print("save sucessfull: \(id)")
+      }, onDisposed: {
+        print("finish save_error")
       })
       .disposed(by: disposeBag)
   }
