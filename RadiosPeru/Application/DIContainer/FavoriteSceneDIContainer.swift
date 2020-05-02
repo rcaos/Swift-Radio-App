@@ -13,6 +13,7 @@ final class FavoriteSceneDIContainer {
   struct Dependencies {
     let stationsLocalStorage: StationsLocalStorage
     let favoritesLocalStorage: FavoritesLocalStorage
+    let analyticsService: AnalyticsServiceProtocol
   }
   
   private let dependencies: Dependencies
@@ -49,7 +50,9 @@ extension FavoriteSceneDIContainer {
   }
   
   private func makeFavoritesRepository() -> FavoritesRepository {
-    return DefaultFavoritesRepository(favoritesPersistentStorage: dependencies.favoritesLocalStorage)
+    return DefaultFavoritesRepository(
+      favoritesPersistentStorage: dependencies.favoritesLocalStorage,
+      analyticsRepository: DefaultAnalyticsRepository(analyticsService: dependencies.analyticsService) )
   }
   
   private func makeStationsLocalRepository() -> StationsLocalRepository {

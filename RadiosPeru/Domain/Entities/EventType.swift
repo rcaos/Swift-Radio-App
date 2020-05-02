@@ -12,4 +12,7 @@ public enum EventsType: String {
   
   case stationPlaying = "station_playing"
   
+  case addFavorite = "add_favorite"
+  
+  case removeFavorite = "remove_favorite"
 }

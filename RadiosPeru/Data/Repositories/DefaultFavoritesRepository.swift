@@ -11,9 +11,11 @@ import RxSwift
 final class DefaultFavoritesRepository {
   
   private var favoritesPersistentStorage: FavoritesLocalStorage
+  private let analyticsRepository: AnalyticsRepository
   
-  init(favoritesPersistentStorage: FavoritesLocalStorage) {
+  init(favoritesPersistentStorage: FavoritesLocalStorage, analyticsRepository: AnalyticsRepository) {
     self.favoritesPersistentStorage = favoritesPersistentStorage
+    self.analyticsRepository = analyticsRepository
   }
 }
 
@@ -24,7 +26,18 @@ extension DefaultFavoritesRepository: FavoritesRepository {
   }
   
   func toogleFavorite(station: SimpleStation) -> Observable<Bool> {
-    favoritesPersistentStorage.toogleFavorite(station: station)
+    return
+      favoritesPersistentStorage.toogleFavorite(station: station)
+        .do(onNext: { [weak self] result in
+          guard let strongSelf = self else { return }
+          let event = EventFavorite(statioName: station.name)
+          
+          if result {
+            _ = strongSelf.analyticsRepository.addFavorite(event: event)
+          } else {
+            _ = strongSelf.analyticsRepository.removeFavorite(event: event)
+          }
+        })
   }
   
   func favoritesList() -> Observable<[SimpleStation]> {

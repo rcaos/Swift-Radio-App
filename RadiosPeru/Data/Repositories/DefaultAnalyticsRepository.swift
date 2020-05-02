@@ -24,4 +24,12 @@ extension DefaultAnalyticsRepository: AnalyticsRepository {
     return analyticsService.logEvent(type: EventsType.stationPlaying,
                                      values: event.event.asDictionary)
   }
+  
+  func addFavorite(event: EventFavorite) -> Observable<Void> {
+    return analyticsService.logEvent(type: EventsType.addFavorite, values: event.asDictionary)
+  }
+  
+  func removeFavorite(event: EventFavorite) -> Observable<Void> {
+    return analyticsService.logEvent(type: EventsType.removeFavorite, values: event.asDictionary)
+  }
 }

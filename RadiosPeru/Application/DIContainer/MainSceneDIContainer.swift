@@ -44,7 +44,8 @@ final class MainSceneDIContainer {
   public func makeFavoritesViewController(delegate: FavoritesViewModelDelegate) -> UIViewController {
     let favoriteDependencies = FavoriteSceneDIContainer.Dependencies(
       stationsLocalStorage: dependencies.stationsLocalStorage,
-      favoritesLocalStorage: dependencies.favoritesLocalStorage)
+      favoritesLocalStorage: dependencies.favoritesLocalStorage,
+      analyticsService: dependencies.analyticsService)
     
     return FavoriteSceneDIContainer(dependencies: favoriteDependencies).makeFavoriteViewController(delegate: delegate)
   }
@@ -52,7 +53,8 @@ final class MainSceneDIContainer {
   public func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> UIViewController {
     let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(
       favoritesLocalStorage: dependencies.favoritesLocalStorage,
-      radioPlayer: self.radioPlayer)
+      radioPlayer: self.radioPlayer,
+      analyticsService: dependencies.analyticsService)
     
     return MiniPlayerSceneDIContainer(dependencies: miniPlayerDependencies).makeMiniPlayerViewController(with: viewModel, delegate: delegate)
   }
@@ -60,7 +62,8 @@ final class MainSceneDIContainer {
   public func makePlayerViewController(with station: StationRemote) -> UIViewController {
     let playerDependencies = PlayerSceneDIContainer.Dependencies(
       favoritesLocalStorage: dependencies.favoritesLocalStorage,
-      radioPlayer: self.radioPlayer)
+      radioPlayer: self.radioPlayer,
+      analyticsService: dependencies.analyticsService)
     
     return PlayerSceneDIContainer.init(dependencies: playerDependencies).makeMiniPlayerViewController(with: station)
   }
@@ -78,7 +81,8 @@ extension MainSceneDIContainer {
   private func makeMainViewModel() -> MainViewModel {
     let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(
       favoritesLocalStorage: dependencies.favoritesLocalStorage,
-      radioPlayer: self.radioPlayer)
+      radioPlayer: self.radioPlayer,
+      analyticsService: dependencies.analyticsService)
     
     let miniPlayerViewModel = MiniPlayerSceneDIContainer(dependencies: miniPlayerDependencies) .makeMiniPlayerViewModel()
     
