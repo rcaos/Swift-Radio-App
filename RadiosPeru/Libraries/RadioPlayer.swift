@@ -10,7 +10,7 @@ import RxSwift
 
 // MARK: - Visual States
 
-enum RadioPlayerState {
+enum RadioPlayerState: Equatable {
   
   case stopped
   case loading
@@ -24,6 +24,8 @@ class RadioPlayer {
   private let showDetailsUseCase: FetchShowOnlineInfoUseCase
   
   private let saveStreamErrorUseCase: SaveStationStreamError?
+  
+  private let savePlayingEventUseCase: SavePlayingEventUseCase
   
   private let player = ApiPlayer.shared
   
@@ -44,23 +46,27 @@ class RadioPlayer {
   // MARK: - Initializers
   
   init(showDetailsUseCase: FetchShowOnlineInfoUseCase,
-       saveStreamErrorUseCase: SaveStationStreamError?) {
+       saveStreamErrorUseCase: SaveStationStreamError?,
+       savePlayingEventUseCase: SavePlayingEventUseCase) {
     statePlayerBehaviorSubject = BehaviorSubject(value: .stopped)
     airingNowBehaviorSubject = BehaviorSubject(value: "")
     onlineInfoBehaviorSubject = BehaviorSubject(value: "")
     
     self.showDetailsUseCase = showDetailsUseCase
     self.saveStreamErrorUseCase = saveStreamErrorUseCase
+    self.savePlayingEventUseCase = savePlayingEventUseCase
     player.delegate = self
   }
   
   // MARK: - Public
   
   func setupRadio(with station: StationRemote, playWhenReady: Bool = false) {
+    statePlayerBehaviorSubject.onNext(.stopped)
     disposeBag = DisposeBag()
     
     resetRadio()
     
+    trackPlayEvent(for: station)
     subscribeToState(for: station)
     subscribeToDescription(for: station)
     bindToRemoteControls(for: station)
@@ -182,6 +188,41 @@ class RadioPlayer {
           print("Error to get online Description: \(error)")
           strongSelf.onlineInfoBehaviorSubject.onNext("")
       })
+      .disposed(by: disposeBag)
+  }
+  
+  // MARK: - Log Events
+  
+  fileprivate func trackPlayEvent(for station: StationRemote) {
+    statePlayerBehaviorSubject
+      .distinctUntilChanged()
+      .scan(EventPlay.empty, accumulator: { (old, new) -> EventPlay? in
+        switch new {
+        case .playing:
+          return EventPlay(stationName: station.name, start: Date(), end: Date())
+        case .stopped:
+          guard let oldValue = old  else { return nil }
+          return EventPlay(stationName: oldValue.stationName, start: oldValue.start, end: Date())
+        case .error:
+          guard let oldValue = old else { return nil }
+          return EventPlay(stationName: oldValue.stationName, start: oldValue.start, end: Date())
+        default:
+          return nil
+        }
+      })
+      .filter { if let event = $0, !event.stationName.isEmpty, event.seconds > 0 {
+        return true
+      } else {
+        return false
+        }
+    }
+    .map { [weak self] event -> Observable<Void> in
+      guard let strongSelf = self, let event = event else { return Observable.just(()) }
+      let request = SavePlayingEventUseCaseRequestValue(event: event)
+      return strongSelf.savePlayingEventUseCase.execute(requestValue: request)
+    }
+    .subscribe(onNext: { _ in
+    })
       .disposed(by: disposeBag)
   }
 }

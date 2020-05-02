@@ -16,4 +16,5 @@ target 'RadiosPeru' do
 
 	pod 'Firebase/Firestore'
 	pod 'FirebaseFirestoreSwift', '~> 0.2'
+  pod 'Firebase/Analytics'
 end

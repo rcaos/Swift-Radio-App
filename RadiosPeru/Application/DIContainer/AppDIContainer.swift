@@ -29,6 +29,11 @@ final class AppDIContainer {
 //    return FireStoreClient(stationsCollection: "stations")
 //  }()
   
+  lazy var analyticsClient: AnalyticsClient = {
+    FirebaseApp.configure()
+    return AnalyticsClient()
+  }()
+  
   lazy var localStorage = CoreDataStorage(maxStorageLimit: 10)
   
   lazy var stationsLocalStorage: StationsLocalStorage = DefaultStationsLocalStorage(coreDataStack: localStorage)
@@ -54,7 +59,8 @@ extension AppDIContainer {
       dataTransferService: dataTransferService,
       stationsLocalStorage: stationsLocalStorage,
       favoritesLocalStorage: favoritesLocalStorage,
-      backendTransferService: fireStoreClient)
+      backendTransferService: fireStoreClient,
+      analyticsService: analyticsClient)
     
     return MainSceneDIContainer(dependencies: dependencies)
   }
