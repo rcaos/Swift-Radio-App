@@ -49,6 +49,7 @@ class FavoritesViewController: UIViewController {
     
     genericTableView.tableView.register(nibName, forCellReuseIdentifier: reuseIdentifier)
     genericTableView.tableView.backgroundColor = .black
+    genericTableView.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
     
     self.view = genericTableView
   }

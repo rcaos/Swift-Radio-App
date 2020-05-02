@@ -49,6 +49,7 @@ class PopularViewController: UIViewController {
   func setupCollection() {
     let nibName = UINib(nibName: "PopularViewCell", bundle: nil)
     customView.collectionView.register(nibName, forCellWithReuseIdentifier: reuseIdentifier)
+    customView.collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
   }
   
   func setupBindables() {
