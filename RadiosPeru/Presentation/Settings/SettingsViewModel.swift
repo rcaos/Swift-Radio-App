@@ -34,8 +34,7 @@ final class SettingsViewModel {
       model: "settings.about".localized(),
       items: [
         .sendMessage("jeansruiz.c@gmail.com"),
-        .rateApp("https://github.com/rcaos"),
-        .privacyPolicy("https://github.com/rcaos")
+        .privacyPolicy("https://radio-player-peru.flycricket.io/privacy.html")
     ])
     
     let secondSection = SettingsSectionModel(
