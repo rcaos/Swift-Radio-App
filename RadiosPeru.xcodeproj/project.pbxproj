@@ -3,14 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E666E952AA3BE4C4DF78408 /* libPods-RadiosPeru.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9211BC5CB594D1905BA53B35 /* libPods-RadiosPeru.a */; };
 		770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282D9235C08AC000098DB /* MiniPlayerViewController.swift */; };
 		770282DC235C08B9000098DB /* MiniPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */; };
-		770282DF235C27A7000098DB /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770282DE235C27A7000098DB /* Bindable.swift */; };
 		770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770A6BFA23687AF400FDE4F6 /* GroupCRPProvider.swift */; };
 		770A6BFF2368978500FDE4F6 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770A6BFE2368978500FDE4F6 /* Show.swift */; };
 		771B23D1244A61A900260E97 /* stations.json in Resources */ = {isa = PBXBuildFile; fileRef = 771B23D0244A61A900260E97 /* stations.json */; };
@@ -29,6 +27,9 @@
 		77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1B2358FEE700A23C79 /* Assets.xcassets */; };
 		77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */; };
 		77421B2C2359116600A23C79 /* PlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B2B2359116600A23C79 /* PlayerViewController.storyboard */; };
+		77435120245E74EB00345320 /* GoogleService-Info.DEV.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7743511E245E74EB00345320 /* GoogleService-Info.DEV.plist */; };
+		77435121245E74EB00345320 /* GoogleService-Info.PROD.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7743511F245E74EB00345320 /* GoogleService-Info.PROD.plist */; };
+		7744852D245D6364009F8865 /* EventFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7744852C245D6364009F8865 /* EventFavorite.swift */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774778D92444CA780020245A /* UIImageView+Kingfisher.swift */; };
 		774F0CA023721555002852C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0C9F23721555002852C3 /* MainViewController.swift */; };
@@ -39,6 +40,10 @@
 		7755B52D235A144F004E642B /* PopularViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B52B235A144F004E642B /* PopularViewCell.swift */; };
 		7755B52E235A144F004E642B /* PopularViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7755B52C235A144F004E642B /* PopularViewCell.xib */; };
 		7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755B52F235A15D2004E642B /* PopularCellViewModel.swift */; };
+		776FE68E24599E77000604A0 /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776FE68D24599E77000604A0 /* EventsRepository.swift */; };
+		776FE69024599FA2000604A0 /* DefaultEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776FE68F24599FA2000604A0 /* DefaultEventsRepository.swift */; };
+		776FE6982459BB2C000604A0 /* TransferServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776FE6972459BB2C000604A0 /* TransferServiceProtocol.swift */; };
+		776FE69A2459BFCE000604A0 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776FE6992459BFCE000604A0 /* Event.swift */; };
 		7772943023DE5EEA008F5305 /* MiniPlayerSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7772942F23DE5EEA008F5305 /* MiniPlayerSceneDIContainer.swift */; };
 		7772943223DE6319008F5305 /* PlayerSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7772943123DE6319008F5305 /* PlayerSceneDIContainer.swift */; };
 		7778B159244C17CD00FDB767 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7778B158244C17CD00FDB767 /* ColorPalette.swift */; };
@@ -52,8 +57,18 @@
 		777AF538244C02770004EB87 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 777AF537244C02770004EB87 /* ProximaNova-Bold.otf */; };
 		777CEDCB23D90C6500FCD04B /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777CEDCA23D90C6500FCD04B /* StoryboardInstantiable.swift */; };
 		777CEDCD23D90C6F00FCD04B /* SimpleViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */; };
+		7785AF7A24590DEA003D5238 /* SaveStationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7785AF7924590DEA003D5238 /* SaveStationError.swift */; };
+		778A96682459EC3100F2E17C /* Event+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778A96672459EC3100F2E17C /* Event+Encodable.swift */; };
+		779359E02455563B00F4C332 /* FireStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779359DF2455563B00F4C332 /* FireStoreClient.swift */; };
 		77964891235A569900813C48 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77964890235A569900813C48 /* PlayerViewModel.swift */; };
 		779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DF55F23634D8C001F034F /* LoadingPlayerView.swift */; };
+		779ECA9F245D4DA100987EE7 /* EventPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECA9E245D4DA100987EE7 /* EventPlay.swift */; };
+		779ECAA1245D4F2B00987EE7 /* SavePlayingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAA0245D4F2B00987EE7 /* SavePlayingEvent.swift */; };
+		779ECAA3245D4FA900987EE7 /* AnalyticsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAA2245D4FA800987EE7 /* AnalyticsRepository.swift */; };
+		779ECAA5245D503800987EE7 /* DefaultAnalyticsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAA4245D503800987EE7 /* DefaultAnalyticsRepository.swift */; };
+		779ECAA7245D507900987EE7 /* AnalyticsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAA6245D507900987EE7 /* AnalyticsServiceProtocol.swift */; };
+		779ECAAA245D50A200987EE7 /* AnalyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAA9245D50A200987EE7 /* AnalyticsClient.swift */; };
+		779ECAAC245D51A400987EE7 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAAB245D51A400987EE7 /* EventType.swift */; };
 		77A00848244E6B960024A3ED /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77A0084A244E6B960024A3ED /* Localizable.strings */; };
 		77A0084E244E749A0024A3ED /* String+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A0084D244E749A0024A3ED /* String+Localizable.swift */; };
 		77A1432D24450DFE003EF18A /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A1432C24450DFE003EF18A /* Managed.swift */; };
@@ -78,7 +93,6 @@
 		77B957B523DC188300220426 /* SimpleStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B423DC188300220426 /* SimpleStation.swift */; };
 		77B957B923DC19DD00220426 /* StationFavoriteCD+Mappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B823DC19DD00220426 /* StationFavoriteCD+Mappings.swift */; };
 		77B957BD23DC1D0500220426 /* FavoritesLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957BC23DC1D0500220426 /* FavoritesLocalStorage.swift */; };
-		77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */; };
 		77C1ED94244CFD64002F4307 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1ED93244CFD64002F4307 /* SettingsViewController.swift */; };
 		77C1ED97244CFD76002F4307 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1ED96244CFD76002F4307 /* SettingsViewModel.swift */; };
 		77C1ED9A244D59C5002F4307 /* SettingsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1ED99244D59C5002F4307 /* SettingsSectionModel.swift */; };
@@ -123,12 +137,13 @@
 		77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */; };
 		77F65DFC2371E1CA00677DB8 /* MiniPlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */; };
 		77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7CA6D23686FB800E1D64A /* ShowCRP.swift */; };
+		BE1B071DBF1EE2A1FA5A507E /* Pods_RadiosPeru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455FCFA8896540895DE420E0 /* Pods_RadiosPeru.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		455FCFA8896540895DE420E0 /* Pods_RadiosPeru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiosPeru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		770282D9235C08AC000098DB /* MiniPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerViewController.swift; sourceTree = "<group>"; };
 		770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerViewModel.swift; sourceTree = "<group>"; };
-		770282DE235C27A7000098DB /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		770A6BFA23687AF400FDE4F6 /* GroupCRPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCRPProvider.swift; sourceTree = "<group>"; };
 		770A6BFE2368978500FDE4F6 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		771B23D0244A61A900260E97 /* stations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = stations.json; sourceTree = "<group>"; };
@@ -147,8 +162,11 @@
 		77421B142358FEE500A23C79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77421B1B2358FEE700A23C79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77421B1E2358FEE700A23C79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		77421B202358FEE700A23C79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77421B2B2359116600A23C79 /* PlayerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayerViewController.storyboard; sourceTree = "<group>"; };
+		7743511E245E74EB00345320 /* GoogleService-Info.DEV.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.DEV.plist"; sourceTree = "<group>"; };
+		7743511F245E74EB00345320 /* GoogleService-Info.PROD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.PROD.plist"; sourceTree = "<group>"; };
+		77435123245E795900345320 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7744852C245D6364009F8865 /* EventFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFavorite.swift; sourceTree = "<group>"; };
 		774714602363A39100198D9E /* PlayingBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingBarsView.swift; sourceTree = "<group>"; };
 		774778D92444CA780020245A /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		774F0C9F23721555002852C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +177,10 @@
 		7755B52B235A144F004E642B /* PopularViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewCell.swift; sourceTree = "<group>"; };
 		7755B52C235A144F004E642B /* PopularViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularViewCell.xib; sourceTree = "<group>"; };
 		7755B52F235A15D2004E642B /* PopularCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCellViewModel.swift; sourceTree = "<group>"; };
+		776FE68D24599E77000604A0 /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
+		776FE68F24599FA2000604A0 /* DefaultEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEventsRepository.swift; sourceTree = "<group>"; };
+		776FE6972459BB2C000604A0 /* TransferServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferServiceProtocol.swift; sourceTree = "<group>"; };
+		776FE6992459BFCE000604A0 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		7772942F23DE5EEA008F5305 /* MiniPlayerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerSceneDIContainer.swift; sourceTree = "<group>"; };
 		7772943123DE6319008F5305 /* PlayerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSceneDIContainer.swift; sourceTree = "<group>"; };
 		7778B158244C17CD00FDB767 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
@@ -172,8 +194,18 @@
 		777AF537244C02770004EB87 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		777CEDCA23D90C6500FCD04B /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleViewState.swift; sourceTree = "<group>"; };
+		7785AF7924590DEA003D5238 /* SaveStationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveStationError.swift; sourceTree = "<group>"; };
+		778A96672459EC3100F2E17C /* Event+Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+Encodable.swift"; sourceTree = "<group>"; };
+		779359DF2455563B00F4C332 /* FireStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreClient.swift; sourceTree = "<group>"; };
 		77964890235A569900813C48 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		779DF55F23634D8C001F034F /* LoadingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlayerView.swift; sourceTree = "<group>"; };
+		779ECA9E245D4DA100987EE7 /* EventPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPlay.swift; sourceTree = "<group>"; };
+		779ECAA0245D4F2B00987EE7 /* SavePlayingEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePlayingEvent.swift; sourceTree = "<group>"; };
+		779ECAA2245D4FA800987EE7 /* AnalyticsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsRepository.swift; sourceTree = "<group>"; };
+		779ECAA4245D503800987EE7 /* DefaultAnalyticsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnalyticsRepository.swift; sourceTree = "<group>"; };
+		779ECAA6245D507900987EE7 /* AnalyticsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceProtocol.swift; sourceTree = "<group>"; };
+		779ECAA9245D50A200987EE7 /* AnalyticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClient.swift; sourceTree = "<group>"; };
+		779ECAAB245D51A400987EE7 /* EventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		77A00849244E6B960024A3ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		77A0084B244E6CF60024A3ED /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		77A0084D244E749A0024A3ED /* String+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localizable.swift"; sourceTree = "<group>"; };
@@ -199,7 +231,6 @@
 		77B957B423DC188300220426 /* SimpleStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleStation.swift; sourceTree = "<group>"; };
 		77B957B823DC19DD00220426 /* StationFavoriteCD+Mappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StationFavoriteCD+Mappings.swift"; sourceTree = "<group>"; };
 		77B957BC23DC1D0500220426 /* FavoritesLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLocalStorage.swift; sourceTree = "<group>"; };
-		77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerObserver.swift; sourceTree = "<group>"; };
 		77C1ED93244CFD64002F4307 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		77C1ED96244CFD76002F4307 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		77C1ED99244D59C5002F4307 /* SettingsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionModel.swift; sourceTree = "<group>"; };
@@ -246,7 +277,6 @@
 		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
 		81BC95517D36B535BE7997A1 /* Pods-RadiosPeru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiosPeru.debug.xcconfig"; path = "Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru.debug.xcconfig"; sourceTree = "<group>"; };
 		8FB612EA606C779819BEE49F /* Pods-RadiosPeru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiosPeru.release.xcconfig"; path = "Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru.release.xcconfig"; sourceTree = "<group>"; };
-		9211BC5CB594D1905BA53B35 /* libPods-RadiosPeru.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RadiosPeru.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,7 +284,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E666E952AA3BE4C4DF78408 /* libPods-RadiosPeru.a in Frameworks */,
+				BE1B071DBF1EE2A1FA5A507E /* Pods_RadiosPeru.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +329,10 @@
 				77D51765237C9FD200B7DCC9 /* StationResult.swift */,
 				77D9A0FC23DA5F8F00DDCE06 /* StationRemote.swift */,
 				77B957B423DC188300220426 /* SimpleStation.swift */,
+				776FE6992459BFCE000604A0 /* Event.swift */,
+				779ECA9E245D4DA100987EE7 /* EventPlay.swift */,
+				7744852C245D6364009F8865 /* EventFavorite.swift */,
+				779ECAAB245D51A400987EE7 /* EventType.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -307,7 +341,6 @@
 			isa = PBXGroup;
 			children = (
 				7739E808235E4A610071882A /* RadioPlayer.swift */,
-				77BBC0FC2382FC2D00F3CA81 /* RadioPlayerObserver.swift */,
 				7739E80B235E4B980071882A /* ApiPlayer.swift */,
 				77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */,
 			);
@@ -400,7 +433,6 @@
 			children = (
 				777CEDCA23D90C6500FCD04B /* StoryboardInstantiable.swift */,
 				777CEDCC23D90C6F00FCD04B /* SimpleViewState.swift */,
-				770282DE235C27A7000098DB /* Bindable.swift */,
 				77B9469F235AD80D006C3EEA /* Transitions */,
 				774778D92444CA780020245A /* UIImageView+Kingfisher.swift */,
 				77A2757C2447D42E00E0C490 /* UIButton+Animation.swift */,
@@ -432,7 +464,8 @@
 			children = (
 				77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */,
 				77421B1B2358FEE700A23C79 /* Assets.xcassets */,
-				77421B202358FEE700A23C79 /* Info.plist */,
+				77435123245E795900345320 /* Info.plist */,
+				779691ED245DE7F900318333 /* GoogleServiceFiles */,
 				7778B16A244C233300FDB767 /* Fonts */,
 				77A0084A244E6B960024A3ED /* Localizable.strings */,
 			);
@@ -449,6 +482,15 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		779359E12455567900F4C332 /* FireStore */ = {
+			isa = PBXGroup;
+			children = (
+				776FE6972459BB2C000604A0 /* TransferServiceProtocol.swift */,
+				779359DF2455563B00F4C332 /* FireStoreClient.swift */,
+			);
+			path = FireStore;
+			sourceTree = "<group>";
+		};
 		77964892235A569D00813C48 /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +498,24 @@
 				77BCBBEA23DFB5E900CA5281 /* View */,
 			);
 			path = Player;
+			sourceTree = "<group>";
+		};
+		779691ED245DE7F900318333 /* GoogleServiceFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7743511E245E74EB00345320 /* GoogleService-Info.DEV.plist */,
+				7743511F245E74EB00345320 /* GoogleService-Info.PROD.plist */,
+			);
+			path = GoogleServiceFiles;
+			sourceTree = "<group>";
+		};
+		779ECAA8245D507D00987EE7 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				779ECAA6245D507900987EE7 /* AnalyticsServiceProtocol.swift */,
+				779ECAA9245D50A200987EE7 /* AnalyticsClient.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		77A1432E24450E02003EF18A /* Protocols */ = {
@@ -739,6 +799,8 @@
 				77CE5D4323DF29E1008C5ECA /* ToogleFavoritesUseCase.swift */,
 				77CE5D4523DF3289008C5ECA /* AskFavoriteUseCase.swift */,
 				77A4E2092448D51500086186 /* FavoritesDidChangedUseCase.swift */,
+				7785AF7924590DEA003D5238 /* SaveStationError.swift */,
+				779ECAA0245D4F2B00987EE7 /* SavePlayingEvent.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -750,6 +812,8 @@
 				77D9A0E523DA3D0300DDCE06 /* StationsLocalRepository.swift */,
 				77D9A0E123DA38F900DDCE06 /* FavoritesRepository.swift */,
 				77D9A0E723DA3F3B00DDCE06 /* ShowDetailsRepository.swift */,
+				776FE68D24599E77000604A0 /* EventsRepository.swift */,
+				779ECAA2245D4FA800987EE7 /* AnalyticsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -769,6 +833,8 @@
 				77D9A0F023DA454B00DDCE06 /* DefaultStationsLocalRepository.swift */,
 				77D9A0F223DA457A00DDCE06 /* DefaultFavoritesRepository.swift */,
 				77D9A0F423DA459C00DDCE06 /* DefaultShowDetailsRepository.swift */,
+				776FE68F24599FA2000604A0 /* DefaultEventsRepository.swift */,
+				779ECAA4245D503800987EE7 /* DefaultAnalyticsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -818,6 +884,8 @@
 				77D9A0EB23DA427C00DDCE06 /* DataTransferService.swift */,
 				77236FA723677C67009C80D0 /* Network */,
 				777AF534244BD93E0004EB87 /* LocalNetwork */,
+				779359E12455567900F4C332 /* FireStore */,
+				779ECAA8245D507D00987EE7 /* Analytics */,
 			);
 			path = Infraestructure;
 			sourceTree = "<group>";
@@ -830,6 +898,7 @@
 				77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */,
 				77E5AF6923D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift */,
 				772B267D23E1B7D700B0409B /* StationRemote+Decodable.swift */,
+				778A96672459EC3100F2E17C /* Event+Encodable.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -854,7 +923,7 @@
 		D7AA83EDDBF66C8DEADF4CE4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9211BC5CB594D1905BA53B35 /* libPods-RadiosPeru.a */,
+				455FCFA8896540895DE420E0 /* Pods_RadiosPeru.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -867,10 +936,12 @@
 			buildConfigurationList = 77421B232358FEE700A23C79 /* Build configuration list for PBXNativeTarget "RadiosPeru" */;
 			buildPhases = (
 				9388DDE98FE366DAE9411276 /* [CP] Check Pods Manifest.lock */,
-				774778D82444B18C0020245A /* ShellScript */,
+				774778D82444B18C0020245A /* Run Script - SwiftLint */,
 				77421B0D2358FEE500A23C79 /* Sources */,
 				77421B0E2358FEE500A23C79 /* Frameworks */,
 				77421B0F2358FEE500A23C79 /* Resources */,
+				2AA4ACDB140A0CAE0EDB5EAC /* [CP] Embed Pods Frameworks */,
+				77E2C813245E806F00EA5B23 /* Run Script - Google Service pList */,
 			);
 			buildRules = (
 			);
@@ -931,19 +1002,38 @@
 				77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */,
 				771B23D1244A61A900260E97 /* stations.json in Resources */,
 				777AF538244C02770004EB87 /* ProximaNova-Bold.otf in Resources */,
+				77435120245E74EB00345320 /* GoogleService-Info.DEV.plist in Resources */,
 				77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */,
 				7755B52E235A144F004E642B /* PopularViewCell.xib in Resources */,
 				77F65DFC2371E1CA00677DB8 /* MiniPlayerViewController.storyboard in Resources */,
 				7778B164244C1E4200FDB767 /* ProximaNova-Thin.otf in Resources */,
 				77B6AE352448989700D4D637 /* FavoriteTableViewCell.xib in Resources */,
 				77421B2C2359116600A23C79 /* PlayerViewController.storyboard in Resources */,
+				77435121245E74EB00345320 /* GoogleService-Info.PROD.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		774778D82444B18C0020245A /* ShellScript */ = {
+		2AA4ACDB140A0CAE0EDB5EAC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		774778D82444B18C0020245A /* Run Script - SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -952,6 +1042,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script - SwiftLint";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -959,6 +1050,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		77E2C813245E806F00EA5B23 /* Run Script - Google Service pList */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Google Service pList";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nPLIST_DEV=${PROJECT_DIR}/${PRODUCT_NAME}/Resources/GoogleServiceFiles/GoogleService-Info.DEV.plist\nPLIST_PROD=${PROJECT_DIR}/${PRODUCT_NAME}/Resources/GoogleServiceFiles/GoogleService-Info.PROD.plist\n\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\n\nif [ ! -f $PLIST_DEV ]\nthen\n    echo \"No Development GoogleService-Info.DEV.plist found.\"\n    exit 1\nfi\n\nif [ ! -f $PLIST_PROD ]\nthen\n    echo \"No Development GoogleService-Info.PROD.plist found.\"\n    exit 1\nfi\n\nif [ \"${APP_PREFIX}\" == \"DEV\" ]; then\n\ncp -r \"${PLIST_DEV}\" \"${PLIST_DESTINATION}\"\necho \"Development GoogleService-Info Copy OK\"\n\nelif [ \"${APP_PREFIX}\" == \"PROD\" ]; then\n\ncp -r \"${PLIST_PROD}\" \"${PLIST_DESTINATION}\"\necho \"Production GoogleService-Info Copy OK\"\n\nfi\n";
 		};
 		9388DDE98FE366DAE9411276 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -992,9 +1101,7 @@
 				773D455D2368EE6E007B755D /* FavoritesViewModel.swift in Sources */,
 				77A68DF62446A10400E6924A /* DefaultFavoritesLocalStorage.swift in Sources */,
 				77C9D3F323DBA4F700C6FD55 /* Station+Mappings.swift in Sources */,
-				770282DF235C27A7000098DB /* Bindable.swift in Sources */,
 				77CE5D4823DF4DE6008C5ECA /* PersistenceStorage.swift in Sources */,
-				77BBC0FD2382FC2D00F3CA81 /* RadioPlayerObserver.swift in Sources */,
 				77D5175D237C9BAE00B7DCC9 /* Group.swift in Sources */,
 				774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */,
 				7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */,
@@ -1009,9 +1116,11 @@
 				77B957B923DC19DD00220426 /* StationFavoriteCD+Mappings.swift in Sources */,
 				7778B167244C1E8A00FDB767 /* FontType.swift in Sources */,
 				770282DA235C08AC000098DB /* MiniPlayerViewController.swift in Sources */,
+				776FE68E24599E77000604A0 /* EventsRepository.swift in Sources */,
 				77A4E2072448A26F00086186 /* MessageView.swift in Sources */,
 				77D9A0F323DA457A00DDCE06 /* DefaultFavoritesRepository.swift in Sources */,
 				77A3D80323DB46C0003FF385 /* GenericCollectionView.swift in Sources */,
+				776FE69A2459BFCE000604A0 /* Event.swift in Sources */,
 				772F53DA2444F5720065E45C /* NSManagedObjectContext+Extensions.swift in Sources */,
 				77B957BD23DC1D0500220426 /* FavoritesLocalStorage.swift in Sources */,
 				77D9A0DA23DA373600DDCE06 /* FetchStationsUseCase.swift in Sources */,
@@ -1043,28 +1152,36 @@
 				77D9A0EE23DA451500DDCE06 /* DefaultStationsRepository.swift in Sources */,
 				77D9A0E823DA3F3B00DDCE06 /* ShowDetailsRepository.swift in Sources */,
 				77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */,
+				779ECAA7245D507900987EE7 /* AnalyticsServiceProtocol.swift in Sources */,
+				7785AF7A24590DEA003D5238 /* SaveStationError.swift in Sources */,
 				77B6AE342448989700D4D637 /* FavoriteTableViewCell.swift in Sources */,
 				777AF533244BD6C90004EB87 /* LocalClient.swift in Sources */,
 				77D9A0F523DA459C00DDCE06 /* DefaultShowDetailsRepository.swift in Sources */,
 				77A3D7FA23DB2ADC003FF385 /* AppAppearance.swift in Sources */,
+				7744852D245D6364009F8865 /* EventFavorite.swift in Sources */,
 				779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */,
 				77C1ED97244CFD76002F4307 /* SettingsViewModel.swift in Sources */,
 				77D51768237CA04400B7DCC9 /* StationProvider.swift in Sources */,
 				77CA145B23689CB9001BF04E /* ApiError.swift in Sources */,
+				776FE6982459BB2C000604A0 /* TransferServiceProtocol.swift in Sources */,
 				7778B159244C17CD00FDB767 /* ColorPalette.swift in Sources */,
+				779ECA9F245D4DA100987EE7 /* EventPlay.swift in Sources */,
 				77B9469B235AD7D7006C3EEA /* Interactor.swift in Sources */,
 				77C9D3F723DBC30B00C6FD55 /* FetchStationsLocalUseCase.swift in Sources */,
 				77D51745237C988B00B7DCC9 /* Station.swift in Sources */,
 				77A1432D24450DFE003EF18A /* Managed.swift in Sources */,
 				77236FA423677C56009C80D0 /* EndPoint.swift in Sources */,
 				77D9A0D823DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift in Sources */,
+				779ECAAA245D50A200987EE7 /* AnalyticsClient.swift in Sources */,
 				77E5AF6823D9F52D00509BC2 /* Group+Decodable.swift in Sources */,
 				77A0084E244E749A0024A3ED /* String+Localizable.swift in Sources */,
 				777CEDCD23D90C6F00FCD04B /* SimpleViewState.swift in Sources */,
 				77D9A0FF23DA628300DDCE06 /* InitialTabBarController.swift in Sources */,
+				779ECAA1245D4F2B00987EE7 /* SavePlayingEvent.swift in Sources */,
 				77C1ED94244CFD64002F4307 /* SettingsViewController.swift in Sources */,
 				77A68DF82446A47100E6924A /* StationFavoriteCD+PersistenceStore.swift in Sources */,
 				77B957B123DC0D1800220426 /* PopularSceneDIContainer.swift in Sources */,
+				779ECAA5245D503800987EE7 /* DefaultAnalyticsRepository.swift in Sources */,
 				7778B15D244C1ACA00FDB767 /* Font.swift in Sources */,
 				77E5AF6323D9F39800509BC2 /* ShowRPP+Decodable.swift in Sources */,
 				77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */,
@@ -1073,20 +1190,25 @@
 				7726B51E2447DF690087AC84 /* SectionAiringToday.swift in Sources */,
 				7772943223DE6319008F5305 /* PlayerSceneDIContainer.swift in Sources */,
 				77D51766237C9FD200B7DCC9 /* StationResult.swift in Sources */,
+				779ECAAC245D51A400987EE7 /* EventType.swift in Sources */,
 				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,
 				7778B15F244C1B2900FDB767 /* FontSize.swift in Sources */,
 				77D9A0F123DA454B00DDCE06 /* DefaultStationsLocalRepository.swift in Sources */,
+				779359E02455563B00F4C332 /* FireStoreClient.swift in Sources */,
 				77C9D3ED23DB990400C6FD55 /* StationsLocalStorage.swift in Sources */,
 				77D51762237C9DA500B7DCC9 /* InitialViewController.swift in Sources */,
 				77B6AE38244898B600D4D637 /* FavoriteTableViewModel.swift in Sources */,
 				77D9A0E623DA3D0300DDCE06 /* StationsLocalRepository.swift in Sources */,
+				779ECAA3245D4FA900987EE7 /* AnalyticsRepository.swift in Sources */,
 				77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */,
 				77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */,
 				7755B51E2359F1E2004E642B /* PlayerViewController.swift in Sources */,
 				77D9A0FB23DA55C500DDCE06 /* InitialSceneDIContainer.swift in Sources */,
+				776FE69024599FA2000604A0 /* DefaultEventsRepository.swift in Sources */,
 				770A6BFF2368978500FDE4F6 /* Show.swift in Sources */,
 				77D9A0FD23DA5F8F00DDCE06 /* StationRemote.swift in Sources */,
+				778A96682459EC3100F2E17C /* Event+Encodable.swift in Sources */,
 				772B267E23E1B7D700B0409B /* StationRemote+Decodable.swift in Sources */,
 				77D51764237C9DB200B7DCC9 /* InitialViewModel.swift in Sources */,
 				77A68DF42446A0F500E6924A /* DefaultStationsLocalStorage.swift in Sources */,
@@ -1248,6 +1370,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81BC95517D36B535BE7997A1 /* Pods-RadiosPeru.debug.xcconfig */;
 			buildSettings = {
+				APP_PREFIX = DEV;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1257,8 +1380,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = default.home.rcaos.RadiosPeru;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = home.rcaos.RadiosPlayerPeru.dev;
+				PRODUCT_NAME = RadiosPeru;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1269,6 +1392,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8FB612EA606C779819BEE49F /* Pods-RadiosPeru.release.xcconfig */;
 			buildSettings = {
+				APP_PREFIX = PROD;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1278,8 +1402,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = default.home.rcaos.RadiosPeru;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = home.rcaos.RadiosPlayerPeru;
+				PRODUCT_NAME = RadiosPeru;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
