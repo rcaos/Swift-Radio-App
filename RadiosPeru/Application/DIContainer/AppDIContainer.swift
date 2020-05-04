@@ -15,24 +15,25 @@ final class AppDIContainer {
     return ApiClient()
   }()
   
-  lazy var localClient: DataTransferService = {
+  lazy var backendClient: LocalClient = {
     return LocalClient(pathLocalFile: "stations", extensionLocalFile: "json")
+  }()
+
+  lazy var analyticsClient: LocalClient = {
+    return backendClient
   }()
   
   // Require a valid 'GoogleService-Info.plist'
-  // Please visit https://firebase.google.com/docs/ios/setup?authuser=0
-  lazy var fireStoreClient: FireStoreClient? = {
-    return nil
-  }()
-//  lazy var fireStoreClient: FireStoreClient = {
+  // Please visit: https://firebase.google.com/docs/ios/setup?authuser=0
+  
+//  lazy var backendClient: FireStoreClient = {
 //    FirebaseApp.configure()
 //    return FireStoreClient(stationsCollection: "stations")
 //  }()
-  
-  lazy var analyticsClient: AnalyticsClient = {
-    FirebaseApp.configure()
-    return AnalyticsClient()
-  }()
+//
+//  lazy var analyticsClient: AnalyticsClient = {
+//    return AnalyticsClient()
+//  }()
   
   lazy var localStorage = CoreDataStorage(maxStorageLimit: 10)
   
@@ -47,7 +48,7 @@ extension AppDIContainer {
   
   func makeInitialSceneDIContainer() -> InitialSceneDIContainer {
     let dependencies =  InitialSceneDIContainer.Dependencies(
-      dataTransferService: localClient,
+      dataTransferService: backendClient,
       stationsLocalStorage: stationsLocalStorage)
     return InitialSceneDIContainer(dependencies: dependencies)
   }
@@ -59,7 +60,7 @@ extension AppDIContainer {
       dataTransferService: dataTransferService,
       stationsLocalStorage: stationsLocalStorage,
       favoritesLocalStorage: favoritesLocalStorage,
-      backendTransferService: fireStoreClient,
+      backendTransferService: backendClient,
       analyticsService: analyticsClient)
     
     return MainSceneDIContainer(dependencies: dependencies)

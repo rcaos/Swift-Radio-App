@@ -43,3 +43,26 @@ extension LocalClient: DataTransferService {
     }
   }
 }
+
+extension LocalClient: TransferServiceProtocol {
+  
+  func request<Element>(path: String, type: Element.Type) -> Observable<[Element]> where Element: Decodable {
+    print("Local Client. Response empty elements")
+    return Observable.just([])
+  }
+  
+  func save<Element>(path: String, _ entitie: Element, _ id: String?) -> Observable<String> where Element: Encodable {
+    let uuid = UUID().uuidString
+    print("Local Client. Save Sucessfulll [UUID:\(uuid)]")
+    return Observable.just(uuid)
+  }
+  
+}
+
+extension LocalClient: AnalyticsServiceProtocol {
+  
+  func logEvent(type: EventsType, values: [String: Any]?) -> Observable<Void> {
+    print("Local Analytics. logevent:[\(type)]")
+    return Observable.just(())
+  }
+}

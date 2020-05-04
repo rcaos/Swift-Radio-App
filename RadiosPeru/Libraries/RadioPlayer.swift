@@ -23,7 +23,7 @@ class RadioPlayer {
   
   private let showDetailsUseCase: FetchShowOnlineInfoUseCase
   
-  private let saveStreamErrorUseCase: SaveStationStreamError?
+  private let saveStreamErrorUseCase: SaveStationStreamError
   
   private let savePlayingEventUseCase: SavePlayingEventUseCase
   
@@ -46,7 +46,7 @@ class RadioPlayer {
   // MARK: - Initializers
   
   init(showDetailsUseCase: FetchShowOnlineInfoUseCase,
-       saveStreamErrorUseCase: SaveStationStreamError?,
+       saveStreamErrorUseCase: SaveStationStreamError,
        savePlayingEventUseCase: SavePlayingEventUseCase) {
     statePlayerBehaviorSubject = BehaviorSubject(value: .stopped)
     airingNowBehaviorSubject = BehaviorSubject(value: "")
@@ -111,7 +111,7 @@ class RadioPlayer {
                       uuid: UIDevice.current.identifierForVendor?.uuidString)
     let request = SaveStationErrorUseCaseRequestValue(event: event)
     
-    saveStreamErrorUseCase?.execute(requestValue: request)
+    saveStreamErrorUseCase.execute(requestValue: request)
       .subscribe(onNext: { id in
         print("save sucessfull: \(id)")
       }, onDisposed: {

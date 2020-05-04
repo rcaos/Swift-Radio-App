@@ -14,7 +14,7 @@ final class MainSceneDIContainer {
     let dataTransferService: DataTransferService
     let stationsLocalStorage: StationsLocalStorage
     let favoritesLocalStorage: FavoritesLocalStorage
-    let backendTransferService: TransferServiceProtocol?
+    let backendTransferService: TransferServiceProtocol
     let analyticsService: AnalyticsServiceProtocol
   }
   
@@ -103,12 +103,9 @@ extension MainSceneDIContainer {
     return DefaultShowDetailsRepository(dataTransferService: dependencies.dataTransferService)
   }
   
-  private func makeSaveStationErrorsUseCase() -> SaveStationStreamError? {
-    if let repository = dependencies.backendTransferService {
-      return DefaultSaveStationError(eventsRepository: makeEventsRepository( with: repository ))
-    } else {
-      return nil
-    }
+  private func makeSaveStationErrorsUseCase() -> SaveStationStreamError {
+    return DefaultSaveStationError(eventsRepository:
+      makeEventsRepository( with: dependencies.backendTransferService ))
   }
   
   private func makeEventsRepository(with repository: TransferServiceProtocol) -> EventsRepository {

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "77421B102358FEE500A23C79"
-               BuildableName = "Radios Peru.app"
+               BuildableName = "RadiosPeru.app"
                BlueprintName = "RadiosPeru"
                ReferencedContainer = "container:RadiosPeru.xcodeproj">
             </BuildableReference>
@@ -45,11 +45,24 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77421B102358FEE500A23C79"
-            BuildableName = "Radios Peru.app"
+            BuildableName = "RadiosPeru.app"
             BlueprintName = "RadiosPeru"
             ReferencedContainer = "container:RadiosPeru.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-FIRDebugEnabled"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "NO">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Debug"
@@ -62,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77421B102358FEE500A23C79"
-            BuildableName = "Radios Peru.app"
+            BuildableName = "RadiosPeru.app"
             BlueprintName = "RadiosPeru"
             ReferencedContainer = "container:RadiosPeru.xcodeproj">
          </BuildableReference>
