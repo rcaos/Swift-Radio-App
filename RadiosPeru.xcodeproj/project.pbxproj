@@ -27,8 +27,6 @@
 		77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1B2358FEE700A23C79 /* Assets.xcassets */; };
 		77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */; };
 		77421B2C2359116600A23C79 /* PlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B2B2359116600A23C79 /* PlayerViewController.storyboard */; };
-		77435120245E74EB00345320 /* GoogleService-Info.DEV.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7743511E245E74EB00345320 /* GoogleService-Info.DEV.plist */; };
-		77435121245E74EB00345320 /* GoogleService-Info.PROD.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7743511F245E74EB00345320 /* GoogleService-Info.PROD.plist */; };
 		7744852D245D6364009F8865 /* EventFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7744852C245D6364009F8865 /* EventFavorite.swift */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774778D92444CA780020245A /* UIImageView+Kingfisher.swift */; };
@@ -1002,14 +1000,12 @@
 				77421B1F2358FEE700A23C79 /* LaunchScreen.storyboard in Resources */,
 				771B23D1244A61A900260E97 /* stations.json in Resources */,
 				777AF538244C02770004EB87 /* ProximaNova-Bold.otf in Resources */,
-				77435120245E74EB00345320 /* GoogleService-Info.DEV.plist in Resources */,
 				77421B1C2358FEE700A23C79 /* Assets.xcassets in Resources */,
 				7755B52E235A144F004E642B /* PopularViewCell.xib in Resources */,
 				77F65DFC2371E1CA00677DB8 /* MiniPlayerViewController.storyboard in Resources */,
 				7778B164244C1E4200FDB767 /* ProximaNova-Thin.otf in Resources */,
 				77B6AE352448989700D4D637 /* FavoriteTableViewCell.xib in Resources */,
 				77421B2C2359116600A23C79 /* PlayerViewController.storyboard in Resources */,
-				77435121245E74EB00345320 /* GoogleService-Info.PROD.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1067,7 +1063,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nPLIST_DEV=${PROJECT_DIR}/${PRODUCT_NAME}/Resources/GoogleServiceFiles/GoogleService-Info.DEV.plist\nPLIST_PROD=${PROJECT_DIR}/${PRODUCT_NAME}/Resources/GoogleServiceFiles/GoogleService-Info.PROD.plist\n\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\n\n# Development Enviroment\nif [ \"${APP_PREFIX}\" == \"DEV\" ]; then\n\n  cp -r \"${PLIST_DEV}\" \"${PLIST_DESTINATION}\"\n  echo \"Development GoogleService-Info Copy OK\"\n\n# Production Enviroment\nelif [ \"${APP_PREFIX}\" == \"PROD\" ]; then\n\n  if [ ! -f $PLIST_PROD ]\n  then\n      echo \"No Development GoogleService-Info.PROD.plist found.\"\n      exit 1\n  fi\n\n  cp -r \"${PLIST_PROD}\" \"${PLIST_DESTINATION}\"\n  echo \"Production GoogleService-Info Copy OK\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nPLIST_DEV=${PROJECT_DIR}/${PRODUCT_NAME}/Resources/GoogleServiceFiles/GoogleService-Info.DEV.plist\nPLIST_PROD=${PROJECT_DIR}/${PRODUCT_NAME}/Resources/GoogleServiceFiles/GoogleService-Info.PROD.plist\n\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\n\n# Development Enviroment\n#if [ \"${APP_PREFIX}\" == \"DEV\" ]; then\n#\n#  cp -r \"${PLIST_DEV}\" \"${PLIST_DESTINATION}\"\n#  echo \"Development GoogleService-Info Copy OK\"\n\n# Production Enviroment\nif [ \"${APP_PREFIX}\" == \"PROD\" ]; then\n\n  if [ ! -f $PLIST_PROD ]\n  then\n      echo \"No Development GoogleService-Info.PROD.plist found.\"\n      exit 1\n  fi\n\n  cp -r \"${PLIST_PROD}\" \"${PLIST_DESTINATION}\"\n  echo \"Production GoogleService-Info Copy OK\"\nfi\n";
 		};
 		9388DDE98FE366DAE9411276 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
