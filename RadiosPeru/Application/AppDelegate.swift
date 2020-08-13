@@ -15,24 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
+  var appCoordinator: AppCoordinator?
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     AppAppearance.setupAppearance()
     
     window = UIWindow(frame: UIScreen.main.bounds)
-    window?.rootViewController = InitialTabBarController(appDIContainer: appDIContainer)
-    window?.makeKeyAndVisible()
+    
+    appCoordinator = AppCoordinator(window: window!, appDIContainer: appDIContainer)
+    appCoordinator?.start()
     
     self.enableDebugMode(true)
     return true
-  }
-  
-  // MARK: - Initial Navigation
-  
-  func initialTransition() {
-    let mainViewController = appDIContainer.makeMainSceneDIContainer().makeMainViewController()
-    let mainNavigation = UINavigationController(rootViewController: mainViewController)
-    self.window?.rootViewController = mainNavigation
   }
   
   // MARK: - Debug

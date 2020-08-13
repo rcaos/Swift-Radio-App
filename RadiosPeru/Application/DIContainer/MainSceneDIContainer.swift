@@ -29,7 +29,7 @@ final class MainSceneDIContainer {
     self.radioPlayer = makeRadioPlayer()
   }
   
-  public func makeMainViewController() -> UIViewController {
+  public func buildMainViewController() -> UIViewController {
     return MainViewControler.create(with: makeMainViewModel(),
                                     controllersFactory: self)
   }
@@ -118,6 +118,9 @@ extension MainSceneDIContainer {
   }
 }
 
+// Delete this
 extension MainSceneDIContainer: MainViewControllersFactory {
   
 }
+
+extension MainSceneDIContainer: MainCoordinatorDependencies { }
