@@ -8,7 +8,27 @@
 
 import RxSwift
 
-final class PlayerViewModel {
+protocol PlayerViewModelProtocol {
+  
+  // MARK: - Input
+  
+  func togglePlayPause()
+  
+  func markAsFavorite()
+  
+  // MARK: - Output
+  var viewState: Observable<RadioPlayerState> { get }
+  
+  var isFavorite: Observable<Bool> { get }
+  
+  var stationName: Observable<String> { get }
+  
+  var stationDescription: Observable<String> { get }
+  
+  var stationURL: Observable<URL?> { get }
+}
+
+final class PlayerViewModel: PlayerViewModelProtocol {
   
   private let toggleFavoritesUseCase: ToggleFavoritesUseCase
   
@@ -19,16 +39,28 @@ final class PlayerViewModel {
   private var stationSelected: StationRemote
   
   private let viewStateBehaviorSubject = BehaviorSubject<RadioPlayerState>(value: .stopped)
+  
   private let isFavoriteBehaviorSubject = BehaviorSubject<Bool>(value: false)
+  
   private let stationNameBehaviorSubject = BehaviorSubject<String>(value: "Pick a Radio Station")
+  
   private let stationDescriptionBehaviorSubject = BehaviorSubject<String>(value: "")
+  
   private let stationURLBehaviorSubject = BehaviorSubject<URL?>(value: nil)
   
   private let disposeBag = DisposeBag()
   
-  public var input: Input
+  // MARK: - Public Api
   
-  public var output: Output
+  let viewState: Observable<RadioPlayerState>
+  
+  let isFavorite: Observable<Bool>
+  
+  let stationName: Observable<String>
+  
+  let stationDescription: Observable<String>
+  
+  let stationURL: Observable<URL?>
   
   // MARK: - Initializers
   
@@ -40,15 +72,14 @@ final class PlayerViewModel {
     self.toggleFavoritesUseCase = toggleFavoritesUseCase
     self.askFavoriteUseCase = askFavoriteUseCase
     
-    self.stationSelected = station
-    self.radioPlayer = player
+    stationSelected = station
+    radioPlayer = player
     
-    self.input = Input()
-    self.output = Output(viewState: viewStateBehaviorSubject.asObservable(),
-                         isFavorite: isFavoriteBehaviorSubject.asObservable(),
-                         stationName: stationNameBehaviorSubject.asObservable(),
-                         stationDescription: stationDescriptionBehaviorSubject.asObservable(),
-                         stationURL: stationURLBehaviorSubject.asObservable())
+    viewState = viewStateBehaviorSubject.asObservable()
+    isFavorite = isFavoriteBehaviorSubject.asObservable()
+    stationName = stationNameBehaviorSubject.asObservable()
+    stationDescription = stationDescriptionBehaviorSubject.asObservable()
+    stationURL = stationURLBehaviorSubject.asObservable()
     
     setupRadio(with: stationSelected)
   }
@@ -74,7 +105,21 @@ final class PlayerViewModel {
       .disposed(by: disposeBag)
   }
   
-  // MARK: - Public
+  private func checkIsFavorite(with station: StationRemote?) {
+    guard let station = station else { return  }
+    
+    let simpleStation = SimpleStation(name: station.name, id: station.id)
+    let request = AskFavoriteUseCaseRequestValue(station: simpleStation)
+    
+    askFavoriteUseCase.execute(requestValue: request)
+      .subscribe(onNext: { [weak self] isFavorite in
+        guard let strongSelf = self else { return }
+        strongSelf.isFavoriteBehaviorSubject.onNext(isFavorite)
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  // MARK: - Public Api
   
   func togglePlayPause() {
     guard let player = radioPlayer else { return }
@@ -92,37 +137,5 @@ final class PlayerViewModel {
         strongSelf.isFavoriteBehaviorSubject.onNext(isFavorite)
       })
       .disposed(by: disposeBag)
-  }
-  
-  private func checkIsFavorite(with station: StationRemote?) {
-    guard let station = station else { return  }
-    
-    let simpleStation = SimpleStation(name: station.name, id: station.id)
-    let request = AskFavoriteUseCaseRequestValue(station: simpleStation)
-    
-    askFavoriteUseCase.execute(requestValue: request)
-      .subscribe(onNext: { [weak self] isFavorite in
-        guard let strongSelf = self else { return }
-        strongSelf.isFavoriteBehaviorSubject.onNext(isFavorite)
-      })
-      .disposed(by: disposeBag)
-  }
-}
-
-extension PlayerViewModel {
-  
-  public struct Input { }
-  
-  public struct Output {
-    
-    let viewState: Observable<RadioPlayerState>
-    
-    let isFavorite: Observable<Bool>
-    
-    let stationName: Observable<String>
-    
-    let stationDescription: Observable<String>
-    
-    let stationURL: Observable<URL?>
   }
 }

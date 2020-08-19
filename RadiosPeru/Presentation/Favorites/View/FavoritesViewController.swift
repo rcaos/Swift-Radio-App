@@ -14,7 +14,7 @@ private let reuseIdentifier = "FavoriteTableViewCell"
 
 class FavoritesViewController: UIViewController {
   
-  var viewModel: FavoritesViewModel!
+  var viewModel: FavoritesViewModelProtocol!
   
   var genericTableView: GenericTableView!
   
@@ -22,7 +22,7 @@ class FavoritesViewController: UIViewController {
   
   let disposeBag = DisposeBag()
   
-  static func create(with viewModel: FavoritesViewModel) -> FavoritesViewController {
+  static func create(with viewModel: FavoritesViewModelProtocol) -> FavoritesViewController {
     let controller = FavoritesViewController()
     controller.viewModel = viewModel
     return controller
@@ -39,10 +39,10 @@ class FavoritesViewController: UIViewController {
     super.viewDidLoad()
     setupViewModel()
     
-    viewModel.getStations()
+    viewModel.viewDidLoad()
   }
   
-  func setupTableView() {
+  fileprivate func setupTableView() {
     let nibName = UINib(nibName: "FavoriteTableViewCell", bundle: nil)
     
     genericTableView = GenericTableView(frame: .zero)
@@ -56,13 +56,13 @@ class FavoritesViewController: UIViewController {
   
   // MARK: - Reactive
   
-  private func setupViewModel() {
+  fileprivate func setupViewModel() {
     
     genericTableView.tableView.rx
       .setDelegate(self)
       .disposed(by: disposeBag)
     
-    viewModel.output.viewState
+    viewModel.viewState
       .map { $0.currentEntities }
       .bind(to: genericTableView.tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: FavoriteTableViewCell.self)) { (_, element, cell) in
         cell.viewModel = element
@@ -70,7 +70,7 @@ class FavoritesViewController: UIViewController {
     }
     .disposed(by: disposeBag)
     
-    viewModel.output.viewState
+    viewModel.viewState
       .subscribe(onNext: { [weak self] state in
         guard let strongSelf = self else { return }
         strongSelf.handleTableState(with: state)
@@ -97,7 +97,7 @@ class FavoritesViewController: UIViewController {
     }
   }
   
-  func setupEmptyView() {
+  fileprivate func setupEmptyView() {
     messageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
     messageView.backgroundColor = .black
     messageView.messageLabel.textColor = .white

@@ -13,7 +13,20 @@ protocol PopularViewModelDelegate: class {
   func stationDidSelect(station: StationRemote)
 }
 
-final class PopularViewModel {
+protocol PopularViewModelProtocol {
+  
+  // MARK: - Input
+  
+  func viewDidLoad()
+  
+  func stationDidSelect(with: StationRemote)
+  
+  // MARK: - Output
+  
+  var viewState: Observable<SimpleViewState<PopularCellViewModel>> { get }
+}
+
+final class PopularViewModel: PopularViewModelProtocol {
   
   private let fetchStationsUseCase: FetchStationsLocalUseCase
   
@@ -23,9 +36,9 @@ final class PopularViewModel {
   
   private let disposeBag = DisposeBag()
   
-  public var input: Input
+  // MARK: - Public Api
   
-  public var output: Output
+  let viewState: Observable<SimpleViewState<PopularCellViewModel>>
   
   // MARK: - Initializers
   
@@ -33,11 +46,12 @@ final class PopularViewModel {
     self.fetchStationsUseCase = fetchStationsUseCase
     self.delegate = delegate
     
-    self.input = Input()
-    self.output = Output(viewState: viewStateObservableSubject.asObservable())
+    viewState = viewStateObservableSubject.asObservable()
   }
   
-  func getStations() {
+  // MARK: - Public Api
+  
+  func viewDidLoad() {
     let request = FetchStationsLocalUseCaseRequestValue()
     
     fetchStationsUseCase.execute(requestValue: request)
@@ -48,7 +62,13 @@ final class PopularViewModel {
       .disposed(by: disposeBag)
   }
   
-  private func processFetched(for items: [StationRemote]) {
+  func stationDidSelect(with station: StationRemote) {
+    delegate?.stationDidSelect(station: station)
+  }
+  
+  // MARK: - Private
+  
+  fileprivate func processFetched(for items: [StationRemote]) {
     let popularCells = items.map( PopularCellViewModel.init )
     
     if popularCells.isEmpty {
@@ -56,17 +76,5 @@ final class PopularViewModel {
     } else {
       viewStateObservableSubject.onNext(.populated(popularCells))
     }
-  }
-  
-  func stationDidSelect(with station: StationRemote) {
-    delegate?.stationDidSelect(station: station)
-  }
-}
-
-extension PopularViewModel {
-  public struct Input { }
-  
-  public struct Output {
-    let viewState: Observable<SimpleViewState<PopularCellViewModel>>
   }
 }

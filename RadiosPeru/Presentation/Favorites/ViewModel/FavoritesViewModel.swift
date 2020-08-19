@@ -13,7 +13,22 @@ protocol FavoritesViewModelDelegate: class {
   func stationFavoriteDidSelect(station: StationRemote)
 }
 
-final class FavoritesViewModel {
+protocol FavoritesViewModelProtocol {
+  
+  // MARK: - Input
+  
+  func viewDidLoad()
+  
+  func stationDidSelected(with: StationRemote)
+  
+  func favoriteDidSelect(for: StationRemote)
+  
+  // MARK: - Output
+  
+  var viewState: Observable<SimpleViewState<FavoriteTableViewModel>> { get }
+}
+
+final class FavoritesViewModel: FavoritesViewModelProtocol {
   
   private let fetchFavoritesUseCase: FetchFavoritesStationsUseCase
   
@@ -25,9 +40,9 @@ final class FavoritesViewModel {
   
   private let disposeBag = DisposeBag()
   
-  public let input: Input
+  // MARK: - Public APi
   
-  public let output: Output
+  let viewState: Observable<SimpleViewState<FavoriteTableViewModel>>
   
   // MARK: - Initializers
   
@@ -38,11 +53,12 @@ final class FavoritesViewModel {
     self.toggleFavoritesUseCase = toggleFavoritesUseCase
     self.delegate = delegate
     
-    input = Input()
-    output = Output(viewState: viewStateSubject.asObservable())
+    viewState = viewStateSubject.asObservable()
   }
   
-  func getStations() {
+  // MARK: - Public Api
+  
+  func viewDidLoad() {
     let request = FetchFavoritesStationsRequestValue()
     
     fetchFavoritesUseCase.execute(requestValue: request)
@@ -52,18 +68,6 @@ final class FavoritesViewModel {
       })
       .disposed(by: disposeBag)
   }
-  
-  private func processFetched(for items: [StationRemote]) {
-    let cells = items.map( FavoriteTableViewModel.init )
-    
-    if cells.isEmpty {
-      viewStateSubject.onNext( .empty )
-    } else {
-      viewStateSubject.onNext( .populated(cells) )
-    }
-  }
-  
-  // MARK: - Public Methods
   
   func stationDidSelected(with station: StationRemote) {
     delegate?.stationFavoriteDidSelect(station: station)
@@ -79,13 +83,16 @@ final class FavoritesViewModel {
       })
       .disposed(by: disposeBag)
   }
-}
-
-extension FavoritesViewModel {
   
-  struct Input {}
+  // MARK: - Private
   
-  struct Output {
-    let viewState: Observable<SimpleViewState<FavoriteTableViewModel>>
+  fileprivate func processFetched(for items: [StationRemote]) {
+    let cells = items.map( FavoriteTableViewModel.init )
+    
+    if cells.isEmpty {
+      viewStateSubject.onNext( .empty )
+    } else {
+      viewStateSubject.onNext( .populated(cells) )
+    }
   }
 }

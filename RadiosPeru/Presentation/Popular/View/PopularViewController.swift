@@ -14,13 +14,13 @@ private let reuseIdentifier = "PopularViewCell"
 
 class PopularViewController: UIViewController {
   
-  var viewModel: PopularViewModel!
+  var viewModel: PopularViewModelProtocol!
   
   var customView: GenericCollectionView!
   
   let disposeBag = DisposeBag()
   
-  static func create(with viewModel: PopularViewModel) -> PopularViewController {
+  static func create(with viewModel: PopularViewModelProtocol) -> PopularViewController {
     let controller = PopularViewController()
     controller.viewModel = viewModel
     return controller
@@ -35,6 +35,8 @@ class PopularViewController: UIViewController {
     setupView()
     setupCollection()
     setupBindables()
+    
+    viewModel.viewDidLoad()
   }
   
   func setupCollectionView() {
@@ -58,8 +60,7 @@ class PopularViewController: UIViewController {
     
     let dataSource = RxCollectionViewSectionedReloadDataSource<SectionAiringToday>(configureCell: configureCollectionViewCell)
     
-    viewModel.output
-      .viewState
+    viewModel.viewState
       .map { [SectionAiringToday(header: "Shows Today", items: $0.currentEntities) ] }
       .bind(to: customView.collectionView.rx.items(dataSource: dataSource) )
       .disposed(by: disposeBag)
@@ -76,15 +77,12 @@ class PopularViewController: UIViewController {
       .setDelegate(self)
       .disposed(by: disposeBag)
     
-    viewModel.output
-      .viewState
+    viewModel.viewState
       .subscribe(onNext: { [weak self] state in
         guard let strongSelf = self else { return }
         strongSelf.configView(with: state)
       })
       .disposed(by: disposeBag)
-    
-    viewModel?.getStations()
   }
   
   func configView(with state: SimpleViewState<PopularCellViewModel>) {
