@@ -34,7 +34,7 @@ final class PlayerViewModel: PlayerViewModelProtocol {
   
   private let askFavoriteUseCase: AskFavoriteUseCase
   
-  private var radioPlayer: RadioPlayer?
+  private var radioPlayer: RadioPlayerProtocol?
   
   private var stationSelected: StationRemote
   
@@ -66,7 +66,7 @@ final class PlayerViewModel: PlayerViewModelProtocol {
   
   init(toggleFavoritesUseCase: ToggleFavoritesUseCase,
        askFavoriteUseCase: AskFavoriteUseCase,
-       player: RadioPlayer?,
+       player: RadioPlayerProtocol?,
        station: StationRemote) {
     
     self.toggleFavoritesUseCase = toggleFavoritesUseCase
@@ -93,14 +93,14 @@ final class PlayerViewModel: PlayerViewModelProtocol {
     subscribe(to: radioPlayer)
   }
   
-  private func subscribe(to radioPlayer: RadioPlayer?) {
+  private func subscribe(to radioPlayer: RadioPlayerProtocol?) {
     guard let radioPlayer = radioPlayer else { return }
     
-    radioPlayer.statePlayerBehaviorSubject
+    radioPlayer.statePlayer
       .bind(to: viewStateBehaviorSubject)
       .disposed(by: disposeBag)
     
-    radioPlayer.airingNowBehaviorSubject
+    radioPlayer.airingNow
       .bind(to: stationDescriptionBehaviorSubject)
       .disposed(by: disposeBag)
   }

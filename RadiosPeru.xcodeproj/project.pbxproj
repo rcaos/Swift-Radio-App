@@ -33,6 +33,7 @@
 		7742E82824EDD42500404259 /* Dequeuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82724EDD42500404259 /* Dequeuable.swift */; };
 		7742E82A24EDD43900404259 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82924EDD43900404259 /* UITableView+Extensions.swift */; };
 		7742E82E24EDD75800404259 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82D24EDD75800404259 /* UICollectionView+Extensions.swift */; };
+		7742E83024EDDD6600404259 /* RadioPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */; };
 		7744852D245D6364009F8865 /* EventFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7744852C245D6364009F8865 /* EventFavorite.swift */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774778D92444CA780020245A /* UIImageView+Kingfisher.swift */; };
@@ -175,6 +176,7 @@
 		7742E82724EDD42500404259 /* Dequeuable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dequeuable.swift; sourceTree = "<group>"; };
 		7742E82924EDD43900404259 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		7742E82D24EDD75800404259 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerProtocol.swift; sourceTree = "<group>"; };
 		7743511E245E74EB00345320 /* GoogleService-Info.DEV.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.DEV.plist"; sourceTree = "<group>"; };
 		7743511F245E74EB00345320 /* GoogleService-Info.PROD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.PROD.plist"; sourceTree = "<group>"; };
 		77435123245E795900345320 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 		7739E80A235E4A690071882A /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */,
 				7739E808235E4A610071882A /* RadioPlayer.swift */,
 				7739E80B235E4B980071882A /* ApiPlayer.swift */,
 				77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */,
@@ -1227,6 +1230,7 @@
 				7778B15D244C1ACA00FDB767 /* Font.swift in Sources */,
 				77E5AF6323D9F39800509BC2 /* ShowRPP+Decodable.swift in Sources */,
 				77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */,
+				7742E83024EDDD6600404259 /* RadioPlayerProtocol.swift in Sources */,
 				7739E809235E4A610071882A /* RadioPlayer.swift in Sources */,
 				777CEDCB23D90C6500FCD04B /* StoryboardInstantiable.swift in Sources */,
 				7726B51E2447DF690087AC84 /* SectionAiringToday.swift in Sources */,

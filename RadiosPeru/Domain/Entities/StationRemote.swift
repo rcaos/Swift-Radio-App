@@ -42,3 +42,26 @@ extension StationRemote {
 extension StationRemote: Equatable {
   
 }
+
+public struct StationProp {
+  
+  let id: Int
+  let name: String
+  let city: String
+  let frecuency: String
+  let slogan: String
+  let urlStream: String
+  let pathImage: String
+  let type: Group
+  
+  init(station: StationRemote) {
+    id = station.id
+    name = station.name
+    city = station.city
+    frecuency = station.frecuency
+    slogan = station.slogan
+    urlStream = station.urlStream
+    pathImage = station.pathImage
+    type = station.type
+  }
+}

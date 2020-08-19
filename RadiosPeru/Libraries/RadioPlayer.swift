@@ -8,18 +8,7 @@
 
 import RxSwift
 
-// MARK: - Visual States
-
-enum RadioPlayerState: Equatable {
-  
-  case stopped
-  case loading
-  case playing
-  case buffering
-  case error(String)
-}
-
-class RadioPlayer {
+class RadioPlayer: RadioPlayerProtocol {
   
   private let showDetailsUseCase: FetchShowOnlineInfoUseCase
   
@@ -39,9 +28,15 @@ class RadioPlayer {
   
   private var disposeBag = DisposeBag()
   
-  public let statePlayerBehaviorSubject: BehaviorSubject<RadioPlayerState>
+  private let statePlayerBehaviorSubject: BehaviorSubject<RadioPlayerState>
   
-  public let airingNowBehaviorSubject: BehaviorSubject<String>
+  private let airingNowBehaviorSubject: BehaviorSubject<String>
+  
+  // MARK: - Public Api
+  
+  let statePlayer: Observable<RadioPlayerState>
+  
+  let airingNow: Observable<String>
   
   // MARK: - Initializers
   
@@ -55,6 +50,10 @@ class RadioPlayer {
     self.showDetailsUseCase = showDetailsUseCase
     self.saveStreamErrorUseCase = saveStreamErrorUseCase
     self.savePlayingEventUseCase = savePlayingEventUseCase
+    
+    statePlayer = statePlayerBehaviorSubject.asObservable()
+    airingNow = airingNowBehaviorSubject.asObservable()
+    
     player.delegate = self
   }
   

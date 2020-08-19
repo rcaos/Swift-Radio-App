@@ -42,7 +42,7 @@ final class MiniPlayerViewModel: MiniPlayerViewModelProtocol {
   
   private let favoritesChangedUseCase: FavoritesDidChangedUseCase
   
-  private var radioPlayer: RadioPlayer?
+  private var radioPlayer: RadioPlayerProtocol?
   
   private var stationSelected: StationRemote?
   
@@ -73,7 +73,7 @@ final class MiniPlayerViewModel: MiniPlayerViewModelProtocol {
   init(toggleFavoritesUseCase: ToggleFavoritesUseCase,
        askFavoriteUseCase: AskFavoriteUseCase,
        favoritesChangedUseCase: FavoritesDidChangedUseCase,
-       player: RadioPlayer?,
+       player: RadioPlayerProtocol?,
        delegate: MiniPlayerViewModelDelegate? = nil) {
     
     self.toggleFavoritesUseCase = toggleFavoritesUseCase
@@ -107,14 +107,14 @@ final class MiniPlayerViewModel: MiniPlayerViewModelProtocol {
     subscribe(to: radioPlayer)
   }
   
-  fileprivate func subscribe(to radioPlayer: RadioPlayer?) {
+  fileprivate func subscribe(to radioPlayer: RadioPlayerProtocol?) {
     guard let radioPlayer = radioPlayer else { return }
     
-    radioPlayer.statePlayerBehaviorSubject
+    radioPlayer.statePlayer
       .bind(to: viewStateBehaviorSubject)
       .disposed(by: disposeBag)
     
-    radioPlayer.airingNowBehaviorSubject
+    radioPlayer.airingNow
       .bind(to: stationDescriptionBehaviorSubject)
       .disposed(by: disposeBag)
   }
