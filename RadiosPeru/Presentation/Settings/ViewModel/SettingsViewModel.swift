@@ -9,21 +9,27 @@
 import RxSwift
 import RxDataSources
 
-final class SettingsViewModel {
+protocol SettingsViewModelProtocol {
+  
+  func didSelected(at element: SettingsSectionModel.Item)
+  
+  func viewDidLoad()
+  
+  var cells: Observable<[SettingsSectionModel]> { get }
+}
+
+final class SettingsViewModel: SettingsViewModelProtocol {
   
   private var cellsSubject = BehaviorSubject<[SettingsSectionModel]>(value: [])
   
   private let disposeBag = DisposeBag()
   
-  public let input: Input
-  
-  public let output: Output
+  let cells: Observable<[SettingsSectionModel]>
   
   // MARK: - Initializers
   
   init() {
-    input = Input()
-    output = Output(cells: cellsSubject.asObservable())
+    cells = cellsSubject.asObservable()
   }
   
   // MARK: - Public Methods
@@ -86,11 +92,3 @@ final class SettingsViewModel {
   }
 }
 
-extension SettingsViewModel {
-  
-  struct Input {}
-  
-  struct Output {
-    let cells: Observable<[SettingsSectionModel]>
-  }
-}
