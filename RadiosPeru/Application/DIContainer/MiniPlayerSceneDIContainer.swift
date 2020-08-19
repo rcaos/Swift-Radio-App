@@ -27,7 +27,7 @@ final class MiniPlayerSceneDIContainer {
     self.favoritesRepository = makeFavoritesRepository()
   }
   
-  public func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> UIViewController {
+  public func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> MiniPlayerViewController {
     viewModel.delegate = delegate
     return MiniPlayerViewController.create(with: viewModel)
   }

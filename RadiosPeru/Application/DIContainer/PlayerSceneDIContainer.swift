@@ -20,16 +20,15 @@ final class PlayerSceneDIContainer {
   
   private var favoritesRepository: FavoritesRepository!
   
-  // MARK: - Initializers
+  // MARK: - Initializer
   
   init(dependencies: Dependencies) {
     self.dependencies = dependencies
     self.favoritesRepository = makeFavoritesRepository()
   }
   
-  public func makeMiniPlayerViewController(with station: StationRemote) -> UIViewController {
-    return PlayerViewController.create(with:
-      makePlayerViewModel(with: station))
+  public func makePlayerViewController(with station: StationRemote) -> PlayerViewController {
+    return PlayerViewController.create(with: makePlayerViewModel(with: station))
   }
 }
 

@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - TODO, separate files too
+
 public protocol MainCoordinatorDelegate: class {
   func mainCoordinatorDidFinish()
 }
@@ -17,21 +19,36 @@ public enum MainSteps: Step {
   
   mainSceneIsRequired,
   
-  mainSceneDidFinish
+  mainSceneDidFinish,
+  
+  miniPlayerDidSelected(station: StationRemote),
+  
+  settingsIsRequired
 }
 
 public protocol MainCoordinatorDependencies {
   
-  func buildMainViewController() -> UIViewController
+  func makeMainViewController(coordinator: MainCoordinatorProtocol?) -> MainViewControler
+  
+  func makeSettingsViewController() -> UIViewController
+  
+  func makePlayerViewController(with station: StationRemote) -> PlayerViewController
 }
 
-public class MainCoordinator: NavigationCoordinator {
+public protocol MainCoordinatorProtocol: class {
+  
+  func navigate(to step: MainSteps)
+}
+
+public class MainCoordinator: NavigationCoordinator, MainCoordinatorProtocol {
   
   public var navigationController: UINavigationController
   
   weak var delegate: MainCoordinatorDelegate?
   
   private let dependencies: MainCoordinatorDependencies
+  
+  private var mainViewController: MainViewControler?
   
   // MARK: - Life Cycle
   
@@ -58,11 +75,42 @@ public class MainCoordinator: NavigationCoordinator {
     case .mainSceneDidFinish:
       // TODO, asignar al VC deinit
       delegate?.mainCoordinatorDidFinish()
+      
+    case .miniPlayerDidSelected(let station):
+      showPlayer(station: station)
+      
+    case .settingsIsRequired:
+      showSettings()
     }
   }
   
+  // MARK: - Build Scenes
+  
   fileprivate func showMainScene() {
-    let mainVC = dependencies.buildMainViewController()
+    let mainVC = dependencies.makeMainViewController(coordinator: self)
+    mainVC.title = "Radios Perú"
+    
+    if mainViewController == nil {
+      mainViewController = mainVC
+    }
     navigationController.setViewControllers([mainVC], animated: true)
+  }
+  
+  fileprivate func showPlayer(station: StationRemote) {
+    
+    let playerController = dependencies.makePlayerViewController(with: station)
+    
+    if #available(iOS 13, *) {
+    } else {
+      playerController.transitioningDelegate = mainViewController
+      playerController.interactor = mainViewController?.interactor
+    }
+    
+    navigationController.present(playerController, animated: true, completion: nil)
+  }
+  
+  fileprivate func showSettings() {
+    let settingsVC = dependencies.makeSettingsViewController()
+    navigationController.pushViewController(settingsVC, animated: true)
   }
 }

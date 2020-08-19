@@ -29,8 +29,8 @@ final class MainSceneDIContainer {
     self.radioPlayer = makeRadioPlayer()
   }
   
-  public func buildMainViewController() -> UIViewController {
-    return MainViewControler.create(with: makeMainViewModel(),
+  public func makeMainViewController(coordinator: MainCoordinatorProtocol? = nil) -> MainViewControler {
+    return MainViewControler.create(with: makeMainViewModel(coordinator: coordinator),
                                     controllersFactory: self)
   }
   
@@ -50,7 +50,7 @@ final class MainSceneDIContainer {
     return FavoriteSceneDIContainer(dependencies: favoriteDependencies).makeFavoriteViewController(delegate: delegate)
   }
   
-  public func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> UIViewController {
+  public func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> MiniPlayerViewController {
     let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(
       favoritesLocalStorage: dependencies.favoritesLocalStorage,
       radioPlayer: self.radioPlayer,
@@ -59,13 +59,13 @@ final class MainSceneDIContainer {
     return MiniPlayerSceneDIContainer(dependencies: miniPlayerDependencies).makeMiniPlayerViewController(with: viewModel, delegate: delegate)
   }
   
-  public func makePlayerViewController(with station: StationRemote) -> UIViewController {
+  public func makePlayerViewController(with station: StationRemote) -> PlayerViewController {
     let playerDependencies = PlayerSceneDIContainer.Dependencies(
       favoritesLocalStorage: dependencies.favoritesLocalStorage,
       radioPlayer: self.radioPlayer,
       analyticsService: dependencies.analyticsService)
-    
-    return PlayerSceneDIContainer.init(dependencies: playerDependencies).makeMiniPlayerViewController(with: station)
+
+    return PlayerSceneDIContainer(dependencies: playerDependencies).makePlayerViewController(with: station)
   }
   
   public func makeSettingsViewController() -> UIViewController {
@@ -78,7 +78,7 @@ final class MainSceneDIContainer {
 
 extension MainSceneDIContainer {
   
-  private func makeMainViewModel() -> MainViewModel {
+  private func makeMainViewModel(coordinator: MainCoordinatorProtocol?) -> MainViewModel {
     let miniPlayerDependencies = MiniPlayerSceneDIContainer.Dependencies(
       favoritesLocalStorage: dependencies.favoritesLocalStorage,
       radioPlayer: self.radioPlayer,
@@ -86,7 +86,9 @@ extension MainSceneDIContainer {
     
     let miniPlayerViewModel = MiniPlayerSceneDIContainer(dependencies: miniPlayerDependencies) .makeMiniPlayerViewModel()
     
-    return MainViewModel(radioPlayer: self.radioPlayer, miniPlayerViewModel: miniPlayerViewModel)
+    let mainViewModel = MainViewModel(miniPlayerViewModel: miniPlayerViewModel)
+    mainViewModel.coordinator = coordinator
+    return mainViewModel
   }
   
   private func makeRadioPlayer() -> RadioPlayer {

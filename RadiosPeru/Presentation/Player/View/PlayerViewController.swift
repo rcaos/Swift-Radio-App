@@ -10,7 +10,7 @@ import UIKit
 import MediaPlayer
 import RxSwift
 
-class PlayerViewController: UIViewController, StoryboardInstantiable {
+public class PlayerViewController: UIViewController, StoryboardInstantiable {
   
   var viewModel: PlayerViewModel!
   
@@ -31,7 +31,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   private var loadingView: UIView!
   private var pauseView: UIView!
   
-  var interactor: Interactor?
+  public var interactor: Interactor?
   
   let disposeBag = DisposeBag()
   
@@ -43,13 +43,17 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   
   // MARK: - Life Cycle
   
-  override func viewDidLoad() {
+  override public func viewDidLoad() {
     super.viewDidLoad()
     
     setupUI()
     setupPlayerView()
     setupGestures()
     setupViewModel()
+  }
+  
+  deinit {
+    print("deinit \(Self.self)")
   }
   
   // MARK: - ViewModel

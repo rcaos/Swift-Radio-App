@@ -38,11 +38,16 @@ class SettingsViewController: UIViewController {
     viewModel.viewDidLoad()
   }
   
+  deinit {
+    print("deinit \(Self.self)")
+  }
+  
   func setupTableView() {
     genericTableView = GenericTableView(frame: .zero)
     
     genericTableView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     genericTableView.tableView.backgroundColor = .black
+    genericTableView.tableView.rowHeight = UITableView.automaticDimension
     
     let font = Font.proximaNova.of(type: .bold, with: .normal)
     UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).font = font
@@ -53,11 +58,6 @@ class SettingsViewController: UIViewController {
   // MARK: - Reactive
   
   private func setupViewModel() {
-    
-    genericTableView.tableView.rx
-      .setDelegate(self)
-      .disposed(by: disposeBag)
-    
     let dataSource = setDataSource()
     
     viewModel.output.cells
@@ -94,12 +94,5 @@ class SettingsViewController: UIViewController {
         return dataSource[sectionIndex].model
     }
     )
-  }
-}
-
-extension SettingsViewController: UITableViewDelegate {
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 60.0
   }
 }

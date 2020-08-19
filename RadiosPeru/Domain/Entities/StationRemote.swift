@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StationRemote {
+public struct StationRemote {
   
   let id: Int
   let name: String

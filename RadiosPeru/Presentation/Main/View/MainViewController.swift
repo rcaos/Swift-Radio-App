@@ -9,22 +9,23 @@
 import UIKit
 import RxSwift
 
-class MainViewControler: UIViewController, StoryboardInstantiable {
+public class MainViewControler: UIViewController, StoryboardInstantiable {
   
-  private var viewModel: MainViewModel!
+  private var viewModel: MainViewModelProtocol!
+  
   private var controllersFactory: MainViewControllersFactory!
-  
-  let interactor = Interactor()
+
+  public let interactor = Interactor()
   
   @IBOutlet weak var tabBarView: UIView!
   @IBOutlet weak var miniPlayerView: UIView!
   
-  var tabBarVC: UITabBarController!
-  var miniPlayerVC: MiniPlayerViewController!
+  private var tabBarVC: UITabBarController!
+  private var miniPlayerVC: MiniPlayerViewController!
   
-  let disposeBag = DisposeBag()
+  private let disposeBag = DisposeBag()
   
-  static func create(with viewModel: MainViewModel, controllersFactory: MainViewControllersFactory) -> MainViewControler {
+  static func create(with viewModel: MainViewModelProtocol, controllersFactory: MainViewControllersFactory) -> MainViewControler {
     let controller = MainViewControler.instantiateViewController()
     controller.viewModel = viewModel
     controller.controllersFactory = controllersFactory
@@ -34,56 +35,15 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
   
   // MARK: - Initializers
   
-  override func viewDidLoad() {
+  override public func viewDidLoad() {
     view.backgroundColor = .black
-    title = "Radios Perú"
-    
     setupTabBarView()
     setupMiniPlayerView()
     setupViewModel()
     setupSettingsButton()
   }
   
-  func setupViewModel() {
-    
-    viewModel.output.route
-      .subscribe(onNext: { [weak self] routing in
-        self?.handle(routing)
-      })
-      .disposed(by: disposeBag)
-    
-    viewModel.showMiniPlayer = { [weak self] in
-      guard let strongSelf = self else { return }
-      UIView.transition(with: strongSelf.miniPlayerView, duration: 0.5, options: .transitionCrossDissolve, animations: {
-        strongSelf.miniPlayerView.isHidden = false
-      })
-    }
-  }
-  
-  private func setupMiniPlayerView() {
-    miniPlayerVC = controllersFactory.makeMiniPlayerViewController(with: viewModel.miniPlayer, delegate: viewModel) as? MiniPlayerViewController
-    miniPlayerVC.view.translatesAutoresizingMaskIntoConstraints = false
-    
-    miniPlayerView.addSubview( miniPlayerVC.view )
-    
-    NSLayoutConstraint.activate([miniPlayerVC.view.topAnchor.constraint(equalTo: miniPlayerView.topAnchor),
-                                 miniPlayerVC.view.leadingAnchor.constraint(equalTo: miniPlayerView.leadingAnchor),
-                                 miniPlayerVC.view.trailingAnchor.constraint(equalTo: miniPlayerView.trailingAnchor),
-                                 miniPlayerVC.view.bottomAnchor.constraint(equalTo: miniPlayerView.bottomAnchor)])
-    miniPlayerView.isHidden = true
-  }
-  
-  private func setupSettingsButton() {
-    let settingsButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .done, target: nil, action: nil)
-    navigationItem.rightBarButtonItem = settingsButton
-    navigationItem.rightBarButtonItem?.tintColor = .white
-    
-    settingsButton.rx.tap
-      .bind(to: viewModel.input.showSettings)
-      .disposed(by: disposeBag)
-  }
-  
-  private func setupTabBarView() {
+  fileprivate func setupTabBarView() {
     tabBarVC = UITabBarController()
     tabBarVC.viewControllers = buildViewControllers()
     
@@ -96,12 +56,44 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
                                  tabBarVC.view.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor)])
   }
   
-  private func buildViewControllers() -> [UIViewController] {
+  fileprivate func setupMiniPlayerView() {
+    miniPlayerVC = controllersFactory.makeMiniPlayerViewController(with: viewModel.miniPlayerViewModel, delegate: viewModel)
+    miniPlayerVC.view.translatesAutoresizingMaskIntoConstraints = false
     
-    guard let popularVC = controllersFactory.makePopularViewController(delegate: viewModel) as? PopularViewController else { return [] }
+    miniPlayerView.addSubview( miniPlayerVC.view )
+    
+    NSLayoutConstraint.activate([miniPlayerVC.view.topAnchor.constraint(equalTo: miniPlayerView.topAnchor),
+                                 miniPlayerVC.view.leadingAnchor.constraint(equalTo: miniPlayerView.leadingAnchor),
+                                 miniPlayerVC.view.trailingAnchor.constraint(equalTo: miniPlayerView.trailingAnchor),
+                                 miniPlayerVC.view.bottomAnchor.constraint(equalTo: miniPlayerView.bottomAnchor)])
+    miniPlayerView.isHidden = true
+  }
+  
+  fileprivate func setupViewModel() {
+    viewModel.showMiniPlayer = { [weak self] in
+      guard let strongSelf = self else { return }
+      UIView.transition(with: strongSelf.miniPlayerView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+        strongSelf.miniPlayerView.isHidden = false
+      })
+    }
+  }
+  
+  fileprivate func setupSettingsButton() {
+    let settingsButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .done, target: nil, action: nil)
+    navigationItem.rightBarButtonItem = settingsButton
+    navigationItem.rightBarButtonItem?.tintColor = .white
+    
+    settingsButton.rx.tap
+      .bind(to: viewModel.showSettingsSubject)
+      .disposed(by: disposeBag)
+  }
+  
+  fileprivate func buildViewControllers() -> [UIViewController] {
+    
+    let popularVC = controllersFactory.makePopularViewController(delegate: viewModel)
     popularVC.tabBarItem = UITabBarItem(title: "home".localized(), image: UIImage(named: "houseItem"), tag: 0)
     
-    guard let favoritesVC = controllersFactory.makeFavoritesViewController(delegate: viewModel) as? FavoritesViewController else { return [] }
+    let favoritesVC = controllersFactory.makeFavoritesViewController(delegate: viewModel)
     favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
     favoritesVC.tabBarItem.title = "favorites".localized()
     
@@ -112,42 +104,13 @@ class MainViewControler: UIViewController, StoryboardInstantiable {
 // MARK: - UIViewControllerTransitioningDelegate
 
 extension MainViewControler: UIViewControllerTransitioningDelegate {
-  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+  
+  public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     return DismissAnimator()
   }
   
-  func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+  public  func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
     return interactor.hasStarted ? interactor : nil
-  }
-}
-
-// MARK: - Navigation
-
-extension MainViewControler {
-  
-  func handle(_ route: MainViewModelRoute) {
-    switch route {
-    case .initial: break
-      
-    case .showPlayer(let station):
-      guard let playerController =
-        controllersFactory.makePlayerViewController(with: station) as? PlayerViewController else { break }
-      
-      if #available(iOS 13, *) {
-      } else {
-        playerController.transitioningDelegate = self
-        playerController.interactor = interactor
-      }
-      
-      present(playerController, animated: true, completion: nil)
-      
-    case .showSettings:
-      
-      let settingsVC = controllersFactory.makeSettingsViewController()
-      settingsVC.title = "settings".localized()
-      navigationController?.pushViewController(settingsVC, animated: true)
-    }
-    
   }
 }
 
@@ -159,9 +122,5 @@ protocol MainViewControllersFactory {
   
   func makeFavoritesViewController(delegate: FavoritesViewModelDelegate) -> UIViewController
   
-  func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> UIViewController
-  
-  func makePlayerViewController(with station: StationRemote) -> UIViewController
-  
-  func makeSettingsViewController() -> UIViewController
+  func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> MiniPlayerViewController
 }

@@ -6,56 +6,57 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 
-enum MainViewModelRoute {
-  case initial
-  case showPlayer(StationRemote)
-  case showSettings
+protocol MainViewModelProtocol: MiniPlayerViewModelDelegate, PopularViewModelDelegate, FavoritesViewModelDelegate {
+  
+  var miniPlayerViewModel: MiniPlayerViewModel { get }
+  
+  var showMiniPlayer: (() -> Void)? { get set }
+  
+  var showSettingsSubject: PublishSubject<Void> { get }
 }
 
-final class MainViewModel {
+final class MainViewModel: MainViewModelProtocol {
   
-  var miniPlayer: MiniPlayerViewModel
-  
-  var radioPlayer: RadioPlayer
-  
-  private let routeBehaviorSubject = BehaviorSubject<MainViewModelRoute>(value: .initial)
+  let miniPlayerViewModel: MiniPlayerViewModel // why? , find better way ?
   
   var showMiniPlayer: (() -> Void)?
   
-  let disposeBag = DisposeBag()
+  let showSettingsSubject = PublishSubject<Void>()
   
-  public var input: Input
+  weak var coordinator: MainCoordinatorProtocol?
   
-  public var output: Output
+  private let disposeBag = DisposeBag()
   
-  // MARK: - Initializers
+  // MARK: - Initializer
   
-  init(radioPlayer: RadioPlayer, miniPlayerViewModel: MiniPlayerViewModel) {
-    self.radioPlayer = radioPlayer
-    
-    miniPlayer = miniPlayerViewModel
-    
-    input = Input()
-    output = Output(route: routeBehaviorSubject.asObservable())
-    
+  init(miniPlayerViewModel: MiniPlayerViewModel) {
+    self.miniPlayerViewModel = miniPlayerViewModel
     subscribe()
   }
   
   func subscribe() {
-    input.showSettings
-      .map { return .showSettings }
-      .bind(to: routeBehaviorSubject )
+    showSettingsSubject
+      .subscribe(onNext: { [weak self] in
+        self?.navigate(to: .settingsIsRequired)
+      })
       .disposed(by: disposeBag)
   }
   
   func selectStation(with station: StationRemote) {
-    miniPlayer.configStation(with: station)
+    miniPlayerViewModel.configStation(with: station)
     showMiniPlayer?()
   }
+  
+  // MARK: - Navigation
+  
+  func navigate(to step: MainSteps) {
+    coordinator?.navigate(to: step)
+  }
 }
+
+// MARK: - PopularViewModelDelegate
 
 extension MainViewModel: PopularViewModelDelegate {
   
@@ -64,6 +65,8 @@ extension MainViewModel: PopularViewModelDelegate {
   }
 }
 
+// MARK: - FavoritesViewModelDelegate
+
 extension MainViewModel: FavoritesViewModelDelegate {
   
   func stationFavoriteDidSelect(station: StationRemote) {
@@ -71,20 +74,11 @@ extension MainViewModel: FavoritesViewModelDelegate {
   }
 }
 
+// MARK: - MiniPlayerViewModelDelegate
+
 extension MainViewModel: MiniPlayerViewModelDelegate {
   
   func stationPLayerDidSelect(station: StationRemote) {
-    routeBehaviorSubject.onNext( .showPlayer(station) )
-  }
-}
-
-extension MainViewModel {
-  
-  public struct Input {
-    let showSettings = PublishSubject<Void>()
-  }
-  
-  public struct Output {
-    let route: Observable<MainViewModelRoute>
+    navigate(to: .miniPlayerDidSelected(station: station))
   }
 }
