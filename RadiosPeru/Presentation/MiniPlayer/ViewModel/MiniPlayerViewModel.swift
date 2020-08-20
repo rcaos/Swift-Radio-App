@@ -23,6 +23,10 @@ protocol MiniPlayerViewModelProtocol {
   
   func markAsFavorite()
   
+  func configStation(with: StationProp, playAutomatically: Bool)
+  
+  var delegate: MiniPlayerViewModelDelegate? { get set }
+  
   // MARK: - Output
   
   var viewState: Observable<RadioPlayerState> { get }

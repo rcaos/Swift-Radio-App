@@ -12,7 +12,7 @@ final class PlayerSceneDIContainer {
   
   struct Dependencies {
     let favoritesLocalStorage: FavoritesLocalStorage
-    let radioPlayer: RadioPlayer
+    let radioPlayer: RadioPlayerProtocol
     let analyticsService: AnalyticsServiceProtocol
   }
   
@@ -26,6 +26,8 @@ final class PlayerSceneDIContainer {
     self.dependencies = dependencies
     self.favoritesRepository = makeFavoritesRepository()
   }
+  
+  // MARK: - Public Api
   
   public func makePlayerViewController(with station: StationProp) -> PlayerViewController {
     return PlayerViewController.create(with: makePlayerViewModel(with: station))

@@ -10,16 +10,18 @@ import RxSwift
 
 protocol MainViewModelProtocol: MiniPlayerViewModelDelegate, PopularViewModelDelegate, FavoritesViewModelDelegate {
   
-  var miniPlayerViewModel: MiniPlayerViewModel { get }
+  var miniPlayerViewModel: MiniPlayerViewModelProtocol? { get set }
   
   var showMiniPlayer: (() -> Void)? { get set }
   
   var showSettingsSubject: PublishSubject<Void> { get }
+  
+  var coordinator: MainCoordinatorProtocol? { get set }
 }
 
 final class MainViewModel: MainViewModelProtocol {
   
-  let miniPlayerViewModel: MiniPlayerViewModel // why? , find better way ?
+  var miniPlayerViewModel: MiniPlayerViewModelProtocol?
   
   var showMiniPlayer: (() -> Void)?
   
@@ -31,7 +33,7 @@ final class MainViewModel: MainViewModelProtocol {
   
   // MARK: - Initializer
   
-  init(miniPlayerViewModel: MiniPlayerViewModel) {
+  init(miniPlayerViewModel: MiniPlayerViewModelProtocol? = nil) {
     self.miniPlayerViewModel = miniPlayerViewModel
     subscribe()
   }
@@ -45,7 +47,7 @@ final class MainViewModel: MainViewModelProtocol {
   }
   
   func selectStation(with station: StationProp) {
-    miniPlayerViewModel.configStation(with: station)
+    miniPlayerViewModel?.configStation(with: station, playAutomatically: true)
     showMiniPlayer?()
   }
   

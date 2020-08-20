@@ -21,7 +21,7 @@ public class MainViewControler: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var miniPlayerView: UIView!
   
   private var tabBarVC: UITabBarController!
-  private var miniPlayerVC: MiniPlayerViewController!
+  private var miniPlayerVC: UIViewController!
   
   private let disposeBag = DisposeBag()
   
@@ -57,7 +57,7 @@ public class MainViewControler: UIViewController, StoryboardInstantiable {
   }
   
   fileprivate func setupMiniPlayerView() {
-    miniPlayerVC = controllersFactory.makeMiniPlayerViewController(with: viewModel.miniPlayerViewModel, delegate: viewModel)
+    miniPlayerVC = controllersFactory.makeMiniPlayerViewController()
     miniPlayerVC.view.translatesAutoresizingMaskIntoConstraints = false
     
     miniPlayerView.addSubview( miniPlayerVC.view )
@@ -89,11 +89,10 @@ public class MainViewControler: UIViewController, StoryboardInstantiable {
   }
   
   fileprivate func buildViewControllers() -> [UIViewController] {
-    
-    let popularVC = controllersFactory.makePopularViewController(delegate: viewModel)
+    let popularVC = controllersFactory.makePopularViewController()
     popularVC.tabBarItem = UITabBarItem(title: "home".localized(), image: UIImage(named: "houseItem"), tag: 0)
     
-    let favoritesVC = controllersFactory.makeFavoritesViewController(delegate: viewModel)
+    let favoritesVC = controllersFactory.makeFavoritesViewController()
     favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
     favoritesVC.tabBarItem.title = "favorites".localized()
     
@@ -118,9 +117,9 @@ extension MainViewControler: UIViewControllerTransitioningDelegate {
 
 protocol MainViewControllersFactory {
   
-  func makePopularViewController(delegate: PopularViewModelDelegate) -> UIViewController
+  func makePopularViewController() -> UIViewController
   
-  func makeFavoritesViewController(delegate: FavoritesViewModelDelegate) -> UIViewController
+  func makeFavoritesViewController() -> UIViewController
   
-  func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> MiniPlayerViewController
+  func makeMiniPlayerViewController() -> UIViewController
 }
