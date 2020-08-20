@@ -91,4 +91,3 @@ final class SettingsViewModel: SettingsViewModelProtocol {
     return "\(nameApp) \(releaseVersionNumber) (\(buildVersionNumber))"
   }
 }
-

@@ -99,7 +99,7 @@ final class MainSceneDIContainer {
   
   public func makeSettingsViewController() -> UIViewController {
     let viewModel = SettingsViewModel()
-    return SettingsViewController.create(with: viewModel)
+    return SettingsViewController(viewModel: viewModel)
   }
 }
 

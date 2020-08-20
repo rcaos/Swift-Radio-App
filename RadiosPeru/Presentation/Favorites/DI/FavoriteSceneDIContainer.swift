@@ -30,8 +30,7 @@ final class FavoriteSceneDIContainer {
   // MARK: - Public Api
   
   public func makeFavoriteViewController(delegate: FavoritesViewModelDelegate) -> UIViewController {
-    return FavoritesViewController.create(with:
-      makeFavoriteViewModel(delegate: delegate))
+    return FavoritesViewController(viewModel: makeFavoriteViewModel(delegate: delegate))
   }
 }
 

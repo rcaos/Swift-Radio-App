@@ -8,17 +8,16 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: NiblessViewController {
   
-  var viewModel: SettingsViewModelProtocol!
+  let viewModel: SettingsViewModelProtocol
   
-  static func create(with viewModel: SettingsViewModelProtocol) -> SettingsViewController {
-    let controller = SettingsViewController()
-    controller.viewModel = viewModel
-    return controller
+  init(viewModel: SettingsViewModelProtocol) {
+    self.viewModel = viewModel
+    super.init()
   }
   
-  // MARK: - Initializer
+  // MARK: - Life Cycle
   
   override func loadView() {
     view = SettingsRootView(viewModel: viewModel)

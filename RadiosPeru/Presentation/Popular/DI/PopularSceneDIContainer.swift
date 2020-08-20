@@ -25,8 +25,7 @@ final class PopularSceneDIContainer {
   // MARK: - Public Api
   
   public func makePopularViewController(delegate: PopularViewModelDelegate) -> UIViewController {
-    return PopularViewController.create(with:
-      makePopularViewModel(delegate: delegate))
+    return PopularViewController(viewModel: makePopularViewModel(delegate: delegate))
   }
 }
 

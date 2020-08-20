@@ -8,14 +8,13 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+class FavoritesViewController: NiblessViewController {
   
-  var viewModel: FavoritesViewModelProtocol!
+  let viewModel: FavoritesViewModelProtocol
   
-  static func create(with viewModel: FavoritesViewModelProtocol) -> FavoritesViewController {
-    let controller = FavoritesViewController()
-    controller.viewModel = viewModel
-    return controller
+  init(viewModel: FavoritesViewModelProtocol) {
+    self.viewModel = viewModel
+    super.init()
   }
   
   // MARK: - Life Cycle

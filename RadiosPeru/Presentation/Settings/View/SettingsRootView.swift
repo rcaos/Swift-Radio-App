@@ -12,10 +12,6 @@ import RxDataSources
 
 class SettingsRootView: UIView {
   
-  public required init?(coder aDecoder: NSCoder) {
-    fatalError("Loading from a nib file its unsupported")
-  }
-  
   var messageView = MessageView(frame: .zero)
   
   let tableView: UITableView = {
@@ -90,5 +86,9 @@ class SettingsRootView: UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
     tableView.frame = bounds
+  }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    fatalError("Loading from a nib file its unsupported")
   }
 }

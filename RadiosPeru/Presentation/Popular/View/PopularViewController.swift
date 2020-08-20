@@ -8,14 +8,13 @@
 
 import UIKit
 
-class PopularViewController: UIViewController {
+class PopularViewController: NiblessViewController {
   
-  var viewModel: PopularViewModelProtocol!
+  let viewModel: PopularViewModelProtocol
   
-  static func create(with viewModel: PopularViewModelProtocol) -> PopularViewController {
-    let controller = PopularViewController()
-    controller.viewModel = viewModel
-    return controller
+  init(viewModel: PopularViewModelProtocol) {
+    self.viewModel = viewModel
+    super.init()
   }
   
   // MARK: - Life Cycle
