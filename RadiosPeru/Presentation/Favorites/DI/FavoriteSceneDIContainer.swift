@@ -20,16 +20,17 @@ final class FavoriteSceneDIContainer {
   
   private var defaultRepository: FavoritesRepository!
   
-  // MARK: - Initializers
+  // MARK: - Initializer
   
   init(dependencies: Dependencies) {
     self.dependencies = dependencies
     defaultRepository = makeFavoritesRepository()
   }
   
+  // MARK: - Public Api
+  
   public func makeFavoriteViewController(delegate: FavoritesViewModelDelegate) -> UIViewController {
-    return FavoritesViewController.create(with:
-      makeFavoriteViewModel(delegate: delegate))
+    return FavoritesViewController(viewModel: makeFavoriteViewModel(delegate: delegate))
   }
 }
 

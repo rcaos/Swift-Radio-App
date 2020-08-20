@@ -8,18 +8,7 @@
 
 import RxSwift
 
-// MARK: - Visual States
-
-enum RadioPlayerState: Equatable {
-  
-  case stopped
-  case loading
-  case playing
-  case buffering
-  case error(String)
-}
-
-class RadioPlayer {
+class RadioPlayer: RadioPlayerProtocol {
   
   private let showDetailsUseCase: FetchShowOnlineInfoUseCase
   
@@ -39,9 +28,15 @@ class RadioPlayer {
   
   private var disposeBag = DisposeBag()
   
-  public let statePlayerBehaviorSubject: BehaviorSubject<RadioPlayerState>
+  private let statePlayerBehaviorSubject: BehaviorSubject<RadioPlayerState>
   
-  public let airingNowBehaviorSubject: BehaviorSubject<String>
+  private let airingNowBehaviorSubject: BehaviorSubject<String>
+  
+  // MARK: - Public Api
+  
+  let statePlayer: Observable<RadioPlayerState>
+  
+  let airingNow: Observable<String>
   
   // MARK: - Initializers
   
@@ -55,12 +50,16 @@ class RadioPlayer {
     self.showDetailsUseCase = showDetailsUseCase
     self.saveStreamErrorUseCase = saveStreamErrorUseCase
     self.savePlayingEventUseCase = savePlayingEventUseCase
+    
+    statePlayer = statePlayerBehaviorSubject.asObservable()
+    airingNow = airingNowBehaviorSubject.asObservable()
+    
     player.delegate = self
   }
   
   // MARK: - Public
   
-  func setupRadio(with station: StationRemote, playWhenReady: Bool = false) {
+  func setupRadio(with station: StationProp, playWhenReady: Bool = false) {
     statePlayerBehaviorSubject.onNext(.stopped)
     disposeBag = DisposeBag()
     
@@ -87,7 +86,7 @@ class RadioPlayer {
     onlineInfoBehaviorSubject.onNext("")
   }
   
-  fileprivate func subscribeToState(for station: StationRemote) {
+  fileprivate func subscribeToState(for station: StationProp) {
     statePlayerBehaviorSubject
       .subscribe(onNext: { [weak self] state in
         switch state {
@@ -102,7 +101,7 @@ class RadioPlayer {
       .disposed(by: disposeBag)
   }
   
-  fileprivate func handleError(for station: StationRemote, error: String) {
+  fileprivate func handleError(for station: StationProp, error: String) {
     let event = Event(radioId: station.id,
                       radioName: station.name,
                       urlStream: station.urlStream,
@@ -120,7 +119,7 @@ class RadioPlayer {
       .disposed(by: disposeBag)
   }
   
-  fileprivate func subscribeToDescription(for station: StationRemote) {
+  fileprivate func subscribeToDescription(for station: StationProp) {
     Observable.combineLatest( statePlayerBehaviorSubject, onlineInfoBehaviorSubject)
       .flatMap { [weak self] (state, onlineInfo) -> Observable<String> in
         guard let strongSelf = self else { return Observable.just("") }
@@ -131,7 +130,7 @@ class RadioPlayer {
     .disposed(by: disposeBag)
   }
   
-  fileprivate func bindToRemoteControls(for station: StationRemote) {
+  fileprivate func bindToRemoteControls(for station: StationProp) {
     let defaultInfo = station.city + " - " +
       station.frecuency + " - " +
       station.slogan
@@ -147,7 +146,7 @@ class RadioPlayer {
   }
   
   fileprivate func buildDescription(for state: RadioPlayerState,
-                                    station: StationRemote,
+                                    station: StationProp,
                                     _ onlineInfo: String) -> String {
     let defaultDescription =
       station.city + " - " +
@@ -175,7 +174,7 @@ class RadioPlayer {
   
   // MARK: - Networking
   
-  private func getAiringNowDetails(for station: StationRemote) {
+  private func getAiringNowDetails(for station: StationProp) {
     let request = FetchShowOnlineInfoUseCaseRequestValue(group: station.type)
     
     showDetailsUseCase.execute(requestValue: request)
@@ -193,7 +192,7 @@ class RadioPlayer {
   
   // MARK: - Log Events
   
-  fileprivate func trackPlayEvent(for station: StationRemote) {
+  fileprivate func trackPlayEvent(for station: StationProp) {
     statePlayerBehaviorSubject
       .distinctUntilChanged()
       .scan(EventPlay.empty, accumulator: { (old, new) -> EventPlay? in

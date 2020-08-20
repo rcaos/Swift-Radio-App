@@ -10,9 +10,9 @@ import UIKit
 import MediaPlayer
 import RxSwift
 
-class PlayerViewController: UIViewController, StoryboardInstantiable {
+public class PlayerViewController: UIViewController, StoryboardInstantiable {
   
-  var viewModel: PlayerViewModel!
+  public var interactor: Interactor?
   
   @IBOutlet weak var closeButton: UIButton!
   
@@ -21,7 +21,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var stationDescriptionLabel: UILabel!
   
   @IBOutlet weak var volumeStackView: UIStackView!
-  var volumeView: MPVolumeView!
+  private var volumeView: MPVolumeView!
   
   @IBOutlet weak var playingBarsImage: UIImageView!
   @IBOutlet weak var playerStackView: UIStackView!
@@ -31,11 +31,11 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   private var loadingView: UIView!
   private var pauseView: UIView!
   
-  var interactor: Interactor?
+  private let disposeBag = DisposeBag()
   
-  let disposeBag = DisposeBag()
+  private var viewModel: PlayerViewModelProtocol!
   
-  static func create(with viewModel: PlayerViewModel) -> PlayerViewController {
+  static func create(with viewModel: PlayerViewModelProtocol) -> PlayerViewController {
     let controller = PlayerViewController.instantiateViewController()
     controller.viewModel = viewModel
     return controller
@@ -43,7 +43,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
   
   // MARK: - Life Cycle
   
-  override func viewDidLoad() {
+  override public func viewDidLoad() {
     super.viewDidLoad()
     
     setupUI()
@@ -52,47 +52,48 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     setupViewModel()
   }
   
+  deinit {
+    print("deinit \(Self.self)")
+  }
+  
   // MARK: - ViewModel
   
-  func setupViewModel() {
+  fileprivate func setupViewModel() {
     
-    viewModel.output.viewState
+    viewModel.viewState
       .subscribe(onNext: { [weak self] state in
-        DispatchQueue.main.async {
-          self?.configView(with: state)
-        }
+        self?.configView(with: state)
       })
       .disposed(by: disposeBag)
     
-    viewModel.output.stationURL
+    viewModel.stationURL
       .subscribe(onNext: { [weak self] url in
         self?.stationImageView.setImage(with: url, placeholder: UIImage(named: "radio-default"))
-        
       })
       .disposed(by: disposeBag)
     
-    viewModel.output.stationName
-      .bind(to: stationNameLabel.rx.text)
+    viewModel.stationName
+      .asDriver(onErrorJustReturn: "")
+      .drive(stationNameLabel.rx.text)
       .disposed(by: disposeBag)
     
-    viewModel.output.stationDescription
-      .bind(to: stationDescriptionLabel.rx.text)
+    viewModel.stationDescription
+      .asDriver(onErrorJustReturn: "")
+      .drive(stationDescriptionLabel.rx.text)
       .disposed(by: disposeBag)
     
-    viewModel.output.isFavorite
+    viewModel.isFavorite
       .subscribe(onNext: { [weak self] isFavorite in
-        DispatchQueue.main.async {
-          let imageFilled = isFavorite ?
-            UIImage(named: "btn-favoriteFill") : UIImage(named: "btn-favorite")
-          self?.favoriteButton.setImage( imageFilled, for: .normal)
-        }
+        let imageFilled = isFavorite ?
+          UIImage(named: "btn-favoriteFill") : UIImage(named: "btn-favorite")
+        self?.favoriteButton.setImage( imageFilled, for: .normal)
       })
       .disposed(by: disposeBag)
   }
   
   // MARK: - Change for State Enum but from it viewModel
   
-  func configView(with state: RadioPlayerState) {
+  fileprivate func configView(with state: RadioPlayerState) {
     switch state {
     case .stopped, .loading, .buffering, .error:
       playingBarsImage.stopAnimating()
@@ -103,7 +104,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     configPlayer(with: state)
   }
   
-  func configPlayer(with state: RadioPlayerState) {
+  fileprivate func configPlayer(with state: RadioPlayerState) {
     switch state {
     case .stopped, .error:
       playView.isHidden = false
@@ -124,9 +125,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     }
   }
   
-  // MARK: - Setup UI
-  
-  func setupUI() {
+  fileprivate func setupUI() {
     
     let image = UIImage(named: "btn-close")?.withRenderingMode(.alwaysTemplate)
     closeButton.setImage(image, for: .normal)
@@ -160,12 +159,12 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     favoriteButton.setImage( UIImage(named: "btn-favorite"), for: .normal)
   }
   
-  func setupPlayerView() {
+  fileprivate func setupPlayerView() {
     setupControlViews()
     setupStackView()
   }
   
-  func setupControlViews() {
+  fileprivate func setupControlViews() {
     playView = buildPlayerView()
     
     let viewForPause = UIImageView(image: UIImage(named: "btn-pause"))
@@ -179,7 +178,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     loadingView = viewForLoading
   }
   
-  func setupStackView() {
+  fileprivate func setupStackView() {
     playerStackView.addArrangedSubview(playView)
     playerStackView.addArrangedSubview(pauseView)
     playerStackView.addArrangedSubview(loadingView)
@@ -190,8 +189,7 @@ class PlayerViewController: UIViewController, StoryboardInstantiable {
     loadingView.isHidden = true
   }
   
-  func setupGestures() {
-    
+  fileprivate func setupGestures() {
     if #available(iOS 13, *) {
     } else {
       let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))

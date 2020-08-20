@@ -10,7 +10,7 @@ import Foundation
 
 final class FavoriteTableViewModel {
   
-  var radioStation: StationRemote
+  let radioStation: StationProp
   
   lazy var imageURL: URL? = {
     return URL(string: radioStation.pathImage)
@@ -20,7 +20,7 @@ final class FavoriteTableViewModel {
   let detailStation: String?
   let isFavorite: Bool
   
-  init(station: StationRemote) {
+  init(_ station: StationProp) {
     self.radioStation = station
     
     titleStation = station.name

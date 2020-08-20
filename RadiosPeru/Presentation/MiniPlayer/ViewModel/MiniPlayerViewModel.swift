@@ -10,10 +10,35 @@ import RxSwift
 
 protocol MiniPlayerViewModelDelegate: class {
   
-  func stationPLayerDidSelect(station: StationRemote)
+  func stationPLayerDidSelect(station: StationProp)
 }
 
-final class MiniPlayerViewModel {
+protocol MiniPlayerViewModelProtocol {
+  
+  // MARK: - Input
+  
+  func showFullPlayer()
+  
+  func togglePlayPause()
+  
+  func markAsFavorite()
+  
+  func configStation(with: StationProp, playAutomatically: Bool)
+  
+  var delegate: MiniPlayerViewModelDelegate? { get set }
+  
+  // MARK: - Output
+  
+  var viewState: Observable<RadioPlayerState> { get }
+  
+  var isFavorite: Observable<Bool> { get }
+  
+  var stationName: Observable<String> { get }
+  
+  var stationDescription: Observable<String> { get }
+}
+
+final class MiniPlayerViewModel: MiniPlayerViewModelProtocol {
   
   private let toggleFavoritesUseCase: ToggleFavoritesUseCase
   
@@ -21,29 +46,38 @@ final class MiniPlayerViewModel {
   
   private let favoritesChangedUseCase: FavoritesDidChangedUseCase
   
-  private var radioPlayer: RadioPlayer?
+  private var radioPlayer: RadioPlayerProtocol?
   
-  private var stationSelected: StationRemote?
-  
-  weak var delegate: MiniPlayerViewModelDelegate?
+  private var stationSelected: StationProp?
   
   private let viewStateBehaviorSubject = BehaviorSubject<RadioPlayerState>(value: .stopped)
+  
   private let isFavoriteBehaviorSubject = BehaviorSubject<Bool>(value: false)
+  
   private let stationNameBehaviorSubject = BehaviorSubject<String>(value: "Pick a Radio Station")
+  
   private let stationDescriptionBehaviorSubject = BehaviorSubject<String>(value: "")
   
   private var disposeBag = DisposeBag()
   
-  public var input: Input
+  // MARK: - Public Api
   
-  public var output: Output
+  let viewState: Observable<RadioPlayerState>
   
-  // MARK: - Initializers
+  let isFavorite: Observable<Bool>
+  
+  let stationName: Observable<String>
+  
+  let stationDescription: Observable<String>
+  
+  weak var delegate: MiniPlayerViewModelDelegate?
+  
+  // MARK: - Initializer
   
   init(toggleFavoritesUseCase: ToggleFavoritesUseCase,
        askFavoriteUseCase: AskFavoriteUseCase,
        favoritesChangedUseCase: FavoritesDidChangedUseCase,
-       player: RadioPlayer?,
+       player: RadioPlayerProtocol?,
        delegate: MiniPlayerViewModelDelegate? = nil) {
     
     self.toggleFavoritesUseCase = toggleFavoritesUseCase
@@ -52,17 +86,17 @@ final class MiniPlayerViewModel {
     
     self.delegate = delegate
     
-    self.input = Input()
-    self.output = Output(viewState: viewStateBehaviorSubject.asObservable(),
-                         isFavorite: isFavoriteBehaviorSubject.asObservable(),
-                         stationName: stationNameBehaviorSubject.asObservable(),
-                         stationDescription: stationDescriptionBehaviorSubject.asObservable())
+    viewState = viewStateBehaviorSubject.asObservable()
+    isFavorite = isFavoriteBehaviorSubject.asObservable()
+    stationName = stationNameBehaviorSubject.asObservable()
+    stationDescription = stationDescriptionBehaviorSubject.asObservable()
+    
     radioPlayer = player
   }
   
   // MARK: - Public
   
-  func configStation(with station: StationRemote, playAutomatically: Bool = true) {
+  func configStation(with station: StationProp, playAutomatically: Bool = true) {
     if checkIsPlaying(with: station) { return }
     
     disposeBag = DisposeBag()
@@ -77,17 +111,19 @@ final class MiniPlayerViewModel {
     subscribe(to: radioPlayer)
   }
   
-  fileprivate func subscribe(to radioPlayer: RadioPlayer?) {
+  fileprivate func subscribe(to radioPlayer: RadioPlayerProtocol?) {
     guard let radioPlayer = radioPlayer else { return }
     
-    radioPlayer.statePlayerBehaviorSubject
+    radioPlayer.statePlayer
       .bind(to: viewStateBehaviorSubject)
       .disposed(by: disposeBag)
     
-    radioPlayer.airingNowBehaviorSubject
+    radioPlayer.airingNow
       .bind(to: stationDescriptionBehaviorSubject)
       .disposed(by: disposeBag)
   }
+  
+  // MARK: - Public Input Api
   
   func showFullPlayer() {
     guard let selected = stationSelected else { return }
@@ -114,11 +150,11 @@ final class MiniPlayerViewModel {
   
   // MARK: - Private
   
-  fileprivate func setupRadio(with station: StationRemote) {
+  fileprivate func setupRadio(with station: StationProp) {
     stationNameBehaviorSubject.onNext(station.name)
   }
   
-  fileprivate func subscribeToFavoriteChanges(for station: StationRemote) {
+  fileprivate func subscribeToFavoriteChanges(for station: StationProp) {
     favoritesChangedUseCase.execute(requestValue: FavoritesDidChangedUseCaseRequestValue() )
       .flatMap { () -> Observable<Bool> in
         let simpleStation = SimpleStation(name: station.name, id: station.id)
@@ -132,9 +168,7 @@ final class MiniPlayerViewModel {
       .disposed(by: disposeBag)
   }
   
-  // MARK: - TODO, Model with operatos instead u.u
-  
-  fileprivate func checkIsPlaying(with station: StationRemote) -> Bool {
+  fileprivate func checkIsPlaying(with station: StationProp) -> Bool {
     if stationSelected == station,
       let state = try? viewStateBehaviorSubject.value() {
       switch state {
@@ -146,21 +180,5 @@ final class MiniPlayerViewModel {
     } else {
       return false
     }
-  }
-}
-
-extension MiniPlayerViewModel {
-  
-  public struct Input { }
-  
-  public struct Output {
-    
-    let viewState: Observable<RadioPlayerState>
-    
-    let isFavorite: Observable<Bool>
-    
-    let stationName: Observable<String>
-    
-    let stationDescription: Observable<String>
   }
 }

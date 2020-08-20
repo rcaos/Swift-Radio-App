@@ -23,8 +23,8 @@ final class InitialSceneDIContainer {
     self.dependencies = dependencies
   }
   
-  public func makeInitialViewController() -> UIViewController {
-    return InitialViewController.create(with: makeInitialViewModel())
+  public func buildInitialViewController(coordinator: InitialCoordinatorProtocol? = nil) -> UIViewController {
+    return InitialViewController.create(with: makeInitialViewModel(coordinator: coordinator))
   }
 }
 
@@ -32,8 +32,10 @@ final class InitialSceneDIContainer {
 
 extension InitialSceneDIContainer {
   
-  private func makeInitialViewModel() -> InitialViewModel {
-    return InitialViewModel(fetchStationsUseCase: makeFetchStationsUseCase())
+  private func makeInitialViewModel(coordinator: InitialCoordinatorProtocol?) -> InitialViewModel {
+    let initialVM = InitialViewModel(fetchStationsUseCase: makeFetchStationsUseCase())
+    initialVM.coordinator = coordinator
+    return initialVM
   }
   
   // MARK: - Use Cases
@@ -54,3 +56,5 @@ extension InitialSceneDIContainer {
     return DefaultStationsLocalRepository(stationsPersistentStorage: dependencies.stationsLocalStorage)
   }
 }
+
+extension InitialSceneDIContainer: InitialCoordinatorDependencies { }

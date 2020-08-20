@@ -12,7 +12,7 @@ final class PlayerSceneDIContainer {
   
   struct Dependencies {
     let favoritesLocalStorage: FavoritesLocalStorage
-    let radioPlayer: RadioPlayer
+    let radioPlayer: RadioPlayerProtocol
     let analyticsService: AnalyticsServiceProtocol
   }
   
@@ -20,16 +20,17 @@ final class PlayerSceneDIContainer {
   
   private var favoritesRepository: FavoritesRepository!
   
-  // MARK: - Initializers
+  // MARK: - Initializer
   
   init(dependencies: Dependencies) {
     self.dependencies = dependencies
     self.favoritesRepository = makeFavoritesRepository()
   }
   
-  public func makeMiniPlayerViewController(with station: StationRemote) -> UIViewController {
-    return PlayerViewController.create(with:
-      makePlayerViewModel(with: station))
+  // MARK: - Public Api
+  
+  public func makePlayerViewController(with station: StationProp) -> PlayerViewController {
+    return PlayerViewController.create(with: makePlayerViewModel(with: station))
   }
 }
 
@@ -37,7 +38,7 @@ final class PlayerSceneDIContainer {
 
 extension PlayerSceneDIContainer {
   
-  private func makePlayerViewModel(with station: StationRemote) -> PlayerViewModel {
+  private func makePlayerViewModel(with station: StationProp) -> PlayerViewModel {
     return PlayerViewModel(
       toggleFavoritesUseCase: makeToggleFavoritesUseCase(),
       askFavoriteUseCase: makeAskFavoritesUseCase(),

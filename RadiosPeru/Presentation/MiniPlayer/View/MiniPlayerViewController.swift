@@ -24,11 +24,11 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   private var loadingView: LoadingPlayerView!
   private var pauseView: UIView!
   
-  var viewModel: MiniPlayerViewModel!
+  private var viewModel: MiniPlayerViewModelProtocol!
   
-  let disposeBag = DisposeBag()
+  private let disposeBag = DisposeBag()
   
-  static func create(with viewModel: MiniPlayerViewModel) -> MiniPlayerViewController {
+  static func create(with viewModel: MiniPlayerViewModelProtocol) -> MiniPlayerViewController {
     let controller = MiniPlayerViewController.instantiateViewController()
     controller.viewModel = viewModel
     return controller
@@ -51,24 +51,24 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   
   // MARK: - Reactive
   
-  private func setupViewModel() {
-    viewModel.output.viewState
+  fileprivate  func setupViewModel() {
+    viewModel.viewState
       .subscribe(onNext: { [weak self] state in
-        DispatchQueue.main.async {
-          self?.configView(with: state)
-        }
+        self?.configView(with: state)
       })
       .disposed(by: disposeBag)
     
-    viewModel.output.stationName
-      .bind(to: stationNameLabel.rx.text)
+    viewModel.stationName
+    .asDriver(onErrorJustReturn: "")
+      .drive(stationNameLabel.rx.text)
       .disposed(by: disposeBag)
     
-    viewModel.output.stationDescription
-      .bind(to: stationDescriptionLabel.rx.text)
+    viewModel.stationDescription
+    .asDriver(onErrorJustReturn: "")
+      .drive(stationDescriptionLabel.rx.text)
       .disposed(by: disposeBag)
     
-    viewModel.output.isFavorite
+    viewModel.isFavorite
       .subscribe(onNext: { [weak self] isFavorite in
         DispatchQueue.main.async {
           let imageFilled = isFavorite ?
@@ -81,7 +81,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
   
   // MARK: - Change for State Enum but from it viewModel
   
-  func configView(with state: RadioPlayerState) {
+  fileprivate func configView(with state: RadioPlayerState) {
     switch state {
     case .stopped, .loading, .buffering, .error:
       playingBarsView.stopAnimating()
@@ -91,7 +91,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     configPlayer(with: state)
   }
   
-  func configPlayer(with state: RadioPlayerState) {
+  fileprivate func configPlayer(with state: RadioPlayerState) {
     switch state {
     case .stopped, .error :
       playView.isHidden = false
@@ -112,7 +112,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     }
   }
   
-  func setupUI() {
+  fileprivate func setupUI() {
     view.backgroundColor = ColorPalette.customGrayColor
     
     favoriteButton.setImage( UIImage(named: "btn-favorite"), for: .normal)
@@ -132,12 +132,12 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     stationDescriptionLabel.font = Font.proximaNova.of(type: .regular, with: .normal)
   }
   
-  func setupPlayerView() {
+  fileprivate func setupPlayerView() {
     setupControlViews()
     setupStackView()
   }
   
-  func setupControlViews() {
+  fileprivate func setupControlViews() {
     playView = buildPlayerView()
     
     let viewForPause = UIImageView(image: UIImage(named: "btn-pause"))
@@ -151,7 +151,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     loadingView = viewForLoading
   }
   
-  func setupStackView() {
+  fileprivate func setupStackView() {
     playerStackView.addArrangedSubview(playView)
     playerStackView.addArrangedSubview(pauseView)
     playerStackView.addArrangedSubview(loadingView)
@@ -162,7 +162,7 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
     loadingView.isHidden = true
   }
   
-  func setupGestures() {
+  fileprivate func setupGestures() {
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleGestureView(_:)))
     view.addGestureRecognizer(tapGesture)
     

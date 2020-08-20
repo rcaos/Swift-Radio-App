@@ -8,13 +8,18 @@
 
 import RxSwift
 
-final class InitialViewModel {
+protocol InitialViewModelProtocol {
+  
+  func viewDidLoad()
+}
+
+final class InitialViewModel: InitialViewModelProtocol {
   
   private let fetchStationsUseCase: FetchStationsUseCase
   
-  var stationsFetched: (() -> Void)?
-  
   private let disposeBag = DisposeBag()
+  
+  weak var coordinator: InitialCoordinatorProtocol?
   
   // MARK: - Initializers
   
@@ -22,18 +27,25 @@ final class InitialViewModel {
     self.fetchStationsUseCase = fetchStationsUseCase
   }
   
+  deinit {
+    print("deinit \(Self.self)")
+  }
+  
   // MARK: - Public
   
-  public func getStations() {
+  public func viewDidLoad() {
     let request = FetchStationsUseCaseRequestValue()
     
     fetchStationsUseCase.execute(requestValue: request)
       .subscribe(onError: { error in
         print("error to Fetch Stations: [\(error)]")
       }, onDisposed: { [weak self] in
-        guard let strongSelf = self else { return }
-        strongSelf.stationsFetched?()
+        self?.viewDidFinish()
       })
       .disposed(by: disposeBag)
+  }
+  
+  fileprivate func viewDidFinish() {
+    coordinator?.navigate(to: .initialSceneDidFinish)
   }
 }

@@ -9,34 +9,23 @@
 import UIKit
 
 class InitialViewController: UIViewController {
-    
-    var viewModel: InitialViewModel!
-    
-    private var appDelegate: AppDelegate? {
-        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        return delegate
-    }
-    
-    static func create(with viewModel: InitialViewModel) -> InitialViewController {
-        let controller = InitialViewController()
-        controller.viewModel = viewModel
-        return controller
-    }
-    
-    // MARK: - Life Cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupBindables()
-        viewModel.getStations()
-    }
-    
-    private func setupBindables() {
-        viewModel.stationsFetched = { [weak self] in
-            self?.appDelegate?.initialTransition()
-        }
-    }
+  
+  var viewModel: InitialViewModelProtocol!
+  
+  static func create(with viewModel: InitialViewModelProtocol) -> InitialViewController {
+    let controller = InitialViewController()
+    controller.viewModel = viewModel
+    return controller
+  }
+  
+  deinit {
+    print("deinit \(Self.self)")
+  }
+  
+  // MARK: - Life Cycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    viewModel.viewDidLoad()
+  }
 }

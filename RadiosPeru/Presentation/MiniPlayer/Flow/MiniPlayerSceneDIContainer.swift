@@ -12,7 +12,7 @@ final class MiniPlayerSceneDIContainer {
   
   struct Dependencies {
     let favoritesLocalStorage: FavoritesLocalStorage
-    let radioPlayer: RadioPlayer
+    let radioPlayer: RadioPlayerProtocol
     let analyticsService: AnalyticsServiceProtocol
   }
   
@@ -20,15 +20,19 @@ final class MiniPlayerSceneDIContainer {
   
   private var favoritesRepository: FavoritesRepository!
   
-  // MARK: - Initializers
+  // MARK: - Initializer
   
   init(dependencies: Dependencies) {
     self.dependencies = dependencies
     self.favoritesRepository = makeFavoritesRepository()
   }
   
-  public func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModel, delegate: MiniPlayerViewModelDelegate) -> UIViewController {
-    viewModel.delegate = delegate
+  // MARK: - Public Api
+  
+  public func makeMiniPlayerViewController(with viewModel: MiniPlayerViewModelProtocol,
+                                           delegate: MiniPlayerViewModelDelegate) -> MiniPlayerViewController {
+    var viewModelMiniPlayer = viewModel
+    viewModelMiniPlayer.delegate = delegate
     return MiniPlayerViewController.create(with: viewModel)
   }
   

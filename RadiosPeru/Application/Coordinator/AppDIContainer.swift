@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-final class AppDIContainer {
+public final class AppDIContainer {
   
   lazy var dataTransferService: DataTransferService = {
     return ApiClient()
