@@ -59,7 +59,7 @@ class RadioPlayer: RadioPlayerProtocol {
   
   // MARK: - Public
   
-  func setupRadio(with station: StationRemote, playWhenReady: Bool = false) {
+  func setupRadio(with station: StationProp, playWhenReady: Bool = false) {
     statePlayerBehaviorSubject.onNext(.stopped)
     disposeBag = DisposeBag()
     
@@ -86,7 +86,7 @@ class RadioPlayer: RadioPlayerProtocol {
     onlineInfoBehaviorSubject.onNext("")
   }
   
-  fileprivate func subscribeToState(for station: StationRemote) {
+  fileprivate func subscribeToState(for station: StationProp) {
     statePlayerBehaviorSubject
       .subscribe(onNext: { [weak self] state in
         switch state {
@@ -101,7 +101,7 @@ class RadioPlayer: RadioPlayerProtocol {
       .disposed(by: disposeBag)
   }
   
-  fileprivate func handleError(for station: StationRemote, error: String) {
+  fileprivate func handleError(for station: StationProp, error: String) {
     let event = Event(radioId: station.id,
                       radioName: station.name,
                       urlStream: station.urlStream,
@@ -119,7 +119,7 @@ class RadioPlayer: RadioPlayerProtocol {
       .disposed(by: disposeBag)
   }
   
-  fileprivate func subscribeToDescription(for station: StationRemote) {
+  fileprivate func subscribeToDescription(for station: StationProp) {
     Observable.combineLatest( statePlayerBehaviorSubject, onlineInfoBehaviorSubject)
       .flatMap { [weak self] (state, onlineInfo) -> Observable<String> in
         guard let strongSelf = self else { return Observable.just("") }
@@ -130,7 +130,7 @@ class RadioPlayer: RadioPlayerProtocol {
     .disposed(by: disposeBag)
   }
   
-  fileprivate func bindToRemoteControls(for station: StationRemote) {
+  fileprivate func bindToRemoteControls(for station: StationProp) {
     let defaultInfo = station.city + " - " +
       station.frecuency + " - " +
       station.slogan
@@ -146,7 +146,7 @@ class RadioPlayer: RadioPlayerProtocol {
   }
   
   fileprivate func buildDescription(for state: RadioPlayerState,
-                                    station: StationRemote,
+                                    station: StationProp,
                                     _ onlineInfo: String) -> String {
     let defaultDescription =
       station.city + " - " +
@@ -174,7 +174,7 @@ class RadioPlayer: RadioPlayerProtocol {
   
   // MARK: - Networking
   
-  private func getAiringNowDetails(for station: StationRemote) {
+  private func getAiringNowDetails(for station: StationProp) {
     let request = FetchShowOnlineInfoUseCaseRequestValue(group: station.type)
     
     showDetailsUseCase.execute(requestValue: request)
@@ -192,7 +192,7 @@ class RadioPlayer: RadioPlayerProtocol {
   
   // MARK: - Log Events
   
-  fileprivate func trackPlayEvent(for station: StationRemote) {
+  fileprivate func trackPlayEvent(for station: StationProp) {
     statePlayerBehaviorSubject
       .distinctUntilChanged()
       .scan(EventPlay.empty, accumulator: { (old, new) -> EventPlay? in

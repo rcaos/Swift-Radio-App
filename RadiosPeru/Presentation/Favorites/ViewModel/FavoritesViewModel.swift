@@ -10,7 +10,7 @@ import RxSwift
 
 protocol FavoritesViewModelDelegate: class {
   
-  func stationFavoriteDidSelect(station: StationRemote)
+  func stationFavoriteDidSelect(station: StationProp)
 }
 
 protocol FavoritesViewModelProtocol {
@@ -19,9 +19,9 @@ protocol FavoritesViewModelProtocol {
   
   func viewDidLoad()
   
-  func stationDidSelected(with: StationRemote)
+  func stationDidSelected(with: StationProp)
   
-  func favoriteDidSelect(for: StationRemote)
+  func favoriteDidSelect(for: StationProp)
   
   // MARK: - Output
   
@@ -69,11 +69,11 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
       .disposed(by: disposeBag)
   }
   
-  func stationDidSelected(with station: StationRemote) {
+  func stationDidSelected(with station: StationProp) {
     delegate?.stationFavoriteDidSelect(station: station)
   }
   
-  func favoriteDidSelect(for station: StationRemote) {
+  func favoriteDidSelect(for station: StationProp) {
     let simpleStation = SimpleStation(name: station.name, id: station.id)
     
     let request = ToggleFavoriteUseCaseRequestValue(station: simpleStation)
@@ -87,7 +87,9 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
   // MARK: - Private
   
   fileprivate func processFetched(for items: [StationRemote]) {
-    let cells = items.map( FavoriteTableViewModel.init )
+    let cells = items
+      .map { StationProp($0) }
+      .map { FavoriteTableViewModel($0) }
     
     if cells.isEmpty {
       viewStateSubject.onNext( .empty )

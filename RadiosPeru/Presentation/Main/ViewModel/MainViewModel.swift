@@ -44,7 +44,7 @@ final class MainViewModel: MainViewModelProtocol {
       .disposed(by: disposeBag)
   }
   
-  func selectStation(with station: StationRemote) {
+  func selectStation(with station: StationProp) {
     miniPlayerViewModel.configStation(with: station)
     showMiniPlayer?()
   }
@@ -60,7 +60,7 @@ final class MainViewModel: MainViewModelProtocol {
 
 extension MainViewModel: PopularViewModelDelegate {
   
-  func stationDidSelect(station: StationRemote) {
+  func stationDidSelect(station: StationProp) {
     selectStation(with: station)
   }
 }
@@ -69,7 +69,7 @@ extension MainViewModel: PopularViewModelDelegate {
 
 extension MainViewModel: FavoritesViewModelDelegate {
   
-  func stationFavoriteDidSelect(station: StationRemote) {
+  func stationFavoriteDidSelect(station: StationProp) {
     selectStation(with: station)
   }
 }
@@ -78,7 +78,7 @@ extension MainViewModel: FavoritesViewModelDelegate {
 
 extension MainViewModel: MiniPlayerViewModelDelegate {
   
-  func stationPLayerDidSelect(station: StationRemote) {
+  func stationPLayerDidSelect(station: StationProp) {
     navigate(to: .miniPlayerDidSelected(station: station))
   }
 }

@@ -12,7 +12,7 @@ protocol RadioPlayerProtocol {
   
   // MARk: - Input
   
-  func setupRadio(with station: StationRemote, playWhenReady: Bool)
+  func setupRadio(with station: StationProp, playWhenReady: Bool)
   
   func togglePlayPause()
   

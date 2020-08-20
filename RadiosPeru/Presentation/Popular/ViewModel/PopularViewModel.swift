@@ -10,7 +10,7 @@ import RxSwift
 
 protocol PopularViewModelDelegate: class {
   
-  func stationDidSelect(station: StationRemote)
+  func stationDidSelect(station: StationProp)
 }
 
 protocol PopularViewModelProtocol {
@@ -19,7 +19,7 @@ protocol PopularViewModelProtocol {
   
   func viewDidLoad()
   
-  func stationDidSelect(with: StationRemote)
+  func stationDidSelect(with: StationProp)
   
   // MARK: - Output
   
@@ -62,14 +62,16 @@ final class PopularViewModel: PopularViewModelProtocol {
       .disposed(by: disposeBag)
   }
   
-  func stationDidSelect(with station: StationRemote) {
+  func stationDidSelect(with station: StationProp) {
     delegate?.stationDidSelect(station: station)
   }
   
   // MARK: - Private
   
   fileprivate func processFetched(for items: [StationRemote]) {
-    let popularCells = items.map( PopularCellViewModel.init )
+    let popularCells = items
+      .map { StationProp($0) }
+      .map { PopularCellViewModel($0) }
     
     if popularCells.isEmpty {
       viewStateObservableSubject.onNext(.empty)

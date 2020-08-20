@@ -36,7 +36,7 @@ final class PlayerViewModel: PlayerViewModelProtocol {
   
   private var radioPlayer: RadioPlayerProtocol?
   
-  private var stationSelected: StationRemote
+  private var stationSelected: StationProp
   
   private let viewStateBehaviorSubject = BehaviorSubject<RadioPlayerState>(value: .stopped)
   
@@ -67,7 +67,7 @@ final class PlayerViewModel: PlayerViewModelProtocol {
   init(toggleFavoritesUseCase: ToggleFavoritesUseCase,
        askFavoriteUseCase: AskFavoriteUseCase,
        player: RadioPlayerProtocol?,
-       station: StationRemote) {
+       station: StationProp) {
     
     self.toggleFavoritesUseCase = toggleFavoritesUseCase
     self.askFavoriteUseCase = askFavoriteUseCase
@@ -86,7 +86,7 @@ final class PlayerViewModel: PlayerViewModelProtocol {
   
   // MARK: - Private
   
-  private func setupRadio(with station: StationRemote) {
+  private func setupRadio(with station: StationProp) {
     stationNameBehaviorSubject.onNext(station.name)
     stationURLBehaviorSubject.onNext( URL(string: station.pathImage))
     checkIsFavorite(with: station)
@@ -105,7 +105,7 @@ final class PlayerViewModel: PlayerViewModelProtocol {
       .disposed(by: disposeBag)
   }
   
-  private func checkIsFavorite(with station: StationRemote?) {
+  private func checkIsFavorite(with station: StationProp?) {
     guard let station = station else { return  }
     
     let simpleStation = SimpleStation(name: station.name, id: station.id)

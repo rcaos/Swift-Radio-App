@@ -11,7 +11,7 @@ import RxSwift
 
 protocol FavoriteTableViewCellDelegate: class {
   
-  func favoriteIsPicked(for station: StationRemote)
+  func favoriteIsPicked(for station: StationProp)
 }
 
 class FavoriteTableViewCell: UITableViewCell {

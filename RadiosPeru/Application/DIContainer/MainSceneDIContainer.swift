@@ -59,7 +59,7 @@ final class MainSceneDIContainer {
     return MiniPlayerSceneDIContainer(dependencies: miniPlayerDependencies).makeMiniPlayerViewController(with: viewModel, delegate: delegate)
   }
   
-  public func makePlayerViewController(with station: StationRemote) -> PlayerViewController {
+  public func makePlayerViewController(with station: StationProp) -> PlayerViewController {
     let playerDependencies = PlayerSceneDIContainer.Dependencies(
       favoritesLocalStorage: dependencies.favoritesLocalStorage,
       radioPlayer: self.radioPlayer,

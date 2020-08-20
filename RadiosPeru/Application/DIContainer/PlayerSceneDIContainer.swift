@@ -27,7 +27,7 @@ final class PlayerSceneDIContainer {
     self.favoritesRepository = makeFavoritesRepository()
   }
   
-  public func makePlayerViewController(with station: StationRemote) -> PlayerViewController {
+  public func makePlayerViewController(with station: StationProp) -> PlayerViewController {
     return PlayerViewController.create(with: makePlayerViewModel(with: station))
   }
 }
@@ -36,7 +36,7 @@ final class PlayerSceneDIContainer {
 
 extension PlayerSceneDIContainer {
   
-  private func makePlayerViewModel(with station: StationRemote) -> PlayerViewModel {
+  private func makePlayerViewModel(with station: StationProp) -> PlayerViewModel {
     return PlayerViewModel(
       toggleFavoritesUseCase: makeToggleFavoritesUseCase(),
       askFavoriteUseCase: makeAskFavoritesUseCase(),

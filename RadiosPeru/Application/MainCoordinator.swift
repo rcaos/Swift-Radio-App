@@ -21,7 +21,7 @@ public enum MainSteps: Step {
   
   mainSceneDidFinish,
   
-  miniPlayerDidSelected(station: StationRemote),
+  miniPlayerDidSelected(station: StationProp),
   
   settingsIsRequired
 }
@@ -32,7 +32,7 @@ public protocol MainCoordinatorDependencies {
   
   func makeSettingsViewController() -> UIViewController
   
-  func makePlayerViewController(with station: StationRemote) -> PlayerViewController
+  func makePlayerViewController(with station: StationProp) -> PlayerViewController
 }
 
 public protocol MainCoordinatorProtocol: class {
@@ -96,7 +96,7 @@ public class MainCoordinator: NavigationCoordinator, MainCoordinatorProtocol {
     navigationController.setViewControllers([mainVC], animated: true)
   }
   
-  fileprivate func showPlayer(station: StationRemote) {
+  fileprivate func showPlayer(station: StationProp) {
     
     let playerController = dependencies.makePlayerViewController(with: station)
     

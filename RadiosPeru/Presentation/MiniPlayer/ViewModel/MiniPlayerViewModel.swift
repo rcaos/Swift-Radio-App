@@ -10,7 +10,7 @@ import RxSwift
 
 protocol MiniPlayerViewModelDelegate: class {
   
-  func stationPLayerDidSelect(station: StationRemote)
+  func stationPLayerDidSelect(station: StationProp)
 }
 
 protocol MiniPlayerViewModelProtocol {
@@ -44,7 +44,7 @@ final class MiniPlayerViewModel: MiniPlayerViewModelProtocol {
   
   private var radioPlayer: RadioPlayerProtocol?
   
-  private var stationSelected: StationRemote?
+  private var stationSelected: StationProp?
   
   private let viewStateBehaviorSubject = BehaviorSubject<RadioPlayerState>(value: .stopped)
   
@@ -92,7 +92,7 @@ final class MiniPlayerViewModel: MiniPlayerViewModelProtocol {
   
   // MARK: - Public
   
-  func configStation(with station: StationRemote, playAutomatically: Bool = true) {
+  func configStation(with station: StationProp, playAutomatically: Bool = true) {
     if checkIsPlaying(with: station) { return }
     
     disposeBag = DisposeBag()
@@ -146,11 +146,11 @@ final class MiniPlayerViewModel: MiniPlayerViewModelProtocol {
   
   // MARK: - Private
   
-  fileprivate func setupRadio(with station: StationRemote) {
+  fileprivate func setupRadio(with station: StationProp) {
     stationNameBehaviorSubject.onNext(station.name)
   }
   
-  fileprivate func subscribeToFavoriteChanges(for station: StationRemote) {
+  fileprivate func subscribeToFavoriteChanges(for station: StationProp) {
     favoritesChangedUseCase.execute(requestValue: FavoritesDidChangedUseCaseRequestValue() )
       .flatMap { () -> Observable<Bool> in
         let simpleStation = SimpleStation(name: station.name, id: station.id)
@@ -164,7 +164,7 @@ final class MiniPlayerViewModel: MiniPlayerViewModelProtocol {
       .disposed(by: disposeBag)
   }
   
-  fileprivate func checkIsPlaying(with station: StationRemote) -> Bool {
+  fileprivate func checkIsPlaying(with station: StationProp) -> Bool {
     if stationSelected == station,
       let state = try? viewStateBehaviorSubject.value() {
       switch state {

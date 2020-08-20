@@ -10,14 +10,14 @@ import Foundation
 
 final class PopularCellViewModel {
   
-  var radioStation: StationRemote
+  let radioStation: StationProp
   
   lazy var imageURL: URL? = {
     return URL(string: radioStation.pathImage)
   }()
   
-  init(station: StationRemote) {
-    self.radioStation = station
+  init(_ station: StationProp) {
+    radioStation = station
   }
   
 }

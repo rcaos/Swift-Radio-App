@@ -43,8 +43,8 @@ extension StationRemote: Equatable {
   
 }
 
-public struct StationProp {
-  
+public struct StationProp: Equatable {
+
   let id: Int
   let name: String
   let city: String
@@ -54,7 +54,7 @@ public struct StationProp {
   let pathImage: String
   let type: Group
   
-  init(station: StationRemote) {
+  init(_ station: StationRemote) {
     id = station.id
     name = station.name
     city = station.city
@@ -63,5 +63,9 @@ public struct StationProp {
     urlStream = station.urlStream
     pathImage = station.pathImage
     type = station.type
+  }
+  
+  public static func == (lhs: StationProp, rhs: StationProp) -> Bool {
+    return lhs.id == rhs.id
   }
 }

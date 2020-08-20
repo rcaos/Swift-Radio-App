@@ -122,7 +122,7 @@ extension FavoritesRootView: UITableViewDelegate {
 
 extension FavoritesRootView: FavoriteTableViewCellDelegate {
   
-  func favoriteIsPicked(for station: StationRemote) {
+  func favoriteIsPicked(for station: StationProp) {
     viewModel.favoriteDidSelect(for: station)
   }
 }
