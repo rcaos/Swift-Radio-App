@@ -7,6 +7,7 @@
 //
 
 import Kingfisher
+import UIKit
 
 extension UIImageView {
   

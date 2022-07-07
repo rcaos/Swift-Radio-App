@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,6 +34,7 @@
 		7742E82E24EDD75800404259 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82D24EDD75800404259 /* UICollectionView+Extensions.swift */; };
 		7742E83024EDDD6600404259 /* RadioPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */; };
 		7744852D245D6364009F8865 /* EventFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7744852C245D6364009F8865 /* EventFavorite.swift */; };
+		77459D3F287724C40049EF78 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D3E287724C40049EF78 /* Kingfisher */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774778D92444CA780020245A /* UIImageView+Kingfisher.swift */; };
 		774F0CA023721555002852C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0C9F23721555002852C3 /* MainViewController.swift */; };
@@ -290,6 +291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77459D3F287724C40049EF78 /* Kingfisher in Frameworks */,
 				BE1B071DBF1EE2A1FA5A507E /* Pods_RadiosPeru.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -998,6 +1000,9 @@
 			dependencies = (
 			);
 			name = RadiosPeru;
+			packageProductDependencies = (
+				77459D3E287724C40049EF78 /* Kingfisher */,
+			);
 			productName = RadiosPeru;
 			productReference = 77421B112358FEE500A23C79 /* RadiosPeru.app */;
 			productType = "com.apple.product-type.application";
@@ -1032,6 +1037,9 @@
 				es,
 			);
 			mainGroup = 77421B082358FEE500A23C79;
+			packageReferences = (
+				77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 77421B122358FEE500A23C79 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1484,6 +1492,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		77459D3E287724C40049EF78 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */ = {
