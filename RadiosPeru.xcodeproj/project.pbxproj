@@ -29,7 +29,6 @@
 		77421B2C2359116600A23C79 /* PlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77421B2B2359116600A23C79 /* PlayerViewController.storyboard */; };
 		7742E82224EDC88700404259 /* FavoritesRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82124EDC88700404259 /* FavoritesRootView.swift */; };
 		7742E82424EDCE0B00404259 /* PopularRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82324EDCE0B00404259 /* PopularRootView.swift */; };
-		7742E82624EDD1F800404259 /* SettingsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82524EDD1F800404259 /* SettingsRootView.swift */; };
 		7742E82824EDD42500404259 /* Dequeuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82724EDD42500404259 /* Dequeuable.swift */; };
 		7742E82A24EDD43900404259 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82924EDD43900404259 /* UITableView+Extensions.swift */; };
 		7742E82E24EDD75800404259 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82D24EDD75800404259 /* UICollectionView+Extensions.swift */; };
@@ -100,9 +99,6 @@
 		77BACF8524E5B73E003B3EB1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BACF8424E5B73E003B3EB1 /* AppCoordinator.swift */; };
 		77BACF8724E5B75D003B3EB1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BACF8624E5B75C003B3EB1 /* Coordinator.swift */; };
 		77BACF8924E5B776003B3EB1 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BACF8824E5B776003B3EB1 /* NavigationCoordinator.swift */; };
-		77C1ED94244CFD64002F4307 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1ED93244CFD64002F4307 /* SettingsViewController.swift */; };
-		77C1ED97244CFD76002F4307 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1ED96244CFD76002F4307 /* SettingsViewModel.swift */; };
-		77C1ED9A244D59C5002F4307 /* SettingsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1ED99244D59C5002F4307 /* SettingsSectionModel.swift */; };
 		77C9D3ED23DB990400C6FD55 /* StationsLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */; };
 		77C9D3F023DB992700C6FD55 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3EF23DB992700C6FD55 /* CoreDataStorage.swift */; };
 		77C9D3F323DBA4F700C6FD55 /* Station+Mappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3F223DBA4F700C6FD55 /* Station+Mappings.swift */; };
@@ -171,7 +167,6 @@
 		77421B2B2359116600A23C79 /* PlayerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayerViewController.storyboard; sourceTree = "<group>"; };
 		7742E82124EDC88700404259 /* FavoritesRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRootView.swift; sourceTree = "<group>"; };
 		7742E82324EDCE0B00404259 /* PopularRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRootView.swift; sourceTree = "<group>"; };
-		7742E82524EDD1F800404259 /* SettingsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootView.swift; sourceTree = "<group>"; };
 		7742E82724EDD42500404259 /* Dequeuable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dequeuable.swift; sourceTree = "<group>"; };
 		7742E82924EDD43900404259 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		7742E82D24EDD75800404259 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
@@ -246,9 +241,6 @@
 		77BACF8424E5B73E003B3EB1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		77BACF8624E5B75C003B3EB1 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = RadiosPeru/Application/Coordinator.swift; sourceTree = SOURCE_ROOT; };
 		77BACF8824E5B776003B3EB1 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavigationCoordinator.swift; path = RadiosPeru/Application/NavigationCoordinator.swift; sourceTree = SOURCE_ROOT; };
-		77C1ED93244CFD64002F4307 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		77C1ED96244CFD76002F4307 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		77C1ED99244D59C5002F4307 /* SettingsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionModel.swift; sourceTree = "<group>"; };
 		77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsLocalStorage.swift; sourceTree = "<group>"; };
 		77C9D3EF23DB992700C6FD55 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		77C9D3F223DBA4F700C6FD55 /* Station+Mappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+Mappings.swift"; sourceTree = "<group>"; };
@@ -406,24 +398,6 @@
 			path = RadiosPeru;
 			sourceTree = "<group>";
 		};
-		7742E82B24EDD5A500404259 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				77C1ED93244CFD64002F4307 /* SettingsViewController.swift */,
-				7742E82524EDD1F800404259 /* SettingsRootView.swift */,
-				77C1ED99244D59C5002F4307 /* SettingsSectionModel.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		7742E82C24EDD5AB00404259 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				77C1ED96244CFD76002F4307 /* SettingsViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		7755B526235A13F0004E642B /* Popular */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,7 +464,6 @@
 				770282DD235C08BD000098DB /* MiniPlayer */,
 				77BCBBDF23DFB55E00CA5281 /* Common Views */,
 				777CEDCE23D90C7A00FCD04B /* Utils */,
-				77C1ED95244CFD67002F4307 /* Settings */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -830,15 +803,6 @@
 				774714602363A39100198D9E /* PlayingBarsView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		77C1ED95244CFD67002F4307 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				7742E82B24EDD5A500404259 /* View */,
-				7742E82C24EDD5AB00404259 /* ViewModel */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 		77C9D3EE23DB990700C6FD55 /* PersistentStorages */ = {
@@ -1190,7 +1154,6 @@
 				774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */,
 				7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */,
 				773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */,
-				77C1ED9A244D59C5002F4307 /* SettingsSectionModel.swift in Sources */,
 				77D9A0F923DA556600DDCE06 /* AppDIContainer.swift in Sources */,
 				77E5AF6623D9F45200509BC2 /* ShowCRP+Decodable.swift in Sources */,
 				77D9A0E023DA38EF00DDCE06 /* StationsRepository.swift in Sources */,
@@ -1209,7 +1172,6 @@
 				77B957BD23DC1D0500220426 /* FavoritesLocalStorage.swift in Sources */,
 				77D9A0DA23DA373600DDCE06 /* FetchStationsUseCase.swift in Sources */,
 				770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */,
-				7742E82624EDD1F800404259 /* SettingsRootView.swift in Sources */,
 				77C9D3F023DB992700C6FD55 /* CoreDataStorage.swift in Sources */,
 				77B957B523DC188300220426 /* SimpleStation.swift in Sources */,
 				77D9A0EC23DA427C00DDCE06 /* DataTransferService.swift in Sources */,
@@ -1246,7 +1208,6 @@
 				77A3D7FA23DB2ADC003FF385 /* AppAppearance.swift in Sources */,
 				7744852D245D6364009F8865 /* EventFavorite.swift in Sources */,
 				779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */,
-				77C1ED97244CFD76002F4307 /* SettingsViewModel.swift in Sources */,
 				77D51768237CA04400B7DCC9 /* StationProvider.swift in Sources */,
 				77CA145B23689CB9001BF04E /* ApiError.swift in Sources */,
 				776FE6982459BB2C000604A0 /* TransferServiceProtocol.swift in Sources */,
@@ -1266,7 +1227,6 @@
 				7742E82224EDC88700404259 /* FavoritesRootView.swift in Sources */,
 				779ECAA1245D4F2B00987EE7 /* SavePlayingEvent.swift in Sources */,
 				778380EA24E5CA9A006EC3C7 /* MainCoordinator.swift in Sources */,
-				77C1ED94244CFD64002F4307 /* SettingsViewController.swift in Sources */,
 				77BACF8724E5B75D003B3EB1 /* Coordinator.swift in Sources */,
 				7742E82824EDD42500404259 /* Dequeuable.swift in Sources */,
 				77A68DF82446A47100E6924A /* StationFavoriteCD+PersistenceStore.swift in Sources */,
