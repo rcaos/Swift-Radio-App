@@ -38,6 +38,8 @@
 		77459D42287726FB0049EF78 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D41287726FB0049EF78 /* RxCocoa */; };
 		77459D44287726FB0049EF78 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D43287726FB0049EF78 /* RxSwift */; };
 		77459D47287727770049EF78 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D46287727770049EF78 /* RxDataSources */; };
+		77459D4B287738630049EF78 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77459D49287738630049EF78 /* Coordinator.swift */; };
+		77459D4C287738630049EF78 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77459D4A287738630049EF78 /* NavigationCoordinator.swift */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774778D92444CA780020245A /* UIImageView+Kingfisher.swift */; };
 		774F0CA023721555002852C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0C9F23721555002852C3 /* MainViewController.swift */; };
@@ -101,8 +103,6 @@
 		77B957B923DC19DD00220426 /* StationFavoriteCD+Mappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957B823DC19DD00220426 /* StationFavoriteCD+Mappings.swift */; };
 		77B957BD23DC1D0500220426 /* FavoritesLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B957BC23DC1D0500220426 /* FavoritesLocalStorage.swift */; };
 		77BACF8524E5B73E003B3EB1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BACF8424E5B73E003B3EB1 /* AppCoordinator.swift */; };
-		77BACF8724E5B75D003B3EB1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BACF8624E5B75C003B3EB1 /* Coordinator.swift */; };
-		77BACF8924E5B776003B3EB1 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BACF8824E5B776003B3EB1 /* NavigationCoordinator.swift */; };
 		77C9D3ED23DB990400C6FD55 /* StationsLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */; };
 		77C9D3F023DB992700C6FD55 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3EF23DB992700C6FD55 /* CoreDataStorage.swift */; };
 		77C9D3F323DBA4F700C6FD55 /* Station+Mappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9D3F223DBA4F700C6FD55 /* Station+Mappings.swift */; };
@@ -177,6 +177,8 @@
 		7743511F245E74EB00345320 /* GoogleService-Info.PROD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.PROD.plist"; sourceTree = "<group>"; };
 		77435123245E795900345320 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7744852C245D6364009F8865 /* EventFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFavorite.swift; sourceTree = "<group>"; };
+		77459D49287738630049EF78 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		77459D4A287738630049EF78 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		774714602363A39100198D9E /* PlayingBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingBarsView.swift; sourceTree = "<group>"; };
 		774778D92444CA780020245A /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		774F0C9F23721555002852C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -241,8 +243,6 @@
 		77B957B823DC19DD00220426 /* StationFavoriteCD+Mappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StationFavoriteCD+Mappings.swift"; sourceTree = "<group>"; };
 		77B957BC23DC1D0500220426 /* FavoritesLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLocalStorage.swift; sourceTree = "<group>"; };
 		77BACF8424E5B73E003B3EB1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		77BACF8624E5B75C003B3EB1 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = RadiosPeru/Application/Coordinator.swift; sourceTree = SOURCE_ROOT; };
-		77BACF8824E5B776003B3EB1 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavigationCoordinator.swift; path = RadiosPeru/Application/NavigationCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		77C9D3EC23DB990400C6FD55 /* StationsLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsLocalStorage.swift; sourceTree = "<group>"; };
 		77C9D3EF23DB992700C6FD55 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		77C9D3F223DBA4F700C6FD55 /* Station+Mappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+Mappings.swift"; sourceTree = "<group>"; };
@@ -393,9 +393,18 @@
 				77E5AF6123D9F35B00509BC2 /* Infraestructure */,
 				7739E80A235E4A690071882A /* Libraries */,
 				777CEDD023D90CA100FCD04B /* Resources */,
-				77D9A0DD23DA388C00DDCE06 /* Common */,
+				77459D48287738340049EF78 /* Common */,
 			);
 			path = RadiosPeru;
+			sourceTree = "<group>";
+		};
+		77459D48287738340049EF78 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				77459D49287738630049EF78 /* Coordinator.swift */,
+				77459D4A287738630049EF78 /* NavigationCoordinator.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		7755B526235A13F0004E642B /* Popular */ = {
@@ -830,15 +839,6 @@
 			path = CoreDataStorage;
 			sourceTree = "<group>";
 		};
-		77D9A0DD23DA388C00DDCE06 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				77BACF8624E5B75C003B3EB1 /* Coordinator.swift */,
-				77BACF8824E5B776003B3EB1 /* NavigationCoordinator.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 		77D9A0DE23DA38DB00DDCE06 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
@@ -1029,9 +1029,9 @@
 			);
 			mainGroup = 77421B082358FEE500A23C79;
 			packageReferences = (
-				77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
-				77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift.git" */,
-				77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources.git" */,
+				77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 77421B122358FEE500A23C79 /* Products */;
 			projectDirPath = "";
@@ -1135,6 +1135,7 @@
 				77D9A0DA23DA373600DDCE06 /* FetchStationsUseCase.swift in Sources */,
 				770A6BFB23687AF400FDE4F6 /* GroupCRPProvider.swift in Sources */,
 				77C9D3F023DB992700C6FD55 /* CoreDataStorage.swift in Sources */,
+				77459D4B287738630049EF78 /* Coordinator.swift in Sources */,
 				77B957B523DC188300220426 /* SimpleStation.swift in Sources */,
 				77D9A0EC23DA427C00DDCE06 /* DataTransferService.swift in Sources */,
 				77236FA923677F9B009C80D0 /* GroupRPPResult.swift in Sources */,
@@ -1165,6 +1166,7 @@
 				7785AF7A24590DEA003D5238 /* SaveStationError.swift in Sources */,
 				77B6AE342448989700D4D637 /* FavoriteTableViewCell.swift in Sources */,
 				7742E82A24EDD43900404259 /* UITableView+Extensions.swift in Sources */,
+				77459D4C287738630049EF78 /* NavigationCoordinator.swift in Sources */,
 				777AF533244BD6C90004EB87 /* LocalClient.swift in Sources */,
 				77D9A0F523DA459C00DDCE06 /* DefaultShowDetailsRepository.swift in Sources */,
 				77A3D7FA23DB2ADC003FF385 /* AppAppearance.swift in Sources */,
@@ -1189,7 +1191,6 @@
 				7742E82224EDC88700404259 /* FavoritesRootView.swift in Sources */,
 				779ECAA1245D4F2B00987EE7 /* SavePlayingEvent.swift in Sources */,
 				778380EA24E5CA9A006EC3C7 /* MainCoordinator.swift in Sources */,
-				77BACF8724E5B75D003B3EB1 /* Coordinator.swift in Sources */,
 				7742E82824EDD42500404259 /* Dequeuable.swift in Sources */,
 				77A68DF82446A47100E6924A /* StationFavoriteCD+PersistenceStore.swift in Sources */,
 				77B957B123DC0D1800220426 /* PopularSceneDIContainer.swift in Sources */,
@@ -1207,7 +1208,6 @@
 				779ECAAC245D51A400987EE7 /* EventType.swift in Sources */,
 				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,
 				7755B530235A15D2004E642B /* PopularCellViewModel.swift in Sources */,
-				77BACF8924E5B776003B3EB1 /* NavigationCoordinator.swift in Sources */,
 				7778B15F244C1B2900FDB767 /* FontSize.swift in Sources */,
 				77D9A0F123DA454B00DDCE06 /* DefaultStationsLocalRepository.swift in Sources */,
 				77C9D3ED23DB990400C6FD55 /* StationsLocalStorage.swift in Sources */,
@@ -1446,7 +1446,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
+		77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -1454,7 +1454,7 @@
 				minimumVersion = 7.3.0;
 			};
 		};
-		77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift.git" */ = {
+		77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
@@ -1462,7 +1462,7 @@
 				version = 5.0.0;
 			};
 		};
-		77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources.git" */ = {
+		77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
 			requirement = {
@@ -1475,22 +1475,22 @@
 /* Begin XCSwiftPackageProductDependency section */
 		77459D3E287724C40049EF78 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
+			package = 77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 		77459D41287726FB0049EF78 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
+			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
 		77459D43287726FB0049EF78 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
+			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
 		77459D46287727770049EF78 /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources.git" */;
+			package = 77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
