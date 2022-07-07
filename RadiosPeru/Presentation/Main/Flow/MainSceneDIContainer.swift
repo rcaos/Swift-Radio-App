@@ -96,11 +96,6 @@ final class MainSceneDIContainer {
     
     return PlayerSceneDIContainer(dependencies: playerDependencies).makePlayerViewController(with: station)
   }
-  
-  public func makeSettingsViewController() -> UIViewController {
-    let viewModel = SettingsViewModel()
-    return SettingsViewController(viewModel: viewModel)
-  }
 }
 
 // MARK: - Private

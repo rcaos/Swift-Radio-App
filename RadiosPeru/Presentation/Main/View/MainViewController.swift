@@ -40,7 +40,6 @@ public class MainViewControler: UIViewController, StoryboardInstantiable {
     setupTabBarView()
     setupMiniPlayerView()
     setupViewModel()
-    setupSettingsButton()
   }
   
   fileprivate func setupTabBarView() {
@@ -77,17 +76,7 @@ public class MainViewControler: UIViewController, StoryboardInstantiable {
       })
     }
   }
-  
-  fileprivate func setupSettingsButton() {
-    let settingsButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .done, target: nil, action: nil)
-    navigationItem.rightBarButtonItem = settingsButton
-    navigationItem.rightBarButtonItem?.tintColor = .white
-    
-    settingsButton.rx.tap
-      .bind(to: viewModel.showSettingsSubject)
-      .disposed(by: disposeBag)
-  }
-  
+
   fileprivate func buildViewControllers() -> [UIViewController] {
     let popularVC = controllersFactory.makePopularViewController()
     popularVC.tabBarItem = UITabBarItem(title: "home".localized(), image: UIImage(named: "houseItem"), tag: 0)
