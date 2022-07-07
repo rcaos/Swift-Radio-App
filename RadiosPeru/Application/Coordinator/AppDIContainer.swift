@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 
 public final class AppDIContainer {
   
@@ -22,19 +21,7 @@ public final class AppDIContainer {
   lazy var analyticsClient: LocalClient = {
     return backendClient
   }()
-  
-  // Require a valid 'GoogleService-Info.plist'
-  // Please visit: https://firebase.google.com/docs/ios/setup?authuser=0
-  
-//  lazy var backendClient: FireStoreClient = {
-//    FirebaseApp.configure()
-//    return FireStoreClient(stationsCollection: "stations")
-//  }()
-//
-//  lazy var analyticsClient: AnalyticsClient = {
-//    return AnalyticsClient()
-//  }()
-  
+
   lazy var localStorage = CoreDataStorage(maxStorageLimit: 10)
   
   lazy var stationsLocalStorage: StationsLocalStorage = DefaultStationsLocalStorage(coreDataStack: localStorage)
