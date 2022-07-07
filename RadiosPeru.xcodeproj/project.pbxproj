@@ -300,13 +300,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		54521FDC5C65B6C9C9BF7229 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		770282DD235C08BD000098DB /* MiniPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,7 +364,6 @@
 			children = (
 				77421B132358FEE500A23C79 /* RadiosPeru */,
 				77421B122358FEE500A23C79 /* Products */,
-				54521FDC5C65B6C9C9BF7229 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -973,9 +965,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		77421B102358FEE500A23C79 /* RadiosPeru */ = {
+		77421B102358FEE500A23C79 /* RadioApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 77421B232358FEE700A23C79 /* Build configuration list for PBXNativeTarget "RadiosPeru" */;
+			buildConfigurationList = 77421B232358FEE700A23C79 /* Build configuration list for PBXNativeTarget "RadioApp" */;
 			buildPhases = (
 				774778D82444B18C0020245A /* Run Script - SwiftLint */,
 				77421B0D2358FEE500A23C79 /* Sources */,
@@ -987,7 +979,7 @@
 			);
 			dependencies = (
 			);
-			name = RadiosPeru;
+			name = RadioApp;
 			packageProductDependencies = (
 				77459D3E287724C40049EF78 /* Kingfisher */,
 				77459D41287726FB0049EF78 /* RxCocoa */,
@@ -1037,7 +1029,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				77421B102358FEE500A23C79 /* RadiosPeru */,
+				77421B102358FEE500A23C79 /* RadioApp */,
 			);
 		};
 /* End PBXProject section */
@@ -1434,7 +1426,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		77421B232358FEE700A23C79 /* Build configuration list for PBXNativeTarget "RadiosPeru" */ = {
+		77421B232358FEE700A23C79 /* Build configuration list for PBXNativeTarget "RadioApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				77421B242358FEE700A23C79 /* Debug */,

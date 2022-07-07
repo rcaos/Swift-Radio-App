@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "77421B102358FEE500A23C79"
                BuildableName = "RadiosPeru.app"
-               BlueprintName = "RadiosPeru"
+               BlueprintName = "RadioApp"
                ReferencedContainer = "container:RadiosPeru.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,7 +46,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77421B102358FEE500A23C79"
             BuildableName = "RadiosPeru.app"
-            BlueprintName = "RadiosPeru"
+            BlueprintName = "RadioApp"
             ReferencedContainer = "container:RadiosPeru.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -76,7 +76,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77421B102358FEE500A23C79"
             BuildableName = "RadiosPeru.app"
-            BlueprintName = "RadiosPeru"
+            BlueprintName = "RadioApp"
             ReferencedContainer = "container:RadiosPeru.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
