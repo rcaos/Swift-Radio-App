@@ -67,7 +67,6 @@
 		7784646124EEBD36004DEB3C /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7784646024EEBD35004DEB3C /* NiblessViewController.swift */; };
 		7785AF7A24590DEA003D5238 /* SaveStationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7785AF7924590DEA003D5238 /* SaveStationError.swift */; };
 		778A96682459EC3100F2E17C /* Event+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778A96672459EC3100F2E17C /* Event+Encodable.swift */; };
-		779359E02455563B00F4C332 /* FireStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779359DF2455563B00F4C332 /* FireStoreClient.swift */; };
 		77964891235A569900813C48 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77964890235A569900813C48 /* PlayerViewModel.swift */; };
 		779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DF55F23634D8C001F034F /* LoadingPlayerView.swift */; };
 		779ECA9F245D4DA100987EE7 /* EventPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECA9E245D4DA100987EE7 /* EventPlay.swift */; };
@@ -75,7 +74,6 @@
 		779ECAA3245D4FA900987EE7 /* AnalyticsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAA2245D4FA800987EE7 /* AnalyticsRepository.swift */; };
 		779ECAA5245D503800987EE7 /* DefaultAnalyticsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAA4245D503800987EE7 /* DefaultAnalyticsRepository.swift */; };
 		779ECAA7245D507900987EE7 /* AnalyticsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAA6245D507900987EE7 /* AnalyticsServiceProtocol.swift */; };
-		779ECAAA245D50A200987EE7 /* AnalyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAA9245D50A200987EE7 /* AnalyticsClient.swift */; };
 		779ECAAC245D51A400987EE7 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779ECAAB245D51A400987EE7 /* EventType.swift */; };
 		77A00848244E6B960024A3ED /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77A0084A244E6B960024A3ED /* Localizable.strings */; };
 		77A0084E244E749A0024A3ED /* String+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A0084D244E749A0024A3ED /* String+Localizable.swift */; };
@@ -214,7 +212,6 @@
 		7784646024EEBD35004DEB3C /* NiblessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NiblessViewController.swift; path = "/Users/rcaos/developer/zProjects/02 - RadioPlayer/RadioPeru.github/RadiosPeru/RadiosPeru/Presentation/Utils/NiblessViewController.swift"; sourceTree = "<absolute>"; };
 		7785AF7924590DEA003D5238 /* SaveStationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveStationError.swift; sourceTree = "<group>"; };
 		778A96672459EC3100F2E17C /* Event+Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+Encodable.swift"; sourceTree = "<group>"; };
-		779359DF2455563B00F4C332 /* FireStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreClient.swift; sourceTree = "<group>"; };
 		77964890235A569900813C48 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		779DF55F23634D8C001F034F /* LoadingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlayerView.swift; sourceTree = "<group>"; };
 		779ECA9E245D4DA100987EE7 /* EventPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPlay.swift; sourceTree = "<group>"; };
@@ -222,7 +219,6 @@
 		779ECAA2245D4FA800987EE7 /* AnalyticsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsRepository.swift; sourceTree = "<group>"; };
 		779ECAA4245D503800987EE7 /* DefaultAnalyticsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnalyticsRepository.swift; sourceTree = "<group>"; };
 		779ECAA6245D507900987EE7 /* AnalyticsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceProtocol.swift; sourceTree = "<group>"; };
-		779ECAA9245D50A200987EE7 /* AnalyticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClient.swift; sourceTree = "<group>"; };
 		779ECAAB245D51A400987EE7 /* EventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		77A00849244E6B960024A3ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		77A0084B244E6CF60024A3ED /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -588,7 +584,6 @@
 			isa = PBXGroup;
 			children = (
 				776FE6972459BB2C000604A0 /* TransferServiceProtocol.swift */,
-				779359DF2455563B00F4C332 /* FireStoreClient.swift */,
 			);
 			path = FireStore;
 			sourceTree = "<group>";
@@ -616,7 +611,6 @@
 			isa = PBXGroup;
 			children = (
 				779ECAA6245D507900987EE7 /* AnalyticsServiceProtocol.swift */,
-				779ECAA9245D50A200987EE7 /* AnalyticsClient.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -1266,7 +1260,6 @@
 				778380E824E5CA8C006EC3C7 /* InitialCoordinator.swift in Sources */,
 				77236FA423677C56009C80D0 /* EndPoint.swift in Sources */,
 				77D9A0D823DA371900DDCE06 /* FetchShowOnlineInfoUseCase.swift in Sources */,
-				779ECAAA245D50A200987EE7 /* AnalyticsClient.swift in Sources */,
 				77E5AF6823D9F52D00509BC2 /* Group+Decodable.swift in Sources */,
 				77A0084E244E749A0024A3ED /* String+Localizable.swift in Sources */,
 				777CEDCD23D90C6F00FCD04B /* SimpleViewState.swift in Sources */,
@@ -1295,7 +1288,6 @@
 				77BACF8924E5B776003B3EB1 /* NavigationCoordinator.swift in Sources */,
 				7778B15F244C1B2900FDB767 /* FontSize.swift in Sources */,
 				77D9A0F123DA454B00DDCE06 /* DefaultStationsLocalRepository.swift in Sources */,
-				779359E02455563B00F4C332 /* FireStoreClient.swift in Sources */,
 				77C9D3ED23DB990400C6FD55 /* StationsLocalStorage.swift in Sources */,
 				77D51762237C9DA500B7DCC9 /* InitialViewController.swift in Sources */,
 				77B6AE38244898B600D4D637 /* FavoriteTableViewModel.swift in Sources */,

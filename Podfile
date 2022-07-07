@@ -13,8 +13,4 @@ target 'RadiosPeru' do
 	pod 'RxSwift',         '5.0.0'
 	pod 'RxCocoa',         '5.0.0'
 	pod 'RxDataSources',   '4.0.0'
-
-	pod 'Firebase/Firestore'
-	pod 'FirebaseFirestoreSwift', '~> 0.2'
-  pod 'Firebase/Analytics'
 end
