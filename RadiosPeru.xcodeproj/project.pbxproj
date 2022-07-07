@@ -143,11 +143,9 @@
 		77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */; };
 		77F65DFC2371E1CA00677DB8 /* MiniPlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */; };
 		77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7CA6D23686FB800E1D64A /* ShowCRP.swift */; };
-		BE1B071DBF1EE2A1FA5A507E /* Pods_RadiosPeru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455FCFA8896540895DE420E0 /* Pods_RadiosPeru.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		455FCFA8896540895DE420E0 /* Pods_RadiosPeru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiosPeru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		770282D9235C08AC000098DB /* MiniPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerViewController.swift; sourceTree = "<group>"; };
 		770282DB235C08B9000098DB /* MiniPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerViewModel.swift; sourceTree = "<group>"; };
 		770A6BFA23687AF400FDE4F6 /* GroupCRPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCRPProvider.swift; sourceTree = "<group>"; };
@@ -285,8 +283,6 @@
 		77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoSource.swift; sourceTree = "<group>"; };
 		77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MiniPlayerViewController.storyboard; sourceTree = "<group>"; };
 		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
-		81BC95517D36B535BE7997A1 /* Pods-RadiosPeru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiosPeru.debug.xcconfig"; path = "Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru.debug.xcconfig"; sourceTree = "<group>"; };
-		8FB612EA606C779819BEE49F /* Pods-RadiosPeru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiosPeru.release.xcconfig"; path = "Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,7 +294,6 @@
 				77459D3F287724C40049EF78 /* Kingfisher in Frameworks */,
 				77459D44287726FB0049EF78 /* RxSwift in Frameworks */,
 				77459D47287727770049EF78 /* RxDataSources in Frameworks */,
-				BE1B071DBF1EE2A1FA5A507E /* Pods_RadiosPeru.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,8 +303,6 @@
 		54521FDC5C65B6C9C9BF7229 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				81BC95517D36B535BE7997A1 /* Pods-RadiosPeru.debug.xcconfig */,
-				8FB612EA606C779819BEE49F /* Pods-RadiosPeru.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -379,7 +372,6 @@
 				77421B132358FEE500A23C79 /* RadiosPeru */,
 				77421B122358FEE500A23C79 /* Products */,
 				54521FDC5C65B6C9C9BF7229 /* Pods */,
-				D7AA83EDDBF66C8DEADF4CE4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -978,14 +970,6 @@
 			path = Crp;
 			sourceTree = "<group>";
 		};
-		D7AA83EDDBF66C8DEADF4CE4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				455FCFA8896540895DE420E0 /* Pods_RadiosPeru.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -993,7 +977,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77421B232358FEE700A23C79 /* Build configuration list for PBXNativeTarget "RadiosPeru" */;
 			buildPhases = (
-				9388DDE98FE366DAE9411276 /* [CP] Check Pods Manifest.lock */,
 				774778D82444B18C0020245A /* Run Script - SwiftLint */,
 				77421B0D2358FEE500A23C79 /* Sources */,
 				77421B0E2358FEE500A23C79 /* Frameworks */,
@@ -1046,9 +1029,9 @@
 			);
 			mainGroup = 77421B082358FEE500A23C79;
 			packageReferences = (
-				77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
+				77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift.git" */,
+				77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources.git" */,
 			);
 			productRefGroup = 77421B122358FEE500A23C79 /* Products */;
 			projectDirPath = "";
@@ -1117,28 +1100,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nPLIST_DEV=${PROJECT_DIR}/${PRODUCT_NAME}/Resources/GoogleServiceFiles/GoogleService-Info.DEV.plist\nPLIST_PROD=${PROJECT_DIR}/${PRODUCT_NAME}/Resources/GoogleServiceFiles/GoogleService-Info.PROD.plist\n\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\n\n# Development Enviroment\n#if [ \"${APP_PREFIX}\" == \"DEV\" ]; then\n#\n#  cp -r \"${PLIST_DEV}\" \"${PLIST_DESTINATION}\"\n#  echo \"Development GoogleService-Info Copy OK\"\n\n# Production Enviroment\nif [ \"${APP_PREFIX}\" == \"PROD\" ]; then\n\n  if [ ! -f $PLIST_PROD ]\n  then\n      echo \"No Development GoogleService-Info.PROD.plist found.\"\n      exit 1\n  fi\n\n  cp -r \"${PLIST_PROD}\" \"${PLIST_DESTINATION}\"\n  echo \"Production GoogleService-Info Copy OK\"\nfi\n";
-		};
-		9388DDE98FE366DAE9411276 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RadiosPeru-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1421,7 +1382,6 @@
 		};
 		77421B242358FEE700A23C79 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81BC95517D36B535BE7997A1 /* Pods-RadiosPeru.debug.xcconfig */;
 			buildSettings = {
 				APP_PREFIX = DEV;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1443,7 +1403,6 @@
 		};
 		77421B252358FEE700A23C79 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FB612EA606C779819BEE49F /* Pods-RadiosPeru.release.xcconfig */;
 			buildSettings = {
 				APP_PREFIX = PROD;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1487,7 +1446,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -1495,7 +1454,7 @@
 				minimumVersion = 7.3.0;
 			};
 		};
-		77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
@@ -1503,7 +1462,7 @@
 				version = 5.0.0;
 			};
 		};
-		77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+		77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
 			requirement = {
@@ -1516,22 +1475,22 @@
 /* Begin XCSwiftPackageProductDependency section */
 		77459D3E287724C40049EF78 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = 77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
 			productName = Kingfisher;
 		};
 		77459D41287726FB0049EF78 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxCocoa;
 		};
 		77459D43287726FB0049EF78 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxSwift;
 		};
 		77459D46287727770049EF78 /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			package = 77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources.git" */;
 			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
