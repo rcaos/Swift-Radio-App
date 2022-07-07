@@ -34,13 +34,13 @@
 		7742E82E24EDD75800404259 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82D24EDD75800404259 /* UICollectionView+Extensions.swift */; };
 		7742E83024EDDD6600404259 /* RadioPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */; };
 		7744852D245D6364009F8865 /* EventFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7744852C245D6364009F8865 /* EventFavorite.swift */; };
-		77459D3F287724C40049EF78 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D3E287724C40049EF78 /* Kingfisher */; };
-		77459D42287726FB0049EF78 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D41287726FB0049EF78 /* RxCocoa */; };
-		77459D44287726FB0049EF78 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D43287726FB0049EF78 /* RxSwift */; };
-		77459D47287727770049EF78 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D46287727770049EF78 /* RxDataSources */; };
 		77459D4B287738630049EF78 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77459D49287738630049EF78 /* Coordinator.swift */; };
 		77459D4C287738630049EF78 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77459D4A287738630049EF78 /* NavigationCoordinator.swift */; };
 		77459D4E28775FB40049EF78 /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77459D4D28775FB40049EF78 /* NiblessViewController.swift */; };
+		77459D51287763B10049EF78 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D50287763B10049EF78 /* Kingfisher */; };
+		77459D54287763CA0049EF78 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D53287763CA0049EF78 /* RxCocoa */; };
+		77459D56287763CA0049EF78 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D55287763CA0049EF78 /* RxSwift */; };
+		77459D59287763E10049EF78 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D58287763E10049EF78 /* RxDataSources */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774778D92444CA780020245A /* UIImageView+Kingfisher.swift */; };
 		774F0CA023721555002852C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0C9F23721555002852C3 /* MainViewController.swift */; };
@@ -162,7 +162,7 @@
 		7739E80B235E4B980071882A /* ApiPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPlayer.swift; sourceTree = "<group>"; };
 		773D455A2368EE58007B755D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		773D455C2368EE6E007B755D /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
-		77421B112358FEE500A23C79 /* RadiosPeru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiosPeru.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		77421B112358FEE500A23C79 /* RadioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77421B142358FEE500A23C79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77421B1B2358FEE700A23C79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77421B1E2358FEE700A23C79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -173,8 +173,6 @@
 		7742E82924EDD43900404259 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		7742E82D24EDD75800404259 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerProtocol.swift; sourceTree = "<group>"; };
-		7743511E245E74EB00345320 /* GoogleService-Info.DEV.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.DEV.plist"; sourceTree = "<group>"; };
-		7743511F245E74EB00345320 /* GoogleService-Info.PROD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.PROD.plist"; sourceTree = "<group>"; };
 		77435123245E795900345320 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7744852C245D6364009F8865 /* EventFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFavorite.swift; sourceTree = "<group>"; };
 		77459D49287738630049EF78 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -290,10 +288,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77459D42287726FB0049EF78 /* RxCocoa in Frameworks */,
-				77459D3F287724C40049EF78 /* Kingfisher in Frameworks */,
-				77459D44287726FB0049EF78 /* RxSwift in Frameworks */,
-				77459D47287727770049EF78 /* RxDataSources in Frameworks */,
+				77459D56287763CA0049EF78 /* RxSwift in Frameworks */,
+				77459D59287763E10049EF78 /* RxDataSources in Frameworks */,
+				77459D54287763CA0049EF78 /* RxCocoa in Frameworks */,
+				77459D51287763B10049EF78 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +368,7 @@
 		77421B122358FEE500A23C79 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				77421B112358FEE500A23C79 /* RadiosPeru.app */,
+				77421B112358FEE500A23C79 /* RadioApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -475,7 +473,6 @@
 				77421B1D2358FEE700A23C79 /* LaunchScreen.storyboard */,
 				77421B1B2358FEE700A23C79 /* Assets.xcassets */,
 				77435123245E795900345320 /* Info.plist */,
-				779691ED245DE7F900318333 /* GoogleServiceFiles */,
 				7778B16A244C233300FDB767 /* Fonts */,
 				77A0084A244E6B960024A3ED /* Localizable.strings */,
 			);
@@ -570,15 +567,6 @@
 				77BCBBEA23DFB5E900CA5281 /* View */,
 			);
 			path = Player;
-			sourceTree = "<group>";
-		};
-		779691ED245DE7F900318333 /* GoogleServiceFiles */ = {
-			isa = PBXGroup;
-			children = (
-				7743511E245E74EB00345320 /* GoogleService-Info.DEV.plist */,
-				7743511F245E74EB00345320 /* GoogleService-Info.PROD.plist */,
-			);
-			path = GoogleServiceFiles;
 			sourceTree = "<group>";
 		};
 		779ECAA8245D507D00987EE7 /* Analytics */ = {
@@ -981,13 +969,13 @@
 			);
 			name = RadioApp;
 			packageProductDependencies = (
-				77459D3E287724C40049EF78 /* Kingfisher */,
-				77459D41287726FB0049EF78 /* RxCocoa */,
-				77459D43287726FB0049EF78 /* RxSwift */,
-				77459D46287727770049EF78 /* RxDataSources */,
+				77459D50287763B10049EF78 /* Kingfisher */,
+				77459D53287763CA0049EF78 /* RxCocoa */,
+				77459D55287763CA0049EF78 /* RxSwift */,
+				77459D58287763E10049EF78 /* RxDataSources */,
 			);
 			productName = RadiosPeru;
-			productReference = 77421B112358FEE500A23C79 /* RadiosPeru.app */;
+			productReference = 77421B112358FEE500A23C79 /* RadioApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1010,7 +998,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 77421B0C2358FEE500A23C79 /* Build configuration list for PBXProject "RadiosPeru" */;
+			buildConfigurationList = 77421B0C2358FEE500A23C79 /* Build configuration list for PBXProject "RadioApp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1021,9 +1009,9 @@
 			);
 			mainGroup = 77421B082358FEE500A23C79;
 			packageReferences = (
-				77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				77459D4F287763B10049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				77459D52287763CA0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				77459D57287763E10049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 77421B122358FEE500A23C79 /* Products */;
 			projectDirPath = "";
@@ -1386,7 +1374,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = home.rcaos.RadiosPlayerPeru.dev;
-				PRODUCT_NAME = RadiosPeru;
+				PRODUCT_NAME = RadioApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1407,7 +1395,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = home.rcaos.RadiosPlayerPeru;
-				PRODUCT_NAME = RadiosPeru;
+				PRODUCT_NAME = RadioApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1417,7 +1405,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		77421B0C2358FEE500A23C79 /* Build configuration list for PBXProject "RadiosPeru" */ = {
+		77421B0C2358FEE500A23C79 /* Build configuration list for PBXProject "RadioApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				77421B212358FEE700A23C79 /* Debug */,
@@ -1438,15 +1426,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		77459D4F287763B10049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.3.0;
+				kind = exactVersion;
+				version = 7.3.0;
 			};
 		};
-		77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		77459D52287763CA0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
@@ -1454,7 +1442,7 @@
 				version = 5.0.0;
 			};
 		};
-		77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+		77459D57287763E10049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
 			requirement = {
@@ -1465,24 +1453,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		77459D3E287724C40049EF78 /* Kingfisher */ = {
+		77459D50287763B10049EF78 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = 77459D4F287763B10049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		77459D41287726FB0049EF78 /* RxCocoa */ = {
+		77459D53287763CA0049EF78 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 77459D52287763CA0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		77459D43287726FB0049EF78 /* RxSwift */ = {
+		77459D55287763CA0049EF78 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 77459D52287763CA0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		77459D46287727770049EF78 /* RxDataSources */ = {
+		77459D58287763E10049EF78 /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			package = 77459D57287763E10049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
