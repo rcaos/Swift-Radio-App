@@ -6,6 +6,8 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
+import Foundation
+import UIKit
 import RxSwift
 
 class RadioPlayer: RadioPlayerProtocol {

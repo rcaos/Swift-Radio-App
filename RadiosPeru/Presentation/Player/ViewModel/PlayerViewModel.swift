@@ -6,6 +6,7 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
+import Foundation
 import RxSwift
 
 protocol PlayerViewModelProtocol {

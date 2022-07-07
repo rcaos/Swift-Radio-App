@@ -35,6 +35,9 @@
 		7742E83024EDDD6600404259 /* RadioPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */; };
 		7744852D245D6364009F8865 /* EventFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7744852C245D6364009F8865 /* EventFavorite.swift */; };
 		77459D3F287724C40049EF78 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D3E287724C40049EF78 /* Kingfisher */; };
+		77459D42287726FB0049EF78 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D41287726FB0049EF78 /* RxCocoa */; };
+		77459D44287726FB0049EF78 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D43287726FB0049EF78 /* RxSwift */; };
+		77459D47287727770049EF78 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 77459D46287727770049EF78 /* RxDataSources */; };
 		774714612363A39100198D9E /* PlayingBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774714602363A39100198D9E /* PlayingBarsView.swift */; };
 		774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774778D92444CA780020245A /* UIImageView+Kingfisher.swift */; };
 		774F0CA023721555002852C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F0C9F23721555002852C3 /* MainViewController.swift */; };
@@ -291,7 +294,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77459D42287726FB0049EF78 /* RxCocoa in Frameworks */,
 				77459D3F287724C40049EF78 /* Kingfisher in Frameworks */,
+				77459D44287726FB0049EF78 /* RxSwift in Frameworks */,
+				77459D47287727770049EF78 /* RxDataSources in Frameworks */,
 				BE1B071DBF1EE2A1FA5A507E /* Pods_RadiosPeru.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -992,7 +998,6 @@
 				77421B0D2358FEE500A23C79 /* Sources */,
 				77421B0E2358FEE500A23C79 /* Frameworks */,
 				77421B0F2358FEE500A23C79 /* Resources */,
-				2AA4ACDB140A0CAE0EDB5EAC /* [CP] Embed Pods Frameworks */,
 				77E2C813245E806F00EA5B23 /* Run Script - Google Service pList */,
 			);
 			buildRules = (
@@ -1002,6 +1007,9 @@
 			name = RadiosPeru;
 			packageProductDependencies = (
 				77459D3E287724C40049EF78 /* Kingfisher */,
+				77459D41287726FB0049EF78 /* RxCocoa */,
+				77459D43287726FB0049EF78 /* RxSwift */,
+				77459D46287727770049EF78 /* RxDataSources */,
 			);
 			productName = RadiosPeru;
 			productReference = 77421B112358FEE500A23C79 /* RadiosPeru.app */;
@@ -1039,6 +1047,8 @@
 			mainGroup = 77421B082358FEE500A23C79;
 			packageReferences = (
 				77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 77421B122358FEE500A23C79 /* Products */;
 			projectDirPath = "";
@@ -1072,23 +1082,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2AA4ACDB140A0CAE0EDB5EAC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RadiosPeru/Pods-RadiosPeru-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		774778D82444B18C0020245A /* Run Script - SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1502,6 +1495,22 @@
 				minimumVersion = 7.3.0;
 			};
 		};
+		77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.0;
+			};
+		};
+		77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1509,6 +1518,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 77459D3D287724C40049EF78 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		77459D41287726FB0049EF78 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		77459D43287726FB0049EF78 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77459D40287726FB0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		77459D46287727770049EF78 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77459D45287727770049EF78 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 

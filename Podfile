@@ -8,7 +8,4 @@ target 'RadiosPeru' do
   #use_modular_headers!
   
   # Pods for RadiosPeru
-	pod 'RxSwift',         '5.0.0'
-	pod 'RxCocoa',         '5.0.0'
-	pod 'RxDataSources',   '4.0.0'
 end
