@@ -7,7 +7,7 @@ let package = Package(
   name: "RadioApp",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v12)
+    .iOS(.v14)
   ],
   products: [
     .library(name: "AppFeature", targets: ["AppFeature"]),
