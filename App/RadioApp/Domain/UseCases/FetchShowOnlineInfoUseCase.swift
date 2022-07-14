@@ -8,15 +8,6 @@
 
 import RxSwift
 
-protocol FetchShowOnlineInfoUseCase {
-  
-  func execute(requestValue: FetchShowOnlineInfoUseCaseRequestValue) -> Observable<Show>
-}
-
-struct FetchShowOnlineInfoUseCaseRequestValue {
-  let group: Group
-}
-
 final class DefaultFetchShowOnlineInfoUseCase: FetchShowOnlineInfoUseCase {
   
   private let showDetailRepository: ShowDetailsRepository
