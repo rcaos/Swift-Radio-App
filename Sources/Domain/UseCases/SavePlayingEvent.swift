@@ -8,12 +8,15 @@
 
 import RxSwift
 
-protocol SavePlayingEventUseCase {
+public protocol SavePlayingEventUseCase {
   func execute(requestValue: SavePlayingEventUseCaseRequestValue) -> Observable<Void>
 }
-
-struct SavePlayingEventUseCaseRequestValue {
+public struct SavePlayingEventUseCaseRequestValue {
   let event: EventPlay
+
+  public init(event: EventPlay) {
+    self.event = event
+  }
 }
 
 final class DefaultSavePlayingEventUseCase: SavePlayingEventUseCase {

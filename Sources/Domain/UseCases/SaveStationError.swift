@@ -8,12 +8,16 @@
 
 import RxSwift
 
-protocol SaveStationStreamError {
+public protocol SaveStationStreamError {
   func execute(requestValue: SaveStationErrorUseCaseRequestValue) -> Observable<String>
 }
 
-struct SaveStationErrorUseCaseRequestValue {
+public struct SaveStationErrorUseCaseRequestValue {
   let event: Event
+
+  public init(event: Event) {
+    self.event = event
+  }
 }
 
 final class DefaultSaveStationError: SaveStationStreamError {

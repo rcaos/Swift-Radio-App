@@ -21,30 +21,6 @@ public struct FetchShowOnlineInfoUseCaseRequestValue {
   }
 }
 
-public protocol SaveStationStreamError {
-  func execute(requestValue: SaveStationErrorUseCaseRequestValue) -> Observable<String>
-}
-
-public struct SaveStationErrorUseCaseRequestValue {
-  let event: Event
-
-  public init(event: Event) {
-    self.event = event
-  }
-}
-
-public protocol SavePlayingEventUseCase {
-  func execute(requestValue: SavePlayingEventUseCaseRequestValue) -> Observable<Void>
-}
-public struct SavePlayingEventUseCaseRequestValue {
-  let event: EventPlay
-
-  public init(event: EventPlay) {
-    self.event = event
-  }
-}
-
-
 public struct Event {
   let radioId: Int
   let radioName: String

@@ -14,7 +14,7 @@ extension RPP: Decodable {
     case id
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
     self.type = try container.decode(String.self, forKey: .type)
@@ -28,7 +28,7 @@ extension CRP: Decodable {
     case base = "base_url"
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
     self.type = try container.decode(String.self, forKey: .type)
@@ -42,7 +42,7 @@ extension Group: Decodable {
     case type
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let typeKey = try container.decode(String.self, forKey: .type)
     

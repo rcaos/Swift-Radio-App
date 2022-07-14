@@ -9,10 +9,8 @@
 import Foundation
 
 protocol ToggleFavoriteUseCase {
-    
-    @discardableResult
     func execute(requestValue: ToogleFavoriteUseCaseRequestValue,
-                 completion: @escaping (Result<Bool, Error>) -> Void ) -> Cancellable?
+                 completion: @escaping (Result<Bool, Error>) -> Void )
 }
 
 struct ToogleFavoriteUseCaseRequestValue {
@@ -26,11 +24,9 @@ final class DefaultToogleFavoriteUseCase: ToggleFavoriteUseCase {
     init(favoritesRepository: FavoritesRepository) {
         self.favoritesRepository = favoritesRepository
     }
-    
-    func execute(requestValue: ToogleFavoriteUseCaseRequestValue, completion: @escaping (Result<Bool, Error>) -> Void) -> Cancellable? {
-        
-        favoritesRepository.toogleFavorite(station: requestValue.station,
-                                           completion: completion)
-        return nil
+
+  // TODO, check this
+    func execute(requestValue: ToogleFavoriteUseCaseRequestValue, completion: @escaping (Result<Bool, Error>) -> Void) {
+      favoritesRepository.toogleFavorite(station: requestValue.station)
     }
 }
