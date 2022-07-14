@@ -11,6 +11,7 @@ let package = Package(
   ],
   products: [
     .library(name: "AppFeature", targets: ["AppFeature"]),
+    .library(name: "Domain", targets: ["Domain"]),
     .library(name: "Networking", targets: ["Networking"]),
     .library(name: "NetworkingInterface", targets: ["NetworkingInterface"]),
     .library(name: "RadioPlayer", targets: ["RadioPlayer"]),
@@ -30,13 +31,24 @@ let package = Package(
         .product(name: "RxDataSources", package: "RxDataSources"),
         .product(name: "Kingfisher", package: "Kingfisher"),
         "Networking",
+        "RadioPlayer"
       ]),
+    .target(name: "Domain", dependencies: [
+      .product(name: "RxSwift", package: "RxSwift")
+      //.product(name: "RxDataSources", package: "RxDataSources"),
+    ]),
     .target(
       name: "Networking",
       dependencies: [
         "NetworkingInterface"
       ]),
     .target(name: "NetworkingInterface"),
-    .target(name: "RadioPlayer")
+    .target(
+      name: "RadioPlayer",
+      dependencies: [
+        .product(name: "RxSwift", package: "RxSwift"),
+        .product(name: "RxDataSources", package: "RxDataSources"),
+        "Domain"
+      ])
   ]
 )
