@@ -12,7 +12,8 @@ let package = Package(
   products: [
     .library(name: "AppFeature", targets: ["AppFeature"]),
     .library(name: "Networking", targets: ["Networking"]),
-    .library(name: "NetworkingInterface", targets: ["NetworkingInterface"])
+    .library(name: "NetworkingInterface", targets: ["NetworkingInterface"]),
+    .library(name: "RadioPlayer", targets: ["RadioPlayer"]),
     // .library(name: "Persistence", targets: ["Persistence"]),
     // .library(name: "PersistenceLive", targets: ["PersistenceLive"])
   ],
@@ -35,6 +36,7 @@ let package = Package(
       dependencies: [
         "NetworkingInterface"
       ]),
-    .target(name: "NetworkingInterface")
+    .target(name: "NetworkingInterface"),
+    .target(name: "RadioPlayer")
   ]
 )
