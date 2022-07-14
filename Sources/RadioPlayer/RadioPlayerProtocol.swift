@@ -7,19 +7,15 @@
 //
 
 import RxSwift
+import Domain
 
 protocol RadioPlayerProtocol {
-  
   // MARk: - Input
-  
   func setupRadio(with station: StationProp, playWhenReady: Bool)
-  
   func togglePlayPause()
   
   // MARK: - Output
-  
   var statePlayer: Observable<RadioPlayerState> { get }
-  
   var airingNow: Observable<String> { get }
 }
 
