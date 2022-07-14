@@ -19,8 +19,6 @@
 		7726B51E2447DF690087AC84 /* SectionAiringToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726B51D2447DF690087AC84 /* SectionAiringToday.swift */; };
 		772B267E23E1B7D700B0409B /* StationRemote+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772B267D23E1B7D700B0409B /* StationRemote+Decodable.swift */; };
 		772F53DA2444F5720065E45C /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F53D92444F5720065E45C /* NSManagedObjectContext+Extensions.swift */; };
-		7739E809235E4A610071882A /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739E808235E4A610071882A /* RadioPlayer.swift */; };
-		7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739E80B235E4B980071882A /* ApiPlayer.swift */; };
 		773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773D455A2368EE58007B755D /* FavoritesViewController.swift */; };
 		773D455D2368EE6E007B755D /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773D455C2368EE6E007B755D /* FavoritesViewModel.swift */; };
 		77421B152358FEE500A23C79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77421B142358FEE500A23C79 /* AppDelegate.swift */; };
@@ -32,7 +30,6 @@
 		7742E82824EDD42500404259 /* Dequeuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82724EDD42500404259 /* Dequeuable.swift */; };
 		7742E82A24EDD43900404259 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82924EDD43900404259 /* UITableView+Extensions.swift */; };
 		7742E82E24EDD75800404259 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82D24EDD75800404259 /* UICollectionView+Extensions.swift */; };
-		7742E83024EDDD6600404259 /* RadioPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */; };
 		7744852D245D6364009F8865 /* EventFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7744852C245D6364009F8865 /* EventFavorite.swift */; };
 		77459D4B287738630049EF78 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77459D49287738630049EF78 /* Coordinator.swift */; };
 		77459D4C287738630049EF78 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77459D4A287738630049EF78 /* NavigationCoordinator.swift */; };
@@ -137,7 +134,6 @@
 		77E5AF6623D9F45200509BC2 /* ShowCRP+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6523D9F45200509BC2 /* ShowCRP+Decodable.swift */; };
 		77E5AF6823D9F52D00509BC2 /* Group+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */; };
 		77E5AF6A23D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5AF6923D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift */; };
-		77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */; };
 		77F65DFC2371E1CA00677DB8 /* MiniPlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */; };
 		77F7CA6E23686FB800E1D64A /* ShowCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7CA6D23686FB800E1D64A /* ShowCRP.swift */; };
 /* End PBXBuildFile section */
@@ -155,8 +151,6 @@
 		7726B51D2447DF690087AC84 /* SectionAiringToday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionAiringToday.swift; sourceTree = "<group>"; };
 		772B267D23E1B7D700B0409B /* StationRemote+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StationRemote+Decodable.swift"; sourceTree = "<group>"; };
 		772F53D92444F5720065E45C /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
-		7739E808235E4A610071882A /* RadioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
-		7739E80B235E4B980071882A /* ApiPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPlayer.swift; sourceTree = "<group>"; };
 		773D455A2368EE58007B755D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		773D455C2368EE6E007B755D /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		77421B112358FEE500A23C79 /* RadioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,7 +163,6 @@
 		7742E82724EDD42500404259 /* Dequeuable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dequeuable.swift; sourceTree = "<group>"; };
 		7742E82924EDD43900404259 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		7742E82D24EDD75800404259 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
-		7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayerProtocol.swift; sourceTree = "<group>"; };
 		77435123245E795900345320 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7744852C245D6364009F8865 /* EventFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFavorite.swift; sourceTree = "<group>"; };
 		77459D49287738630049EF78 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -276,7 +269,6 @@
 		77E5AF6523D9F45200509BC2 /* ShowCRP+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowCRP+Decodable.swift"; sourceTree = "<group>"; };
 		77E5AF6723D9F52D00509BC2 /* Group+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+Decodable.swift"; sourceTree = "<group>"; };
 		77E5AF6923D9F66D00509BC2 /* GrupoRPPResult+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GrupoRPPResult+Decodable.swift"; sourceTree = "<group>"; };
-		77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoSource.swift; sourceTree = "<group>"; };
 		77F65DFB2371E1CA00677DB8 /* MiniPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MiniPlayerViewController.storyboard; sourceTree = "<group>"; };
 		77F7CA6D23686FB800E1D64A /* ShowCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCRP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -331,17 +323,6 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		7739E80A235E4A690071882A /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				7742E82F24EDDD6600404259 /* RadioPlayerProtocol.swift */,
-				7739E808235E4A610071882A /* RadioPlayer.swift */,
-				7739E80B235E4B980071882A /* ApiPlayer.swift */,
-				77F3CEC3237F4F8E00FA49B6 /* PlayInfoSource.swift */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
 		773D455E2368EE72007B755D /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,7 +359,6 @@
 				777CEDCF23D90C8200FCD04B /* Presentation */,
 				77E5AF6023D9F31800509BC2 /* Data */,
 				77E5AF6123D9F35B00509BC2 /* Infraestructure */,
-				7739E80A235E4A690071882A /* Libraries */,
 				777CEDD023D90CA100FCD04B /* Resources */,
 				77459D48287738340049EF78 /* Common */,
 			);
@@ -1092,7 +1072,6 @@
 				77CE5D4823DF4DE6008C5ECA /* PersistenceStorage.swift in Sources */,
 				77D5175D237C9BAE00B7DCC9 /* Group.swift in Sources */,
 				774778DA2444CA780020245A /* UIImageView+Kingfisher.swift in Sources */,
-				7739E80C235E4B980071882A /* ApiPlayer.swift in Sources */,
 				773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */,
 				77D9A0F923DA556600DDCE06 /* AppDIContainer.swift in Sources */,
 				77E5AF6623D9F45200509BC2 /* ShowCRP+Decodable.swift in Sources */,
@@ -1175,9 +1154,6 @@
 				779ECAA5245D503800987EE7 /* DefaultAnalyticsRepository.swift in Sources */,
 				7778B15D244C1ACA00FDB767 /* Font.swift in Sources */,
 				77E5AF6323D9F39800509BC2 /* ShowRPP+Decodable.swift in Sources */,
-				77F3CEC4237F4F8E00FA49B6 /* PlayInfoSource.swift in Sources */,
-				7742E83024EDDD6600404259 /* RadioPlayerProtocol.swift in Sources */,
-				7739E809235E4A610071882A /* RadioPlayer.swift in Sources */,
 				777CEDCB23D90C6500FCD04B /* StoryboardInstantiable.swift in Sources */,
 				7726B51E2447DF690087AC84 /* SectionAiringToday.swift in Sources */,
 				7772943223DE6319008F5305 /* PlayerSceneDIContainer.swift in Sources */,
