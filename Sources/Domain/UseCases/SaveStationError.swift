@@ -13,21 +13,21 @@ public protocol SaveStationStreamError {
 }
 
 public struct SaveStationErrorUseCaseRequestValue {
-  let event: Event
+  public let event: Event
 
   public init(event: Event) {
     self.event = event
   }
 }
 
-final class DefaultSaveStationError: SaveStationStreamError {
+public final class DefaultSaveStationError: SaveStationStreamError {
   private let eventsRepository: EventsRepository
   
-  init(eventsRepository: EventsRepository) {
+  public init(eventsRepository: EventsRepository) {
     self.eventsRepository = eventsRepository
   }
   
-  func execute(requestValue: SaveStationErrorUseCaseRequestValue) -> Observable<String> {
+  public func execute(requestValue: SaveStationErrorUseCaseRequestValue) -> Observable<String> {
     return eventsRepository.saveStationError(station: requestValue)
   }
 }

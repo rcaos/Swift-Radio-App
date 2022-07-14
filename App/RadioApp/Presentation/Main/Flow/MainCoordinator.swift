@@ -6,6 +6,7 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
+import Domain
 import UIKit
 
 // MARK: - TODO, separate files too

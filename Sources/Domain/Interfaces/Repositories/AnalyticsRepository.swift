@@ -8,11 +8,8 @@
 
 import RxSwift
 
-protocol AnalyticsRepository {
-  
+public protocol AnalyticsRepository {
   func savePlaying(event: SavePlayingEventUseCaseRequestValue) -> Observable<Void>
-  
   func addFavorite(event: EventFavorite) -> Observable<Void>
-  
   func removeFavorite(event: EventFavorite) -> Observable<Void>
 }

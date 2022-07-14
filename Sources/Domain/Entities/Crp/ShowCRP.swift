@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct ShowCRP: Show {
-    
-    let id: String
-    let name: String
-    let imageURL: String
-    
-    let horario: String
+public struct ShowCRP: Show {
+  
+  public let id: String
+  public let name: String
+  public let imageURL: String
+  
+  public let horario: String
 }

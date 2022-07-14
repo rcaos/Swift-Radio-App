@@ -8,24 +8,23 @@
 
 import RxSwift
 
-protocol FetchStationsLocalUseCase {
-  
+public protocol FetchStationsLocalUseCase {
   func execute(requestValue: FetchStationsLocalUseCaseRequestValue) -> Observable<[StationRemote]>
 }
 
-struct FetchStationsLocalUseCaseRequestValue {
-  
+public struct FetchStationsLocalUseCaseRequestValue {
+  public init() { }
 }
 
-final class DefaultFetchStationsLocalUseCase: FetchStationsLocalUseCase {
+public final class DefaultFetchStationsLocalUseCase: FetchStationsLocalUseCase {
   
   private let stationsLocalRepository: StationsLocalRepository
   
-  init(stationsLocalRepository: StationsLocalRepository) {
+  public init(stationsLocalRepository: StationsLocalRepository) {
     self.stationsLocalRepository = stationsLocalRepository
   }
   
-  func execute(requestValue: FetchStationsLocalUseCaseRequestValue) -> Observable<[StationRemote]> {
+  public func execute(requestValue: FetchStationsLocalUseCaseRequestValue) -> Observable<[StationRemote]> {
     return stationsLocalRepository.stationsList()
       .flatMap { stations -> Observable<[StationRemote]> in
         let filtered = stations

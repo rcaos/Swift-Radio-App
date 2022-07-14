@@ -36,20 +36,48 @@ public struct StationProp: Equatable {
 }
 
 public struct StationRemote: Equatable {
-  let id: Int
-  let name: String
-  let order: Int
-  let city: String
-  let frecuency: String
-  let slogan: String
-  let urlStream: String
-  let pathImage: String
+  public let id: Int
+  public let name: String
+  public let order: Int
+  public let city: String
+  public let frecuency: String
+  public let slogan: String
+  public let urlStream: String
+  public let pathImage: String
 
-  let group: String
-  let groupId: String
-  let groupBase: String
+  public let group: String
+  public let groupId: String
+  public let groupBase: String
 
-  let isActive: Bool
+  public let isActive: Bool
+
+  public init(
+    id: Int,
+    name: String,
+    order: Int,
+    city: String,
+    frecuency: String,
+    slogan: String,
+    urlStream: String,
+    pathImage: String,
+    group: String,
+    groupId: String,
+    groupBase: String,
+    isActive: Bool
+  ) {
+    self.id = id
+    self.name =  name
+    self.order =  order
+    self.city =  city
+    self.frecuency = frecuency
+    self.slogan =  slogan
+    self.urlStream = urlStream
+    self.pathImage = pathImage
+    self.group =  group
+    self.groupId = groupId
+    self.groupBase = groupBase
+    self.isActive = isActive
+  }
 }
 
 extension StationRemote {
@@ -71,11 +99,11 @@ public enum Group {
 }
 
 public struct RPP {
-  let type: String
-  let id: String
+  public let type: String
+  public let id: String
 }
 
 public struct CRP {
-  let type: String
-  let base: String
+  public let type: String
+  public let base: String
 }

@@ -9,7 +9,7 @@
 import RxSwift
 import Domain
 
-protocol RadioPlayerProtocol {
+public protocol RadioPlayerProtocol {
   // MARk: - Input
   func setupRadio(with station: StationProp, playWhenReady: Bool)
   func togglePlayPause()
@@ -21,7 +21,7 @@ protocol RadioPlayerProtocol {
 
 // MARK: - Visual States
 
-enum RadioPlayerState: Equatable {
+public enum RadioPlayerState: Equatable {
   
   case stopped
   case loading

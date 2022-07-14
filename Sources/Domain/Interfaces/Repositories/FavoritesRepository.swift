@@ -8,7 +8,7 @@
 
 import RxSwift
 
-protocol FavoritesRepository {
+public protocol FavoritesRepository {
   
   func isFavorite(station: SimpleStation) -> Observable<Bool>
   

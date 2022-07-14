@@ -52,7 +52,7 @@ public struct EventPlay {
     return EventPlay(stationName: "", start: Date(), end: Date())
   }
 
-  var asDictionary: [String: Any] {
+  public var asDictionary: [String: Any] {
     return [
       "station_name": stationName,
       "seconds": seconds

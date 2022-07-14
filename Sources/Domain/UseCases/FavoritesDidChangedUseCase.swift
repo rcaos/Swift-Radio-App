@@ -8,24 +8,23 @@
 
 import RxSwift
 
-protocol FavoritesDidChangedUseCase {
-  
+public protocol FavoritesDidChangedUseCase {
   func execute(requestValue: FavoritesDidChangedUseCaseRequestValue) -> Observable<Void>
 }
 
-struct FavoritesDidChangedUseCaseRequestValue {
-  
+public struct FavoritesDidChangedUseCaseRequestValue {
+  public init() { }
 }
 
-final class DefaultFavoritesDidChangedUseCase: FavoritesDidChangedUseCase {
+public final class DefaultFavoritesDidChangedUseCase: FavoritesDidChangedUseCase {
   
   private let favoritesRepository: FavoritesRepository
   
-  init(favoritesRepository: FavoritesRepository) {
+  public init(favoritesRepository: FavoritesRepository) {
     self.favoritesRepository = favoritesRepository
   }
   
-  func execute(requestValue: FavoritesDidChangedUseCaseRequestValue) -> Observable<Void> {
+  public func execute(requestValue: FavoritesDidChangedUseCaseRequestValue) -> Observable<Void> {
     return favoritesRepository.favoritesDidChanged()
   }
   

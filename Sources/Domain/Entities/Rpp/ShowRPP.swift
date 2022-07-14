@@ -8,19 +8,19 @@
 
 import Foundation
 
-struct ShowRPP: Show {
-    
-    var id: String
-    var name: String
-    var imageURL: String
-    
-    var startTime: String
-    var endTime: String
+public struct ShowRPP: Show {
+  
+  public var id: String
+  public var name: String
+  public var imageURL: String
+  
+  public var startTime: String
+  public var endTime: String
 }
 
 extension ShowRPP {
-    
-    var horario: String {
-        return startTime + " - " + endTime
-    }
+  
+  public var horario: String {
+    return startTime + " - " + endTime
+  }
 }

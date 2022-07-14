@@ -6,6 +6,7 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
+import Domain
 import Foundation
 
 final class PopularCellViewModel {

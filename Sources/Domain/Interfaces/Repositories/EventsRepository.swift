@@ -8,7 +8,6 @@
 
 import RxSwift
 
-protocol EventsRepository {
-  
+public protocol EventsRepository {  
   func saveStationError(station: SaveStationErrorUseCaseRequestValue) -> Observable<String>
 }

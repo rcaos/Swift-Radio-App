@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import Domain
 
-class RadioPlayer: RadioPlayerProtocol {
+public class RadioPlayer: RadioPlayerProtocol {
   
   private let showDetailsUseCase: FetchShowOnlineInfoUseCase
   
@@ -38,13 +38,13 @@ class RadioPlayer: RadioPlayerProtocol {
   
   // MARK: - Public Api
   
-  let statePlayer: Observable<RadioPlayerState>
+  public let statePlayer: Observable<RadioPlayerState>
   
-  let airingNow: Observable<String>
+  public let airingNow: Observable<String>
   
   // MARK: - Initializers
   
-  init(showDetailsUseCase: FetchShowOnlineInfoUseCase,
+  public init(showDetailsUseCase: FetchShowOnlineInfoUseCase,
        saveStreamErrorUseCase: SaveStationStreamError,
        savePlayingEventUseCase: SavePlayingEventUseCase) {
     statePlayerBehaviorSubject = BehaviorSubject(value: .stopped)
@@ -63,7 +63,7 @@ class RadioPlayer: RadioPlayerProtocol {
   
   // MARK: - Public
   
-  func setupRadio(with station: StationProp, playWhenReady: Bool = false) {
+  public func setupRadio(with station: StationProp, playWhenReady: Bool = false) {
     statePlayerBehaviorSubject.onNext(.stopped)
     disposeBag = DisposeBag()
     
@@ -79,7 +79,7 @@ class RadioPlayer: RadioPlayerProtocol {
     }
   }
   
-  func togglePlayPause() {
+  public func togglePlayPause() {
     player.togglePlayPause()
   }
   

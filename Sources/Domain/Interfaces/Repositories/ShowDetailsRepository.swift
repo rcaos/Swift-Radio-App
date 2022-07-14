@@ -8,7 +8,6 @@
 
 import RxSwift
 
-protocol ShowDetailsRepository {
-  
+public protocol ShowDetailsRepository {
   func fetchShowDetails(group: Group) -> Observable<Show>
 }

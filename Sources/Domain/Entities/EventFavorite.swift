@@ -8,13 +8,17 @@
 
 import Foundation
 
-struct EventFavorite {
+public struct EventFavorite {
   
   let statioName: String
   
-  var asDictionary: [String: Any] {
+  public var asDictionary: [String: Any] {
     return [
       "station_name": statioName
     ]
+  }
+
+  public init(statioName: String) {
+    self.statioName = statioName
   }
 }

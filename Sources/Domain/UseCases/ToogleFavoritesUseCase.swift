@@ -8,24 +8,28 @@
 
 import RxSwift
 
-protocol ToggleFavoritesUseCase {
+public protocol ToggleFavoritesUseCase {
   
   func execute(requestValue: ToggleFavoriteUseCaseRequestValue) -> Observable<Bool>
 }
 
-struct ToggleFavoriteUseCaseRequestValue {
+public struct ToggleFavoriteUseCaseRequestValue {
   let station: SimpleStation
+
+  public init(station: SimpleStation) {
+    self.station = station
+  }
 }
 
-final class DefaultToggleFavoriteUseCase: ToggleFavoritesUseCase {
+public final class DefaultToggleFavoriteUseCase: ToggleFavoritesUseCase {
   
   private let favoritesRepository: FavoritesRepository
   
-  init(favoritesRepository: FavoritesRepository) {
+  public init(favoritesRepository: FavoritesRepository) {
     self.favoritesRepository = favoritesRepository
   }
   
-  func execute(requestValue: ToggleFavoriteUseCaseRequestValue) -> Observable<Bool> {
+  public func execute(requestValue: ToggleFavoriteUseCaseRequestValue) -> Observable<Bool> {
     
     return favoritesRepository.toogleFavorite(station: requestValue.station)
   }

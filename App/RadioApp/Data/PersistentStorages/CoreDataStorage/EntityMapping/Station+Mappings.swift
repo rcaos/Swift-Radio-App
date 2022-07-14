@@ -6,6 +6,7 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
+import Domain
 import Foundation
 import CoreData
 
@@ -33,18 +34,18 @@ extension Station {
 extension StationRemote {
   
   init(stationLocal: Station) {
-    id = stationLocal.id
-    name = stationLocal.name
-    order = stationLocal.order
-    city = stationLocal.city
-    frecuency = stationLocal.frecuency
-    slogan = stationLocal.slogan
-    urlStream = stationLocal.urlStream
-    pathImage = stationLocal.image
-    isActive = stationLocal.isActive
-    
-    group = stationLocal.group
-    groupId = stationLocal.groupId
-    groupBase = stationLocal.groupBase
+    self = .init(id: stationLocal.id,
+                 name: stationLocal.name,
+                 order: stationLocal.order,
+                 city: stationLocal.city,
+                 frecuency: stationLocal.frecuency,
+                 slogan: stationLocal.slogan,
+                 urlStream: stationLocal.urlStream,
+                 pathImage: stationLocal.image,
+                 group: stationLocal.group,
+                 groupId: stationLocal.groupId,
+                 groupBase: stationLocal.groupBase,
+                 isActive: stationLocal.isActive
+    )
   }
 }

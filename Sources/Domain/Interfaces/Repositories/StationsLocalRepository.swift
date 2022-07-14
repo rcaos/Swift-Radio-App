@@ -8,7 +8,7 @@
 
 import RxSwift
 
-protocol StationsLocalRepository {
+public protocol StationsLocalRepository {
   
   func saveStations(stations: [StationRemote]) -> Observable<Void>
   

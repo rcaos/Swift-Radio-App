@@ -12,22 +12,22 @@ public protocol SavePlayingEventUseCase {
   func execute(requestValue: SavePlayingEventUseCaseRequestValue) -> Observable<Void>
 }
 public struct SavePlayingEventUseCaseRequestValue {
-  let event: EventPlay
+  public let event: EventPlay
 
   public init(event: EventPlay) {
     self.event = event
   }
 }
 
-final class DefaultSavePlayingEventUseCase: SavePlayingEventUseCase {
+public final class DefaultSavePlayingEventUseCase: SavePlayingEventUseCase {
   
   private let analyticsRepository: AnalyticsRepository
   
-  init(analyticsRepository: AnalyticsRepository) {
+  public init(analyticsRepository: AnalyticsRepository) {
     self.analyticsRepository = analyticsRepository
   }
   
-  func execute(requestValue: SavePlayingEventUseCaseRequestValue) -> Observable<Void> {
+  public func execute(requestValue: SavePlayingEventUseCaseRequestValue) -> Observable<Void> {
     return analyticsRepository.savePlaying(event: requestValue)
   }
 }

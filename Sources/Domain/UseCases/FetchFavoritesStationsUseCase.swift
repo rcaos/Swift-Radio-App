@@ -8,26 +8,25 @@
 
 import RxSwift
 
-protocol FetchFavoritesStationsUseCase {
-  
+public protocol FetchFavoritesStationsUseCase {
   func execute(requestValue: FetchFavoritesStationsRequestValue) -> Observable<[StationRemote]>
 }
 
-struct FetchFavoritesStationsRequestValue {
-  
+public struct FetchFavoritesStationsRequestValue {
+  public init() { }
 }
 
-final class DefaultFetchFavoritesStationsUseCase: FetchFavoritesStationsUseCase {
+public final class DefaultFetchFavoritesStationsUseCase: FetchFavoritesStationsUseCase {
   
   private let favoritesRepository: FavoritesRepository
   private let localsRepository: StationsLocalRepository
   
-  init(favoritesRepository: FavoritesRepository, localsRepository: StationsLocalRepository) {
+  public init(favoritesRepository: FavoritesRepository, localsRepository: StationsLocalRepository) {
     self.favoritesRepository = favoritesRepository
     self.localsRepository = localsRepository
   }
   
-  func execute(requestValue: FetchFavoritesStationsRequestValue) -> Observable<[StationRemote]> {
+  public func execute(requestValue: FetchFavoritesStationsRequestValue) -> Observable<[StationRemote]> {
     return favoritesRepository.favoritesList()
       .flatMap { [weak self] stations -> Observable<[StationRemote]> in
         guard let strongself = self else { return Observable.just([]) }

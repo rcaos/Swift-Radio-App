@@ -8,12 +8,10 @@
 
 import Foundation
 
-struct GroupRPPResult {
-    
-    let results: ShowWrapper
+public struct GroupRPPResult {
+  public let results: ShowWrapper
 }
 
-struct ShowWrapper {
-    
-    let radioDetail: ShowRPP
+public struct ShowWrapper {
+  public let radioDetail: ShowRPP
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2019 Jeans. All rights reserved.
 //
 
+import Domain
 import RxSwift
 
 protocol MainViewModelProtocol: MiniPlayerViewModelDelegate, PopularViewModelDelegate, FavoritesViewModelDelegate {

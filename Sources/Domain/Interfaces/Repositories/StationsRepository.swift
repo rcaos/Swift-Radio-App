@@ -8,7 +8,6 @@
 
 import RxSwift
 
-protocol StationsRepository {
-  
+public protocol StationsRepository {
   func stationsList() -> Observable<[StationRemote]>
 }

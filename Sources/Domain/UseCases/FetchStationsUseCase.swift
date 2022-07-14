@@ -8,26 +8,25 @@
 
 import RxSwift
 
-protocol FetchStationsUseCase {
-  
+public protocol FetchStationsUseCase {
   func execute(requestValue: FetchStationsUseCaseRequestValue) -> Observable<[StationRemote]>
 }
 
-struct FetchStationsUseCaseRequestValue {
-  
+public struct FetchStationsUseCaseRequestValue {
+  public init() { }
 }
 
-final class DefaultFetchStationsUseCase: FetchStationsUseCase {
+public final class DefaultFetchStationsUseCase: FetchStationsUseCase {
   
   private let stationsRepository: StationsRepository
   private let stationsLocalRepository: StationsLocalRepository
   
-  init(stationsRepository: StationsRepository, stationsLocalRepository: StationsLocalRepository) {
+  public init(stationsRepository: StationsRepository, stationsLocalRepository: StationsLocalRepository) {
     self.stationsRepository = stationsRepository
     self.stationsLocalRepository = stationsLocalRepository
   }
   
-  func execute(requestValue: FetchStationsUseCaseRequestValue)-> Observable<[StationRemote]> {
+  public func execute(requestValue: FetchStationsUseCaseRequestValue)-> Observable<[StationRemote]> {
     return stationsRepository.stationsList()
       .flatMap { stations -> Observable<[StationRemote]> in
         self.stationsLocalRepository.saveStations(stations: stations)

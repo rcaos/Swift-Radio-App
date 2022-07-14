@@ -8,24 +8,27 @@
 
 import RxSwift
 
-protocol AskFavoriteUseCase {
-  
+public protocol AskFavoriteUseCase {
   func execute(requestValue: AskFavoriteUseCaseRequestValue) -> Observable<Bool>
 }
 
-struct AskFavoriteUseCaseRequestValue {
+public struct AskFavoriteUseCaseRequestValue {
   let station: SimpleStation
+
+  public init(station: SimpleStation) {
+    self.station = station
+  }
 }
 
-final class DefaultAskFavoriteUseCase: AskFavoriteUseCase {
+public final class DefaultAskFavoriteUseCase: AskFavoriteUseCase {
   
   private let favoritesRepository: FavoritesRepository
   
-  init(favoritesRepository: FavoritesRepository) {
+  public init(favoritesRepository: FavoritesRepository) {
     self.favoritesRepository = favoritesRepository
   }
   
-  func execute(requestValue: AskFavoriteUseCaseRequestValue) -> Observable<Bool> {
+  public func execute(requestValue: AskFavoriteUseCaseRequestValue) -> Observable<Bool> {
     return favoritesRepository.isFavorite(station: requestValue.station)
   }
   

@@ -6,6 +6,7 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
+import Domain
 import Foundation
 
 extension PersistenceStore where Entity == StationFavoriteCD {

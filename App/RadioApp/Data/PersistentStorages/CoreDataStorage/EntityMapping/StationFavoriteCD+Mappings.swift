@@ -6,6 +6,7 @@
 //  Copyright © 2020 Jeans. All rights reserved.
 //
 
+import Domain
 import CoreData
 
 extension StationFavoriteCD {
@@ -21,9 +22,8 @@ extension StationFavoriteCD {
 }
 
 extension SimpleStation {
-  
+
   init(stationLocal: StationFavoriteCD) {
-    name = stationLocal.name
-    id = stationLocal.id
+    self = .init(name: stationLocal.name, id: stationLocal.id)
   }
 }
