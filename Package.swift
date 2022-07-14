@@ -17,15 +17,17 @@ let package = Package(
     // .library(name: "PersistenceLive", targets: ["PersistenceLive"])
   ],
   dependencies: [
-    // .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "14.0.0"),
-    // .package(url: "https://github.com/onevcat/Kingfisher.git", from: "7.2.1"),
-    // .package(url: "https://github.com/pointfreeco/combine-schedulers", from: "0.5.3"),
-    // .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.9.0")
+     .package(url: "https://github.com/onevcat/Kingfisher.git", from: "7.3.0"),
+     .package(url: "https://github.com/RxSwiftCommunity/RxDataSources.git", from: "4.0.0"),
+     .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "5.0.0")
   ],
   targets: [
     .target(
       name: "AppFeature",
       dependencies: [
+        .product(name: "RxSwift", package: "RxSwift"),
+        .product(name: "RxDataSources", package: "RxDataSources"),
+        .product(name: "Kingfisher", package: "Kingfisher")
         // "Networking"
       ])
   ]
