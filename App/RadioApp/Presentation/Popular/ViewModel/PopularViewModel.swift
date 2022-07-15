@@ -9,21 +9,17 @@
 import RxSwift
 import Domain
 
-protocol PopularViewModelDelegate: class {
-  
+protocol PopularViewModelDelegate: AnyObject {
   func stationDidSelect(station: StationProp)
 }
 
 protocol PopularViewModelProtocol {
-  
+
   // MARK: - Input
-  
   func viewDidLoad()
-  
-  func stationDidSelect(with: StationProp)
-  
+  func stationDidSelect(index: Int)
+
   // MARK: - Output
-  
   var viewState: Observable<SimpleViewState<PopularCellViewModel>> { get }
 }
 
@@ -63,8 +59,13 @@ final class PopularViewModel: PopularViewModelProtocol {
       .disposed(by: disposeBag)
   }
   
-  func stationDidSelect(with station: StationProp) {
-    delegate?.stationDidSelect(station: station)
+  func stationDidSelect(index: Int) {
+    do {
+      let entities = try viewStateObservableSubject.value().currentEntities
+      if entities.indices.contains(index) {
+        delegate?.stationDidSelect(station: entities[index].radioStation)
+      }
+    } catch { }
   }
   
   // MARK: - Private
