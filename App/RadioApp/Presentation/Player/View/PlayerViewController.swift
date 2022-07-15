@@ -75,13 +75,15 @@ public class PlayerViewController: UIViewController, StoryboardInstantiable {
       .disposed(by: disposeBag)
     
     viewModel.stationName
-      .asDriver(onErrorJustReturn: "")
-      .drive(stationNameLabel.rx.text)
+      .subscribe(onNext: { [weak self] stationName in
+        self?.stationNameLabel.text = stationName
+      })
       .disposed(by: disposeBag)
     
     viewModel.stationDescription
-      .asDriver(onErrorJustReturn: "")
-      .drive(stationDescriptionLabel.rx.text)
+      .subscribe(onNext: { [weak self] stationDescription in
+        self?.stationDescriptionLabel.text = stationDescription
+      })
       .disposed(by: disposeBag)
     
     viewModel.isFavorite

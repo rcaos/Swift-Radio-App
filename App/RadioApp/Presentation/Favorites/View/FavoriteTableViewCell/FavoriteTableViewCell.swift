@@ -50,13 +50,14 @@ class FavoriteTableViewCell: UITableViewCell {
   }
 
   func setupObservers() {
-    favoriteButton.rx.tap
-      .bind { [weak self] in
-        guard let strongSelf = self,
-          let viewModel = strongSelf.viewModel else { return }
-        strongSelf.delegate?.favoriteIsPicked(for: viewModel.radioStation)
+    favoriteButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
+  }
+
+  @objc private func tapButton() {
+    guard let viewModel = viewModel else {
+      return
     }
-    .disposed(by: disposeBag)
+    delegate?.favoriteIsPicked(for: viewModel.radioStation)
   }
 
   override func prepareForReuse() {

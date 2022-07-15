@@ -97,14 +97,20 @@ final class PlayerViewModel: PlayerViewModelProtocol {
   }
   
   private func subscribe(to radioPlayer: RadioPlayerProtocol?) {
-    guard let radioPlayer = radioPlayer else { return }
-    
+    guard let radioPlayer = radioPlayer else {
+      return
+    }
+
     radioPlayer.statePlayer
-      .bind(to: viewStateBehaviorSubject)
+      .subscribe { event in
+        self.viewStateBehaviorSubject.on(event)
+      }
       .disposed(by: disposeBag)
-    
+
     radioPlayer.airingNow
-      .bind(to: stationDescriptionBehaviorSubject)
+      .subscribe { event in
+        self.stationDescriptionBehaviorSubject.on(event)
+      }
       .disposed(by: disposeBag)
   }
   

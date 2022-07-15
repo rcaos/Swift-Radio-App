@@ -59,15 +59,17 @@ class MiniPlayerViewController: UIViewController, StoryboardInstantiable {
         self?.configView(with: state)
       })
       .disposed(by: disposeBag)
-    
+
     viewModel.stationName
-    .asDriver(onErrorJustReturn: "")
-      .drive(stationNameLabel.rx.text)
+      .subscribe(onNext: { [weak self] stationName in
+        self?.stationNameLabel.text = stationName
+      })
       .disposed(by: disposeBag)
     
     viewModel.stationDescription
-    .asDriver(onErrorJustReturn: "")
-      .drive(stationDescriptionLabel.rx.text)
+      .subscribe(onNext: { [weak self] description in
+        self?.stationDescriptionLabel.text = description
+      })
       .disposed(by: disposeBag)
     
     viewModel.isFavorite

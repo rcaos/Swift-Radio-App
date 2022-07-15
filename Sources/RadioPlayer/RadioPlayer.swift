@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import RxSwift
-import RxCocoa
 import Domain
 
 public class RadioPlayer: RadioPlayerProtocol {
@@ -122,18 +121,20 @@ public class RadioPlayer: RadioPlayerProtocol {
       })
       .disposed(by: disposeBag)
   }
-  
-  fileprivate func subscribeToDescription(for station: StationProp) {
+
+  private func subscribeToDescription(for station: StationProp) {
     Observable.combineLatest( statePlayerBehaviorSubject, onlineInfoBehaviorSubject)
       .flatMap { [weak self] (state, onlineInfo) -> Observable<String> in
         guard let strongSelf = self else { return Observable.just("") }
         return Observable.just(
           strongSelf.buildDescription(for: state, station: station, onlineInfo))
-    }
-    .bind(to: airingNowBehaviorSubject)
-    .disposed(by: disposeBag)
+      }
+      .subscribe { event in
+        self.airingNowBehaviorSubject.on(event)
+      }
+      .disposed(by: disposeBag)
   }
-  
+
   fileprivate func bindToRemoteControls(for station: StationProp) {
     let defaultInfo = station.city + " - " +
       station.frecuency + " - " +
