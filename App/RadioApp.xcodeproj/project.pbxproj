@@ -13,7 +13,7 @@
 		771B23D1244A61A900260E97 /* stations.json in Resources */ = {isa = PBXBuildFile; fileRef = 771B23D0244A61A900260E97 /* stations.json */; };
 		77236FA423677C56009C80D0 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FA323677C56009C80D0 /* EndPoint.swift */; };
 		77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */; };
-		7726B51E2447DF690087AC84 /* SectionAiringToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726B51D2447DF690087AC84 /* SectionAiringToday.swift */; };
+		7726B51E2447DF690087AC84 /* SecionPopularStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726B51D2447DF690087AC84 /* SecionPopularStationsView.swift */; };
 		772F53DA2444F5720065E45C /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F53D92444F5720065E45C /* NSManagedObjectContext+Extensions.swift */; };
 		773D455B2368EE58007B755D /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773D455A2368EE58007B755D /* FavoritesViewController.swift */; };
 		773D455D2368EE6E007B755D /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773D455C2368EE6E007B755D /* FavoritesViewModel.swift */; };
@@ -112,7 +112,7 @@
 		771B23D0244A61A900260E97 /* stations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = stations.json; sourceTree = "<group>"; };
 		77236FA323677C56009C80D0 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRPPProvider.swift; sourceTree = "<group>"; };
-		7726B51D2447DF690087AC84 /* SectionAiringToday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionAiringToday.swift; sourceTree = "<group>"; };
+		7726B51D2447DF690087AC84 /* SecionPopularStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecionPopularStationsView.swift; sourceTree = "<group>"; };
 		772F53D92444F5720065E45C /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
 		773D455A2368EE58007B755D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		773D455C2368EE6E007B755D /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
@@ -657,7 +657,7 @@
 			children = (
 				7755B521235A1241004E642B /* PopularViewController.swift */,
 				7742E82324EDCE0B00404259 /* PopularRootView.swift */,
-				7726B51D2447DF690087AC84 /* SectionAiringToday.swift */,
+				7726B51D2447DF690087AC84 /* SecionPopularStationsView.swift */,
 				77B6AE2F2448983700D4D637 /* PopularCollectionCell */,
 			);
 			path = View;
@@ -968,7 +968,7 @@
 				779ECAA5245D503800987EE7 /* DefaultAnalyticsRepository.swift in Sources */,
 				7778B15D244C1ACA00FDB767 /* Font.swift in Sources */,
 				777CEDCB23D90C6500FCD04B /* StoryboardInstantiable.swift in Sources */,
-				7726B51E2447DF690087AC84 /* SectionAiringToday.swift in Sources */,
+				7726B51E2447DF690087AC84 /* SecionPopularStationsView.swift in Sources */,
 				7772943223DE6319008F5305 /* PlayerSceneDIContainer.swift in Sources */,
 				7742E82424EDCE0B00404259 /* PopularRootView.swift in Sources */,
 				77236FAF236787B3009C80D0 /* GroupRPPProvider.swift in Sources */,

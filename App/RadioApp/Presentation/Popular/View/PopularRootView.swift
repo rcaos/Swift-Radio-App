@@ -9,10 +9,6 @@
 import UIKit
 import RxSwift
 
-enum SecionPopularStationsView: Hashable {
-  case list
-}
-
 class PopularRootView: UIView {
   
   public required init?(coder aDecoder: NSCoder) {
