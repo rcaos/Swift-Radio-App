@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "RxDataSources",
-        "repositoryURL": "https://github.com/RxSwiftCommunity/RxDataSources.git",
-        "state": {
-          "branch": null,
-          "revision": "05ead9a086ed698137a36cd4789c6b23ddc69f55",
-          "version": "4.0.0"
-        }
-      },
-      {
         "package": "RxSwift",
         "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {

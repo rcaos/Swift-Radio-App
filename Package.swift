@@ -20,7 +20,6 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/onevcat/Kingfisher.git", from: "7.3.0"),
-    .package(url: "https://github.com/RxSwiftCommunity/RxDataSources.git", from: "4.0.0"),
     .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "5.0.0")
   ],
   targets: [
@@ -28,14 +27,12 @@ let package = Package(
       name: "AppFeature",
       dependencies: [
         .product(name: "RxSwift", package: "RxSwift"),
-        .product(name: "RxDataSources", package: "RxDataSources"),
         .product(name: "Kingfisher", package: "Kingfisher"),
         "Networking",
         "RadioPlayer"
       ]),
     .target(name: "Domain", dependencies: [
       .product(name: "RxSwift", package: "RxSwift")
-      //.product(name: "RxDataSources", package: "RxDataSources"),
     ]),
     .target(
       name: "Networking",
@@ -47,7 +44,6 @@ let package = Package(
       name: "RadioPlayer",
       dependencies: [
         .product(name: "RxSwift", package: "RxSwift"),
-        .product(name: "RxDataSources", package: "RxDataSources"),
         "Domain"
       ])
   ]
