@@ -69,14 +69,6 @@ class PopularRootView: UIView {
       })
       .disposed(by: disposeBag)
 
-//    collectionView.rx
-//      .modelSelected( PopularCellViewModel.self)
-//      .subscribe(onNext: { [weak self] item in
-//        guard let strongSelf = self else { return }
-//        strongSelf.viewModel.stationDidSelect(with: item.radioStation)
-//      })
-//      .disposed(by: disposeBag)
-
     viewModel.viewState
       .subscribe(onNext: { [weak self] state in
         guard let strongSelf = self else { return }
@@ -121,6 +113,10 @@ class PopularRootView: UIView {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension PopularRootView: UICollectionViewDelegateFlowLayout {
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    viewModel.stationDidSelect(index: indexPath.row)
+  }
   
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
