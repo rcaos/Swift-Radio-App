@@ -8,7 +8,7 @@
 // MARK: - TODO, clean this
 import Foundation
 
-public struct StationProp: Equatable {
+public struct StationProp: Hashable {
 
   public let id: Int
   public let name: String
@@ -92,18 +92,18 @@ extension StationRemote {
   }
 }
 
-public enum Group {
+public enum Group: Hashable {
   case rpp(RPP)
   case crp(CRP)
   case unknown
 }
 
-public struct RPP {
+public struct RPP: Hashable {
   public let type: String
   public let id: String
 }
 
-public struct CRP {
+public struct CRP: Hashable{
   public let type: String
   public let base: String
 }

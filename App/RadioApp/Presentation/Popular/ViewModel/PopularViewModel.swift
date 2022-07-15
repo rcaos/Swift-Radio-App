@@ -32,7 +32,7 @@ final class PopularViewModel: PopularViewModelProtocol {
   private let fetchStationsUseCase: FetchStationsLocalUseCase
   
   private let viewStateObservableSubject = BehaviorSubject<SimpleViewState<PopularCellViewModel>>(value: .empty)
-  
+
   private weak var delegate: PopularViewModelDelegate?
   
   private let disposeBag = DisposeBag()
@@ -40,7 +40,7 @@ final class PopularViewModel: PopularViewModelProtocol {
   // MARK: - Public Api
   
   let viewState: Observable<SimpleViewState<PopularCellViewModel>>
-  
+
   // MARK: - Initializers
   
   init(fetchStationsUseCase: FetchStationsLocalUseCase, delegate: PopularViewModelDelegate? = nil) {

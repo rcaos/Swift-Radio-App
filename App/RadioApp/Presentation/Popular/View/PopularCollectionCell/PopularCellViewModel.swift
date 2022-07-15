@@ -9,16 +9,12 @@
 import Domain
 import Foundation
 
-final class PopularCellViewModel {
-  
+struct PopularCellViewModel: Hashable {
   let radioStation: StationProp
-  
-  lazy var imageURL: URL? = {
-    return URL(string: radioStation.pathImage)
-  }()
-  
+  let imageURL: URL?
+
   init(_ station: StationProp) {
     radioStation = station
+    imageURL = URL(string: radioStation.pathImage)
   }
-  
 }
