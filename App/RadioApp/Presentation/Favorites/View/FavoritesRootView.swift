@@ -10,6 +10,10 @@ import Domain
 import UIKit
 import RxSwift
 
+enum FavoritesSectionView: Hashable {
+  case list
+}
+
 class FavoritesRootView: UIView {
   
   public required init?(coder aDecoder: NSCoder) {
@@ -32,6 +36,10 @@ class FavoritesRootView: UIView {
   let disposeBag = DisposeBag()
   
   let viewModel: FavoritesViewModelProtocol
+
+  typealias DataSource = UITableViewDiffableDataSource<FavoritesSectionView, FavoriteTableViewModel>
+  typealias Snapshot = NSDiffableDataSourceSnapshot<FavoritesSectionView, FavoriteTableViewModel>
+  private var dataSource: DataSource?
   
   // MARK: - Initializer
   
@@ -46,20 +54,27 @@ class FavoritesRootView: UIView {
   }
   
   fileprivate func bind(to viewModel: FavoritesViewModelProtocol) {
-    tableView.rx
-      .setDelegate(self)
-      .disposed(by: disposeBag)
-    
-    let (cellIdentifier, cellType) = (FavoriteTableViewCell.dequeuIdentifier, FavoriteTableViewCell.self)
-    
-    viewModel.viewState
-      .map { $0.currentEntities }
-      .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: cellType)) { (_, element, cell) in
-        cell.viewModel = element
-        cell.delegate = self
+    tableView.delegate = self
+
+    dataSource = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, viewModel in
+      let cell = tableView.dequeueReusableCell(with: FavoriteTableViewCell.self, for: indexPath)
+      cell.setupUI(with: viewModel)
+      cell.delegate = self
+      return cell
     }
-    .disposed(by: disposeBag)
-    
+
+    viewModel.viewState
+      .map { viewState -> Snapshot in
+        var snapshot = Snapshot()
+        snapshot.appendSections([.list])
+        snapshot.appendItems(viewState.currentEntities, toSection: .list)
+        return snapshot
+      }
+      .subscribe(onNext: { [weak self] snapshot in
+        self?.dataSource?.apply(snapshot)
+      })
+      .disposed(by: disposeBag)
+
     viewModel.viewState
       .subscribe(onNext: { [weak self] state in
         guard let strongSelf = self else { return }
@@ -67,15 +82,15 @@ class FavoritesRootView: UIView {
       })
       .disposed(by: disposeBag)
     
-    Observable
-      .zip( tableView.rx.itemSelected,
-            tableView.rx.modelSelected(FavoriteTableViewModel.self) )
-      .bind { [weak self] (indexPath, cell) in
-        guard let strongSelf = self else { return }
-        strongSelf.tableView.deselectRow(at: indexPath, animated: true)
-        strongSelf.viewModel.stationDidSelected(with: cell.radioStation)
-    }
-    .disposed(by: disposeBag)
+//    Observable
+//      .zip( tableView.rx.itemSelected,
+//            tableView.rx.modelSelected(FavoriteTableViewModel.self) )
+//      .bind { [weak self] (indexPath, cell) in
+//        guard let strongSelf = self else { return }
+//        strongSelf.tableView.deselectRow(at: indexPath, animated: true)
+//        strongSelf.viewModel.stationDidSelected(with: cell.radioStation)
+//    }
+//    .disposed(by: disposeBag)
   }
   
   fileprivate func handleTableState(with state: SimpleViewState<FavoriteTableViewModel>) {
