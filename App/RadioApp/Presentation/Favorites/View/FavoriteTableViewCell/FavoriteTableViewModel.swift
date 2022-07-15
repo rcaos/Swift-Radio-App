@@ -9,21 +9,17 @@
 import Foundation
 import Domain
 
-final class FavoriteTableViewModel {
-  
+struct FavoriteTableViewModel: Hashable {
   let radioStation: StationProp
-  
-  lazy var imageURL: URL? = {
-    return URL(string: radioStation.pathImage)
-  }()
-  
+  let imageURL: URL?
   let titleStation: String?
   let detailStation: String?
   let isFavorite: Bool
   
   init(_ station: StationProp) {
     self.radioStation = station
-    
+
+    imageURL = URL(string: radioStation.pathImage)
     titleStation = station.name
     detailStation = station.slogan
     isFavorite = true

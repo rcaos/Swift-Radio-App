@@ -10,29 +10,23 @@ import Domain
 import UIKit
 import RxSwift
 
-protocol FavoriteTableViewCellDelegate: class {
-  
+protocol FavoriteTableViewCellDelegate: AnyObject {
   func favoriteIsPicked(for station: StationProp)
 }
 
 class FavoriteTableViewCell: UITableViewCell {
-  
+
   @IBOutlet weak var stationImageView: UIImageView!
   @IBOutlet weak var nameStationLabel: UILabel!
   @IBOutlet weak var detailStationLabel: UILabel!
   @IBOutlet weak var favoriteButton: UIButton!
-  
+
   weak var delegate: FavoriteTableViewCellDelegate?
-  
+
   private var disposeBag = DisposeBag()
-  
-  var viewModel: FavoriteTableViewModel? {
-    didSet {
-      setupUI()
-      setupObservers()
-    }
-  }
-  
+
+  private var viewModel: FavoriteTableViewModel?
+
   override func awakeFromNib() {
     super.awakeFromNib()
     
@@ -42,9 +36,10 @@ class FavoriteTableViewCell: UITableViewCell {
     nameStationLabel.font = Font.proximaNova.of(type: .bold, with: .big)
     detailStationLabel.font = Font.proximaNova.of(type: .regular, with: .normal)
   }
-  
-  func setupUI() {
-    guard let viewModel = viewModel else { return }
+
+  func setupUI(with viewModel: FavoriteTableViewModel) {
+    self.viewModel = viewModel
+    setupObservers()
     
     stationImageView.setImage(with: viewModel.imageURL, placeholder: UIImage(named: "radio-default"))
     nameStationLabel.text = viewModel.titleStation
@@ -53,7 +48,7 @@ class FavoriteTableViewCell: UITableViewCell {
     let isFilled = viewModel.isFavorite ? UIImage(named: "btn-favoriteFill") : UIImage(named: "btn-favorite")
     favoriteButton.setImage(isFilled, for: .normal)
   }
-  
+
   func setupObservers() {
     favoriteButton.rx.tap
       .bind { [weak self] in
@@ -63,7 +58,7 @@ class FavoriteTableViewCell: UITableViewCell {
     }
     .disposed(by: disposeBag)
   }
-  
+
   override func prepareForReuse() {
     disposeBag = DisposeBag()
   }
