@@ -10,18 +10,14 @@ import Domain
 import UIKit
 import RxSwift
 
-enum FavoritesSectionView: Hashable {
-  case list
-}
-
 class FavoritesRootView: UIView {
-  
+
   public required init?(coder aDecoder: NSCoder) {
     fatalError("Loading from a nib file its unsupported")
   }
-  
+
   var messageView = MessageView(frame: .zero)
-  
+
   let tableView: UITableView = {
     let tableView = UITableView(frame: .zero, style: .plain)
     tableView.registerNib(cellType: FavoriteTableViewCell.self)
@@ -52,8 +48,8 @@ class FavoritesRootView: UIView {
     
     bind(to: viewModel)
   }
-  
-  fileprivate func bind(to viewModel: FavoritesViewModelProtocol) {
+
+  private func bind(to viewModel: FavoritesViewModelProtocol) {
     tableView.delegate = self
 
     dataSource = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, viewModel in
@@ -81,19 +77,9 @@ class FavoritesRootView: UIView {
         strongSelf.handleTableState(with: state)
       })
       .disposed(by: disposeBag)
-    
-//    Observable
-//      .zip( tableView.rx.itemSelected,
-//            tableView.rx.modelSelected(FavoriteTableViewModel.self) )
-//      .bind { [weak self] (indexPath, cell) in
-//        guard let strongSelf = self else { return }
-//        strongSelf.tableView.deselectRow(at: indexPath, animated: true)
-//        strongSelf.viewModel.stationDidSelected(with: cell.radioStation)
-//    }
-//    .disposed(by: disposeBag)
   }
-  
-  fileprivate func handleTableState(with state: SimpleViewState<FavoriteTableViewModel>) {
+
+  private func handleTableState(with state: SimpleViewState<FavoriteTableViewModel>) {
     switch state {
     case .populated :
       messageView.isHidden = true
@@ -102,7 +88,7 @@ class FavoritesRootView: UIView {
     }
   }
   
-  fileprivate func setupEmptyView() {
+  private func setupEmptyView() {
     messageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 200)
     messageView.backgroundColor = .black
     messageView.messageLabel.textColor = .white
@@ -126,19 +112,25 @@ class FavoritesRootView: UIView {
 }
 
 // MARK: - UITableViewDelegate
-
 extension FavoritesRootView: UITableViewDelegate {
-  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+    viewModel.stationDidSelected(index: indexPath.row)
+  }
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 100.0
   }
 }
 
 // MARK: - FavoriteTableViewCellDelegate
-
 extension FavoritesRootView: FavoriteTableViewCellDelegate {
-  
   func favoriteIsPicked(for station: StationProp) {
     viewModel.favoriteDidSelect(for: station)
   }
+}
+
+// MARK: - Section
+enum FavoritesSectionView: Hashable {
+  case list
 }
