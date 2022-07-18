@@ -36,7 +36,7 @@ public struct StationProp: Hashable {
 }
 
 public struct StationRemote: Equatable {
-  public let id: Int
+  public let id: Int // MARK: - TODO should be Nil
   public let name: String
   public let order: Int
   public let city: String
