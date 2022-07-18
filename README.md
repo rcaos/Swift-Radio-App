@@ -2,6 +2,11 @@
 
 - Listen and save your favorite radio station
 
+## What I'm working on
+
+July, 2022
+* ⏳ Moving to Combine and SwiftUI (_wip_)  https://github.com/rcaos/Swift-Radio-App/tree/combine
+
 ## Built with
 - Swift 5, MVVM
 - RxSwift
