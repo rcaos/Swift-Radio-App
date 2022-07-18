@@ -87,9 +87,7 @@
 		77D51747237C989200B7DCC9 /* StationFavoriteCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51746237C989200B7DCC9 /* StationFavoriteCD.swift */; };
 		77D5175B237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77D51759237C9A8300B7DCC9 /* RadiosPeru.xcdatamodeld */; };
 		77D51760237C9CD500B7DCC9 /* MainViewControler.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D5175E237C9CD500B7DCC9 /* MainViewControler.storyboard */; };
-		77D51768237CA04400B7DCC9 /* StationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D51767237CA04400B7DCC9 /* StationProvider.swift */; };
 		77D9A0EC23DA427C00DDCE06 /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0EB23DA427C00DDCE06 /* DataTransferService.swift */; };
-		77D9A0EE23DA451500DDCE06 /* DefaultStationsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0ED23DA451500DDCE06 /* DefaultStationsRepository.swift */; };
 		77D9A0F123DA454B00DDCE06 /* DefaultStationsLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F023DA454B00DDCE06 /* DefaultStationsLocalRepository.swift */; };
 		77D9A0F323DA457A00DDCE06 /* DefaultFavoritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F223DA457A00DDCE06 /* DefaultFavoritesRepository.swift */; };
 		77D9A0F523DA459C00DDCE06 /* DefaultShowDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9A0F423DA459C00DDCE06 /* DefaultShowDetailsRepository.swift */; };
@@ -183,9 +181,7 @@
 		77D51746237C989200B7DCC9 /* StationFavoriteCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFavoriteCD.swift; sourceTree = "<group>"; };
 		77D5175A237C9A8300B7DCC9 /* RadiosPeru.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RadiosPeru.xcdatamodel; sourceTree = "<group>"; };
 		77D5175F237C9CD500B7DCC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = RadiosPeru/StoryBoards/Base.lproj/MainViewControler.storyboard; sourceTree = "<group>"; };
-		77D51767237CA04400B7DCC9 /* StationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationProvider.swift; sourceTree = "<group>"; };
 		77D9A0EB23DA427C00DDCE06 /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
-		77D9A0ED23DA451500DDCE06 /* DefaultStationsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStationsRepository.swift; sourceTree = "<group>"; };
 		77D9A0F023DA454B00DDCE06 /* DefaultStationsLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStationsLocalRepository.swift; sourceTree = "<group>"; };
 		77D9A0F223DA457A00DDCE06 /* DefaultFavoritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFavoritesRepository.swift; sourceTree = "<group>"; };
 		77D9A0F423DA459C00DDCE06 /* DefaultShowDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultShowDetailsRepository.swift; sourceTree = "<group>"; };
@@ -663,7 +659,6 @@
 		77D9A0EF23DA451D00DDCE06 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				77D9A0ED23DA451500DDCE06 /* DefaultStationsRepository.swift */,
 				77D9A0F023DA454B00DDCE06 /* DefaultStationsLocalRepository.swift */,
 				77D9A0F223DA457A00DDCE06 /* DefaultFavoritesRepository.swift */,
 				77D9A0F423DA459C00DDCE06 /* DefaultShowDetailsRepository.swift */,
@@ -678,7 +673,6 @@
 			children = (
 				77236FAE236787B2009C80D0 /* GroupRPPProvider.swift */,
 				770A6BFA23687AF400FDE4F6 /* GroupCRPProvider.swift */,
-				77D51767237CA04400B7DCC9 /* StationProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -879,7 +873,6 @@
 				77A3D7FD23DB2DF9003FF385 /* MainSceneDIContainer.swift in Sources */,
 				77A68DF2244698B500E6924A /* Station+PersistenceStore.swift in Sources */,
 				77D9A0F723DA526100DDCE06 /* ApiClient.swift in Sources */,
-				77D9A0EE23DA451500DDCE06 /* DefaultStationsRepository.swift in Sources */,
 				77B9469D235AD7E6006C3EEA /* DismissAnimator.swift in Sources */,
 				779ECAA7245D507900987EE7 /* AnalyticsServiceProtocol.swift in Sources */,
 				77B6AE342448989700D4D637 /* FavoriteTableViewCell.swift in Sources */,
@@ -888,7 +881,6 @@
 				77D9A0F523DA459C00DDCE06 /* DefaultShowDetailsRepository.swift in Sources */,
 				77A3D7FA23DB2ADC003FF385 /* AppAppearance.swift in Sources */,
 				779DF56023634D8C001F034F /* LoadingPlayerView.swift in Sources */,
-				77D51768237CA04400B7DCC9 /* StationProvider.swift in Sources */,
 				77CA145B23689CB9001BF04E /* ApiError.swift in Sources */,
 				776FE6982459BB2C000604A0 /* TransferServiceProtocol.swift in Sources */,
 				7778B159244C17CD00FDB767 /* ColorPalette.swift in Sources */,
