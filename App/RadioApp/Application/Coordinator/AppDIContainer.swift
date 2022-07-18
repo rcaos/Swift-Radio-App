@@ -8,11 +8,20 @@
 
 import Foundation
 import InitialFeature
+import Networking
 
 public final class AppDIContainer {
   
   lazy var dataTransferService: DataTransferService = {
     return ApiClient()
+  }()
+
+  lazy var remoteStorageDataTransfer: DefaultDataTransferService = {
+    let configuration = ApiDataNetworkConfig(
+      baseURL: URL(string: "https://www.dropbox.com")!
+    )
+    let networkService = DefaultNetworkService(config: configuration)
+    return DefaultDataTransferService(with: networkService)
   }()
   
   lazy var backendClient: LocalClient = {
@@ -36,7 +45,7 @@ extension AppDIContainer {
   
   func makeInitialSceneDIContainer() -> InitialSceneDIContainer {
     let dependencies =  InitialSceneDIContainer.Dependencies(
-//      dataTransferService: backendClient
+      dataTransferService: remoteStorageDataTransfer
 //      ,
 //      stationsLocalStorage: stationsLocalStorage
     )
