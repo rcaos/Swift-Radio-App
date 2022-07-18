@@ -2,7 +2,7 @@ import Domain
 import NetworkingInterface
 import UIKit
 
-public final class InitialSceneDIContainer {
+public final class InitialSceneDIContainer: InitialCoordinatorDependencies {
 
   public struct Dependencies {
     let dataTransferService: DataTransferService
@@ -53,5 +53,3 @@ extension InitialSceneDIContainer {
 //    return DefaultStationsLocalRepository(stationsPersistentStorage: dependencies.stationsLocalStorage)
 //  }
 }
-
-extension InitialSceneDIContainer: InitialCoordinatorDependencies { }

@@ -12,7 +12,7 @@ struct FetchStationsUseCaseRequestValue {
   public init() { }
 }
 
-final class DefaultFetchStationsUseCase: FetchStationsUseCase {
+struct DefaultFetchStationsUseCase: FetchStationsUseCase {
 
   private let stationsRemoteRepository: StationsRemoteRepositoryProtocol
   //  private let stationsLocalRepository: StationsLocalRepository
