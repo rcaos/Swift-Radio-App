@@ -5,7 +5,8 @@
 ## What I'm working on
 
 July, 2022
-* ⏳ Moving to Combine and SwiftUI (_wip_)  https://github.com/rcaos/Swift-Radio-App/tree/combine
+* ⏳ Moving to Combine (_wip_)  https://github.com/rcaos/Swift-Radio-App/tree/combine
+* ⏳ Moving to SwiftUI
 
 ## Built with
 - Swift 5, MVVM
