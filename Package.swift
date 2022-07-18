@@ -40,7 +40,6 @@ let package = Package(
     .target(
       name: "InitialFeature",
       dependencies: [
-        .product(name: "RxSwift", package: "RxSwift"), // TODO, remove
         "Domain",
         "Networking",
         "Shared"
