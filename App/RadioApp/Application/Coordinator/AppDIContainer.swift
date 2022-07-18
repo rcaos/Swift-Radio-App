@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import InitialFeature
 
 public final class AppDIContainer {
   
@@ -35,8 +36,10 @@ extension AppDIContainer {
   
   func makeInitialSceneDIContainer() -> InitialSceneDIContainer {
     let dependencies =  InitialSceneDIContainer.Dependencies(
-      dataTransferService: backendClient,
-      stationsLocalStorage: stationsLocalStorage)
+//      dataTransferService: backendClient
+//      ,
+//      stationsLocalStorage: stationsLocalStorage
+    )
     return InitialSceneDIContainer(dependencies: dependencies)
   }
   

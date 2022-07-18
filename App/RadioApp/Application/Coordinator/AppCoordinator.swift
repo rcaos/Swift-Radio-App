@@ -7,45 +7,35 @@
 //
 
 import UIKit
+import InitialFeature
+import Shared
 
 public enum AppChildCoordinator {
-  case
-  
-  initial,
-  
-  main
+  case initial
+  case main
 }
 
 public enum AppSteps {
-  
-  case
-  
-  initialSceneIsRequired,
-  
-  mainSceneIsRequired
+  case initialSceneIsRequired
+  case mainSceneIsRequired
 }
 
 class AppCoordinator: Coordinator {
-  
   private let window: UIWindow
-  
   private var childCoordinators = [AppChildCoordinator: Coordinator]()
-  
   private let appDIContainer: AppDIContainer
-  
+
   // MARK: - Initializer
-  
   public init(window: UIWindow, appDIContainer: AppDIContainer) {
     self.window = window
     self.appDIContainer = appDIContainer
   }
-  
+
   func start() {
     navigate(to: .initialSceneIsRequired)
   }
-  
+
   // MARK: - Navigation
-  
   fileprivate func navigate(to step: AppSteps) {
     switch step {
     case .initialSceneIsRequired:
@@ -55,29 +45,29 @@ class AppCoordinator: Coordinator {
       navigateToMainFlow()
     }
   }
-  
+
   fileprivate func navigateToInitialFlow() {
     let tabBar = UITabBarController()
     let dependencies = appDIContainer.makeInitialSceneDIContainer()
     let coordinator = InitialCoordinator(tabBarController: tabBar, dependencies: dependencies)
-    
+
     self.window.rootViewController = tabBar
     self.window.makeKeyAndVisible()
-    
+
     childCoordinators[.initial] = coordinator
     coordinator.delegate = self
     coordinator.start(with: .initialSceneIsRequired)
   }
-  
+
   fileprivate func navigateToMainFlow() {
     let navigationVC = UINavigationController()
     
     let dependencies = appDIContainer.makeMainSceneDIContainer()
     let coordinator = MainCoordinator(navigationController: navigationVC, dependencies: dependencies)
-    
+
     self.window.rootViewController = navigationVC
     self.window.makeKeyAndVisible()
-    
+
     childCoordinators[.main] = coordinator
     coordinator.delegate = self
     coordinator.start(with: .mainSceneIsRequired)
@@ -85,9 +75,7 @@ class AppCoordinator: Coordinator {
 }
 
 // MARK: - InitialCoordinatorDelegate
-
 extension AppCoordinator: InitialCoordinatorDelegate {
-  
   func initialCoordinatorDidFinish() {
     childCoordinators[.initial] = nil
     navigate(to: .mainSceneIsRequired)
@@ -95,9 +83,7 @@ extension AppCoordinator: InitialCoordinatorDelegate {
 }
 
 // MARK: - MainCoordinatorDelegate
-
 extension AppCoordinator: MainCoordinatorDelegate {
-  
   func mainCoordinatorDidFinish() {
     childCoordinators[.main] = nil
   }

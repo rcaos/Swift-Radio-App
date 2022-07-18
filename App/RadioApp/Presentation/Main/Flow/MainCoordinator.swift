@@ -7,11 +7,12 @@
 //
 
 import Domain
+import Shared
 import UIKit
 
 // MARK: - TODO, separate files too
 
-public protocol MainCoordinatorDelegate: class {
+public protocol MainCoordinatorDelegate: AnyObject {
   func mainCoordinatorDidFinish()
 }
 
@@ -32,7 +33,7 @@ public protocol MainCoordinatorDependencies {
   func makePlayerViewController(with station: StationProp) -> PlayerViewController
 }
 
-public protocol MainCoordinatorProtocol: class {
+public protocol MainCoordinatorProtocol: AnyObject {
   
   func navigate(to step: MainSteps)
 }
