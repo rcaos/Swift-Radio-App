@@ -42,7 +42,7 @@ let package = Package(
       dependencies: [
         .product(name: "RxSwift", package: "RxSwift"), // TODO, remove
         "Domain",
-        "NetworkingInterface",
+        "Networking",
         "Shared"
       ]
     ),
