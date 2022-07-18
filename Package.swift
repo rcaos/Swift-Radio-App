@@ -14,8 +14,8 @@ let package = Package(
     .library(name: "Domain", targets: ["Domain"]),
     .library(name: "Networking", targets: ["Networking"]),
     .library(name: "NetworkingInterface", targets: ["NetworkingInterface"]),
+    .library(name: "Persistence", targets: ["Persistence"]),
     .library(name: "RadioPlayer", targets: ["RadioPlayer"]),
-    // .library(name: "Persistence", targets: ["Persistence"]),
     // .library(name: "PersistenceLive", targets: ["PersistenceLive"])
   ],
   dependencies: [
@@ -40,6 +40,7 @@ let package = Package(
         "NetworkingInterface"
       ]),
     .target(name: "NetworkingInterface"),
+    .target(name: "Persistence"),
     .target(
       name: "RadioPlayer",
       dependencies: [
