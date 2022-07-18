@@ -25,6 +25,7 @@ struct DefaultFetchStationsUseCase: FetchStationsUseCase {
   }
 
   // MARK: - TODO, save in Local Repository
+  // TODO, don't use two repositories here, Move to Repository with DataSources
   public func execute(requestValue: FetchStationsUseCaseRequestValue)-> AnyPublisher<[StationRemote], CustomError> {
     return stationsRemoteRepository.fetchAllStations()
     //      .flatMap { stations -> Observable<[StationRemote]> in
