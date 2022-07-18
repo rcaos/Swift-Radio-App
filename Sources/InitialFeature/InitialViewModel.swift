@@ -16,7 +16,7 @@ protocol InitialViewModelProtocol {
 
 final class InitialViewModel: InitialViewModelProtocol {
   
-  private let fetchStationsUseCase: FetchStationsUseCase
+//  private let fetchStationsUseCase: FetchStationsUseCase
   
   private let disposeBag = DisposeBag()
   
@@ -24,9 +24,9 @@ final class InitialViewModel: InitialViewModelProtocol {
   
   // MARK: - Initializers
   
-  init(fetchStationsUseCase: FetchStationsUseCase) {
-    self.fetchStationsUseCase = fetchStationsUseCase
-  }
+//  init(fetchStationsUseCase: FetchStationsUseCase) {
+//    self.fetchStationsUseCase = fetchStationsUseCase
+//  }
   
   deinit {
     print("deinit \(Self.self)")
@@ -37,13 +37,13 @@ final class InitialViewModel: InitialViewModelProtocol {
   public func viewDidLoad() {
     let request = FetchStationsUseCaseRequestValue()
     
-    fetchStationsUseCase.execute(requestValue: request)
-      .subscribe(onError: { error in
-        print("error to Fetch Stations: [\(error)]")
-      }, onDisposed: { [weak self] in
-        self?.viewDidFinish()
-      })
-      .disposed(by: disposeBag)
+//    fetchStationsUseCase.execute(requestValue: request)
+//      .subscribe(onError: { error in
+//        print("error to Fetch Stations: [\(error)]")
+//      }, onDisposed: { [weak self] in
+//        self?.viewDidFinish()
+//      })
+//      .disposed(by: disposeBag)
   }
   
   fileprivate func viewDidFinish() {

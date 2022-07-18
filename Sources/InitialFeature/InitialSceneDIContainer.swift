@@ -7,15 +7,16 @@
 //
 
 import Domain
+import NetworkingInterface
 import UIKit
 
 final class InitialSceneDIContainer {
   
   struct Dependencies {
     let dataTransferService: DataTransferService
-    let stationsLocalStorage: StationsLocalStorage
+//    let stationsLocalStorage: StationsLocalStorage
   }
-  
+
   private let dependencies: Dependencies
   
   // MARK: - Initializers
@@ -34,28 +35,29 @@ final class InitialSceneDIContainer {
 extension InitialSceneDIContainer {
   
   private func makeInitialViewModel(coordinator: InitialCoordinatorProtocol?) -> InitialViewModel {
-    let initialVM = InitialViewModel(fetchStationsUseCase: makeFetchStationsUseCase())
+//    let initialVM = InitialViewModel(fetchStationsUseCase: makeFetchStationsUseCase())
+    let initialVM = InitialViewModel()
     initialVM.coordinator = coordinator
     return initialVM
   }
   
   // MARK: - Use Cases
   
-  private func makeFetchStationsUseCase() -> FetchStationsUseCase {
-    return DefaultFetchStationsUseCase(
-      stationsRepository: makeStationsRepository(),
-      stationsLocalRepository: makeStationsLocalRepository())
-  }
-  
-  // MARK: - Repositories
-  
-  private func makeStationsRepository() -> StationsRepository {
-    return DefaultStationsRepository(dataTransferService: dependencies.dataTransferService)
-  }
-  
-  private func makeStationsLocalRepository() -> StationsLocalRepository {
-    return DefaultStationsLocalRepository(stationsPersistentStorage: dependencies.stationsLocalStorage)
-  }
+//  private func makeFetchStationsUseCase() -> FetchStationsUseCase {
+//    return DefaultFetchStationsUseCase(
+//      stationsRepository: makeStationsRepository(),
+//      stationsLocalRepository: makeStationsLocalRepository())
+//  }
+//
+//  // MARK: - Repositories
+//
+//  private func makeStationsRepository() -> StationsRepository {
+//    return DefaultStationsRepository(dataTransferService: dependencies.dataTransferService)
+//  }
+//
+//  private func makeStationsLocalRepository() -> StationsLocalRepository {
+//    return DefaultStationsLocalRepository(stationsPersistentStorage: dependencies.stationsLocalStorage)
+//  }
 }
 
 extension InitialSceneDIContainer: InitialCoordinatorDependencies { }

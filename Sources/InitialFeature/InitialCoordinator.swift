@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Shared
 
 // MARK: - TODO, separate files
 
