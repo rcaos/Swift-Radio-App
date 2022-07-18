@@ -12,6 +12,7 @@ struct StationsDTO: Decodable {
   let stations: [StationRemote]  // MARK: - TODO, use another domain model DTO and Domain
 }
 
+// MARK: - TODO, USe datasources, Remote and Local !!!
 struct StationsRepository: StationsRemoteRepositoryProtocol {
   
   private let dataTransferService: DataTransferService
