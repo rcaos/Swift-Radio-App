@@ -27,7 +27,7 @@ public protocol InitialCoordinatorDependencies {
 }
 
 public class InitialCoordinator: Coordinator, InitialCoordinatorProtocol {
-  weak var delegate: InitialCoordinatorDelegate?
+  public weak var delegate: InitialCoordinatorDelegate?
   private let tabBarController: UITabBarController
   private let dependencies: InitialCoordinatorDependencies
 
