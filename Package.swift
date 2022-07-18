@@ -30,6 +30,7 @@ let package = Package(
       dependencies: [
         .product(name: "RxSwift", package: "RxSwift"),
         .product(name: "Kingfisher", package: "Kingfisher"),
+        "InitialFeature",
         "Networking",
         "RadioPlayer"
       ]),
