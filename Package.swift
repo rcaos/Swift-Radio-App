@@ -12,10 +12,12 @@ let package = Package(
   products: [
     .library(name: "AppFeature", targets: ["AppFeature"]),
     .library(name: "Domain", targets: ["Domain"]),
+    .library(name: "InitialFeature", targets: ["InitialFeature"]),
     .library(name: "Networking", targets: ["Networking"]),
     .library(name: "NetworkingInterface", targets: ["NetworkingInterface"]),
     .library(name: "Persistence", targets: ["Persistence"]),
     .library(name: "RadioPlayer", targets: ["RadioPlayer"]),
+    .library(name: "Shared", targets: ["Shared"]),
     // .library(name: "PersistenceLive", targets: ["PersistenceLive"])
   ],
   dependencies: [
@@ -35,17 +37,38 @@ let package = Package(
       .product(name: "RxSwift", package: "RxSwift")
     ]),
     .target(
+      name: "InitialFeature",
+      dependencies: [
+        .product(name: "RxSwift", package: "RxSwift"),
+        "Domain",
+        "NetworkingInterface",
+        "Shared"
+      ]
+    ),
+    .target(
       name: "Networking",
       dependencies: [
         "NetworkingInterface"
       ]),
     .target(name: "NetworkingInterface"),
-    .target(name: "Persistence"),
+    .target(
+      name: "Persistence",
+      dependencies: [
+        "Shared"
+      ]
+    ),
     .target(
       name: "RadioPlayer",
       dependencies: [
         .product(name: "RxSwift", package: "RxSwift"),
         "Domain"
-      ])
+      ]
+    ),
+    .target(
+      name: "Shared",
+      dependencies: [
+        "NetworkingInterface"
+      ]
+    )
   ]
 )
