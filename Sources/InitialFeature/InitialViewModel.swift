@@ -1,52 +1,41 @@
-//
-//  InitialViewModel.swift
-//  RadiosPeru
-//
-//  Created by Jeans on 11/13/19.
-//  Copyright © 2019 Jeans. All rights reserved.
-//
-
 import Domain
-import RxSwift
+import Combine
+import Foundation
 
 protocol InitialViewModelProtocol {
-  
   func viewDidLoad()
 }
 
 final class InitialViewModel: InitialViewModelProtocol {
-  
-//  private let fetchStationsUseCase: FetchStationsUseCase
-  
-  private let disposeBag = DisposeBag()
-  
+  private let fetchStationsUseCase: FetchStationsUseCase
+  private var disposeBag = Set<AnyCancellable>()
   weak var coordinator: InitialCoordinatorProtocol?
-  
+
   // MARK: - Initializers
-  
-//  init(fetchStationsUseCase: FetchStationsUseCase) {
-//    self.fetchStationsUseCase = fetchStationsUseCase
-//  }
-  
+  init(fetchStationsUseCase: FetchStationsUseCase) {
+    self.fetchStationsUseCase = fetchStationsUseCase
+  }
+
   deinit {
     print("deinit \(Self.self)")
   }
-  
+
   // MARK: - Public
-  
   public func viewDidLoad() {
     let request = FetchStationsUseCaseRequestValue()
-    
-//    fetchStationsUseCase.execute(requestValue: request)
-//      .subscribe(onError: { error in
-//        print("error to Fetch Stations: [\(error)]")
-//      }, onDisposed: { [weak self] in
-//        self?.viewDidFinish()
-//      })
-//      .disposed(by: disposeBag)
+
+    fetchStationsUseCase.execute(requestValue: request)
+      .receive(on: RunLoop.main)
+      .sink(receiveCompletion: { [weak self] _ in
+        self?.viewDidFinish()
+      },
+            receiveValue: { list in
+        print("rcaos list= \n \(list)")
+      })
+      .store(in: &disposeBag)
   }
-  
-  fileprivate func viewDidFinish() {
+
+  private func viewDidFinish() {
     coordinator?.navigate(to: .initialSceneDidFinish)
   }
 }
