@@ -25,7 +25,7 @@ final class InitialViewModel: InitialViewModelProtocol {
     let request = FetchStationsUseCaseRequestValue()
 
     fetchStationsUseCase.execute(requestValue: request)
-      .receive(on: RunLoop.main)
+      .receive(on: RunLoop.main)  // MARK: - TODO, use Combine Schedulers
       .sink(receiveCompletion: { [weak self] _ in
         self?.viewDidFinish()
       },
