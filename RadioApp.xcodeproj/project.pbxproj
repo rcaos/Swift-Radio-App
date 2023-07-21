@@ -1369,6 +1369,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DV4PUUR55B;
 				INFOPLIST_FILE = "$(SRCROOT)/RadioApp/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1390,6 +1391,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DV4PUUR55B;
 				INFOPLIST_FILE = "$(SRCROOT)/RadioApp/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1431,7 +1433,7 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = exactVersion;
-				version = 7.3.0;
+				version = 7.8.1;
 			};
 		};
 		77459D52287763CA0049EF78 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
