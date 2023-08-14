@@ -23,15 +23,15 @@ enum RequestGenerationError: Error {
 }
 
 public struct Endpoint: URLRequestable {
-  public let path: String
-  public let isFullPath: Bool
-  public let method: HTTPMethodType
-  public let headerParamaters: [String: String]
-  public let queryParametersEncodable: Encodable?
-  public let queryParameters: [String: Any]
-  public let bodyParamatersEncodable: Encodable?
-  public let bodyParamaters: [String: Any]
-  public let bodyEncoding: BodyEncoding
+  let path: String
+  let isFullPath: Bool
+  let method: HTTPMethodType
+  let headerParamaters: [String: String]
+  let queryParametersEncodable: Encodable?
+  let queryParameters: [String: Any]
+  let bodyParamatersEncodable: Encodable?
+  let bodyParamaters: [String: Any]
+  let bodyEncoding: BodyEncoding
   public let responseDecoder: ResponseDecoder
 
   public init(
@@ -61,52 +61,53 @@ public struct Endpoint: URLRequestable {
   public func urlRequest(with networkConfig: NetworkConfig) throws -> URLRequest {
     return try buildURLRequest(endpoint: self, with: networkConfig)
   }
-}
 
-private func buildURLRequest(endpoint: Endpoint, with config: NetworkConfig) throws -> URLRequest {
-  let url = try url(endpoint: endpoint, with: config)
-  var urlRequest = URLRequest(url: url)
-  var allHeaders: [String: String] = config.headers
-  endpoint.headerParamaters.forEach { allHeaders.updateValue($1, forKey: $0) }
+  // MARK: - Private
+  private func buildURLRequest(endpoint: Endpoint, with config: NetworkConfig) throws -> URLRequest {
+    let url = try url(endpoint: endpoint, with: config)
+    var urlRequest = URLRequest(url: url)
+    var allHeaders: [String: String] = config.headers
+    endpoint.headerParamaters.forEach { allHeaders.updateValue($1, forKey: $0) }
 
-  let bodyParamaters = try endpoint.bodyParamatersEncodable?.toDictionary() ?? endpoint.bodyParamaters
-  if !bodyParamaters.isEmpty {
-    urlRequest.httpBody = encodeBody(bodyParamaters: bodyParamaters, bodyEncoding: endpoint.bodyEncoding)
+    let bodyParamaters = try endpoint.bodyParamatersEncodable?.toDictionary() ?? endpoint.bodyParamaters
+    if !bodyParamaters.isEmpty {
+      urlRequest.httpBody = encodeBody(bodyParamaters: bodyParamaters, bodyEncoding: endpoint.bodyEncoding)
+    }
+    urlRequest.httpMethod = endpoint.method.rawValue
+    urlRequest.allHTTPHeaderFields = allHeaders
+    return urlRequest
   }
-  urlRequest.httpMethod = endpoint.method.rawValue
-  urlRequest.allHTTPHeaderFields = allHeaders
-  return urlRequest
-}
 
-private func url(endpoint: Endpoint, with config: NetworkConfig) throws -> URL {
-  let baseURL = config.baseURL.absoluteString.last != "/" ? config.baseURL.absoluteString + "/" : config.baseURL.absoluteString
+  private func url(endpoint: Endpoint, with config: NetworkConfig) throws -> URL {
+    let baseURL = config.baseURL.absoluteString.last != "/" ? config.baseURL.absoluteString + "/" : config.baseURL.absoluteString
 
-  let endpointRaw = endpoint.isFullPath ? endpoint.path : baseURL.appending(endpoint.path)
+    let endpointRaw = endpoint.isFullPath ? endpoint.path : baseURL.appending(endpoint.path)
 
-  guard var urlComponents = URLComponents(string: endpointRaw) else { throw RequestGenerationError.components }
-  var urlQueryItems = [URLQueryItem]()
+    guard var urlComponents = URLComponents(string: endpointRaw) else { throw RequestGenerationError.components }
+    var urlQueryItems = [URLQueryItem]()
 
-  let queryParameters = try endpoint.queryParametersEncodable?.toDictionary() ?? endpoint.queryParameters
-  queryParameters.forEach {
-    urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
+    let queryParameters = try endpoint.queryParametersEncodable?.toDictionary() ?? endpoint.queryParameters
+    queryParameters.forEach {
+      urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
+    }
+    config.queryParameters.forEach {
+      urlQueryItems.append(URLQueryItem(name: $0.key, value: $0.value))
+    }
+    urlComponents.queryItems = !urlQueryItems.isEmpty ? urlQueryItems : nil
+
+    guard let url = urlComponents.url else {
+      throw RequestGenerationError.components
+    }
+    return url
   }
-  config.queryParameters.forEach {
-    urlQueryItems.append(URLQueryItem(name: $0.key, value: $0.value))
-  }
-  urlComponents.queryItems = !urlQueryItems.isEmpty ? urlQueryItems : nil
 
-  guard let url = urlComponents.url else {
-    throw RequestGenerationError.components
-  }
-  return url
-}
-
-private func encodeBody(bodyParamaters: [String: Any], bodyEncoding: BodyEncoding) -> Data? {
-  switch bodyEncoding {
-  case .jsonSerializationData:
-    return try? JSONSerialization.data(withJSONObject: bodyParamaters)
-  case .stringEncodingAscii:
-    return bodyParamaters.queryString.data(using: String.Encoding.ascii, allowLossyConversion: true)
+  private func encodeBody(bodyParamaters: [String: Any], bodyEncoding: BodyEncoding) -> Data? {
+    switch bodyEncoding {
+    case .jsonSerializationData:
+      return try? JSONSerialization.data(withJSONObject: bodyParamaters)
+    case .stringEncodingAscii:
+      return bodyParamaters.queryString.data(using: String.Encoding.ascii, allowLossyConversion: true)
+    }
   }
 }
 
