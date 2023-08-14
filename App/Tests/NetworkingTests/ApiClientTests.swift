@@ -4,6 +4,7 @@
 
 import Foundation
 import Networking
+import NetworkingLive
 import XCTest
 
 class ApiClientTests: XCTestCase {
