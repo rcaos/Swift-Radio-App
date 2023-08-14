@@ -11,8 +11,8 @@ extension ApiClient {
     logger: NetworkLogger = .live
   ) -> ApiClient {
     return ApiClient(
-      apiRequest: { try await request(endpoint: $0, networkConfig: networkConfig, urlSession: urlSession, logger: $1) },
-      logger: { logger }
+      apiRequest: { try await request(endpoint: $0, networkConfig: networkConfig, urlSession: urlSession, logger: logger) },
+      logError: { logger.logError($0) }
     )
   }
 }

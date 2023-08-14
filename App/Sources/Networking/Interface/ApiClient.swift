@@ -5,15 +5,15 @@
 import Foundation
 
 public struct ApiClient {
-  public var apiRequest: (URLRequestable, NetworkLogger) async throws -> (Data, URLResponse)
-  public var logger: () -> NetworkLogger
+  public var apiRequest: (URLRequestable) async throws -> (Data, URLResponse)
+  public var logError: (Error) -> Void
 
   public init(
-    apiRequest: @escaping (URLRequestable, NetworkLogger) async throws -> (Data, URLResponse),
-    logger: @escaping () -> NetworkLogger
+    apiRequest: @escaping (URLRequestable) async throws -> (Data, URLResponse),
+    logError: @escaping (Error) -> Void
   ) {
     self.apiRequest = apiRequest
-    self.logger = logger
+    self.logError = logError
   }
 
   public func apiRequest(
@@ -22,7 +22,7 @@ public struct ApiClient {
     line: UInt = #line
   ) async throws -> (Data, URLResponse) {
     do {
-      let (data, response) = try await apiRequest(endpoint, logger())
+      let (data, response) = try await apiRequest(endpoint)
       return (data, response)
     } catch {
       throw ApiError(error: error, file: file, line: line)
@@ -40,7 +40,7 @@ public struct ApiClient {
     do {
       return try endpoint.responseDecoder.decode(A.self, from: data)
     } catch {
-      logger().logError(error)
+      logError(error)
       throw ApiError(error: error, file: file, line: line)
     }
   }
