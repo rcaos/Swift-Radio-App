@@ -69,7 +69,7 @@ class AudioPlayerAVP: NSObject {
 
         switch item.status {
         case .failed, .unknown:
-          break
+          self?.continuation?.yield(.changeStatus(.stopped))
         case.readyToPlay:
           player.play()
         @unknown default:
@@ -119,14 +119,21 @@ class AudioPlayerAVP: NSObject {
   }
 
   func toggle() {
-    print("toggle: \(player.timeControlStatus.descriptionValue)")
-    print("toggle item: \(player.currentItem?.status.descriptionValue)")
-
-//  toggle: playing
-//  toggle item: Optional("readyToPlay")
-
-//  toggle: paused
-//  toggle item: nil
+//    print("toggle: \(player.timeControlStatus.descriptionValue)")
+//    print("toggle item: \(player.currentItem?.status.descriptionValue)")
+//    print("toggle item: \( (player.currentItem?.asset as? AVURLAsset)?.url )")
+    switch player.timeControlStatus {
+    case .paused:
+      if let currentItem = player.currentItem, currentItem.status != .failed {
+        player.play()
+      }
+    case .playing:
+      player.pause()
+    case .waitingToPlayAtSpecifiedRate:
+      player.pause()
+    @unknown default:
+      break
+    }
   }
 
   func delegate() -> AsyncStream<AudioPlayerClient.DelegateEvent> {
