@@ -2,6 +2,7 @@
 //  Created by Jeans Ruiz on 14/08/23.
 //
 
+import Combine
 import Foundation
 import AVFoundation
 
@@ -29,6 +30,7 @@ class AudioPlayerAVP: NSObject {
   private var currentItemStatusObserver: NSKeyValueObservation?
 
   private var continuation: AsyncStream<AudioPlayerClient.DelegateEvent>.Continuation?
+  private var disposeBag = Set<AnyCancellable>()
 
   override init() {
     print("Init: \(Self.self)")
@@ -41,10 +43,11 @@ class AudioPlayerAVP: NSObject {
     player = AVPlayer()
     super.init()
 
-    setupObservers()
+    //setupObservers()
 
 #warning("todo, add notification, AVAudioSession.interruptionNotification")
 #warning("todo, setup MPRemoteCommandCenter")
+    subscribeToAudioInterruption()
   }
 
   deinit {
@@ -144,6 +147,32 @@ class AudioPlayerAVP: NSObject {
         print("\(Self.self) Stream finished with status: \(status)")
       }
     }
+  }
+
+  private func subscribeToAudioInterruption() {
+    NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)
+      .sink(receiveValue: { [weak self] notification in
+        guard let userInfo = notification.userInfo,
+              let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+          return
+        }
+        
+        switch type {
+        case .began:
+          self?.player.pause()
+          
+        case .ended:
+          guard let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
+          let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+          if options.contains(.shouldResume) {
+            self?.player.play() // An interruption ended. Resume playback.
+          }
+        default:
+          break
+        }
+      })
+      .store(in: &disposeBag)
   }
 }
 
