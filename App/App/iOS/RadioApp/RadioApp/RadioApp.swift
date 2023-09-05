@@ -7,7 +7,7 @@ import PlayerFeature
 import SwiftUI
 
 @main
-struct RadioAppApp: App {
+struct RadioApp: App {
 
   private let playerViewModel = PlayerViewModel()
 
