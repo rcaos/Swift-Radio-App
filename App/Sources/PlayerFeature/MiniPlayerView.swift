@@ -40,9 +40,11 @@ public struct MiniPlayerView: View {
 
         VStack(alignment: .leading) {
           Text(model.title)
+            .lineLimit(1)
             .font(.title3)
             .fontWeight(.bold)
           Text(model.subtitle)
+            .lineLimit(1)
             .font(.footnote)
             .fontWeight(.regular)
         }
@@ -62,39 +64,5 @@ public struct MiniPlayerView: View {
       Divider()
     }
     .background(Color(UIColor.secondarySystemBackground))
-  }
-}
-
-// MARK: - UIModel
-public struct MiniPlayerUIModel {
-  public let isFavorite: Bool
-  public var state: PlayerStatus
-  public var title: String
-  public let subtitle: String
-
-  public init(
-    isFavorite: Bool = false,
-    state: PlayerStatus = .stopped,
-    title: String = "",
-    subtitle: String = ""
-  ) {
-    self.isFavorite = isFavorite
-    self.state = state
-    self.title = title
-    self.subtitle = subtitle
-  }
-
-  public enum PlayerStatus {
-    case loading
-    case stopped
-    case playing
-
-    var isPlaying: Bool {
-      return .playing == self
-    }
-
-    var isLoading: Bool {
-      return .loading == self
-    }
   }
 }
