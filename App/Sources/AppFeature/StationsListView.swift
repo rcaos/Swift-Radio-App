@@ -37,8 +37,10 @@ public struct StationsListView: View {
               }
             )
             .frame(height: 131)
-            .onTapGesture {
-              model.loadStation(stationId: station.id)
+            .onTapGesture { 
+              Task {
+                await model.loadStation(stationId: station.id)
+              }
             }
           }
         })
