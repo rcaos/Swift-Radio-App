@@ -97,6 +97,7 @@ class AudioPlayerAVP: NSObject {
   }
 
   func load(_ url: String) {
+    print("I will load: \(url)")
     let sourceURL = URL(string: url)! // fix
     // check if is the same URL?, return
     if let asset = player.currentItem?.asset as? AVURLAsset, sourceURL == asset.url {

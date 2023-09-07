@@ -45,13 +45,13 @@ public struct StationsListView: View {
           }
         })
       }
-      .onAppear {
-        model.onAppear()
-      }
 
       if let station = model.selectedStation {
         MiniPlayerView(model: station)
       }
+    }
+    .task {
+      await model.onAppear()
     }
   }
 }
