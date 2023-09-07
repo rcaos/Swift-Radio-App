@@ -43,6 +43,7 @@ let package = Package(
       name: "PlayerFeature",
       dependencies: [
         "AudioPlayerClient",
+        "Networking",
         .product(name: "AsyncAlgorithms", package: "swift-async-algorithms")
       ]
     ),
