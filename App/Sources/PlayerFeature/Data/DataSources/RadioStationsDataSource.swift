@@ -1,10 +1,10 @@
 //
-//  Created by Jeans Ruiz on 17/08/23.
+//  Created by Jeans Ruiz on 7/09/23.
 //
 
 import Foundation
 
-struct RadioStationsRepository {
+struct RadioStationsDataSource {
   var getAllStations: () async -> [RadioStation]
 
   var getStationById: (String) async -> RadioStation?
