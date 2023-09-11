@@ -46,8 +46,8 @@ public struct StationsListView: View {
         })
       }
 
-      if let station = model.selectedStation {
-        MiniPlayerView(model: station)
+      if model.selectedStation != nil {
+        MiniPlayerView()
       }
     }
     .task {
