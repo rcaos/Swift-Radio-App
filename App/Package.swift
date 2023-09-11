@@ -11,6 +11,7 @@ let package = Package(
   products: [
     .library(name: "AppFeature", targets: ["AppFeature"]),
     .library(name: "AudioPlayerClient", targets: ["AudioPlayerClient"]),
+    .library(name: "Env", targets: ["Env"]),
     .library(name: "Networking", targets: ["Networking"]),
     .library(name: "NetworkingLive", targets: ["NetworkingLive"]),
     .library(name: "PlayerFeature", targets: ["PlayerFeature"])
@@ -22,6 +23,7 @@ let package = Package(
     .target(
       name: "AppFeature",
       dependencies: [
+        "Env",
         "NetworkingLive",
         "PlayerFeature"
       ]
@@ -30,6 +32,7 @@ let package = Package(
       name: "AudioPlayerClient",
       dependencies: []
     ),
+    .target(name: "Env"),
     .target(
       name: "Networking"
     ),
@@ -43,6 +46,7 @@ let package = Package(
       name: "PlayerFeature",
       dependencies: [
         "AudioPlayerClient",
+        "Env",
         "Networking",
         .product(name: "AsyncAlgorithms", package: "swift-async-algorithms")
       ]
