@@ -2,13 +2,15 @@
 //  Created by Jeans Ruiz on 17/08/23.
 //
 
+import Env
 import Foundation
 import SwiftUI
 
 public struct MiniPlayerView: View {
 
-  #warning("todo, change namimg, model, store?")
+#warning("todo, change namimg, model, store?")
   @Environment(PlayerViewModel.self) private var playerModel
+  @Environment(RouterPath.self) private var routerPath
   var model: MiniPlayerUIModel // @Bindable ?
 
   public init(model: MiniPlayerUIModel) {
@@ -64,5 +66,8 @@ public struct MiniPlayerView: View {
       Divider()
     }
     .background(Color(UIColor.secondarySystemBackground))
+    .onTapGesture {
+      routerPath.presentedSheet = .fullPlayer
+    }
   }
 }
