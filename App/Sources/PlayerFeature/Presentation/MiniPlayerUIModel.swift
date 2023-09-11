@@ -9,17 +9,20 @@ public struct MiniPlayerUIModel {
   public var state: PlayerStatus
   public var title: String
   public var subtitle: String
+  public var imageURL: URL?
 
   public init(
     isFavorite: Bool = false,
     state: PlayerStatus = .stopped,
     title: String = "",
-    subtitle: String = ""
+    subtitle: String = "",
+    imageURL: URL? = nil
   ) {
     self.isFavorite = isFavorite
     self.state = state
     self.title = title
     self.subtitle = subtitle
+    self.imageURL = imageURL
   }
 
   public enum PlayerStatus {
