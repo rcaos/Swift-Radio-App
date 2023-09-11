@@ -9,7 +9,7 @@ import AsyncAlgorithms
 #warning("Rename, this is not a ViewModel anymore")
 @Observable public class PlayerViewModel {
   public var stations: [RadioStation] = []
-  public var selectedStation: MiniPlayerUIModel?
+  public var selectedStation: MiniPlayerUIModel? // todo, change to private set
 
   private let fetchNowInfoUseCase: () -> FetchNowInfoUseCase
   private let fetchAllRadioStations: () -> FetchAllRadioStations
@@ -42,9 +42,10 @@ import AsyncAlgorithms
   public func loadStation(stationId: String) async {
     if let station = await getRadioStationById().execute(stationId)  {
       if selectedStation == nil {
-        selectedStation = .init(title: station.name)
+        selectedStation = .init(title: station.name, imageURL: station.pathImageURL)
       } else {
         selectedStation?.title = station.name
+        selectedStation?.imageURL = station.pathImageURL
       }
 
       AudioPlayerClient.live.load(station.audioStreamURL.absoluteString)
