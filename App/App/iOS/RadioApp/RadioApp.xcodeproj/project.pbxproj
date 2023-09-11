@@ -11,6 +11,10 @@
 		7733BCC52A869DB100758E7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7733BCC42A869DB100758E7D /* Assets.xcassets */; };
 		7733BCC92A869DB100758E7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7733BCC82A869DB100758E7D /* Preview Assets.xcassets */; };
 		7733BCD22A869FC200758E7D /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 7733BCD12A869FC200758E7D /* AppFeature */; };
+		775155D12AAFB6F1004EBB6B /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775155D02AAFB6F1004EBB6B /* AppRouter.swift */; };
+		775155D32AAFC21C004EBB6B /* StationListTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775155D22AAFC21C004EBB6B /* StationListTab.swift */; };
+		775155D52AAFC283004EBB6B /* FavoritesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775155D42AAFC283004EBB6B /* FavoritesTab.swift */; };
+		775155D72AAFC2D7004EBB6B /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775155D62AAFC2D7004EBB6B /* DI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,10 @@
 		7733BCC62A869DB100758E7D /* RadioApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RadioApp.entitlements; sourceTree = "<group>"; };
 		7733BCC82A869DB100758E7D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7733BCCF2A869DD800758E7D /* App */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = App; path = ../../..; sourceTree = "<group>"; };
+		775155D02AAFB6F1004EBB6B /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		775155D22AAFC21C004EBB6B /* StationListTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListTab.swift; sourceTree = "<group>"; };
+		775155D42AAFC283004EBB6B /* FavoritesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTab.swift; sourceTree = "<group>"; };
+		775155D62AAFC2D7004EBB6B /* DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,10 @@
 			children = (
 				772785492A87191300E342DE /* Info.plist */,
 				7733BCC02A869DAF00758E7D /* RadioApp.swift */,
+				775155D62AAFC2D7004EBB6B /* DI.swift */,
+				775155D22AAFC21C004EBB6B /* StationListTab.swift */,
+				775155D42AAFC283004EBB6B /* FavoritesTab.swift */,
+				775155D02AAFB6F1004EBB6B /* AppRouter.swift */,
 				7733BCC42A869DB100758E7D /* Assets.xcassets */,
 				7733BCC62A869DB100758E7D /* RadioApp.entitlements */,
 				7733BCC72A869DB100758E7D /* Preview Content */,
@@ -153,7 +165,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				775155D12AAFB6F1004EBB6B /* AppRouter.swift in Sources */,
+				775155D32AAFC21C004EBB6B /* StationListTab.swift in Sources */,
 				7733BCC12A869DAF00758E7D /* RadioApp.swift in Sources */,
+				775155D72AAFC2D7004EBB6B /* DI.swift in Sources */,
+				775155D52AAFC283004EBB6B /* FavoritesTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
