@@ -2,28 +2,27 @@
 //  Created by Jeans Ruiz on 11/08/23.
 //
 
-import AppFeature
 import PlayerFeature
 import SwiftUI
 
 @main
 struct RadioApp: App {
-
-  private let playerViewModel = PlayerViewModel()
+  private let playerViewModel = PlayerViewModel.shared
 
   var body: some Scene {
     WindowGroup {
       TabView {
-        StationsListView()
+        StationListTab()
           .tabItem {
             Label("Home", systemImage: "house")
           }
           .environment(playerViewModel)
 
-        Text("Favorites here")
+        FavoritesTab()
           .tabItem {
             Label("Favorites", systemImage: "star")
           }
+          .environment(playerViewModel)
       }
     }
   }
