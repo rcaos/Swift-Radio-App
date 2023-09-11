@@ -91,7 +91,7 @@ public struct FullPlayerView: View {
 
   struct PlayerFactory {
     func foo() -> FetchNowInfoUseCase {
-      return FetchNowInfoUseCaseFactory.build(apiClient: .mock)
+      return FetchNowInfoUseCaseFactory.build(apiClient: .noop)
     }
 
     func foo2() -> FetchAllRadioStations {
