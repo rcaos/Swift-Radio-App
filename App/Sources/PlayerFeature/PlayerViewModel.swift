@@ -62,4 +62,8 @@ import AsyncAlgorithms
   public func toggle() {
     AudioPlayerClient.live.toggle()
   }
+
+  public func toggleFavorite() {
+    print("Save/Remove Station: \(String(describing: selectedStation?.title))")
+  }
 }

@@ -15,9 +15,7 @@ public struct StationsListView: View {
     GridItem(.flexible())
   ]
 
-  public init() {
-  }
-
+  public init() { }
 
   public var body: some View {
     ZStack(alignment: .bottom) {
