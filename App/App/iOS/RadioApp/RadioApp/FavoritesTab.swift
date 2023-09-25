@@ -4,6 +4,7 @@
 
 import AppFeature
 import Env
+import FavoritesFeature
 import Foundation
 import SwiftUI
 
@@ -13,7 +14,7 @@ struct FavoritesTab: View {
 
   var body: some View {
     // Add a NavigationStack in case needed
-    Text("The Favorites Stations will show here")
+    FavoritesListView()
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
       .environment(routerPath) // todo router is @State
   }
