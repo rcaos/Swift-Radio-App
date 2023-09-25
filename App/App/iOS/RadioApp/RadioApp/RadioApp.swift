@@ -7,8 +7,13 @@ import SwiftUI
 
 @main
 struct RadioApp: App {
-  private let playerViewModel = PlayerViewModel.shared
-
+  private let modelContainer = buildModelContainer()
+  
+  @MainActor
+  private func buildPlayerManager() -> PlayerViewModel {
+    return .buildShared(modelContext: modelContainer.mainContext)
+  }
+  
   var body: some Scene {
     WindowGroup {
       TabView {
@@ -16,14 +21,14 @@ struct RadioApp: App {
           .tabItem {
             Label("Home", systemImage: "house")
           }
-          .environment(playerViewModel)
-
+        
         FavoritesTab()
           .tabItem {
             Label("Favorites", systemImage: "star")
           }
-          .environment(playerViewModel)
       }
+      //todo, find another way, is injected in all tabs"
+      .environment(buildPlayerManager())
     }
   }
 }
