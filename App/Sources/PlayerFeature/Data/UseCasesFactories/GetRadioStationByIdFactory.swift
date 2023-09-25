@@ -3,9 +3,14 @@
 //
 
 import Foundation
+import LocalDatabaseClient
 
 public struct GetRadioStationByIdFactory {
-  public static func build() -> GetRadioStationById {
-    return .live(radioStationsRepository: .live(dataSource: .memoryDataSource))
+  public static func build(
+    localDatabaseClient: LocalDatabaseClient
+  ) -> GetRadioStationById {
+    return .live(
+      radioStationsRepository: .live(remoteDataSource: .memoryDataSource, localDatabaseClient: localDatabaseClient)
+    )
   }
 }
