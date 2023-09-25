@@ -79,7 +79,9 @@ public struct FullPlayerView: View {
           Spacer()
 
           Button(action: {
-
+            Task {
+              await playerModel.toggleFavorite(stationId: model.stationId)
+            }
           }, label: {
             Image(systemName: model.isFavorite ? "heart.fill" : "heart")
               .resizable()
@@ -100,32 +102,27 @@ public struct FullPlayerView: View {
 }
 
 #Preview {
-  let factory = PlayerFactory()
-
-  struct PlayerFactory {
-    func foo() -> FetchNowInfoUseCase {
-      return FetchNowInfoUseCaseFactory.build(apiClient: .noop)
-    }
-
-    func foo2() -> FetchAllRadioStations {
-      return FetchAllRadioStationsFactory.build()
-    }
-
-    func foo3() -> GetRadioStationById {
-      return GetRadioStationByIdFactory.build()
-    }
-
-  }
-
   let playerViewModel = PlayerViewModel(
-    fetchNowInfoUseCase: { factory.foo() },
-    fetchAllRadioStations: { factory.foo2() },
-    getRadioStationById: { factory.foo3() }
+    fetchNowInfoUseCase: {
+      FetchNowInfoUseCaseFactory.build(apiClient: .noop)
+    },
+    fetchAllRadioStations: {
+      FetchAllRadioStationsFactory.build(localDatabaseClient: .noop)
+    },
+    getRadioStationById: {
+      GetRadioStationByIdFactory.build(localDatabaseClient: .noop)
+    },
+    toggleFavoriteRadioStationUseCase: { fatalError() },
+    fetchAllFavorites: { fatalError() }
   )
 
   playerViewModel.selectedStation = .init(
+    stationId: UUID().uuidString,
+    isFavorite: false,
+    state: .loading,
     title: "Moda FM",
-    subtitle: "Lima - 97.3 FM Música continuada"
+    subtitle: "Lima - 97.3 FM Música continuada",
+    imageURL: nil
   )
 
   return FullPlayerView()

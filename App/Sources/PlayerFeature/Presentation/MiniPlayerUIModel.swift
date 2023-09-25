@@ -5,19 +5,22 @@
 import Foundation
 
 public struct MiniPlayerUIModel {
-  public let isFavorite: Bool
+  public let stationId: String
+  public var isFavorite: Bool
   public var state: PlayerStatus
   public var title: String
   public var subtitle: String
   public var imageURL: URL?
 
   public init(
-    isFavorite: Bool = false,
-    state: PlayerStatus = .stopped,
-    title: String = "",
-    subtitle: String = "",
-    imageURL: URL? = nil
+    stationId: String,
+    isFavorite: Bool,
+    state: PlayerStatus,
+    title: String,
+    subtitle: String,
+    imageURL: URL?
   ) {
+    self.stationId = stationId
     self.isFavorite = isFavorite
     self.state = state
     self.title = title

@@ -8,7 +8,7 @@ import SwiftUI
 
 public struct MiniPlayerView: View {
 
-  #warning("todo, change namimg, model, store?")
+#warning("todo, change namimg, model, store?")
   @Environment(PlayerViewModel.self) private var playerModel
   @Environment(RouterPath.self) private var routerPath
 
@@ -19,7 +19,9 @@ public struct MiniPlayerView: View {
       VStack {
         HStack(alignment: .center) {
           Button(action: {
-
+            Task {
+              await playerModel.toggleFavorite(stationId: model.stationId)
+            }
           }, label: {
             Image(systemName: model.isFavorite ? "heart.fill" : "heart")
               .resizable()
