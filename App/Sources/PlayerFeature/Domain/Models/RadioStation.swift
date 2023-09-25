@@ -7,21 +7,27 @@ import Foundation
 public struct RadioStation: Hashable {
   public let id: String
   public let name: String
+  public let description: String
   public let audioStreamURL: URL
   public let pathImageURL: URL
+  public let isFavorite: Bool
   public let type: RadioStationType
 
   public init(
     id: String = UUID().uuidString,
     name: String,
+    description: String,
     audioStreamURL: URL,
     pathImageURL: URL,
+    isFavorite: Bool,
     type: RadioStationType
   ) {
     self.id = id
     self.name = name
+    self.description = description
     self.audioStreamURL = audioStreamURL
     self.pathImageURL = pathImageURL
+    self.isFavorite = isFavorite
     self.type = type
   }
 
