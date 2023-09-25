@@ -6,29 +6,84 @@ import Foundation
 import AudioPlayerClient
 import AsyncAlgorithms
 
+public struct RadioStationUiModel: Hashable {
+  public let id: String
+  public let pathImageURL: URL
+
+  public init(
+    id: String,
+    pathImageURL: URL
+  ) {
+    self.id = id
+    self.pathImageURL = pathImageURL
+  }
+
+  public init(_ domain: RadioStation) {
+    self.id = domain.id
+    self.pathImageURL = domain.pathImageURL
+  }
+}
+
+public struct RadioStationFavoriteUiModel: Hashable {
+  public let id: String
+  public let name: String
+  public let description: String
+  public let pathImageURL: URL
+
+  public init(
+    id: String,
+    name: String,
+    description: String,
+    pathImageURL: URL
+  ) {
+    self.id = id
+    self.name = name
+    self.description = description
+    self.pathImageURL = pathImageURL
+  }
+
+  public init(_ domain: RadioStationFavorite) {
+    self.id = domain.id
+    self.name = domain.name
+    self.description = domain.description
+    self.pathImageURL = domain.pathImageURL
+  }
+}
+
 #warning("Rename, this is not a ViewModel anymore")
 @Observable public class PlayerViewModel {
-  public var stations: [RadioStation] = []
+  private var stationsModel: [RadioStation] = []
+  
+  public var stations: [RadioStationUiModel] = []
+  public var favoriteStations: [RadioStationFavoriteUiModel] = []
   public var selectedStation: MiniPlayerUIModel? // todo, change to private set
 
   private let fetchNowInfoUseCase: () -> FetchNowInfoUseCase
   private let fetchAllRadioStations: () -> FetchAllRadioStations
   private let getRadioStationById: () -> GetRadioStationById
+  private let toggleFavoriteRadioStationUseCase: () -> ToggleRadioStationFavoriteUseCase
+  private let fetchAllFavorites: () -> FetchAllFavoriteRadiosUseCase
 
   public init(
     fetchNowInfoUseCase: @escaping () -> FetchNowInfoUseCase,
     fetchAllRadioStations: @escaping () -> FetchAllRadioStations,
-    getRadioStationById: @escaping () -> GetRadioStationById
+    getRadioStationById: @escaping () -> GetRadioStationById,
+    toggleFavoriteRadioStationUseCase: @escaping () -> ToggleRadioStationFavoriteUseCase,
+    fetchAllFavorites: @escaping () -> FetchAllFavoriteRadiosUseCase
   ) {
     self.fetchNowInfoUseCase = fetchNowInfoUseCase
     self.fetchAllRadioStations = fetchAllRadioStations
     self.getRadioStationById = getRadioStationById
+    self.toggleFavoriteRadioStationUseCase = toggleFavoriteRadioStationUseCase
+    self.fetchAllFavorites = fetchAllFavorites
     print("init viewModel: \(Self.self)")
   }
 
   #warning("call once???")
   public func onAppear() async {
-    stations = await fetchAllRadioStations().execute()
+    //stations = await fetchAllRadioStations().execute().map { .init($0) }
+    stationsModel = await fetchAllRadioStations().execute()
+    stations = stationsModel.map { .init($0) }
 
     for await value in AudioPlayerClient.live.delegate().removeDuplicates() {
       print("✅viewModel.event: \(value)")
@@ -39,15 +94,20 @@ import AsyncAlgorithms
     }
   }
 
+  public func loadFavorites() async {
+    favoriteStations = await fetchAllFavorites().execute().map { .init($0) }
+  }
+
   public func loadStation(stationId: String) async {
     if let station = await getRadioStationById().execute(stationId)  {
-      if selectedStation == nil {
-        selectedStation = .init(title: station.name, imageURL: station.pathImageURL)
-      } else {
-        selectedStation?.title = station.name
-        selectedStation?.imageURL = station.pathImageURL
-      }
-
+      selectedStation = .init(
+        stationId: station.id,
+        isFavorite: station.isFavorite,
+        state: .loading,
+        title: station.name,
+        subtitle: station.description,
+        imageURL: station.pathImageURL
+      )
       AudioPlayerClient.live.load(station.audioStreamURL.absoluteString)
 
       let radioInfo = await fetchNowInfoUseCase().execute(station)
@@ -63,7 +123,25 @@ import AsyncAlgorithms
     AudioPlayerClient.live.toggle()
   }
 
-  public func toggleFavorite() {
-    print("Save/Remove Station: \(String(describing: selectedStation?.title))")
+  public func toggleFavorite(stationId: String) async {
+    if let found = stationsModel.first(where: { $0.id == stationId }) {
+      let toToggle = RadioStationFavorite(found)
+      let isFavorite = await toggleFavoriteRadioStationUseCase().execute(toToggle)
+      selectedStation?.isFavorite = isFavorite
+      await loadFavorites()
+    }
+  }
+}
+
+#warning("todo, move it")
+extension RadioStationFavorite {
+
+  public init(_ domain: RadioStation) {
+    self.init(
+      id: domain.id,
+      name: domain.name,
+      description: domain.description,
+      pathImageURL: domain.pathImageURL
+    )
   }
 }
