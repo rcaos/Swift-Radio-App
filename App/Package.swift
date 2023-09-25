@@ -12,6 +12,8 @@ let package = Package(
     .library(name: "AppFeature", targets: ["AppFeature"]),
     .library(name: "AudioPlayerClient", targets: ["AudioPlayerClient"]),
     .library(name: "Env", targets: ["Env"]),
+    .library(name: "FavoritesFeature", targets: ["FavoritesFeature"]),
+    .library(name: "LocalDatabaseClient", targets: ["LocalDatabaseClient"]),
     .library(name: "Networking", targets: ["Networking"]),
     .library(name: "NetworkingLive", targets: ["NetworkingLive"]),
     .library(name: "PlayerFeature", targets: ["PlayerFeature"])
@@ -24,6 +26,8 @@ let package = Package(
       name: "AppFeature",
       dependencies: [
         "Env",
+        "FavoritesFeature",
+        "LocalDatabaseClient",
         "NetworkingLive",
         "PlayerFeature"
       ]
@@ -33,6 +37,13 @@ let package = Package(
       dependencies: []
     ),
     .target(name: "Env"),
+    .target(
+      name: "FavoritesFeature",
+      dependencies: [
+        "PlayerFeature"
+      ]
+    ),
+    .target(name: "LocalDatabaseClient"),
     .target(
       name: "Networking"
     ),
@@ -47,6 +58,7 @@ let package = Package(
       dependencies: [
         "AudioPlayerClient",
         "Env",
+        "LocalDatabaseClient",
         "Networking",
         .product(name: "AsyncAlgorithms", package: "swift-async-algorithms")
       ]
