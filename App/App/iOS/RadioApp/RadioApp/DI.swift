@@ -9,12 +9,11 @@ import NetworkingLive
 import PlayerFeature
 import SwiftData
 
-private let apiClientRPPLive = ApiClient.live(networkConfig: .init(baseURL: URL(string: "https://radio.rpp.pe")!))
-
 private struct PlayerFactory {
 
   private let modelContext: ModelContext
-  let localDatabaseClient: LocalDatabaseClient
+  private let localDatabaseClient: LocalDatabaseClient
+  private let apiClientRPPLive = ApiClient.live(networkConfig: .init(baseURL: URL(string: "https://radio.rpp.pe")!))
 
   init(modelContext: ModelContext) {
     self.modelContext = modelContext
@@ -32,6 +31,14 @@ private struct PlayerFactory {
   func buildGetStationByIdUseCase() -> GetRadioStationById {
     return GetRadioStationByIdFactory.build(localDatabaseClient: localDatabaseClient)
   }
+
+  func buildToggleRadioStationFavoriteUseCase() -> ToggleRadioStationFavoriteUseCase {
+    return ToggleRadioStationUseCaseFactory.buildLocalUseCase(localDataBaseClient: localDatabaseClient)
+  }
+
+  func buildFetchAllFavoriteRadiosUseCase() -> FetchAllFavoriteRadiosUseCase {
+    FetchAllFavoriteRadiosUseCaseFactory.buildLocalUseCase(localDataBaseClient: localDatabaseClient)
+  }
 }
 
 // MARK: TODO, expose this
@@ -44,8 +51,8 @@ extension PlayerViewModel {
       fetchNowInfoUseCase: { factory.buildFetchNowUseCase() },
       fetchAllRadioStations: { factory.buildFetchAllStationsUseCase() },
       getRadioStationById: { factory.buildGetStationByIdUseCase() },
-      toggleFavoriteRadioStationUseCase: { ToggleRadioStationUseCaseFactory.buildLocalUseCase(localDataBaseClient: factory.localDatabaseClient) },
-      fetchAllFavorites: { FetchAllFavoriteRadiosUseCaseFactory.buildLocalUseCase(localDataBaseClient: factory.localDatabaseClient) }
+      toggleFavoriteRadioStationUseCase: { factory.buildToggleRadioStationFavoriteUseCase() },
+      fetchAllFavorites: { factory.buildFetchAllFavoriteRadiosUseCase() }
     )
   }
 }
