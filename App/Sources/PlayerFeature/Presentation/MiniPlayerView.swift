@@ -59,7 +59,7 @@ public struct MiniPlayerView: View {
             Image(systemName: model.state.isPlaying ? "pause.circle.fill" : "play.circle.fill")
               .resizable()
               .scaledToFit()
-              .padding(.init(top: 8, leading: 8, bottom: 8, trailing: 8))
+              .padding(.init(top: 2, leading: 2, bottom: 2, trailing: 2))
               .frame(width: 44, height: 44)
           })
         }
@@ -74,3 +74,25 @@ public struct MiniPlayerView: View {
     }
   }
 }
+
+#if DEBUG
+#Preview {
+  let player = PlayerViewModel.test()
+
+  player.selectedStation = .init(
+    stationId: "some",
+    isFavorite: false,
+    state: .loading,
+    title: "RPP",
+    subtitle: "La radio de todo el Perú",
+    imageURL: nil
+  )
+
+  let routerPath = RouterPath()
+
+  return MiniPlayerView()
+    //.previewLayout(.fixed(width: 500, height: 200))
+    .environment(player)
+    .environment(routerPath)
+}
+#endif
