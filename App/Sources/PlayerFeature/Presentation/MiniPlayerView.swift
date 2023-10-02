@@ -94,5 +94,7 @@ public struct MiniPlayerView: View {
     //.previewLayout(.fixed(width: 500, height: 200))
     .environment(player)
     .environment(routerPath)
+    .tint(.green)
+    .preferredColorScheme(.dark)
 }
 #endif
