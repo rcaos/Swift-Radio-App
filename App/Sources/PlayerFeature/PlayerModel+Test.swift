@@ -6,7 +6,7 @@ import Foundation
 import XCTestDynamicOverlay
 
 #if DEBUG
-extension PlayerViewModel {
+extension PlayerModel {
 
   public static func test(
     fetchNowInfoUseCase: @escaping () -> FetchNowInfoUseCase = { unimplemented("fetchNowInfoUseCase") },
@@ -14,8 +14,8 @@ extension PlayerViewModel {
     getRadioStationById: @escaping () -> GetRadioStationById = { unimplemented("getRadioStationById") },
     toggleFavoriteRadioStationUseCase: @escaping () -> ToggleRadioStationFavoriteUseCase = { unimplemented("toggleFavoriteRadioStationUseCase") },
     fetchAllFavorites: @escaping () -> FetchAllFavoriteRadiosUseCase = { unimplemented("fetchAllFavorites") }
-  ) -> PlayerViewModel {
-    return PlayerViewModel(
+  ) -> PlayerModel {
+    return PlayerModel(
       fetchNowInfoUseCase: fetchNowInfoUseCase,
       fetchAllRadioStations: fetchAllRadioStations,
       getRadioStationById: getRadioStationById,

@@ -6,9 +6,7 @@ import Foundation
 import SwiftUI
 
 public struct FullPlayerView: View {
-
-  #warning("todo, change namimg, model, store?")
-  @Environment(PlayerViewModel.self) private var playerModel
+  @Environment(PlayerModel.self) private var playerModel
 
   public init() { }
 
@@ -96,7 +94,7 @@ public struct FullPlayerView: View {
 }
 
 #Preview {
-  let player = PlayerViewModel.test()
+  let player = PlayerModel.test()
 
   player.selectedStation = .init(
     stationId: UUID().uuidString,

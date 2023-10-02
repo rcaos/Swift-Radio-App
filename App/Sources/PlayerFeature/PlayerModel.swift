@@ -50,8 +50,7 @@ public struct RadioStationFavoriteUiModel: Hashable {
   }
 }
 
-#warning("Rename, this is not a ViewModel anymore")
-@Observable public class PlayerViewModel {
+@Observable public class PlayerModel {
   private var stationsModel: [RadioStation] = []
   
   public var stations: [RadioStationUiModel] = []

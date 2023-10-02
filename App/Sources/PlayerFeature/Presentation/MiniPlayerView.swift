@@ -7,9 +7,7 @@ import Foundation
 import SwiftUI
 
 public struct MiniPlayerView: View {
-
-#warning("todo, change namimg, model, store?")
-  @Environment(PlayerViewModel.self) private var playerModel
+  @Environment(PlayerModel.self) private var playerModel
   @Environment(RouterPath.self) private var routerPath
 
   public init() { }
@@ -77,7 +75,7 @@ public struct MiniPlayerView: View {
 
 #if DEBUG
 #Preview {
-  let player = PlayerViewModel.test()
+  let player = PlayerModel.test()
 
   player.selectedStation = .init(
     stationId: "some",
