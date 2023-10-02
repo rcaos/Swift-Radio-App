@@ -57,7 +57,7 @@ public struct StationsListView: View {
 
 #Preview {
   let player = PlayerViewModel.test(
-    fetchAllRadioStations: { FetchAllRadioStationsFactory.build(localDatabaseClient: .noop) }
+    fetchAllRadioStations: { FetchAllRadioStationsFactory.build(localDatabaseClient: .mock()) }
   )
 
   return StationsListView()
