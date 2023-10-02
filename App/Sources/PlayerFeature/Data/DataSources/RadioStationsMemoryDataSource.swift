@@ -5,7 +5,7 @@
 import Foundation
 
 extension RadioStationsRemoteDataSource {
-  static let memoryDataSource: RadioStationsRemoteDataSource = {
+  public static let memoryDataSource: RadioStationsRemoteDataSource = {
 
     let memoryStations: [RadioStationRemote] = [
       .init(

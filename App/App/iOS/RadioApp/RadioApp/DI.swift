@@ -25,7 +25,10 @@ private struct PlayerFactory {
   }
 
   func buildFetchAllStationsUseCase() -> FetchAllRadioStations {
-    return FetchAllRadioStationsFactory.build(localDatabaseClient: localDatabaseClient)
+    return FetchAllRadioStationsFactory.build(
+      remoteDataSource: .memoryDataSource,
+      localDatabaseClient: localDatabaseClient
+    )
   }
 
   func buildGetStationByIdUseCase() -> GetRadioStationById {

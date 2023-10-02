@@ -7,10 +7,11 @@ import LocalDatabaseClient
 
 public struct FetchAllRadioStationsFactory {
   public static func build(
+    remoteDataSource: RadioStationsRemoteDataSource,
     localDatabaseClient: LocalDatabaseClient
   ) -> FetchAllRadioStations {
     return .live(
-      radioStationsRepository: .live(remoteDataSource: .memoryDataSource, localDatabaseClient: localDatabaseClient)
+      radioStationsRepository: .live(remoteDataSource: remoteDataSource, localDatabaseClient: localDatabaseClient)
     )
   }
 }

@@ -57,7 +57,12 @@ public struct StationsListView: View {
 
 #Preview {
   let player = PlayerModel.test(
-    fetchAllRadioStations: { FetchAllRadioStationsFactory.build(localDatabaseClient: .mock()) }
+    fetchAllRadioStations: {
+      return FetchAllRadioStationsFactory.build(
+        remoteDataSource: .memoryDataSource,
+        localDatabaseClient: .mock()
+      )
+    }
   )
 
   return StationsListView()
@@ -71,7 +76,12 @@ public struct StationsListView: View {
 
 #Preview {
   let player = PlayerModel.test(
-    fetchAllRadioStations: { FetchAllRadioStationsFactory.build(localDatabaseClient: .mock()) }
+    fetchAllRadioStations: {
+      return FetchAllRadioStationsFactory.build(
+        remoteDataSource: .memoryDataSource,
+        localDatabaseClient: .mock()
+      )
+    }
   )
 
   return StationsListView()

@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct RadioStationsRemoteDataSource {
+public struct RadioStationsRemoteDataSource {
   var getAllStations: () async -> [RadioStationRemote]
 
   var getStationById: (String) async -> RadioStationRemote?
