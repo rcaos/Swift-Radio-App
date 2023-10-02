@@ -19,7 +19,8 @@ let package = Package(
     .library(name: "PlayerFeature", targets: ["PlayerFeature"])
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-async-algorithms.git", .upToNextMajor(from: .init(stringLiteral: "0.1.0")) )
+    .package(url: "https://github.com/apple/swift-async-algorithms.git", .upToNextMajor(from: .init(stringLiteral: "0.1.0")) ),
+    .package(url: "https://github.com/pointfreeco/swift-custom-dump.git", .upToNextMajor(from: .init(stringLiteral: "1.1.0")))
   ],
   targets: [
     .target(
@@ -60,7 +61,8 @@ let package = Package(
         "Env",
         "LocalDatabaseClient",
         "Networking",
-        .product(name: "AsyncAlgorithms", package: "swift-async-algorithms")
+        .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
+        .product(name: "CustomDump", package: "swift-custom-dump")
       ]
     ),
     .testTarget(
