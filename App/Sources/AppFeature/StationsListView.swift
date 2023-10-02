@@ -63,4 +63,18 @@ public struct StationsListView: View {
   return StationsListView()
     .environment(player)
     .preferredColorScheme(.dark)
+
+  return StationsListView()
+    .environment(player)
+    .preferredColorScheme(.dark)
+}
+
+#Preview {
+  let player = PlayerModel.test(
+    fetchAllRadioStations: { FetchAllRadioStationsFactory.build(localDatabaseClient: .mock()) }
+  )
+
+  return StationsListView()
+    .environment(player)
+    .preferredColorScheme(.light)
 }
