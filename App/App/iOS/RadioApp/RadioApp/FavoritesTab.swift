@@ -9,13 +9,14 @@ import Foundation
 import SwiftUI
 
 struct FavoritesTab: View {
-
   @State private var routerPath = RouterPath()
 
   var body: some View {
-    // Add a NavigationStack in case needed
-    FavoritesListView()
-      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-      .environment(routerPath) // todo router is @State
+    NavigationStack {
+      FavoritesListView()
+        .navigationTitle("Favorites")
+        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+    }
+    .environment(routerPath) // todo router is @State
   }
 }

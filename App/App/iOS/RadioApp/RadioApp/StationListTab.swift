@@ -8,13 +8,14 @@ import Foundation
 import SwiftUI
 
 struct StationListTab: View {
-
   @State private var routerPath = RouterPath()
 
   var body: some View {
-    // Add a NavigationStack in case needed
-    StationsListView()
-      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-      .environment(routerPath) // todo router is @State
+    NavigationStack {
+      StationsListView()
+        .navigationTitle("Radio app")
+        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+    }
+    .environment(routerPath) // todo router is @State
   }
 }
