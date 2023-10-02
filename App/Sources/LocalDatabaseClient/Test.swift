@@ -13,5 +13,17 @@ extension LocalDatabaseClient {
       getStationById: { _ in nil }
     )
   }()
+
+  public static func mock(
+    toggleFavoriteStation: @escaping (FavoriteStation) async -> Bool = { _ in true },
+    fetchAllFavorites: @escaping () async -> [FavoriteStation] = { [] },
+    getStationById: @escaping (String) async -> FavoriteStation? = { _ in nil }
+  ) -> LocalDatabaseClient {
+    return LocalDatabaseClient(
+      toggleFavoriteStation: toggleFavoriteStation,
+      fetchAllFavorites: fetchAllFavorites,
+      getStationById: getStationById
+    )
+  }
 }
 #endif
