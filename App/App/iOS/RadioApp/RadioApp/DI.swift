@@ -42,8 +42,8 @@ private struct PlayerFactory {
 }
 
 // MARK: TODO, expose this
-extension PlayerViewModel {
-  static func buildShared(modelContext: ModelContext) -> PlayerViewModel {
+extension PlayerModel {
+  static func buildShared(modelContext: ModelContext) -> PlayerModel {
 
     let factory = PlayerFactory(modelContext: modelContext)
 

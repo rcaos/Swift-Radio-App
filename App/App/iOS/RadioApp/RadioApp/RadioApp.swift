@@ -10,10 +10,10 @@ struct RadioApp: App {
   private let modelContainer = buildModelContainer()
   
   @MainActor
-  private func buildPlayerManager() -> PlayerViewModel {
+  private func buildPlayerManager() -> PlayerModel {
     return .buildShared(modelContext: modelContainer.mainContext)
   }
-  
+
   var body: some Scene {
     WindowGroup {
       TabView {

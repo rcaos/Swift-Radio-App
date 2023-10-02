@@ -7,7 +7,7 @@ import SwiftUI
 import PlayerFeature
 
 public struct StationsListView: View {
-  @Environment(PlayerViewModel.self) private var model
+  @Environment(PlayerModel.self) private var playerModel
 
   let colums = [
     GridItem(.flexible()), 
@@ -21,7 +21,7 @@ public struct StationsListView: View {
     ZStack(alignment: .bottom) {
       ScrollView {
         LazyVGrid(columns: colums, content: {
-          ForEach(model.stations, id: \.self) { station in
+          ForEach(playerModel.stations, id: \.self) { station in
             AsyncImage(
               url: station.pathImageURL,
               content: {
@@ -37,7 +37,7 @@ public struct StationsListView: View {
             .frame(height: 131)
             .onTapGesture { 
               Task {
-                await model.loadStation(stationId: station.id)
+                await playerModel.loadStation(stationId: station.id)
               }
             }
           }
@@ -45,18 +45,18 @@ public struct StationsListView: View {
         .padding([.leading, .trailing])
       }
 
-      if model.selectedStation != nil {
+      if playerModel.selectedStation != nil {
         MiniPlayerView()
       }
     }
     .task {
-      await model.onAppear()
+      await playerModel.onAppear()
     }
   }
 }
 
 #Preview {
-  let player = PlayerViewModel.test(
+  let player = PlayerModel.test(
     fetchAllRadioStations: { FetchAllRadioStationsFactory.build(localDatabaseClient: .mock()) }
   )
 

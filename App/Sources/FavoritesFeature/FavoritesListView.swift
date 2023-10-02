@@ -7,15 +7,14 @@ import PlayerFeature
 import SwiftUI
 
 public struct FavoritesListView: View {
-
-  @Environment(PlayerViewModel.self) private var playerManager
+  @Environment(PlayerModel.self) private var playerModel
 
   public init() { }
 
   public var body: some View {
     VStack(alignment: .leading) {
-      if playerManager.favoriteStations.count > 0 {
-        List(playerManager.favoriteStations, id: \.self) { station in
+      if playerModel.favoriteStations.count > 0 {
+        List(playerModel.favoriteStations, id: \.self) { station in
           VStack(alignment: .leading) {
             Text(station.name)
             Text(station.description)
@@ -26,7 +25,7 @@ public struct FavoritesListView: View {
       }
     }
     .task {
-      await playerManager.loadFavorites()
+      await playerModel.loadFavorites()
     }
   }
 }
@@ -47,7 +46,7 @@ import LocalDatabaseClient
     ]
   })
 
-  let player = PlayerViewModel.test(
+  let player = PlayerModel.test(
     fetchAllFavorites: { FetchAllFavoriteRadiosUseCaseFactory.buildLocalUseCase(localDataBaseClient: dataBase) }
   )
 
