@@ -30,3 +30,29 @@ public struct FavoritesListView: View {
     }
   }
 }
+
+#if DEBUG
+import LocalDatabaseClient
+
+#Preview {
+
+  let dataBase = LocalDatabaseClient.mock(fetchAllFavorites: {
+    return [
+      .init(
+        id: "mock1",
+        name: "RPP",
+        description: "La Radio del Perú",
+        pathImageURL: URL(string: "https://www.dropbox.com/s/hgxrkhe8ar40360/studio92.jpg?dl=1")!
+      )
+    ]
+  })
+
+  let player = PlayerViewModel.test(
+    fetchAllFavorites: { FetchAllFavoriteRadiosUseCaseFactory.buildLocalUseCase(localDataBaseClient: dataBase) }
+  )
+
+  return FavoritesListView()
+    .environment(player)
+    .preferredColorScheme(.dark)
+}
+#endif
