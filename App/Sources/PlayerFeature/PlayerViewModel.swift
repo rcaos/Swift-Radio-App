@@ -76,7 +76,6 @@ public struct RadioStationFavoriteUiModel: Hashable {
     self.getRadioStationById = getRadioStationById
     self.toggleFavoriteRadioStationUseCase = toggleFavoriteRadioStationUseCase
     self.fetchAllFavorites = fetchAllFavorites
-    print("init viewModel: \(Self.self)")
   }
 
   #warning("call once???")
@@ -85,8 +84,8 @@ public struct RadioStationFavoriteUiModel: Hashable {
     stationsModel = await fetchAllRadioStations().execute()
     stations = stationsModel.map { .init($0) }
 
+    #warning("todo, control this dependency")
     for await value in AudioPlayerClient.live.delegate().removeDuplicates() {
-      print("✅viewModel.event: \(value)")
       switch value {
       case .changeStatus(let status):
         selectedStation?.state = status.playerStatusUIModel
