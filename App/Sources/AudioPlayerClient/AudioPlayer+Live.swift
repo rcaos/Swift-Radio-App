@@ -20,7 +20,7 @@ extension AudioPlayerClient {
   }()
 }
 
-class AudioPlayerAVP: NSObject {
+private class AudioPlayerAVP: NSObject {
 
   private let player: AVPlayer
 
