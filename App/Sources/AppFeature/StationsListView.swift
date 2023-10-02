@@ -42,6 +42,7 @@ public struct StationsListView: View {
             }
           }
         })
+        .padding([.leading, .trailing])
       }
 
       if model.selectedStation != nil {
@@ -52,4 +53,14 @@ public struct StationsListView: View {
       await model.onAppear()
     }
   }
+}
+
+#Preview {
+  let player = PlayerViewModel.test(
+    fetchAllRadioStations: { FetchAllRadioStationsFactory.build(localDatabaseClient: .noop) }
+  )
+
+  return StationsListView()
+    .environment(player)
+    .preferredColorScheme(.dark)
 }
