@@ -1,4 +1,4 @@
-# Swift Radio app made with SwiftUI
+# Swift Radio app made with SwiftUI and SwiftData
 
 - Listen and save your favorite radio station
 
