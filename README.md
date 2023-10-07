@@ -18,8 +18,8 @@
 
 ### Screenshots
 <p>
-<img src="https://github.com/rcaos/RadiosPeru/blob/master/Screenshots/Simulator Screenshot - iPhone SE (3rd generation) - 2023-10-07 at 10.20.50" width="240">
-<img src="https://github.com/rcaos/RadiosPeru/blob/master/Screenshots/Simulator Screenshot - iPhone SE (3rd generation) - 2023-10-07 at 10.21.04" width="240">
+<img src="https://github.com/rcaos/Swift-Radio-App/blob/master/Screenshots/Simulator%20Screenshot%20-%20iPhone%20SE%20(3rd%20generation)%20-%202023-10-07%20at%2010.20.50.png" width="240">
+<img src="https://github.com/rcaos/Swift-Radio-App/blob/master/Screenshots/Simulator%20Screenshot%20-%20iPhone%20SE%20(3rd%20generation)%20-%202023-10-07%20at%2010.21.04.png" width="240">
 </p>
 
 # Author
